@@ -19,13 +19,20 @@ struct ContentView: View {
     @StateObject var mainData = AppData()
 
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            IncomesView()
+                .tabItem {
+                    Label("Incomes", systemImage: "plus.circle")
+                }
+            ExpensesView()
+                .tabItem {
+                    Label("Expenses", systemImage: "minus.circle")
+                }
+            EstimateView()
+                .tabItem {
+                    Label("Estimate", systemImage: "plus.forwardslash.minus")
+                }
         }
-        .padding()
         .environmentObject(mainData)
     }
 }

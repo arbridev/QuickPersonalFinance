@@ -17,6 +17,7 @@
 		149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEEC29BA29BD0088CE94 /* CalculationService.swift */; };
 		149ABEF129BA304E0088CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEF029BA304E0088CE94 /* Constants.swift */; };
 		14A169FB29BA432C00B69FD7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 14A169FA29BA432B00B69FD7 /* README.md */; };
+		14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A169FD29BA456D00B69FD7 /* FinanceData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		149ABEEC29BA29BD0088CE94 /* CalculationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationService.swift; sourceTree = "<group>"; };
 		149ABEF029BA304E0088CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14A169FA29BA432B00B69FD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		14A169FD29BA456D00B69FD7 /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +103,11 @@
 		149ABEBF29BA282B0088CE94 /* QuickPersonalFinance */ = {
 			isa = PBXGroup;
 			children = (
+				14A169FF29BA46B100B69FD7 /* Views */,
+				14A169FC29BA456200B69FD7 /* Model */,
 				149ABEEE29BA2FC70088CE94 /* Resources */,
 				149ABEEB29BA29910088CE94 /* Services */,
 				149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */,
-				149ABEC229BA282B0088CE94 /* ContentView.swift */,
-				149ABEC429BA28310088CE94 /* Assets.xcassets */,
 				149ABEC629BA28310088CE94 /* Preview Content */,
 			);
 			path = QuickPersonalFinance;
@@ -148,8 +150,25 @@
 			isa = PBXGroup;
 			children = (
 				149ABEF029BA304E0088CE94 /* Constants.swift */,
+				149ABEC429BA28310088CE94 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		14A169FC29BA456200B69FD7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				14A169FD29BA456D00B69FD7 /* FinanceData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		14A169FF29BA46B100B69FD7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				149ABEC229BA282B0088CE94 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +305,7 @@
 				149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */,
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
 				149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */,
+				14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */,
 				149ABEF129BA304E0088CE94 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

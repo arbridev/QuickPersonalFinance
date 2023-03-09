@@ -7,7 +7,17 @@
 
 import SwiftUI
 
+class AppData: ObservableObject {
+    @Published var financeData = FinanceData(
+        income: 0.0,
+        expense: 0.0,
+        frequency: .day
+    )
+}
+
 struct ContentView: View {
+    @StateObject var mainData = AppData()
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +26,7 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .environmentObject(mainData)
     }
 }
 

@@ -16,6 +16,7 @@
 		149ABEDE29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */; };
 		149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEEC29BA29BD0088CE94 /* CalculationService.swift */; };
 		149ABEF129BA304E0088CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEF029BA304E0088CE94 /* Constants.swift */; };
+		14A169FB29BA432C00B69FD7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 14A169FA29BA432B00B69FD7 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		149ABEEC29BA29BD0088CE94 /* CalculationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationService.swift; sourceTree = "<group>"; };
 		149ABEF029BA304E0088CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14A169FA29BA432B00B69FD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		149ABEB429BA282B0088CE94 = {
 			isa = PBXGroup;
 			children = (
+				14A169FA29BA432B00B69FD7 /* README.md */,
 				149ABEBF29BA282B0088CE94 /* QuickPersonalFinance */,
 				149ABED029BA28310088CE94 /* QuickPersonalFinanceTests */,
 				149ABEDA29BA28320088CE94 /* QuickPersonalFinanceUITests */,
@@ -253,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A169FB29BA432C00B69FD7 /* README.md in Resources */,
 				149ABEC829BA28310088CE94 /* Preview Assets.xcassets in Resources */,
 				149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */,
 			);

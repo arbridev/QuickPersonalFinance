@@ -8,7 +8,7 @@
 import Foundation
 
 struct FinanceData {
-    let income: Double
-    let expense: Double
+    let incomes: [Income]
+    let expenses: [Expense]
     let frequency: CalculationFrequency
 }

@@ -7,45 +7,80 @@
 
 import Foundation
 
-enum CalculationFrequency {
-    case hour, day, week, month, year
-}
-
 protocol CalculationService {
-    var income: Double { get set }
-    var expense: Double { get set }
-    var frequency: CalculationFrequency { get set }
+    var incomes: [Income] { get set }
+    var expenses: [Expense] { get set }
     func monthlyBalance() -> Double
 }
 
 class Calculation: CalculationService {
-    var income: Double
-    var expense: Double
-    var frequency: CalculationFrequency
+    var incomes: [Income]
+    var expenses: [Expense]
 
-    init(income: Double, expense: Double, frequency: CalculationFrequency) {
-        self.income = income
-        self.expense = expense
-        self.frequency = frequency
+    init(incomes: [Income], expenses: [Expense]) {
+        self.incomes = incomes
+        self.expenses = expenses
+    }
+
+    private func convert(
+        _ value: Double,
+        from origin: Recurrence,
+        to destination: Recurrence) -> Double
+    {
+        guard origin != destination else {
+            return value
+        }
+        let isForward = origin < destination // advances from top to bottom
+        guard let currentIndex = Recurrence.allCases.firstIndex(where: { $0 == origin }) else {
+            return value
+        }
+        let offset = isForward ? currentIndex + 1 : currentIndex - 1
+        guard offset >= 0 && offset < Recurrence.allCases.count else {
+            return value
+        }
+        let next = Recurrence.allCases[offset]
+        var factor: Double!
+        if isForward {
+            switch next {
+                case .hour:
+                    factor = 1
+                case .day:
+                    factor = Constant.workHoursPerDay
+                case .week:
+                    factor = Constant.workDaysPerWeek
+                case .month:
+                    factor = Constant.weeksPerMonthCount
+                case .year:
+                    factor = Constant.monthsPerYearCount
+            }
+        } else {
+            switch next {
+                case .hour:
+                    factor = Constant.workHoursPerDay
+                case .day:
+                    factor = Constant.workDaysPerWeek
+                case .week:
+                    factor = Constant.weeksPerMonthCount
+                case .month:
+                    factor = Constant.monthsPerYearCount
+                case .year:
+                    factor = 1
+            }
+        }
+
+        let newValue = isForward ? value * factor : value / factor
+        return convert(newValue, from: next, to: destination)
+    }
+
+    private func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
+        sources.map { source in
+            source.recurrence != nil ?
+            convert(source.netValue, from: source.recurrence!, to: recurrence) :
+            source.netValue
+        }.reduce(0, +)
     }
 
     func monthlyBalance() -> Double {
-        switch frequency {
-            case .hour:
-                return (income - expense) *
-                Double(Constant.workHoursPerDay) *
-                Double(Constant.workDaysPerWeek) *
-                Double(Constant.weeksPerMonthCount)
-            case .day:
-                return (income - expense) *
-                Double(Constant.workDaysPerWeek) *
-                Double(Constant.weeksPerMonthCount)
-            case .week:
-                return (income - expense) * Double(Constant.weeksPerMonthCount)
-            case .year:
-                return (income - expense) / Double(Constant.monthsPerYearCount)
-            default:
-                return income - expense
-        }
+        totalize(sources: incomes, to: .month) - totalize(sources: expenses, to: .month)
     }
 }

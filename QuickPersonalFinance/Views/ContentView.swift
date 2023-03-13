@@ -10,8 +10,7 @@ import SwiftUI
 class AppData: ObservableObject {
     @Published var financeData = FinanceData(
         incomes: [Income](),
-        expenses: [Expense](),
-        frequency: .day
+        expenses: [Expense]()
     )
 }
 

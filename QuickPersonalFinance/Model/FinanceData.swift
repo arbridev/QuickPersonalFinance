@@ -10,5 +10,4 @@ import Foundation
 struct FinanceData {
     let incomes: [Income]
     let expenses: [Expense]
-    let frequency: CalculationFrequency
 }

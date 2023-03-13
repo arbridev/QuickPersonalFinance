@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Income: Codable, Hashable {
+struct Income: Source {
     let netValue: Double
     let recurrence: Recurrence?
 }

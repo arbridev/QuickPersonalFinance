@@ -26,6 +26,7 @@
 		14A16A1029BBCFA500B69FD7 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A0F29BBCFA500B69FD7 /* Income.swift */; };
 		14A16A1229BBCFB000B69FD7 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1129BBCFB000B69FD7 /* Expense.swift */; };
 		14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1529BBD27C00B69FD7 /* Recurrence.swift */; };
+		14A16A1829BE408D00B69FD7 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1729BE408D00B69FD7 /* Source.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		14A16A0F29BBCFA500B69FD7 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		14A16A1129BBCFB000B69FD7 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		14A16A1529BBD27C00B69FD7 /* Recurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recurrence.swift; sourceTree = "<group>"; };
+		14A16A1729BE408D00B69FD7 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		14A16A1929BF865500B69FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,7 @@
 		149ABEBF29BA282B0088CE94 /* QuickPersonalFinance */ = {
 			isa = PBXGroup;
 			children = (
+				14A16A1929BF865500B69FD7 /* Info.plist */,
 				14A169FF29BA46B100B69FD7 /* Views */,
 				14A169FC29BA456200B69FD7 /* Model */,
 				149ABEEE29BA2FC70088CE94 /* Resources */,
@@ -178,6 +182,7 @@
 				14A16A0F29BBCFA500B69FD7 /* Income.swift */,
 				14A16A1129BBCFB000B69FD7 /* Expense.swift */,
 				14A16A1529BBD27C00B69FD7 /* Recurrence.swift */,
+				14A16A1729BE408D00B69FD7 /* Source.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				14A16A0629BA6FCF00B69FD7 /* ExpensesView.swift in Sources */,
 				14A16A0829BA6FED00B69FD7 /* EstimateView.swift in Sources */,
 				14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */,
+				14A16A1829BE408D00B69FD7 /* Source.swift in Sources */,
 				14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */,
 				149ABEF129BA304E0088CE94 /* Constants.swift in Sources */,
 				14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */,
@@ -539,7 +545,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"QuickPersonalFinance/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = QuickPersonalFinance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -567,7 +573,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"QuickPersonalFinance/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = QuickPersonalFinance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

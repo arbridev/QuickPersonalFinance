@@ -8,8 +8,8 @@
 import Foundation
 
 struct Constant {
-    static let monthsPerYearCount = 12
-    static let weeksPerMonthCount = 4
-    static let workHoursPerDay = 8
-    static let workDaysPerWeek = 5
+    static let monthsPerYearCount: Double = 12
+    static let weeksPerMonthCount: Double = 4
+    static let workHoursPerDay: Double = 8
+    static let workDaysPerWeek: Double = 5
 }

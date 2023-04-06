@@ -10,21 +10,42 @@ import SwiftUI
 struct IncomeActionView: View {
     @Environment(\.dismiss) var dismiss
 
+    @StateObject private var viewModel: ViewModel = ViewModel()
+    @FocusState var isInputActive: Bool
+
+    var currencyCode: String {
+        Locale.current.currency?.identifier ?? "USD"
+    }
+
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                .padding(.top)
-                .padding(.trailing)
-            }
+            // MARK: Upper bar
+            ModalViewUpperBar(dismiss: dismiss)
+            // MARK: Content
             Spacer()
             VStack {
                 Text("Income Create/Edit")
+                Form {
+                    CustomTextField(
+                        text: $viewModel.grossValueText,
+                        errorMessage: $viewModel.grossValueErrorMessage,
+                        placeholder: "Gross value",
+                        prefix: currencyCode,
+                        keyboardType: .decimalPad
+                    ) { isStarting in
+                        if let number = Double(viewModel.grossValueText), isStarting && number == 0.0 {
+                            viewModel.grossValueText = ""
+                        }
+                    }
+                    .padding(.vertical, 4)
+
+                    Button {
+                        viewModel.submit()
+                    } label: {
+                        Text("Submit")
+                            .padding(6)
+                    }
+                }
             }
             Spacer()
         }

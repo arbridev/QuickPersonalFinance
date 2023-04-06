@@ -12,17 +12,10 @@ struct ExpenseActionView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                .padding(.top)
-                .padding(.trailing)
-            }
+            // MARK: Upper bar
+            ModalViewUpperBar(dismiss: dismiss)
             Spacer()
+            // MARK: Content
             VStack {
                 Text("Expense Create/Edit")
             }

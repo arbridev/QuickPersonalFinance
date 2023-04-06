@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IncomesView: View {
+    @EnvironmentObject var mainData: AppData
     @State private var isPresentingAction = false
 
     var body: some View {
@@ -22,6 +23,7 @@ struct IncomesView: View {
                 .padding(.trailing)
                 .sheet(isPresented: $isPresentingAction) {
                     IncomeActionView()
+                        .environmentObject(mainData)
                 }
             }
             Spacer()

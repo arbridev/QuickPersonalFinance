@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IncomeActionView: View {
+    @EnvironmentObject var mainData: AppData
     @Environment(\.dismiss) var dismiss
 
     @StateObject private var viewModel: ViewModel = ViewModel()
@@ -39,8 +40,18 @@ struct IncomeActionView: View {
                     }
                     .padding(.vertical, 4)
 
+                    Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
+                        ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
+                            Text(recurrence.rawValue.capitalized).tag(recurrence)
+                        }
+                    }
+
                     Button {
-                        viewModel.submit()
+                        viewModel.submit { didSubmit in
+                            if didSubmit {
+                                dismiss.callAsFunction()
+                            }
+                        }
                     } label: {
                         Text("Submit")
                             .padding(6)
@@ -48,6 +59,9 @@ struct IncomeActionView: View {
                 }
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.mainData = mainData
         }
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 extension IncomeActionView {
 
     @MainActor class ViewModel: ObservableObject {
+        @Published var mainData: AppData?
         @Published var grossValueText: String = "" {
             didSet {
                 let preemptiveValidation = DoubleValidation(value: grossValueText)
@@ -19,14 +20,29 @@ extension IncomeActionView {
             }
         }
         @Published var grossValueErrorMessage: String?
+        @Published var selectedRecurrence: Recurrence = .hour
 
-        func submit() {
+        func submit(_ didSubmit: (Bool) -> Void) {
+            var isValid = true
             let grossValueValidation = DoubleValidation(value: grossValueText)
             if grossValueText.isEmpty || !grossValueValidation.isValid {
                 grossValueErrorMessage = "A gross income value is required"
+                isValid = false
             } else {
                 grossValueErrorMessage = nil
             }
+
+            if isValid, let oldData = mainData {
+                let income = Income(netValue: Double(grossValueText)!, recurrence: selectedRecurrence)
+                var incomes = oldData.financeData.incomes
+                incomes.append(income)
+                let financeData = FinanceData(incomes: incomes, expenses: oldData.financeData.expenses)
+                mainData?.financeData = financeData
+                didSubmit(true)
+                return
+            }
+
+            didSubmit(false)
         }
     }
 

@@ -8,6 +8,8 @@
 import Foundation
 
 struct Expense: Source {
+    let name: String
+    let more: String?
     let netValue: Double
     let recurrence: Recurrence?
 }

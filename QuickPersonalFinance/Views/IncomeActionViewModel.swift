@@ -33,7 +33,7 @@ extension IncomeActionView {
             }
 
             if isValid, let oldData = mainData {
-                let income = Income(netValue: Double(grossValueText)!, recurrence: selectedRecurrence)
+                let income = Income(name: "something", more: "something more", netValue: Double(grossValueText)!, recurrence: selectedRecurrence)
                 var incomes = oldData.financeData.incomes
                 incomes.append(income)
                 let financeData = FinanceData(incomes: incomes, expenses: oldData.financeData.expenses)

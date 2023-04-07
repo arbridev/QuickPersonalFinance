@@ -19,11 +19,21 @@ extension IncomeActionView {
                 }
             }
         }
+        @Published var nameText: String = ""
+        @Published var moreText: String = ""
+        @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
         @Published var selectedRecurrence: Recurrence = .hour
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
+            if nameText.isEmpty {
+                nameTextErrorMessage = "A name is required to identify this source of income"
+                isValid = false
+            } else {
+                nameTextErrorMessage = nil
+            }
+
             let grossValueValidation = DoubleValidation(value: grossValueText)
             if grossValueText.isEmpty || !grossValueValidation.isValid {
                 grossValueErrorMessage = "A gross income value is required"
@@ -33,7 +43,12 @@ extension IncomeActionView {
             }
 
             if isValid, let oldData = mainData {
-                let income = Income(name: "something", more: "something more", netValue: Double(grossValueText)!, recurrence: selectedRecurrence)
+                let income = Income(
+                    name: nameText,
+                    more: moreText.isEmpty ? nil : moreText,
+                    netValue: Double(grossValueText)!,
+                    recurrence: selectedRecurrence
+                )
                 var incomes = oldData.financeData.incomes
                 incomes.append(income)
                 let financeData = FinanceData(incomes: incomes, expenses: oldData.financeData.expenses)

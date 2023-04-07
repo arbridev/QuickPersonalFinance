@@ -34,7 +34,11 @@ struct IncomesView: View {
             VStack {
                 Text("Incomes")
                 List(mainData.financeData.incomes, id: \.hashValue) { income in
-                    Text(String(format: "\(currencyCode) %.2f", income.netValue))
+                    HStack {
+                        Text(income.name)
+                        Spacer()
+                        Text(String(format: "\(currencyCode) %.2f", income.netValue))
+                    }
                 }
             }
             Spacer()

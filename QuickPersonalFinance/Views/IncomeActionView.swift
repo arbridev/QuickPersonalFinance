@@ -28,6 +28,24 @@ struct IncomeActionView: View {
                 Text("Income Create/Edit")
                 Form {
                     CustomTextField(
+                        text: $viewModel.nameText,
+                        errorMessage: $viewModel.nameTextErrorMessage,
+                        placeholder: "Name",
+                        prefix: nil,
+                        keyboardType: .alphabet
+                    )
+                    .padding(.vertical, 4)
+
+                    CustomTextField(
+                        text: $viewModel.moreText,
+                        errorMessage: Binding.constant(nil),
+                        placeholder: "More",
+                        prefix: nil,
+                        keyboardType: .alphabet
+                    )
+                    .padding(.vertical, 4)
+
+                    CustomTextField(
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "Gross value",

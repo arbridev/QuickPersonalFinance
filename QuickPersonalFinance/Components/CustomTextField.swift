@@ -11,17 +11,21 @@ struct CustomTextField: View {
     @Binding var text: String
     @Binding var errorMessage: String?
     var placeholder: String
-    var prefix: String
+    var prefix: String?
     var keyboardType: UIKeyboardType
     @FocusState var isFocused: Bool
-    var onEditingChanged: (Bool) -> Void
+    var onEditingChanged: ((Bool) -> Void)?
 
     var body: some View {
         VStack {
-            TextField(placeholder, text: $text, onEditingChanged: onEditingChanged)
+            TextField(placeholder, text: $text, onEditingChanged: onEditingChanged ?? { isStarting in })
                 .keyboardType(keyboardType)
                 .focused($isFocused)
-                .textFieldStyle(OutlinedTextFieldStyle(prefix: Text(prefix)))
+                .textFieldStyle(
+                    OutlinedTextFieldStyle(
+                        prefix: prefix == nil ? nil : Text(prefix!)
+                    )
+                )
 
             if let errorMessage {
                 Text(errorMessage)

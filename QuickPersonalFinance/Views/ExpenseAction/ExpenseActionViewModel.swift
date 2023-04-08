@@ -1,13 +1,13 @@
 //
-//  IncomeActionViewModel.swift
+//  ExpenseActionViewModel.swift
 //  QuickPersonalFinance
 //
-//  Created by Armando Brito on 14/3/23.
+//  Created by Armando Brito on 7/4/23.
 //
 
 import Foundation
 
-extension IncomeActionView {
+extension ExpenseActionView {
 
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
@@ -28,7 +28,7 @@ extension IncomeActionView {
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
             if nameText.isEmpty {
-                nameTextErrorMessage = "A name is required to identify this source of income"
+                nameTextErrorMessage = "A name is required to identify this source of expense"
                 isValid = false
             } else {
                 nameTextErrorMessage = nil
@@ -36,24 +36,24 @@ extension IncomeActionView {
 
             let grossValueValidation = DoubleValidation(value: grossValueText)
             if grossValueText.isEmpty || !grossValueValidation.isValid {
-                grossValueErrorMessage = "A gross income value is required"
+                grossValueErrorMessage = "A gross expense value is required"
                 isValid = false
             } else {
                 grossValueErrorMessage = nil
             }
 
             if isValid, let oldData = mainData {
-                let income = Income(
+                let expense = Expense(
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
                     netValue: Double(grossValueText)!,
                     recurrence: selectedRecurrence
                 )
-                var incomes = oldData.financeData.incomes
-                incomes.append(income)
+                var expenses = oldData.financeData.expenses
+                expenses.append(expense)
                 let financeData = FinanceData(
-                    incomes: incomes,
-                    expenses: oldData.financeData.expenses
+                    incomes: oldData.financeData.incomes,
+                    expenses: expenses
                 )
                 mainData?.financeData = financeData
                 didSubmit(true)

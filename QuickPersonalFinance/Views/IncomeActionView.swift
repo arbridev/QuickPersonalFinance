@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct IncomeActionView: View {
-    @EnvironmentObject var mainData: AppData
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var mainData: AppData
+    @Environment(\.dismiss) private var dismiss
 
     @StateObject private var viewModel: ViewModel = ViewModel()
-    @FocusState var isInputActive: Bool
 
     var currencyCode: String {
         Locale.current.currency?.identifier ?? "USD"
@@ -26,6 +25,7 @@ struct IncomeActionView: View {
             Spacer()
             VStack {
                 Text("Income Create/Edit")
+                
                 Form {
                     CustomTextField(
                         text: $viewModel.nameText,

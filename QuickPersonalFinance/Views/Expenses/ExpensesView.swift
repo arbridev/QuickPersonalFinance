@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct ExpensesView: View {
+    @EnvironmentObject private var mainData: AppData
     @State private var isPresentingAction = false
+
+    private var currencyCode: String {
+        Locale.current.currency?.identifier ?? "USD"
+    }
 
     var body: some View {
         VStack {
@@ -21,12 +26,19 @@ struct ExpensesView: View {
                 }
                 .padding(.trailing)
                 .sheet(isPresented: $isPresentingAction) {
-                    IncomeActionView()
+                    ExpenseActionView()
                 }
             }
             Spacer()
             VStack {
                 Text("Expenses")
+                List(mainData.financeData.expenses, id: \.hashValue) { expense in
+                    HStack {
+                        Text(expense.name)
+                        Spacer()
+                        Text(String(format: "\(currencyCode) %.2f", expense.netValue))
+                    }
+                }
             }
             Spacer()
         }

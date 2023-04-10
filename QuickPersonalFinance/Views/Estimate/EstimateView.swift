@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct EstimateView: View {
+    @EnvironmentObject private var mainData: AppData
+    @StateObject private var viewModel = ViewModel()
+
     var body: some View {
-        Text("Estimate")
+        VStack {
+            HStack {
+                Text("Estimate: ")
+                Text(String(format: "%.2f", viewModel.balance))
+            }
+        }
+        .onAppear {
+            viewModel.mainData = mainData
+            viewModel.update()
+        }
     }
 }
 

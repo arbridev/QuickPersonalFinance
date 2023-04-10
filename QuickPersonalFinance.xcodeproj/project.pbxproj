@@ -11,6 +11,7 @@
 		1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1403933329CA034F00049CCB /* ValidationProtocol.swift */; };
 		14189C5229C0E29500A916A9 /* IncomeActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14189C5129C0E29500A916A9 /* IncomeActionViewModel.swift */; };
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
+		1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DA29E4376A00197112 /* EstimateViewModel.swift */; };
 		146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */; };
 		146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5229E0F6DE0087F514 /* Validations.swift */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
@@ -58,6 +59,7 @@
 		1403933329CA034F00049CCB /* ValidationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationProtocol.swift; sourceTree = "<group>"; };
 		14189C5129C0E29500A916A9 /* IncomeActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeActionViewModel.swift; sourceTree = "<group>"; };
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
 		146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseActionViewModel.swift; sourceTree = "<group>"; };
 		146F6A5229E0F6DE0087F514 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		149ABEBD29BA282B0088CE94 /* QuickPersonalFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPersonalFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				14A16A0729BA6FED00B69FD7 /* EstimateView.swift */,
+				1439A0DA29E4376A00197112 /* EstimateViewModel.swift */,
 			);
 			path = Estimate;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			files = (
 				14A16A1229BBCFB000B69FD7 /* Expense.swift in Sources */,
 				149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */,
+				1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */,
 				14A16A0B29BA775C00B69FD7 /* IncomeActionView.swift in Sources */,
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
 				1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */,

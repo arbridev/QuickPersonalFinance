@@ -10,6 +10,7 @@ import Foundation
 protocol CalculationService {
     var incomes: [Income] { get set }
     var expenses: [Expense] { get set }
+    func totalize(sources: [any Source], to recurrence: Recurrence) -> Double
     func monthlyBalance() -> Double
 }
 
@@ -72,7 +73,7 @@ class Calculation: CalculationService {
         return convert(newValue, from: next, to: destination)
     }
 
-    private func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
+    func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
         sources.map { source in
             source.recurrence != nil ?
             convert(source.netValue, from: source.recurrence!, to: recurrence) :

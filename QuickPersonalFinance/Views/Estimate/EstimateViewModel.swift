@@ -23,10 +23,28 @@ extension EstimateView {
                 )
             }
         }
+        @Published var incomeTotal: Double = 0.0
+        @Published var expenseTotal: Double = 0.0
         @Published var balance: Double = 0.0
+        @Published var selectedRecurrence: Recurrence = .year {
+            didSet {
+                update()
+            }
+        }
 
         func update() {
-            balance = calculations?.monthlyBalance() ?? 0.0
+            guard let mainData else {
+                return
+            }
+            incomeTotal = calculations!.totalize(
+                sources: mainData.financeData.incomes,
+                to: selectedRecurrence
+            )
+            expenseTotal = calculations!.totalize(
+                sources: mainData.financeData.expenses,
+                to: selectedRecurrence
+            )
+            balance = incomeTotal - expenseTotal
         }
     }
 

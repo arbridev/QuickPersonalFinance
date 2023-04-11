@@ -47,7 +47,15 @@ struct IncomesView: View {
 }
 
 struct IncomesView_Previews: PreviewProvider {
-    static let envObject = AppData()
+    static var envObject: AppData {
+        let data = AppData()
+        let incomes = [
+            MockData.income1
+        ]
+        data.financeData = FinanceData(incomes: incomes, expenses: [Expense]())
+        return data
+    }
+
     static var previews: some View {
         IncomesView()
             .environmentObject(envObject)

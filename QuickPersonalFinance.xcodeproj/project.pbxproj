@@ -36,6 +36,9 @@
 		14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1529BBD27C00B69FD7 /* Recurrence.swift */; };
 		14A16A1829BE408D00B69FD7 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1729BE408D00B69FD7 /* Source.swift */; };
 		14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */; };
+		14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393B29E4CC8E005E31A9 /* MockData.swift */; };
+		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
+		14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,9 @@
 		14A16A1729BE408D00B69FD7 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		14A16A1929BF865500B69FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewUpperBar.swift; sourceTree = "<group>"; };
+		14B4393B29E4CC8E005E31A9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
+		14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 				14A169FC29BA456200B69FD7 /* Model */,
 				149ABEEE29BA2FC70088CE94 /* Resources */,
 				149ABEEB29BA29910088CE94 /* Services */,
+				14B4393A29E4CC29005E31A9 /* Mocking */,
 				149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */,
 				149ABEC629BA28310088CE94 /* Preview Content */,
 			);
@@ -193,6 +200,8 @@
 				1403933329CA034F00049CCB /* ValidationProtocol.swift */,
 				146F6A5229E0F6DE0087F514 /* Validations.swift */,
 				1439A0DC29E460E200197112 /* Double+Currency.swift */,
+				14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */,
+				14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -273,6 +282,14 @@
 				141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		14B4393A29E4CC29005E31A9 /* Mocking */ = {
+			isa = PBXGroup;
+			children = (
+				14B4393B29E4CC8E005E31A9 /* MockData.swift */,
+			);
+			path = Mocking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,10 +432,13 @@
 				141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */,
 				14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */,
 				1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */,
+				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,
 				1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */,
 				146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */,
 				14A16A1029BBCFA500B69FD7 /* Income.swift in Sources */,
+				14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */,
+				14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */,
 				149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */,
 				14A16A0629BA6FCF00B69FD7 /* ExpensesView.swift in Sources */,
 				146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */,

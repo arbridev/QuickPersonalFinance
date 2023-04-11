@@ -85,7 +85,14 @@ struct ExpenseActionView: View {
 }
 
 struct ExpenseActionView_Previews: PreviewProvider {
+    static var envObject: AppData {
+        let data = AppData()
+        data.financeData = FinanceData(incomes: [Income](), expenses: [Expense]())
+        return data
+    }
+
     static var previews: some View {
         ExpenseActionView()
+            .environmentObject(envObject)
     }
 }

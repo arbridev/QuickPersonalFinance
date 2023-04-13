@@ -11,23 +11,25 @@ import SwiftUI
 struct OutlinedTextFieldStyle: TextFieldStyle {
     @State var icon: Image?
     @State var prefix: Text?
+    var iconColor: Color?
+    var prefixColor: Color?
 
     func _body(configuration: TextField<Self._Label>) -> some View {
         VStack {
             HStack {
                 if let icon {
-                    icon.foregroundColor(Color(UIColor.systemGray4))
+                    icon.foregroundColor(iconColor ?? .Palette.gray1)
                 }
                 if let prefix {
-                    prefix.foregroundColor(Color(UIColor.systemGreen))
+                    prefix.foregroundColor(prefixColor ?? .Palette.blue)
                 }
                 configuration
             }
             .padding(.horizontal)
-            .padding(.vertical, 6)
+            .padding(.vertical, 8)
             .overlay {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(Color(UIColor.systemGray4), lineWidth: 2)
+                    .stroke(Color.Palette.gray2, lineWidth: 2)
             }
         }
     }

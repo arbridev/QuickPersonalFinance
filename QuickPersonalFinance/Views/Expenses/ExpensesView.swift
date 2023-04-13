@@ -32,6 +32,7 @@ struct ExpensesView: View {
             Spacer()
             VStack {
                 Text("Expenses")
+                    .asScreenTitle()
                 List(mainData.financeData.expenses, id: \.hashValue) { expense in
                     HStack {
                         Text(expense.name)

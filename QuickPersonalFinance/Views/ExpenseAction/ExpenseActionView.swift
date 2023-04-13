@@ -20,12 +20,10 @@ struct ExpenseActionView: View {
     var body: some View {
         VStack {
             // MARK: Upper bar
-            ModalViewUpperBar(dismiss: dismiss)
+            ModalViewUpperBar(title: "Expense Create/Edit", dismiss: dismiss)
             Spacer()
             // MARK: Content
             VStack {
-                Text("Expense Create/Edit")
-
                 Form {
                     CustomTextField(
                         text: $viewModel.nameText,
@@ -34,7 +32,8 @@ struct ExpenseActionView: View {
                         prefix: nil,
                         keyboardType: .alphabet
                     )
-                    .padding(.vertical, 4)
+                    .padding(.top, 4)
+                    .listRowSeparator(.hidden)
 
                     CustomTextField(
                         text: $viewModel.moreText,
@@ -43,37 +42,37 @@ struct ExpenseActionView: View {
                         prefix: nil,
                         keyboardType: .alphabet
                     )
-                    .padding(.vertical, 4)
+                    .listRowSeparator(.hidden)
 
                     CustomTextField(
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "Gross value",
                         prefix: currencyCode,
+                        prefixColor: .Palette.red,
                         keyboardType: .decimalPad
                     ) { isStarting in
                         if let number = Double(viewModel.grossValueText), isStarting && number == 0.0 {
                             viewModel.grossValueText = ""
                         }
                     }
-                    .padding(.vertical, 4)
+                    .listRowSeparator(.hidden)
 
                     Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
                             Text(recurrence.rawValue.capitalized).tag(recurrence)
                         }
                     }
+                    .padding(.bottom, 4)
 
-                    Button {
+                    CTAButton(title: "Submit", color: .Palette.red) {
                         viewModel.submit { didSubmit in
                             if didSubmit {
                                 dismiss.callAsFunction()
                             }
                         }
-                    } label: {
-                        Text("Submit")
-                            .padding(6)
                     }
+                    .padding(.vertical, 6)
                 }
             }
             Spacer()

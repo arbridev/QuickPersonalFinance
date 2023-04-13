@@ -12,6 +12,7 @@ struct CustomTextField: View {
     @Binding var errorMessage: String?
     var placeholder: String
     var prefix: String?
+    var prefixColor: Color?
     var keyboardType: UIKeyboardType
     @FocusState var isFocused: Bool
     var onEditingChanged: ((Bool) -> Void)?
@@ -23,14 +24,15 @@ struct CustomTextField: View {
                 .focused($isFocused)
                 .textFieldStyle(
                     OutlinedTextFieldStyle(
-                        prefix: prefix == nil ? nil : Text(prefix!)
+                        prefix: prefix == nil ? nil : Text(prefix!),
+                        prefixColor: prefixColor
                     )
                 )
 
             if let errorMessage {
                 Text(errorMessage)
                     .font(.caption)
-                    .foregroundColor(.red)
+                    .foregroundColor(.pink)
             }
         }
     }

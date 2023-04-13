@@ -17,67 +17,86 @@ struct EstimateView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text("Time span:")
-                Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
-                    ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
-                        Text(recurrence.rawValue.capitalized).tag(recurrence)
-                    }
-                }
-                Spacer()
-            }
-            .padding(.horizontal)
-            .padding(.bottom)
-
             Text("Estimate")
-                .font(.title2)
+                .asScreenTitle()
+                .padding()
 
-            HStack {
-                Text("Income:")
-                    .font(.caption)
-                Spacer()
-                Text("\(viewModel.incomeTotal.asCurrency)")
-                    .font(.caption)
-            }
-            .padding(.top)
-            .padding(.horizontal)
+            Spacer()
 
-            HStack {
-                Text("Expense:")
-                    .font(.caption)
-                Spacer()
-                Text("\(viewModel.expenseTotal.asCurrency)")
-                    .font(.caption)
-            }
-            .padding(.top)
-            .padding(.horizontal)
+            VStack {
+                HStack {
+                    Text("Time span:")
+                    Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
+                        ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
+                            Text(recurrence.rawValue.capitalized)
+                                .tag(recurrence)
+                        }
+                    }
+                    .tint(Color.Palette.blue2)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
 
-            Divider()
-                .overlay(.gray)
+                HStack {
+                    Text("Income:")
+                        .font(.system(size: 16))
+                    Spacer()
+                    Text("\(viewModel.incomeTotal.asCurrency)")
+                        .font(.system(size: 16))
+                        .underline(true, color: .Palette.green)
+                }
                 .padding(.top)
                 .padding(.horizontal)
 
-            HStack {
-                Text("Total:")
-                Spacer()
-                Text("\(viewModel.balance.asCurrency)")
-                    .font(.subheadline)
-            }
-            .padding(.top)
-            .padding(.horizontal)
+                HStack {
+                    Text("Expense:")
+                        .font(.system(size: 16))
+                    Spacer()
+                    Text("\(viewModel.expenseTotal.asCurrency)")
+                        .font(.system(size: 16))
+                        .underline(true, color: .Palette.red)
+                }
+                .padding(.top)
+                .padding(.horizontal)
 
-            HStack {
-                Spacer()
-                Text("\(currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
-                    .font(.caption)
+                Divider()
+                    .overlay(Color.Palette.gray0)
+                    .padding(.top)
+                    .padding(.horizontal)
+
+                HStack {
+                    Text("Total:")
+                        .font(.system(size: 20))
+                    Spacer()
+                    Text("\(viewModel.balance.asCurrency)")
+                        .font(.system(size: 20))
+                        .underline(true, color: .Palette.blue)
+                }
+                .padding(.top)
+                .padding(.horizontal)
+
+                HStack {
+                    Spacer()
+                    Text("\(currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
+                        .font(.caption)
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            .padding()
+            .onAppear {
+                viewModel.mainData = mainData
+                viewModel.update()
+            }
+
+            Spacer()
         }
-        .padding()
-        .onAppear {
-            viewModel.mainData = mainData
-            viewModel.update()
-        }
+    }
+
+    init() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = .red
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
     }
 }
 

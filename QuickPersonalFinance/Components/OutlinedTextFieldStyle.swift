@@ -31,6 +31,7 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .stroke(Color.Palette.gray2, lineWidth: 2)
             }
+            .font(.App.input)
         }
     }
 }

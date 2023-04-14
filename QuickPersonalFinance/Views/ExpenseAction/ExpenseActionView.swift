@@ -58,12 +58,15 @@ struct ExpenseActionView: View {
                     }
                     .listRowSeparator(.hidden)
 
-                    Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
+                    Picker("Recurrence:", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
-                            Text(recurrence.rawValue.capitalized).tag(recurrence)
+                            Text(recurrence.rawValue.capitalized)
+                                .font(.App.input)
+                                .tag(recurrence)
                         }
                     }
                     .padding(.bottom, 4)
+                    .font(.App.input)
 
                     CTAButton(title: "Submit", color: .Palette.red) {
                         viewModel.submit { didSubmit in

@@ -40,6 +40,7 @@ struct ExpensesView: View {
                         Text(String(format: "\(currencyCode) %.2f", expense.netValue))
                     }
                 }
+                .font(.App.standard)
             }
             Spacer()
         }

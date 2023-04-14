@@ -31,7 +31,7 @@ struct CustomTextField: View {
 
             if let errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.App.error)
                     .foregroundColor(.pink)
             }
         }

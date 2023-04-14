@@ -43,18 +43,22 @@ struct ContentView: View {
                         Label("Incomes", systemImage: "plus.circle")
                     }
                     .tag(0)
+                    .font(.app(size: 20))
                 ExpensesView()
                     .tabItem {
                         Label("Expenses", systemImage: "minus.circle")
                     }
                     .tag(1)
+                    .font(.app(size: 20))
                 EstimateView()
                     .tabItem {
                         Label("Estimate", systemImage: "plus.forwardslash.minus")
                     }
                     .tag(2)
+                    .font(.app(size: 20))
             }
             .tint(tabTint)
+            .font(.app(size: 12))
         }
         .environmentObject(mainData)
     }

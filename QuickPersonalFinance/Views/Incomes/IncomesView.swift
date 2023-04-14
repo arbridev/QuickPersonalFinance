@@ -41,6 +41,7 @@ struct IncomesView: View {
                         Text(String(format: "\(currencyCode) %.2f", income.netValue))
                     }
                 }
+                .font(.App.standard)
             }
             Spacer()
         }

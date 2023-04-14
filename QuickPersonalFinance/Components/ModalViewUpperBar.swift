@@ -8,27 +8,27 @@
 import SwiftUI
 
 struct ModalViewUpperBar: View {
-    var title: String?
+    var title: String
     var dismiss: DismissAction?
 
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button {
-                    dismiss?.callAsFunction()
-                } label: {
-                    Image(systemName: "xmark")
+            if let dismiss {
+                HStack {
+                    Spacer()
+                    Button {
+                        dismiss.callAsFunction()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                    .padding(.top)
+                    .padding(.trailing)
                 }
-                .padding(.top)
-                .padding(.trailing)
+                .frame(maxHeight: 50)
             }
-            .frame(maxHeight: 50)
 
-            if let title {
-                Text(title)
-                    .asScreenTitle()
-            }
+            Text(title)
+                .asScreenTitle()
         }
     }
 }

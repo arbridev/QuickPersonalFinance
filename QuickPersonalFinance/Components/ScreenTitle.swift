@@ -10,8 +10,7 @@ import SwiftUI
 struct ScreenTitle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.title3)
-            .fontWeight(.light)
+            .font(.App.screenTitle)
     }
 }
 

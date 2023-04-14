@@ -18,8 +18,6 @@ struct CTAButton: View {
             action()
         } label: {
             Text(title.uppercased())
-                .font(.title3)
-                .fontWeight(.light)
                 .padding(.horizontal, 10)
         }
         .frame(maxWidth: .infinity, idealHeight: 40, maxHeight: 60, alignment: .center)
@@ -28,6 +26,7 @@ struct CTAButton: View {
                 .foregroundColor(color ?? Color.Palette.blue)
         })
         .tint(titleColor ?? Color.white)
+        .font(.App.buttonTitle)
     }
 }
 

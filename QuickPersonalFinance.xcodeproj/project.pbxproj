@@ -26,6 +26,12 @@
 		149ABEDE29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */; };
 		149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEEC29BA29BD0088CE94 /* CalculationService.swift */; };
 		149ABEF129BA304E0088CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEF029BA304E0088CE94 /* Constants.swift */; };
+		149DEEC229E86B7000155BF6 /* WorkSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEB029E86B7000155BF6 /* WorkSans-Light.ttf */; };
+		149DEECA29E86B7000155BF6 /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEB829E86B7000155BF6 /* WorkSans-Medium.ttf */; };
+		149DEECE29E86B7000155BF6 /* WorkSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEBC29E86B7000155BF6 /* WorkSans-Italic.ttf */; };
+		149DEED229E86B7000155BF6 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEC029E86B7000155BF6 /* WorkSans-Regular.ttf */; };
+		149DEEEB29E8BB7600155BF6 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEDF29E8BB7600155BF6 /* Manrope-Regular.ttf */; };
+		149DEEEF29E8BD1000155BF6 /* Font+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149DEEEE29E8BD1000155BF6 /* Font+App.swift */; };
 		14A169FB29BA432C00B69FD7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 14A169FA29BA432B00B69FD7 /* README.md */; };
 		14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A169FD29BA456D00B69FD7 /* FinanceData.swift */; };
 		14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A0329BA6FB700B69FD7 /* IncomesView.swift */; };
@@ -83,6 +89,12 @@
 		149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		149ABEEC29BA29BD0088CE94 /* CalculationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationService.swift; sourceTree = "<group>"; };
 		149ABEF029BA304E0088CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		149DEEB029E86B7000155BF6 /* WorkSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Light.ttf"; sourceTree = "<group>"; };
+		149DEEB829E86B7000155BF6 /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
+		149DEEBC29E86B7000155BF6 /* WorkSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Italic.ttf"; sourceTree = "<group>"; };
+		149DEEC029E86B7000155BF6 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		149DEEDF29E8BB7600155BF6 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		149DEEEE29E8BD1000155BF6 /* Font+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+App.swift"; sourceTree = "<group>"; };
 		14A169FA29BA432B00B69FD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14A169FD29BA456D00B69FD7 /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
 		14A16A0329BA6FB700B69FD7 /* IncomesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesView.swift; sourceTree = "<group>"; };
@@ -199,6 +211,7 @@
 		149ABEEE29BA2FC70088CE94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				149DEEAE29E86AC300155BF6 /* Fonts */,
 				149ABEF029BA304E0088CE94 /* Constants.swift */,
 				149ABEC429BA28310088CE94 /* Assets.xcassets */,
 				1403933329CA034F00049CCB /* ValidationProtocol.swift */,
@@ -206,8 +219,37 @@
 				1439A0DC29E460E200197112 /* Double+Currency.swift */,
 				14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */,
 				14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */,
+				149DEEEE29E8BD1000155BF6 /* Font+App.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		149DEEAE29E86AC300155BF6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				149DEEDC29E8BB7600155BF6 /* Manrope */,
+				149DEEAF29E86AFB00155BF6 /* Work_Sans */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		149DEEAF29E86AFB00155BF6 /* Work_Sans */ = {
+			isa = PBXGroup;
+			children = (
+				149DEEBC29E86B7000155BF6 /* WorkSans-Italic.ttf */,
+				149DEEB029E86B7000155BF6 /* WorkSans-Light.ttf */,
+				149DEEB829E86B7000155BF6 /* WorkSans-Medium.ttf */,
+				149DEEC029E86B7000155BF6 /* WorkSans-Regular.ttf */,
+			);
+			path = Work_Sans;
+			sourceTree = "<group>";
+		};
+		149DEEDC29E8BB7600155BF6 /* Manrope */ = {
+			isa = PBXGroup;
+			children = (
+				149DEEDF29E8BB7600155BF6 /* Manrope-Regular.ttf */,
+			);
+			path = Manrope;
 			sourceTree = "<group>";
 		};
 		14A169FC29BA456200B69FD7 /* Model */ = {
@@ -402,9 +444,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149DEECA29E86B7000155BF6 /* WorkSans-Medium.ttf in Resources */,
 				14A169FB29BA432C00B69FD7 /* README.md in Resources */,
 				149ABEC829BA28310088CE94 /* Preview Assets.xcassets in Resources */,
+				149DEECE29E86B7000155BF6 /* WorkSans-Italic.ttf in Resources */,
 				149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */,
+				149DEEC229E86B7000155BF6 /* WorkSans-Light.ttf in Resources */,
+				149DEED229E86B7000155BF6 /* WorkSans-Regular.ttf in Resources */,
+				149DEEEB29E8BB7600155BF6 /* Manrope-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +485,7 @@
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
 				1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */,
 				141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */,
+				149DEEEF29E8BD1000155BF6 /* Font+App.swift in Sources */,
 				14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */,
 				1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */,
 				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,

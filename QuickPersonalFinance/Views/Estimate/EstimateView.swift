@@ -29,6 +29,7 @@ struct EstimateView: View {
                     Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
                             Text(recurrence.rawValue.capitalized)
+                                .font(.App.input)
                                 .tag(recurrence)
                         }
                     }
@@ -37,28 +38,31 @@ struct EstimateView: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
+                .font(.App.input)
+
+                Divider()
+                    .overlay(Color.Palette.gray1)
+                    .padding(.horizontal)
 
                 HStack {
-                    Text("Income:")
-                        .font(.system(size: 16))
+                    Text("Income")
                     Spacer()
                     Text("\(viewModel.incomeTotal.asCurrency)")
-                        .font(.system(size: 16))
                         .underline(true, color: .Palette.green)
                 }
                 .padding(.top)
                 .padding(.horizontal)
+                .font(.app(size: 18))
 
                 HStack {
-                    Text("Expense:")
-                        .font(.system(size: 16))
+                    Text("Expense")
                     Spacer()
                     Text("\(viewModel.expenseTotal.asCurrency)")
-                        .font(.system(size: 16))
                         .underline(true, color: .Palette.red)
                 }
-                .padding(.top)
+                .padding(.top, 6)
                 .padding(.horizontal)
+                .font(.app(size: 18))
 
                 Divider()
                     .overlay(Color.Palette.gray0)
@@ -66,20 +70,19 @@ struct EstimateView: View {
                     .padding(.horizontal)
 
                 HStack {
-                    Text("Total:")
-                        .font(.system(size: 20))
+                    Text("Total")
                     Spacer()
                     Text("\(viewModel.balance.asCurrency)")
-                        .font(.system(size: 20))
                         .underline(true, color: .Palette.blue)
                 }
                 .padding(.top)
                 .padding(.horizontal)
+                .font(.app(size: 20))
 
                 HStack {
                     Spacer()
                     Text("\(currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
-                        .font(.caption)
+                        .font(.App.info)
                 }
                 .padding(.horizontal)
             }
@@ -91,12 +94,6 @@ struct EstimateView: View {
 
             Spacer()
         }
-    }
-
-    init() {
-        UISegmentedControl.appearance().selectedSegmentTintColor = .red
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
     }
 }
 

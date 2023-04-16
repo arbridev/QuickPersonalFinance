@@ -34,6 +34,7 @@ struct IncomeActionView: View {
                     )
                     .padding(.top, 4)
                     .listRowSeparator(.hidden)
+                    .autocorrectionDisabled()
 
                     CustomTextField(
                         text: $viewModel.moreText,

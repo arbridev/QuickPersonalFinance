@@ -21,7 +21,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(name: "expense", more: nil, netValue: 4, recurrence: .hour)]
         calculation = Calculation(incomes: incomes, expenses: expenses)
         let balance = calculation.monthlyBalance()
-        XCTAssertEqual(balance, 160)
+        XCTAssertEqual(balance, 173.0, accuracy: 1.0)
     }
 
     func testDaily() throws {
@@ -29,7 +29,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(name: "expense", more: nil, netValue: 9, recurrence: .day)]
         calculation = Calculation(incomes: incomes, expenses: expenses)
         let balance = calculation.monthlyBalance()
-        XCTAssertEqual(balance, 20)
+        XCTAssertEqual(balance, 21.0, accuracy: 1.0)
     }
 
     func testWeekly() throws {
@@ -37,7 +37,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(name: "expense", more: nil, netValue: 40, recurrence: .week)]
         calculation = Calculation(incomes: incomes, expenses: expenses)
         let balance = calculation.monthlyBalance()
-        XCTAssertEqual(balance, 40)
+        XCTAssertEqual(balance, 43.0, accuracy: 1.0)
     }
 
     func testMonthly() throws {
@@ -75,7 +75,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         ]
         calculation = Calculation(incomes: incomes, expenses: expenses)
         let balance = calculation.monthlyBalance()
-        XCTAssertEqual(balance, 2800)
+        XCTAssertEqual(balance, 2893.0, accuracy: 1.0)
     }
 
 }

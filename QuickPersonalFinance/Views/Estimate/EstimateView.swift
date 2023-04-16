@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Charts
 
 struct EstimateView: View {
     @EnvironmentObject private var mainData: AppData
     @StateObject private var viewModel = ViewModel()
+
+    let barChartColors: [Color] = [.Palette.green, .Palette.red]
 
     private var currencyCode: String {
         Locale.current.currency?.identifier ?? "USD"
@@ -85,11 +88,27 @@ struct EstimateView: View {
                         .font(.App.info)
                 }
                 .padding(.horizontal)
+
+                Divider()
+                    .overlay(Color.Palette.gray0)
+                    .padding(.vertical)
+
+                Chart {
+                    ForEach(viewModel.barChartData, id: \.title) { barValue in
+                        BarMark(
+                            x: .value("Source", barValue.title),
+                            y: .value("Total", barValue.total)
+                        )
+                        .foregroundStyle(by: .value("Source", barValue.title))
+                    }
+                }
+                .chartForegroundStyleScale(domain: ["Income", "Expense"], range: barChartColors)
             }
             .padding()
             .onAppear {
                 viewModel.mainData = mainData
                 viewModel.update()
+                viewModel.createChartData()
             }
 
             Spacer()
@@ -101,15 +120,17 @@ struct EstimateView_Previews: PreviewProvider {
     static var envObject: AppData {
         let data = AppData()
         let incomes = [
-            Income(
-                name: "income 1",
-                more: nil,
-                netValue: 20.0,
-                recurrence: .hour
-            )
+            MockData.income1
         ]
 
-        data.financeData = FinanceData(incomes: incomes, expenses: [Expense]())
+        let expenses = [
+            MockData.expense1
+        ]
+
+        data.financeData = FinanceData(
+            incomes: incomes,
+            expenses: expenses
+        )
         return data
     }
     

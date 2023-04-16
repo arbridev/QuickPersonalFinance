@@ -31,6 +31,7 @@ extension EstimateView {
                 update()
             }
         }
+        @Published var barChartData: [BarValue] = [BarValue]()
 
         func update() {
             guard let mainData else {
@@ -46,6 +47,24 @@ extension EstimateView {
             )
             balance = incomeTotal - expenseTotal
         }
+
+        func createChartData() {
+            guard let _ = mainData else {
+                return
+            }
+            let barChartData = [
+                BarValue(title: "Income", total: incomeTotal),
+                BarValue(title: "Expense", total: expenseTotal)
+            ]
+            self.barChartData = barChartData
+        }
     }
 
+}
+
+extension EstimateView {
+    struct BarValue {
+        let title: String
+        let total: Double
+    }
 }

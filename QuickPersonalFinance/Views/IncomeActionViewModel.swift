@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension IncomeActionView {
 
@@ -24,6 +25,7 @@ extension IncomeActionView {
         @Published var selectedRecurrence: Recurrence = .hour
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
+        var moc: NSManagedObjectContext?
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
@@ -42,7 +44,7 @@ extension IncomeActionView {
                 grossValueErrorMessage = nil
             }
 
-            if isValid, let oldData = mainData {
+            if isValid, let oldData = mainData, let moc {
                 let income = Income(
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
@@ -56,6 +58,8 @@ extension IncomeActionView {
                     expenses: oldData.financeData.expenses
                 )
                 mainData?.financeData = financeData
+                let _ = StoredIncome.from(income, context: moc)
+                try? moc.save()
                 didSubmit(true)
                 return
             }

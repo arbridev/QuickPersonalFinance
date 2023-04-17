@@ -10,6 +10,7 @@ import SwiftUI
 struct IncomeActionView: View {
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) var moc
 
     @StateObject private var viewModel: ViewModel = ViewModel()
 
@@ -83,6 +84,7 @@ struct IncomeActionView: View {
         }
         .onAppear {
             viewModel.mainData = mainData
+            viewModel.moc = moc
         }
     }
 }

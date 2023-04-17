@@ -12,10 +12,13 @@
 		14153FD529E8516E00C90D13 /* ScreenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153FD429E8516E00C90D13 /* ScreenTitle.swift */; };
 		14189C5229C0E29500A916A9 /* IncomeActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14189C5129C0E29500A916A9 /* IncomeActionViewModel.swift */; };
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
+		142BA18729ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */; };
 		1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DA29E4376A00197112 /* EstimateViewModel.swift */; };
 		1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DC29E460E200197112 /* Double+Currency.swift */; };
 		144DB7B529EED77F00DF3585 /* IncomesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */; };
 		144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */; };
+		1468A1EC29ED86A6002E92B7 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468A1EB29ED86A6002E92B7 /* DataController.swift */; };
+		1468A1EE29ED8C70002E92B7 /* Model+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */; };
 		146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */; };
 		146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5229E0F6DE0087F514 /* Validations.swift */; };
 		14783A0929E8350100BBE10F /* CTAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783A0829E8350100BBE10F /* CTAButton.swift */; };
@@ -74,10 +77,13 @@
 		14153FD429E8516E00C90D13 /* ScreenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTitle.swift; sourceTree = "<group>"; };
 		14189C5129C0E29500A916A9 /* IncomeActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeActionViewModel.swift; sourceTree = "<group>"; };
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickPersonalFinance.xcdatamodel; sourceTree = "<group>"; };
 		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
 		1439A0DC29E460E200197112 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
 		144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesViewModel.swift; sourceTree = "<group>"; };
 		144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
+		1468A1EB29ED86A6002E92B7 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Persistence.swift"; sourceTree = "<group>"; };
 		146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseActionViewModel.swift; sourceTree = "<group>"; };
 		146F6A5229E0F6DE0087F514 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		14783A0829E8350100BBE10F /* CTAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAButton.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				14B4393A29E4CC29005E31A9 /* Mocking */,
 				149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */,
 				149ABEC629BA28310088CE94 /* Preview Content */,
+				142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */,
 			);
 			path = QuickPersonalFinance;
 			sourceTree = "<group>";
@@ -208,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				149ABEEC29BA29BD0088CE94 /* CalculationService.swift */,
+				1468A1EB29ED86A6002E92B7 /* DataController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 				14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */,
 				14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */,
 				149DEEEE29E8BD1000155BF6 /* Font+App.swift */,
+				1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -499,14 +508,17 @@
 				144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */,
 				1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */,
 				146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */,
+				1468A1EE29ED8C70002E92B7 /* Model+Persistence.swift in Sources */,
 				14A16A1029BBCFA500B69FD7 /* Income.swift in Sources */,
 				14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */,
 				14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */,
 				149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */,
 				14A16A0629BA6FCF00B69FD7 /* ExpensesView.swift in Sources */,
 				146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */,
+				142BA18729ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld in Sources */,
 				14A16A0829BA6FED00B69FD7 /* EstimateView.swift in Sources */,
 				14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */,
+				1468A1EC29ED86A6002E92B7 /* DataController.swift in Sources */,
 				14189C5229C0E29500A916A9 /* IncomeActionViewModel.swift in Sources */,
 				14A16A1829BE408D00B69FD7 /* Source.swift in Sources */,
 				14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */,
@@ -831,6 +843,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */,
+			);
+			currentVersion = 142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */;
+			path = QuickPersonalFinance.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 149ABEB529BA282B0088CE94 /* Project object */;
 }

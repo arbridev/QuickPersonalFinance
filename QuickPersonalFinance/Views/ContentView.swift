@@ -15,14 +15,17 @@ class AppData: ObservableObject {
 }
 
 struct ContentView: View {
-    @StateObject var mainData = AppData()
+    @StateObject private var mainData = AppData()
     @State private var selectedTab = 0 {
         didSet {
             print("selectedtab \(selectedTab)")
         }
     }
 
-    var tabTint: Color {
+    @FetchRequest(sortDescriptors: []) var storedIncomes: FetchedResults<StoredIncome>
+    @FetchRequest(sortDescriptors: []) var storedExpenses: FetchedResults<StoredExpense>
+
+    private var tabTint: Color {
         switch selectedTab {
             case 0:
                 return Color.Palette.green
@@ -61,6 +64,12 @@ struct ContentView: View {
             .font(.app(size: 12))
         }
         .environmentObject(mainData)
+        .onAppear {
+            mainData.financeData = FinanceData(
+                incomes: storedIncomes.map({ Income.from($0) }),
+                expenses: storedExpenses.map({ Expense.from($0) })
+            )
+        }
     }
 }
 

@@ -46,7 +46,7 @@ extension IncomeActionView {
                 let income = Income(
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
-                    netValue: Double(grossValueText)!,
+                    grossValue: Double(grossValueText)!,
                     recurrence: selectedRecurrence
                 )
                 var incomes = oldData.financeData.incomes

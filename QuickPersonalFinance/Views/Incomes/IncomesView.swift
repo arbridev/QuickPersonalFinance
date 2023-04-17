@@ -38,7 +38,7 @@ struct IncomesView: View {
                     HStack {
                         Text(income.name)
                         Spacer()
-                        Text(String(format: "\(currencyCode) %.2f", income.netValue))
+                        Text(String(format: "\(currencyCode) %.2f", income.grossValue))
                     }
                 }
                 .font(.App.standard)

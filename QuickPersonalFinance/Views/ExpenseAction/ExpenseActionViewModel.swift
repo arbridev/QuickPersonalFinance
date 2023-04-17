@@ -46,7 +46,7 @@ extension ExpenseActionView {
                 let expense = Expense(
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
-                    netValue: Double(grossValueText)!,
+                    grossValue: Double(grossValueText)!,
                     recurrence: selectedRecurrence
                 )
                 var expenses = oldData.financeData.expenses

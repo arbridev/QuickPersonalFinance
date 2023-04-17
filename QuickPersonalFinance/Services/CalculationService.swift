@@ -76,8 +76,8 @@ class Calculation: CalculationService {
     func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
         sources.map { source in
             source.recurrence != nil ?
-            convert(source.netValue, from: source.recurrence!, to: recurrence) :
-            source.netValue
+            convert(source.grossValue, from: source.recurrence!, to: recurrence) :
+            source.grossValue
         }.reduce(0, +)
     }
 

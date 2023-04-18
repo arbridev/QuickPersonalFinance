@@ -14,6 +14,8 @@
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
 		1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DA29E4376A00197112 /* EstimateViewModel.swift */; };
 		1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DC29E460E200197112 /* Double+Currency.swift */; };
+		144DB7B529EED77F00DF3585 /* IncomesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */; };
+		144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */; };
 		146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */; };
 		146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5229E0F6DE0087F514 /* Validations.swift */; };
 		14783A0929E8350100BBE10F /* CTAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783A0829E8350100BBE10F /* CTAButton.swift */; };
@@ -74,6 +76,8 @@
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
 		1439A0DC29E460E200197112 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
+		144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesViewModel.swift; sourceTree = "<group>"; };
+		144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseActionViewModel.swift; sourceTree = "<group>"; };
 		146F6A5229E0F6DE0087F514 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		14783A0829E8350100BBE10F /* CTAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAButton.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				14A16A0329BA6FB700B69FD7 /* IncomesView.swift */,
+				144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */,
 			);
 			path = Incomes;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				14A16A0529BA6FCF00B69FD7 /* ExpensesView.swift */,
+				144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -490,6 +496,7 @@
 				1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */,
 				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,
+				144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */,
 				1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */,
 				146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */,
 				14A16A1029BBCFA500B69FD7 /* Income.swift in Sources */,
@@ -503,6 +510,7 @@
 				14189C5229C0E29500A916A9 /* IncomeActionViewModel.swift in Sources */,
 				14A16A1829BE408D00B69FD7 /* Source.swift in Sources */,
 				14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */,
+				144DB7B529EED77F00DF3585 /* IncomesViewModel.swift in Sources */,
 				149ABEF129BA304E0088CE94 /* Constants.swift in Sources */,
 				14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */,
 			);

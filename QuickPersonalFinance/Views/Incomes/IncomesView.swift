@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IncomesView: View {
     @EnvironmentObject private var mainData: AppData
+    @StateObject private var viewModel: ViewModel = ViewModel()
     @State private var isPresentingAction = false
 
     private var currencyCode: String {
@@ -34,16 +35,22 @@ struct IncomesView: View {
             VStack {
                 Text("Incomes")
                     .asScreenTitle()
-                List(mainData.financeData.incomes, id: \.hashValue) { income in
-                    HStack {
-                        Text(income.name)
-                        Spacer()
-                        Text(String(format: "\(currencyCode) %.2f", income.grossValue))
+                List {
+                    ForEach(mainData.financeData.incomes, id: \.hashValue) { income in
+                        HStack {
+                            Text(income.name)
+                            Spacer()
+                            Text(String(format: "\(currencyCode) %.2f", income.grossValue))
+                        }
                     }
+                    .onDelete(perform: { viewModel.deleteItems(at: $0) })
                 }
                 .font(.App.standard)
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.mainData = mainData
         }
     }
 }

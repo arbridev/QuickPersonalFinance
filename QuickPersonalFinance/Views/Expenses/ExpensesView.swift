@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ExpensesView: View {
     @EnvironmentObject private var mainData: AppData
+    @Environment(\.managedObjectContext) var moc
+    
     @StateObject private var viewModel: ViewModel = ViewModel()
     @State private var isPresentingAction = false
 
@@ -50,6 +52,7 @@ struct ExpensesView: View {
         }
         .onAppear {
             viewModel.mainData = mainData
+            viewModel.moc = moc
         }
     }
 }

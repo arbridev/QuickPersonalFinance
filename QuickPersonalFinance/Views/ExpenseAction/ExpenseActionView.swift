@@ -83,8 +83,7 @@ struct ExpenseActionView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.mainData = mainData
-            viewModel.moc = moc
+            viewModel.input(mainData: mainData, moc: moc)
         }
     }
 }

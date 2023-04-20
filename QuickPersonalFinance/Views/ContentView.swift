@@ -16,14 +16,10 @@ class AppData: ObservableObject {
 
 struct ContentView: View {
     @StateObject private var mainData = AppData()
-    @State private var selectedTab = 0 {
-        didSet {
-            print("selectedtab \(selectedTab)")
-        }
-    }
+    @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(sortDescriptors: []) var storedIncomes: FetchedResults<StoredIncome>
-    @FetchRequest(sortDescriptors: []) var storedExpenses: FetchedResults<StoredExpense>
+    @StateObject private var viewModel = ViewModel()
+    @State private var selectedTab = 0
 
     private var tabTint: Color {
         switch selectedTab {
@@ -65,10 +61,7 @@ struct ContentView: View {
         }
         .environmentObject(mainData)
         .onAppear {
-            mainData.financeData = FinanceData(
-                incomes: storedIncomes.map({ Income.from($0) }),
-                expenses: storedExpenses.map({ Expense.from($0) })
-            )
+            viewModel.input(mainData: mainData, moc: moc)
         }
     }
 }

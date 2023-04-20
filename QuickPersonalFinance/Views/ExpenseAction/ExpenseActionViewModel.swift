@@ -5,7 +5,6 @@
 //  Created by Armando Brito on 7/4/23.
 //
 
-import Foundation
 import CoreData
 
 extension ExpenseActionView {
@@ -25,14 +24,13 @@ extension ExpenseActionView {
         @Published var selectedRecurrence: Recurrence = .hour
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
-        var moc: NSManagedObjectContext? {
-            didSet {
-                if let moc {
-                    persistenceService = ExpensePersistence(moc: moc)
-                }
-            }
-        }
+        var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
+
+        func input(mainData: AppData, moc: NSManagedObjectContext) {
+            self.mainData = mainData
+            self.persistenceService = ExpensePersistence(moc: moc)
+        }
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true

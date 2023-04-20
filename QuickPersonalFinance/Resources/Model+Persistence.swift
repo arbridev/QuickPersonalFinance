@@ -5,7 +5,6 @@
 //  Created by Armando Brito on 17/4/23.
 //
 
-import Foundation
 import CoreData
 
 extension Income {

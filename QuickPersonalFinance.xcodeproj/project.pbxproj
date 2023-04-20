@@ -56,6 +56,7 @@
 		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
 		14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */; };
 		14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40829F1737600EFF244 /* ExpensePersistence.swift */; };
+		14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		14DBC40829F1737600EFF244 /* ExpensePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePersistence.swift; sourceTree = "<group>"; };
+		14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				14A16A0C29BA808600B69FD7 /* ExpenseAction */,
 				14A16A0229BA6F9800B69FD7 /* Estimate */,
 				149ABEC229BA282B0088CE94 /* ContentView.swift */,
+				14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				149DEEEF29E8BD1000155BF6 /* Font+App.swift in Sources */,
 				14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */,
 				1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */,
+				14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */,
 				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,
 				144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */,

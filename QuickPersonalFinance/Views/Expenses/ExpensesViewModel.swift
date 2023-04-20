@@ -5,21 +5,19 @@
 //  Created by Armando Brito on 18/4/23.
 //
 
-import Foundation
 import CoreData
 
 extension ExpensesView {
 
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
-        var moc: NSManagedObjectContext? {
-            didSet {
-                if let moc {
-                    persistenceService = ExpensePersistence(moc: moc)
-                }
-            }
-        }
+        var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
+
+        func input(mainData: AppData, moc: NSManagedObjectContext) {
+            self.mainData = mainData
+            self.persistenceService = ExpensePersistence(moc: moc)
+        }
 
         func deleteItems(at offsets: IndexSet) {
             guard let oldData = mainData else {

@@ -5,7 +5,6 @@
 //  Created by Armando Brito on 18/4/23.
 //
 
-import Foundation
 import CoreData
 
 extension IncomesView {
@@ -13,14 +12,13 @@ extension IncomesView {
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
 
-        var moc: NSManagedObjectContext? {
-            didSet {
-                if let moc {
-                    persistenceService = IncomePersistence(moc: moc)
-                }
-            }
-        }
+        var moc: NSManagedObjectContext?
         var persistenceService: (any IncomePersistenceService)?
+
+        func input(mainData: AppData, moc: NSManagedObjectContext) {
+            self.mainData = mainData
+            self.persistenceService = IncomePersistence(moc: moc)
+        }
 
         func deleteItems(at offsets: IndexSet) {
             guard let oldData = mainData else {

@@ -5,7 +5,6 @@
 //  Created by Armando Brito on 14/3/23.
 //
 
-import Foundation
 import CoreData
 
 extension IncomeActionView {
@@ -26,14 +25,13 @@ extension IncomeActionView {
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
 
-        var moc: NSManagedObjectContext? {
-            didSet {
-                if let moc {
-                    persistenceService = IncomePersistence(moc: moc)
-                }
-            }
-        }
+        var moc: NSManagedObjectContext?
         var persistenceService: (any IncomePersistenceService)?
+
+        func input(mainData: AppData, moc: NSManagedObjectContext) {
+            self.mainData = mainData
+            self.persistenceService = IncomePersistence(moc: moc)
+        }
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true

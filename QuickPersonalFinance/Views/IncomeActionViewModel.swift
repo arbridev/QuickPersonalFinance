@@ -25,7 +25,15 @@ extension IncomeActionView {
         @Published var selectedRecurrence: Recurrence = .hour
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
-        var moc: NSManagedObjectContext?
+
+        var moc: NSManagedObjectContext? {
+            didSet {
+                if let moc {
+                    persistenceService = IncomePersistence(moc: moc)
+                }
+            }
+        }
+        var persistenceService: (any IncomePersistenceService)?
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
@@ -44,8 +52,9 @@ extension IncomeActionView {
                 grossValueErrorMessage = nil
             }
 
-            if isValid, let oldData = mainData, let moc {
+            if isValid, let oldData = mainData {
                 let income = Income(
+                    id: UUID(),
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
                     grossValue: Double(grossValueText)!,
@@ -58,8 +67,9 @@ extension IncomeActionView {
                     expenses: oldData.financeData.expenses
                 )
                 mainData?.financeData = financeData
-                let _ = StoredIncome.from(income, context: moc)
-                try? moc.save()
+
+                persistenceService?.save(item: income)
+                
                 didSubmit(true)
                 return
             }

@@ -4,6 +4,7 @@
     <entity name="StoredIncome" representedClassName="StoredIncome" parentEntity="StoredSource" syncable="YES" codeGenerationType="class"/>
     <entity name="StoredSource" representedClassName="StoredSource" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="grossValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="more" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="recurrence" optional="YES" attributeType="String"/>

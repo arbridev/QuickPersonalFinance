@@ -12,7 +12,14 @@ extension ExpensesView {
 
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
-        var moc: NSManagedObjectContext?
+        var moc: NSManagedObjectContext? {
+            didSet {
+                if let moc {
+                    persistenceService = ExpensePersistence(moc: moc)
+                }
+            }
+        }
+        var persistenceService: (any ExpensePersistenceService)?
 
         func deleteItems(at offsets: IndexSet) {
             guard let oldData = mainData else {
@@ -29,17 +36,7 @@ extension ExpensesView {
             )
             mainData?.financeData = financeData
 
-            for expense in forDeletion {
-                let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
-                request.predicate = NSPredicate(
-                    format: "name == %@ AND grossValue == %@",
-                    argumentArray: [expense.name, expense.grossValue]
-                )
-                if let fetchedObject = try? moc?.fetch(request).first {
-                    moc?.delete(fetchedObject)
-                }
-            }
-            try? moc?.save()
+            persistenceService?.delete(items: forDeletion)
         }
     }
 

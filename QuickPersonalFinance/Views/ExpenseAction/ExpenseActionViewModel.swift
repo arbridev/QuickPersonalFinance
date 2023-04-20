@@ -25,7 +25,14 @@ extension ExpenseActionView {
         @Published var selectedRecurrence: Recurrence = .hour
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
-        var moc: NSManagedObjectContext?
+        var moc: NSManagedObjectContext? {
+            didSet {
+                if let moc {
+                    persistenceService = ExpensePersistence(moc: moc)
+                }
+            }
+        }
+        var persistenceService: (any ExpensePersistenceService)?
 
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
@@ -44,8 +51,9 @@ extension ExpenseActionView {
                 grossValueErrorMessage = nil
             }
 
-            if isValid, let oldData = mainData, let moc {
+            if isValid, let oldData = mainData {
                 let expense = Expense(
+                    id: UUID(),
                     name: nameText,
                     more: moreText.isEmpty ? nil : moreText,
                     grossValue: Double(grossValueText)!,
@@ -58,8 +66,9 @@ extension ExpenseActionView {
                     expenses: expenses
                 )
                 mainData?.financeData = financeData
-                let _ = StoredExpense.from(expense, context: moc)
-                try? moc.save()
+
+                persistenceService?.save(item: expense)
+
                 didSubmit(true)
                 return
             }

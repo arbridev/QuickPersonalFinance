@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Source: Codable, Hashable {
+    var id: UUID { get }
     var name: String { get }
     var more: String? { get }
     var grossValue: Double { get }

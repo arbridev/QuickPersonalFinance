@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  QuickPersonalFinance
+
+  Created by Armando Brito on 22/4/23.
+  
+*/
+
+"incomes.title" = "Ingresos";
+"expenses.title" = "Gastos";
+"estimate.title" = "Estimado";
+
+"income.action.title" = "Ingreso Crear/Editar";
+"expense.action.title" = "Gasto Crear/Editar";
+
+"income.validation.error.empty.name" = "Un nombre es requerido para identificar esta fuente de ingreso";
+"income.validation.error.gross.value" = "Un valor de ingreso bruto es requerido";
+"expense.validation.error.empty.name" = "Un nombre es requerido para identificar esta fuente de gasto";
+"expense.validation.error.gross.value" = "Un valor de gasto bruto es requerido";
+
+"action.field.name" = "Nombre";
+"action.field.more" = "Más";
+"action.field.gross.value" = "Valor bruto";
+"action.field.recurrence" = "Frecuencia";
+"action.button.submit" = "Enviar";
+
+"hour" = "hora";
+"day" = "día";
+"week" = "semana";
+"month" = "mes";
+"year" = "año";
+
+"estimate.action.time.span" = "Duración";
+"estimate.table.income" = "Ingreso";
+"estimate.table.expense" = "Gasto";
+"estimate.table.total" = "Total";
+"estimate.chart.source" = "Fuente";

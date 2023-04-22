@@ -34,7 +34,7 @@ struct EstimateView: View {
                         selection: $viewModel.selectedRecurrence
                     ) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
-                            Text(recurrence.rawValue.capitalized)
+                            Text(recurrence.rawValue.localized.capitalized)
                                 .font(.App.input)
                                 .tag(recurrence)
                         }

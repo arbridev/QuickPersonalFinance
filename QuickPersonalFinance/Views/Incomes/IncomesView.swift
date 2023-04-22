@@ -35,7 +35,7 @@ struct IncomesView: View {
             }
             Spacer()
             VStack {
-                Text("Incomes")
+                Text("incomes.title")
                     .asScreenTitle()
                 List {
                     ForEach(mainData.financeData.incomes, id: \.hashValue) { income in

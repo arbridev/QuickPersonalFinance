@@ -53,8 +53,8 @@ extension EstimateView {
                 return
             }
             let barChartData = [
-                BarValue(title: "Income", total: incomeTotal),
-                BarValue(title: "Expense", total: expenseTotal)
+                BarValue(title: "estimate.table.income".localized, total: incomeTotal),
+                BarValue(title: "estimate.table.expense".localized, total: expenseTotal)
             ]
             self.barChartData = barChartData
         }

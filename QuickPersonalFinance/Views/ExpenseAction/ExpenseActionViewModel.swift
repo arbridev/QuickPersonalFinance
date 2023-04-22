@@ -35,7 +35,7 @@ extension ExpenseActionView {
         func submit(_ didSubmit: (Bool) -> Void) {
             var isValid = true
             if nameText.isEmpty {
-                nameTextErrorMessage = "A name is required to identify this source of expense"
+                nameTextErrorMessage = "income.validation.error.empty.name".localized
                 isValid = false
             } else {
                 nameTextErrorMessage = nil
@@ -43,7 +43,7 @@ extension ExpenseActionView {
 
             let grossValueValidation = DoubleValidation(value: grossValueText)
             if grossValueText.isEmpty || !grossValueValidation.isValid {
-                grossValueErrorMessage = "A gross expense value is required"
+                grossValueErrorMessage = "expense.validation.error.gross.value".localized
                 isValid = false
             } else {
                 grossValueErrorMessage = nil

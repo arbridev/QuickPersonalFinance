@@ -21,7 +21,7 @@ struct IncomeActionView: View {
     var body: some View {
         VStack {
             // MARK: Upper bar
-            ModalViewUpperBar(title: "Income Create/Edit", dismiss: dismiss)
+            ModalViewUpperBar(title: "income.action.title".localized, dismiss: dismiss)
             // MARK: Content
             Spacer()
             VStack {
@@ -29,7 +29,7 @@ struct IncomeActionView: View {
                     CustomTextField(
                         text: $viewModel.nameText,
                         errorMessage: $viewModel.nameTextErrorMessage,
-                        placeholder: "Name",
+                        placeholder: "action.field.name".localized,
                         prefix: nil,
                         keyboardType: .alphabet
                     )
@@ -40,7 +40,7 @@ struct IncomeActionView: View {
                     CustomTextField(
                         text: $viewModel.moreText,
                         errorMessage: Binding.constant(nil),
-                        placeholder: "More",
+                        placeholder: "action.field.more".localized,
                         prefix: nil,
                         keyboardType: .alphabet
                     )
@@ -49,20 +49,25 @@ struct IncomeActionView: View {
                     CustomTextField(
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
-                        placeholder: "Gross value",
+                        placeholder: "action.field.gross.value".localized,
                         prefix: currencyCode,
                         prefixColor: .Palette.green,
                         keyboardType: .decimalPad
                     ) { isStarting in
-                        if let number = Double(viewModel.grossValueText), isStarting && number == 0.0 {
+                        if let number = Double(viewModel.grossValueText),
+                            isStarting && number == 0.0
+                        {
                             viewModel.grossValueText = ""
                         }
                     }
                     .listRowSeparator(.hidden)
 
-                    Picker("Recurrence:", selection: $viewModel.selectedRecurrence) {
+                    Picker(
+                        "\("action.field.recurrence".localized):",
+                        selection: $viewModel.selectedRecurrence
+                    ) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
-                            Text(recurrence.rawValue.capitalized)
+                            Text(recurrence.rawValue.localized.capitalized)
                                 .font(.App.input)
                                 .tag(recurrence)
                         }
@@ -70,7 +75,7 @@ struct IncomeActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    CTAButton(title: "Submit", color: .Palette.green) {
+                    CTAButton(title: "action.button.submit".localized, color: .Palette.green) {
                         viewModel.submit { didSubmit in
                             if didSubmit {
                                 dismiss.callAsFunction()

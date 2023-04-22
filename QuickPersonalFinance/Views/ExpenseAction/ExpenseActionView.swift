@@ -21,7 +21,7 @@ struct ExpenseActionView: View {
     var body: some View {
         VStack {
             // MARK: Upper bar
-            ModalViewUpperBar(title: "Expense Create/Edit", dismiss: dismiss)
+            ModalViewUpperBar(title: "expense.action.title".localized, dismiss: dismiss)
             Spacer()
             // MARK: Content
             VStack {
@@ -29,7 +29,7 @@ struct ExpenseActionView: View {
                     CustomTextField(
                         text: $viewModel.nameText,
                         errorMessage: $viewModel.nameTextErrorMessage,
-                        placeholder: "Name",
+                        placeholder: "action.field.name".localized,
                         prefix: nil,
                         keyboardType: .alphabet
                     )
@@ -40,7 +40,7 @@ struct ExpenseActionView: View {
                     CustomTextField(
                         text: $viewModel.moreText,
                         errorMessage: Binding.constant(nil),
-                        placeholder: "More",
+                        placeholder: "action.field.more".localized,
                         prefix: nil,
                         keyboardType: .alphabet
                     )
@@ -49,7 +49,7 @@ struct ExpenseActionView: View {
                     CustomTextField(
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
-                        placeholder: "Gross value",
+                        placeholder: "action.field.gross.value".localized,
                         prefix: currencyCode,
                         prefixColor: .Palette.red,
                         keyboardType: .decimalPad
@@ -60,7 +60,7 @@ struct ExpenseActionView: View {
                     }
                     .listRowSeparator(.hidden)
 
-                    Picker("Recurrence:", selection: $viewModel.selectedRecurrence) {
+                    Picker("\("action.field.recurrence".localized):", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
                             Text(recurrence.rawValue.capitalized)
                                 .font(.App.input)
@@ -70,7 +70,7 @@ struct ExpenseActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    CTAButton(title: "Submit", color: .Palette.red) {
+                    CTAButton(title: "action.button.submit".localized, color: .Palette.red) {
                         viewModel.submit { didSubmit in
                             if didSubmit {
                                 dismiss.callAsFunction()

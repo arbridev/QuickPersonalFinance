@@ -20,7 +20,7 @@ struct EstimateView: View {
 
     var body: some View {
         VStack {
-            Text("Estimate")
+            Text("estimate.title")
                 .asScreenTitle()
                 .padding()
 
@@ -28,8 +28,11 @@ struct EstimateView: View {
 
             VStack {
                 HStack {
-                    Text("Time span:")
-                    Picker("Recurrence", selection: $viewModel.selectedRecurrence) {
+                    Text("\("estimate.action.time.span".localized):")
+                    Picker(
+                        "action.field.recurrence".localized,
+                        selection: $viewModel.selectedRecurrence
+                    ) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
                             Text(recurrence.rawValue.capitalized)
                                 .font(.App.input)
@@ -48,7 +51,7 @@ struct EstimateView: View {
                     .padding(.horizontal)
 
                 HStack {
-                    Text("Income")
+                    Text("estimate.table.income")
                     Spacer()
                     Text("\(viewModel.incomeTotal.asCurrency)")
                         .underline(true, color: .Palette.green)
@@ -58,7 +61,7 @@ struct EstimateView: View {
                 .font(.app(size: 18))
 
                 HStack {
-                    Text("Expense")
+                    Text("estimate.table.expense")
                     Spacer()
                     Text("\(viewModel.expenseTotal.asCurrency)")
                         .underline(true, color: .Palette.red)
@@ -73,7 +76,7 @@ struct EstimateView: View {
                     .padding(.horizontal)
 
                 HStack {
-                    Text("Total")
+                    Text("estimate.table.total")
                     Spacer()
                     Text("\(viewModel.balance.asCurrency)")
                         .underline(true, color: .Palette.blue)
@@ -96,13 +99,18 @@ struct EstimateView: View {
                 Chart {
                     ForEach(viewModel.barChartData, id: \.title) { barValue in
                         BarMark(
-                            x: .value("Source", barValue.title),
-                            y: .value("Total", barValue.total)
+                            x: .value("estimate.chart.source".localized, barValue.title),
+                            y: .value("estimate.table.total".localized, barValue.total)
                         )
-                        .foregroundStyle(by: .value("Source", barValue.title))
+                        .foregroundStyle(by: .value("estimate.chart.source".localized, barValue.title))
                     }
                 }
-                .chartForegroundStyleScale(domain: ["Income", "Expense"], range: barChartColors)
+                .chartForegroundStyleScale(
+                    domain: [
+                        "estimate.table.income".localized,
+                        "estimate.table.expense".localized],
+                    range: barChartColors
+                )
             }
             .padding()
             .onAppear {

@@ -39,19 +39,28 @@ struct ContentView: View {
             TabView(selection: $selectedTab) {
                 IncomesView()
                     .tabItem {
-                        Label("Incomes", systemImage: "plus.circle")
+                        Label(
+                            "incomes.title".localized,
+                            systemImage: "plus.circle"
+                        )
                     }
                     .tag(0)
                     .font(.app(size: 20))
                 ExpensesView()
                     .tabItem {
-                        Label("Expenses", systemImage: "minus.circle")
+                        Label(
+                            "expenses.title".localized,
+                            systemImage: "minus.circle"
+                        )
                     }
                     .tag(1)
                     .font(.app(size: 20))
                 EstimateView()
                     .tabItem {
-                        Label("Estimate", systemImage: "plus.forwardslash.minus")
+                        Label(
+                            "estimate.title".localized,
+                            systemImage: "plus.forwardslash.minus"
+                        )
                     }
                     .tag(2)
                     .font(.app(size: 20))

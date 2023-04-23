@@ -12,23 +12,18 @@ struct IncomesView: View {
     @Environment(\.managedObjectContext) var moc
 
     @StateObject private var viewModel: ViewModel = ViewModel()
-    @State private var isPresentingAction = false
-
-    private var currencyCode: String {
-        Locale.current.currency?.identifier ?? "USD"
-    }
 
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 Button {
-                    isPresentingAction = true
+                    viewModel.isPresentingCreateAction = true
                 } label: {
                     Image(systemName: "plus")
                 }
                 .padding(.trailing)
-                .sheet(isPresented: $isPresentingAction) {
+                .sheet(isPresented: $viewModel.isPresentingCreateAction) {
                     IncomeActionView()
                         .environmentObject(mainData)
                 }
@@ -42,12 +37,20 @@ struct IncomesView: View {
                         HStack {
                             Text(income.name)
                             Spacer()
-                            Text(String(format: "\(currencyCode) %.2f", income.grossValue))
+                            Text(String(format: "\(viewModel.currencyCode) %.2f", income.grossValue))
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.selectedItem = income
                         }
                     }
                     .onDelete(perform: { viewModel.deleteItems(at: $0) })
                 }
                 .font(.App.standard)
+                .sheet(isPresented: $viewModel.isPresentingEditAction) {
+                    IncomeActionView(editingIncome: viewModel.selectedItem!)
+                        .environmentObject(mainData)
+                }
             }
             Spacer()
         }

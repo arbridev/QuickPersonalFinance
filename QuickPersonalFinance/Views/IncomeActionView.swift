@@ -14,14 +14,17 @@ struct IncomeActionView: View {
 
     @StateObject private var viewModel: ViewModel = ViewModel()
 
-    var currencyCode: String {
-        Locale.current.currency?.identifier ?? "USD"
-    }
+    var editingIncome: Income?
 
     var body: some View {
         VStack {
             // MARK: Upper bar
-            ModalViewUpperBar(title: "income.action.title".localized, dismiss: dismiss)
+            ModalViewUpperBar(
+                title: editingIncome == nil ?
+                "income.action.create.title".localized :
+                    "income.action.edit.title".localized,
+                dismiss: dismiss
+            )
             // MARK: Content
             Spacer()
             VStack {
@@ -50,7 +53,7 @@ struct IncomeActionView: View {
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "action.field.gross.value".localized,
-                        prefix: currencyCode,
+                        prefix: viewModel.currencyCode,
                         prefixColor: .Palette.green,
                         keyboardType: .decimalPad
                     ) { isStarting in
@@ -75,21 +78,39 @@ struct IncomeActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    CTAButton(title: "action.button.submit".localized, color: .Palette.green) {
-                        viewModel.submit { didSubmit in
-                            if didSubmit {
-                                dismiss.callAsFunction()
+                    if let _ = editingIncome {
+                        CTAButton(title: "action.button.edit".localized, color: .Palette.green) {
+                            viewModel.edit { didEdit in
+                                if didEdit {
+                                    dismiss.callAsFunction()
+                                }
                             }
                         }
+                        .padding(.vertical, 6)
+                    } else {
+                        CTAButton(title: "action.button.submit".localized, color: .Palette.green) {
+                            viewModel.submit { didSubmit in
+                                if didSubmit {
+                                    dismiss.callAsFunction()
+                                }
+                            }
+                        }
+                        .padding(.vertical, 6)
                     }
-                    .padding(.vertical, 6)
                 }
             }
             Spacer()
         }
         .onAppear {
             viewModel.input(mainData: mainData, moc: moc)
+            viewModel.editingIncome = editingIncome
         }
+    }
+
+    init() {}
+
+    init(editingIncome: Income) {
+        self.editingIncome = editingIncome
     }
 }
 

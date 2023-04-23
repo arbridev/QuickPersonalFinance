@@ -14,14 +14,17 @@ struct ExpenseActionView: View {
 
     @StateObject private var viewModel: ViewModel = ViewModel()
 
-    private var currencyCode: String {
-        Locale.current.currency?.identifier ?? "USD"
-    }
+    var editingExpense: Expense?
     
     var body: some View {
         VStack {
             // MARK: Upper bar
-            ModalViewUpperBar(title: "expense.action.title".localized, dismiss: dismiss)
+            ModalViewUpperBar(
+                title: editingExpense == nil ?
+                "expense.action.create.title".localized :
+                    "expense.action.edit.title".localized,
+                dismiss: dismiss
+            )
             Spacer()
             // MARK: Content
             VStack {
@@ -50,7 +53,7 @@ struct ExpenseActionView: View {
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "action.field.gross.value".localized,
-                        prefix: currencyCode,
+                        prefix: viewModel.currencyCode,
                         prefixColor: .Palette.red,
                         keyboardType: .decimalPad
                     ) { isStarting in
@@ -62,7 +65,7 @@ struct ExpenseActionView: View {
 
                     Picker("\("action.field.recurrence".localized):", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
-                            Text(recurrence.rawValue.capitalized)
+                            Text(recurrence.rawValue.localized.capitalized)
                                 .font(.App.input)
                                 .tag(recurrence)
                         }
@@ -70,21 +73,39 @@ struct ExpenseActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    CTAButton(title: "action.button.submit".localized, color: .Palette.red) {
-                        viewModel.submit { didSubmit in
-                            if didSubmit {
-                                dismiss.callAsFunction()
+                    if let _ = editingExpense {
+                        CTAButton(title: "action.button.edit".localized, color: .Palette.red) {
+                            viewModel.edit { didEdit in
+                                if didEdit {
+                                    dismiss.callAsFunction()
+                                }
                             }
                         }
+                        .padding(.vertical, 6)
+                    } else {
+                        CTAButton(title: "action.button.submit".localized, color: .Palette.red) {
+                            viewModel.submit { didSubmit in
+                                if didSubmit {
+                                    dismiss.callAsFunction()
+                                }
+                            }
+                        }
+                        .padding(.vertical, 6)
                     }
-                    .padding(.vertical, 6)
                 }
             }
             Spacer()
         }
         .onAppear {
             viewModel.input(mainData: mainData, moc: moc)
+            viewModel.editingExpense = editingExpense
         }
+    }
+
+    init() {}
+
+    init(editingExpense: Expense) {
+        self.editingExpense = editingExpense
     }
 }
 

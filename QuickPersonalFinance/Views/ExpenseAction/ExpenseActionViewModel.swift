@@ -26,16 +26,30 @@ extension ExpenseActionView {
         @Published var grossValueErrorMessage: String?
         var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
+        var editingExpense: Expense? {
+            didSet {
+                guard let editingExpense else {
+                    return
+                }
+                nameText = editingExpense.name
+                moreText = editingExpense.more ?? ""
+                grossValueText = String(editingExpense.grossValue)
+                selectedRecurrence = editingExpense.recurrence ?? .hour
+            }
+        }
+        var currencyCode: String {
+            Locale.current.currency?.identifier ?? "USD"
+        }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData
             self.persistenceService = ExpensePersistence(moc: moc)
         }
 
-        func submit(_ didSubmit: (Bool) -> Void) {
+        func validate() -> Bool {
             var isValid = true
             if nameText.isEmpty {
-                nameTextErrorMessage = "income.validation.error.empty.name".localized
+                nameTextErrorMessage = "expense.validation.error.empty.name".localized
                 isValid = false
             } else {
                 nameTextErrorMessage = nil
@@ -48,6 +62,12 @@ extension ExpenseActionView {
             } else {
                 grossValueErrorMessage = nil
             }
+
+            return isValid
+        }
+
+        func submit(_ didSubmit: (Bool) -> Void) {
+            let isValid = validate()
 
             if isValid, let oldData = mainData {
                 let expense = Expense(
@@ -72,6 +92,37 @@ extension ExpenseActionView {
             }
 
             didSubmit(false)
+        }
+
+        func edit(_ didEdit: (Bool) -> Void) {
+            let isValid = validate()
+
+            if let editingExpense, isValid, let oldData = mainData {
+                let expense = Expense(
+                    id: editingExpense.id,
+                    name: nameText,
+                    more: moreText.isEmpty ? nil : moreText,
+                    grossValue: Double(grossValueText)!,
+                    recurrence: selectedRecurrence
+                )
+
+                persistenceService?.update(item: expense)
+                guard let expenses = persistenceService?.loadAll() else {
+                    didEdit(false)
+                    return
+                }
+
+                let financeData = FinanceData(
+                    incomes: oldData.financeData.incomes,
+                    expenses: expenses
+                )
+                mainData?.financeData = financeData
+
+                didEdit(true)
+                return
+            }
+
+            didEdit(false)
         }
     }
 

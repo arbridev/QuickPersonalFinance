@@ -11,9 +11,19 @@ extension IncomesView {
 
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
+        @Published var isPresentingCreateAction = false
+        @Published var isPresentingEditAction = false
+        @Published var selectedItem: Income? {
+            didSet {
+                isPresentingEditAction.toggle()
+            }
+        }
 
         var moc: NSManagedObjectContext?
         var persistenceService: (any IncomePersistenceService)?
+        var currencyCode: String {
+            Locale.current.currency?.identifier ?? "USD"
+        }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData

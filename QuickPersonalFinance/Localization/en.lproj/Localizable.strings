@@ -10,8 +10,10 @@
 "expenses.title" = "Expenses";
 "estimate.title" = "Estimate";
 
-"income.action.title" = "Income Create/Edit";
-"expense.action.title" = "Expense Create/Edit";
+"income.action.create.title" = "Create Income";
+"income.action.edit.title" = "Edit Income";
+"expense.action.create.title" = "Create Expense";
+"expense.action.edit.title" = "Edit Expense";
 
 "income.validation.error.empty.name" = "A name is required to identify this source of income";
 "income.validation.error.gross.value" = "A gross income value is required";
@@ -19,10 +21,11 @@
 "expense.validation.error.gross.value" = "A gross expense value is required";
 
 "action.field.name" = "Name";
-"action.field.more" = "More";
+"action.field.more" = "More info (optional)";
 "action.field.gross.value" = "Gross value";
 "action.field.recurrence" = "Recurrence";
 "action.button.submit" = "Submit";
+"action.button.edit" = "Edit";
 
 "hour" = "hour";
 "day" = "day";

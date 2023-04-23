@@ -11,8 +11,18 @@ extension ExpensesView {
 
     @MainActor class ViewModel: ObservableObject {
         @Published var mainData: AppData?
+        @Published var isPresentingCreateAction = false
+        @Published var isPresentingEditAction = false
+        @Published var selectedItem: Expense? {
+            didSet {
+                isPresentingEditAction.toggle()
+            }
+        }
         var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
+        var currencyCode: String {
+            Locale.current.currency?.identifier ?? "USD"
+        }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData

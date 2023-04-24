@@ -23,6 +23,7 @@
 		144E4E5829F421A400EEDC9B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5729F421A400EEDC9B /* Launch Screen.storyboard */; };
 		144E4E5C29F4693A00EEDC9B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5E29F4693A00EEDC9B /* Localizable.strings */; };
 		144E4E6029F472C200EEDC9B /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E4E5F29F472C200EEDC9B /* String+Localization.swift */; };
+		1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */; };
 		1468A1EC29ED86A6002E92B7 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468A1EB29ED86A6002E92B7 /* DataController.swift */; };
 		1468A1EE29ED8C70002E92B7 /* Model+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */; };
 		146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */; };
@@ -97,6 +98,7 @@
 		144E4E5D29F4693A00EEDC9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		144E4E5F29F472C200EEDC9B /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		144E4E6129F4A2A200EEDC9B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockData+Persistence.swift"; sourceTree = "<group>"; };
 		1468A1EB29ED86A6002E92B7 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Persistence.swift"; sourceTree = "<group>"; };
 		146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseActionViewModel.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				14B4393B29E4CC8E005E31A9 /* MockData.swift */,
+				1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */,
 			);
 			path = Mocking;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				149ABEF129BA304E0088CE94 /* Constants.swift in Sources */,
 				14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */,
 				144E4E6029F472C200EEDC9B /* String+Localization.swift in Sources */,
+				1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

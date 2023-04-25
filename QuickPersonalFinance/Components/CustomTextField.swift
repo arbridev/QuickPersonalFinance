@@ -14,20 +14,20 @@ struct CustomTextField: View {
     var prefix: String?
     var prefixColor: Color?
     var keyboardType: UIKeyboardType
-    @FocusState var isFocused: Bool
-    var onEditingChanged: ((Bool) -> Void)?
 
     var body: some View {
         VStack {
-            TextField(placeholder, text: $text, onEditingChanged: onEditingChanged ?? { isStarting in })
-                .keyboardType(keyboardType)
-                .focused($isFocused)
-                .textFieldStyle(
-                    OutlinedTextFieldStyle(
-                        prefix: prefix == nil ? nil : Text(prefix!),
-                        prefixColor: prefixColor
-                    )
+            TextField(text: $text) {
+                Text(placeholder)
+                    .foregroundColor(Color.Palette.textFieldOutline)
+            }
+            .keyboardType(keyboardType)
+            .textFieldStyle(
+                OutlinedTextFieldStyle(
+                    prefix: prefix == nil ? nil : Text(prefix!),
+                    prefixColor: prefixColor
                 )
+            )
 
             if let errorMessage {
                 Text(errorMessage)

@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct ExpenseActionView: View {
+    enum Field {
+        case name, more, grossValue
+    }
+
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) var moc
 
     @StateObject private var viewModel: ViewModel = ViewModel()
+    @FocusState private var focusedField: Field?
 
     var editingExpense: Expense?
     
@@ -39,6 +44,7 @@ struct ExpenseActionView: View {
                     .padding(.top, 4)
                     .listRowSeparator(.hidden)
                     .autocorrectionDisabled()
+                    .focused($focusedField, equals: .name)
 
                     CustomTextField(
                         text: $viewModel.moreText,
@@ -48,20 +54,27 @@ struct ExpenseActionView: View {
                         keyboardType: .alphabet
                     )
                     .listRowSeparator(.hidden)
+                    .focused($focusedField, equals: .more)
 
                     CustomTextField(
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "action.field.gross.value".localized,
                         prefix: viewModel.currencyCode,
-                        prefixColor: .Palette.red,
+                        prefixColor: .Palette.expenseAccent,
                         keyboardType: .decimalPad
-                    ) { isStarting in
-                        if let number = Double(viewModel.grossValueText), isStarting && number == 0.0 {
-                            viewModel.grossValueText = ""
+                    )
+                    .listRowSeparator(.hidden)
+                    .focused($focusedField, equals: .grossValue)
+                    .onChange(of: focusedField) { newFocusedField in
+                        if newFocusedField == .grossValue {
+                            if let number = Double(viewModel.grossValueText),
+                                number == 0.0
+                            {
+                                viewModel.grossValueText = ""
+                            }
                         }
                     }
-                    .listRowSeparator(.hidden)
 
                     Picker("\("action.field.recurrence".localized):", selection: $viewModel.selectedRecurrence) {
                         ForEach(Recurrence.allCases, id: \.rawValue) { recurrence in
@@ -74,7 +87,7 @@ struct ExpenseActionView: View {
                     .font(.App.input)
 
                     if let _ = editingExpense {
-                        CTAButton(title: "action.button.edit".localized, color: .Palette.red) {
+                        CTAButton(title: "action.button.edit".localized, color: .Palette.expenseAccent) {
                             viewModel.edit { didEdit in
                                 if didEdit {
                                     dismiss.callAsFunction()
@@ -83,7 +96,7 @@ struct ExpenseActionView: View {
                         }
                         .padding(.vertical, 6)
                     } else {
-                        CTAButton(title: "action.button.submit".localized, color: .Palette.red) {
+                        CTAButton(title: "action.button.submit".localized, color: .Palette.expenseAccent) {
                             viewModel.submit { didSubmit in
                                 if didSubmit {
                                     dismiss.callAsFunction()

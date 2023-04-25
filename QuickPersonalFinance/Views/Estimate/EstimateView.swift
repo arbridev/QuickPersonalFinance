@@ -12,7 +12,7 @@ struct EstimateView: View {
     @EnvironmentObject private var mainData: AppData
     @StateObject private var viewModel = ViewModel()
 
-    let barChartColors: [Color] = [.Palette.green, .Palette.red]
+    let barChartColors: [Color] = [.Palette.incomeTable, .Palette.expenseTable]
 
     private var currencyCode: String {
         Locale.current.currency?.identifier ?? "USD"
@@ -39,7 +39,7 @@ struct EstimateView: View {
                                 .tag(recurrence)
                         }
                     }
-                    .tint(Color.Palette.blue2)
+                    .tint(Color.Palette.estimateAccentSecondary)
                     Spacer()
                 }
                 .padding(.horizontal)
@@ -47,14 +47,14 @@ struct EstimateView: View {
                 .font(.App.input)
 
                 Divider()
-                    .overlay(Color.Palette.gray1)
+                    .overlay(Color.Palette.dividerPrimary)
                     .padding(.horizontal)
 
                 HStack {
                     Text("estimate.table.income")
                     Spacer()
                     Text("\(viewModel.incomeTotal.asCurrency)")
-                        .underline(true, color: .Palette.green)
+                        .underline(true, color: .Palette.incomeAccent)
                 }
                 .padding(.top)
                 .padding(.horizontal)
@@ -64,14 +64,14 @@ struct EstimateView: View {
                     Text("estimate.table.expense")
                     Spacer()
                     Text("\(viewModel.expenseTotal.asCurrency)")
-                        .underline(true, color: .Palette.red)
+                        .underline(true, color: .Palette.expenseAccent)
                 }
                 .padding(.top, 6)
                 .padding(.horizontal)
                 .font(.app(size: 18))
 
                 Divider()
-                    .overlay(Color.Palette.gray0)
+                    .overlay(Color.Palette.dividerSecondary)
                     .padding(.top)
                     .padding(.horizontal)
 
@@ -79,7 +79,7 @@ struct EstimateView: View {
                     Text("estimate.table.total")
                     Spacer()
                     Text("\(viewModel.balance.asCurrency)")
-                        .underline(true, color: .Palette.blue)
+                        .underline(true, color: .Palette.estimateAccent)
                 }
                 .padding(.top)
                 .padding(.horizontal)
@@ -93,7 +93,7 @@ struct EstimateView: View {
                 .padding(.horizontal)
 
                 Divider()
-                    .overlay(Color.Palette.gray0)
+                    .overlay(Color.Palette.dividerSecondary)
                     .padding(.vertical)
 
                 Chart {

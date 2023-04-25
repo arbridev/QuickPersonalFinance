@@ -23,7 +23,7 @@ struct CTAButton: View {
         .frame(maxWidth: .infinity, idealHeight: 40, maxHeight: 60, alignment: .center)
         .background(content: {
             RoundedRectangle(cornerSize: CGSize(width: 16.0, height: 16.0))
-                .foregroundColor(color ?? Color.Palette.blue)
+                .foregroundColor(color ?? Color.Palette.estimateAccent)
         })
         .tint(titleColor ?? Color.white)
         .font(.App.buttonTitle)

@@ -24,13 +24,13 @@ struct ContentView: View {
     private var tabTint: Color {
         switch selectedTab {
             case 0:
-                return Color.Palette.green
+                return Color.Palette.incomeAccent
             case 1:
-                return Color.Palette.red
+                return Color.Palette.expenseAccent
             case 2:
-                return Color.Palette.blue
+                return Color.Palette.estimateAccent
             default:
-                return Color.Palette.blue
+                return Color.Palette.estimateAccent
         }
     }
 

@@ -18,10 +18,10 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
         VStack {
             HStack {
                 if let icon {
-                    icon.foregroundColor(iconColor ?? .Palette.gray1)
+                    icon.foregroundColor(iconColor ?? .Palette.iconPrimary)
                 }
                 if let prefix {
-                    prefix.foregroundColor(prefixColor ?? .Palette.blue)
+                    prefix.foregroundColor(prefixColor ?? .Palette.estimateAccent)
                 }
                 configuration
             }
@@ -29,7 +29,7 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
             .padding(.vertical, 8)
             .overlay {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(Color.Palette.gray2, lineWidth: 2)
+                    .stroke(Color.Palette.textFieldOutline, lineWidth: 2)
             }
             .font(.App.input)
         }

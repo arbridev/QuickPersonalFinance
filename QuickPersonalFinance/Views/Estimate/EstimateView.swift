@@ -14,15 +14,23 @@ struct EstimateView: View {
 
     let barChartColors: [Color] = [.Palette.incomeTable, .Palette.expenseTable]
 
-    private var currencyCode: String {
-        Locale.current.currency?.identifier ?? "USD"
-    }
-
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Button {
+                    viewModel.isPresentingSettings = true
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                }
+                .padding(.trailing)
+                .sheet(isPresented: $viewModel.isPresentingSettings) {
+                    SettingsActionView()
+                }
+            }
+
             Text("estimate.title")
                 .asScreenTitle()
-                .padding()
 
             Spacer()
 
@@ -87,7 +95,7 @@ struct EstimateView: View {
 
                 HStack {
                     Spacer()
-                    Text("\(currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
+                    Text("\(viewModel.currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
                         .font(.App.info)
                 }
                 .padding(.horizontal)
@@ -114,9 +122,8 @@ struct EstimateView: View {
             }
             .padding()
             .onAppear {
-                viewModel.mainData = mainData
+                viewModel.input(mainData: mainData)
                 viewModel.update()
-                viewModel.createChartData()
             }
 
             Spacer()

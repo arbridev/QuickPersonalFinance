@@ -12,7 +12,7 @@ extension EstimateView {
     @MainActor class ViewModel: ObservableObject {
         private var calculations: CalculationService?
 
-        @Published var mainData: AppData? {
+        @Published private(set) var mainData: AppData? {
             didSet {
                 guard let mainData else {
                     return
@@ -32,6 +32,21 @@ extension EstimateView {
             }
         }
         @Published var barChartData: [BarValue] = [BarValue]()
+        @Published var isPresentingSettings: Bool = false {
+            didSet {
+                if !isPresentingSettings {
+                    update()
+                }
+            }
+        }
+
+        var currencyCode: String {
+            Locale.current.currency?.identifier ?? "USD"
+        }
+
+        func input(mainData: AppData) {
+            self.mainData = mainData
+        }
 
         func update() {
             guard let mainData else {
@@ -46,9 +61,10 @@ extension EstimateView {
                 to: selectedRecurrence
             )
             balance = incomeTotal - expenseTotal
+            createChartData()
         }
 
-        func createChartData() {
+        private func createChartData() {
             guard let _ = mainData else {
                 return
             }

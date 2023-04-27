@@ -38,3 +38,8 @@
 "estimate.table.expense" = "Expense";
 "estimate.table.total" = "Total";
 "estimate.chart.source" = "Source";
+
+"settings.action.title" = "Settings";
+"settings.action.field.work.hours.day" = "Work hours per day";
+"settings.action.field.work.days.week" = "Work days per week";
+"settings.action.field.suggestion.average" = "It can be an average";

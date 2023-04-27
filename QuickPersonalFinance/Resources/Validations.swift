@@ -10,6 +10,6 @@ import Foundation
 struct DoubleValidation: Validation {
     var value: String
     var isValid: Bool {
-        !(value.count > 0 && Double(value) == nil)
+        value.isEmpty ? true : Double(value) != nil
     }
 }

@@ -15,12 +15,18 @@ protocol CalculationService {
 }
 
 class Calculation: CalculationService {
+    let settings: SettingsService
     var incomes: [Income]
     var expenses: [Expense]
 
-    init(incomes: [Income], expenses: [Expense]) {
+    init(
+        incomes: [Income],
+        expenses: [Expense],
+        settings: SettingsService = Settings(persistence: UserDefaults.standard)
+    ) {
         self.incomes = incomes
         self.expenses = expenses
+        self.settings = settings
     }
 
     private func convert(
@@ -46,9 +52,9 @@ class Calculation: CalculationService {
                 case .hour:
                     factor = 1
                 case .day:
-                    factor = Constant.workHoursPerDay
+                    factor = settings.workHoursPerDay
                 case .week:
-                    factor = Constant.workDaysPerWeek
+                    factor = settings.workDaysPerWeek
                 case .month:
                     factor = Constant.weeksPerMonthCount
                 case .year:
@@ -57,9 +63,9 @@ class Calculation: CalculationService {
         } else {
             switch next {
                 case .hour:
-                    factor = Constant.workHoursPerDay
+                    factor = settings.workHoursPerDay
                 case .day:
-                    factor = Constant.workDaysPerWeek
+                    factor = settings.workDaysPerWeek
                 case .week:
                     factor = Constant.weeksPerMonthCount
                 case .month:

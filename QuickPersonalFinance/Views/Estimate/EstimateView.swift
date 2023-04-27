@@ -152,5 +152,6 @@ struct EstimateView_Previews: PreviewProvider {
     static var previews: some View {
         EstimateView()
             .environmentObject(envObject)
+//            .previewDevice(PreviewDevice(rawValue: "iPad (10th generation)"))
     }
 }

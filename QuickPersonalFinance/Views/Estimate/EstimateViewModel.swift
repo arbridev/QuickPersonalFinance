@@ -32,7 +32,7 @@ extension EstimateView {
             }
         }
         @Published var barChartData: [BarValue] = [BarValue]()
-        @Published var isPresentingSettings: Bool = false {
+        @Published var isPresentingSettings = false {
             didSet {
                 if !isPresentingSettings {
                     update()
@@ -65,7 +65,7 @@ extension EstimateView {
         }
 
         private func createChartData() {
-            guard let _ = mainData else {
+            guard mainData != nil else {
                 return
             }
             let barChartData = [

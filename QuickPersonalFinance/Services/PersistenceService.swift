@@ -8,13 +8,13 @@
 import CoreData
 
 protocol PersistenceService {
-    associatedtype T
-    func save(item: T)
-    func loadAll() -> [T]
-    func load(itemWithID: UUID) -> T?
-    func update(item: T)
-    func delete(item: T)
-    func delete(items: [T])
+    associatedtype PersistentType
+    func save(item: PersistentType)
+    func loadAll() -> [PersistentType]
+    func load(itemWithID: UUID) -> PersistentType?
+    func update(item: PersistentType)
+    func delete(item: PersistentType)
+    func delete(items: [PersistentType])
 }
 
 protocol CoreDataPersistable {

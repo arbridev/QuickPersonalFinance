@@ -8,7 +8,7 @@
 import Foundation
 
 enum Recurrence: String, Codable {
-    case hour = "hour", day = "day", week = "week", month = "month", year = "year"
+    case hour, day, week, month, year
 }
 
 extension Recurrence: CaseIterable, Comparable {

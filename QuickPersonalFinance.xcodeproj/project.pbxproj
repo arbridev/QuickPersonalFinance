@@ -422,6 +422,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1439F8C029FFFCDA00544883 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinance;
 			productName = QuickPersonalFinance;
@@ -497,6 +498,9 @@
 				"es-419",
 			);
 			mainGroup = 149ABEB429BA282B0088CE94;
+			packageReferences = (
+				1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */,
+			);
 			productRefGroup = 149ABEBE29BA282B0088CE94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -614,6 +618,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1439F8C029FFFCDA00544883 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 1439F8BF29FFFCDA00544883 /* SwiftLint */;
+		};
 		149ABECF29BA28310088CE94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 149ABEBC29BA282B0088CE94 /* QuickPersonalFinance */;
@@ -933,6 +941,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alandeguz/SwiftLintPlugin";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1439F8BF29FFFCDA00544883 /* SwiftLint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
+			productName = "plugin:SwiftLint";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */ = {

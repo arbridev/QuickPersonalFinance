@@ -8,7 +8,7 @@
 import CoreData
 
 protocol IncomePersistenceService: PersistenceService,
-                                    CoreDataPersistable where T == Income {}
+                                    CoreDataPersistable where PersistentType == Income {}
 
 class IncomePersistence: IncomePersistenceService {
     let moc: NSManagedObjectContext
@@ -18,7 +18,7 @@ class IncomePersistence: IncomePersistenceService {
     }
 
     func save(item: Income) {
-        let _ = StoredIncome.from(item, context: moc)
+        _ = StoredIncome.from(item, context: moc)
         try? moc.save()
     }
 

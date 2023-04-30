@@ -32,8 +32,8 @@ class Calculation: CalculationService {
     private func convert(
         _ value: Double,
         from origin: Recurrence,
-        to destination: Recurrence) -> Double
-    {
+        to destination: Recurrence
+    ) -> Double {
         guard origin != destination else {
             return value
         }
@@ -48,31 +48,23 @@ class Calculation: CalculationService {
         let next = Recurrence.allCases[offset]
         var factor: Double!
         if isForward {
-            switch next {
-                case .hour:
-                    factor = 1
-                case .day:
-                    factor = settings.workHoursPerDay
-                case .week:
-                    factor = settings.workDaysPerWeek
-                case .month:
-                    factor = Constant.weeksPerMonthCount
-                case .year:
-                    factor = Constant.monthsPerYearCount
-            }
+            let forwardConversionFactor: [Recurrence: Double] = [
+                .hour: 1,
+                .day: settings.workHoursPerDay,
+                .week: settings.workDaysPerWeek,
+                .month: Constant.weeksPerMonthCount,
+                .year: Constant.monthsPerYearCount
+            ]
+            factor = forwardConversionFactor[next]
         } else {
-            switch next {
-                case .hour:
-                    factor = settings.workHoursPerDay
-                case .day:
-                    factor = settings.workDaysPerWeek
-                case .week:
-                    factor = Constant.weeksPerMonthCount
-                case .month:
-                    factor = Constant.monthsPerYearCount
-                case .year:
-                    factor = 1
-            }
+            let backwardConversionFactor: [Recurrence: Double] = [
+                .hour: settings.workHoursPerDay,
+                .day: settings.workDaysPerWeek,
+                .week: Constant.weeksPerMonthCount,
+                .month: Constant.monthsPerYearCount,
+                .year: 1
+            ]
+            factor = backwardConversionFactor[next]
         }
 
         let newValue = isForward ? value * factor : value / factor
@@ -84,7 +76,8 @@ class Calculation: CalculationService {
             source.recurrence != nil ?
             convert(source.grossValue, from: source.recurrence!, to: recurrence) :
             source.grossValue
-        }.reduce(0, +)
+        }
+        .reduce(0, +)
     }
 
     func monthlyBalance() -> Double {

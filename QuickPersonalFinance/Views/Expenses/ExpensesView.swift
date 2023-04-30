@@ -11,7 +11,7 @@ struct ExpensesView: View {
     @EnvironmentObject private var mainData: AppData
     @Environment(\.managedObjectContext) var moc
     
-    @StateObject private var viewModel: ViewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         VStack {

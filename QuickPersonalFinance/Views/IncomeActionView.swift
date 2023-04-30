@@ -16,7 +16,7 @@ struct IncomeActionView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) var moc
 
-    @StateObject private var viewModel: ViewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel()
     @FocusState private var focusedField: Field?
 
     var editingIncome: Income?
@@ -69,8 +69,7 @@ struct IncomeActionView: View {
                     .onChange(of: focusedField) { newFocusedField in
                         if newFocusedField == .grossValue {
                             if let number = Double(viewModel.grossValueText),
-                                number == 0.0
-                            {
+                                number == 0.0 {
                                 viewModel.grossValueText = ""
                             }
                         }
@@ -89,7 +88,7 @@ struct IncomeActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    if let _ = editingIncome {
+                    if editingIncome != nil {
                         CTAButton(title: "action.button.edit".localized, color: .Palette.incomeAccent) {
                             viewModel.edit { didEdit in
                                 if didEdit {

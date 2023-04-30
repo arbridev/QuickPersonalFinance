@@ -14,7 +14,7 @@ extension Income {
             name: origin.name ?? "",
             more: origin.more,
             grossValue: origin.grossValue,
-            recurrence: Recurrence.init(rawValue: origin.recurrence ?? "")
+            recurrence: Recurrence(rawValue: origin.recurrence ?? "")
         )
     }
 }
@@ -38,7 +38,7 @@ extension Expense {
             name: origin.name ?? "",
             more: origin.more,
             grossValue: origin.grossValue,
-            recurrence: Recurrence.init(rawValue: origin.recurrence ?? "")
+            recurrence: Recurrence(rawValue: origin.recurrence ?? "")
         )
     }
 }

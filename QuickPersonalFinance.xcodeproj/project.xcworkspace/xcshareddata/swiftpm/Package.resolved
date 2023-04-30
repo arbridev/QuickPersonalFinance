@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftlintplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alandeguz/SwiftLintPlugin",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1f7cbc1ba7d307e362024f052bef277b129fb71c"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -16,7 +16,7 @@ struct ExpenseActionView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) var moc
 
-    @StateObject private var viewModel: ViewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel()
     @FocusState private var focusedField: Field?
 
     var editingExpense: Expense?
@@ -69,8 +69,7 @@ struct ExpenseActionView: View {
                     .onChange(of: focusedField) { newFocusedField in
                         if newFocusedField == .grossValue {
                             if let number = Double(viewModel.grossValueText),
-                                number == 0.0
-                            {
+                                number == 0.0 {
                                 viewModel.grossValueText = ""
                             }
                         }
@@ -86,7 +85,7 @@ struct ExpenseActionView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
 
-                    if let _ = editingExpense {
+                    if editingExpense != nil {
                         CTAButton(title: "action.button.edit".localized, color: .Palette.expenseAccent) {
                             viewModel.edit { didEdit in
                                 if didEdit {

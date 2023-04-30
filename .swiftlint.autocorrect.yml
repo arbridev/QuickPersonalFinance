@@ -1,0 +1,14 @@
+excluded:
+  - Package.swift
+
+disabled_rules:
+  - force_cast
+  - nesting
+  - trailing_whitespace
+
+opt_in_rules:
+  - switch_case_alignment
+  - redundant_type_annotation
+
+switch_case_alignment:
+  indented_cases: true

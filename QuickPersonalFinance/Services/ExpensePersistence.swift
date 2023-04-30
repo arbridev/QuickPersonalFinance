@@ -8,7 +8,7 @@
 import CoreData
 
 protocol ExpensePersistenceService: PersistenceService,
-                                    CoreDataPersistable where T == Expense {}
+                                    CoreDataPersistable where PersistentType == Expense {}
 
 class ExpensePersistence: ExpensePersistenceService {
     let moc: NSManagedObjectContext
@@ -18,7 +18,7 @@ class ExpensePersistence: ExpensePersistenceService {
     }
 
     func save(item: Expense) {
-        let _ = StoredExpense.from(item, context: moc)
+        _ = StoredExpense.from(item, context: moc)
         try? moc.save()
     }
 

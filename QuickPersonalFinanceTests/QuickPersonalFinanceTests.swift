@@ -13,6 +13,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
     var calculation: CalculationService!
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         calculation = nil
     }
 

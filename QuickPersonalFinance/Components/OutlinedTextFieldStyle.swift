@@ -14,6 +14,7 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
     var iconColor: Color?
     var prefixColor: Color?
 
+    // swiftlint:disable:next identifier_name
     func _body(configuration: TextField<Self._Label>) -> some View {
         VStack {
             HStack {

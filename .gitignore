@@ -93,3 +93,6 @@ iOSInjectionProject/
 
 # Config files
 *.xcconfig
+
+# Environment configuration files
+.env**

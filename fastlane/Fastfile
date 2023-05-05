@@ -16,8 +16,125 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+
+  code_signing_type = {
+    "development"=> "development",
+    "stage"=> "adhoc",
+    "production"=> "appstore"
+  }
+
+  configuration_type = {
+    "development"=> "Debug",
+    "stage"=> "Release",
+    "production"=> "Release"
+  }
+
+  export_method_type = {
+    "development"=> "development",
+    "stage"=> "ad-hoc",
+    "production"=> "app-store"
+  }
+
+  initial_version = "0.1.0"
+  project_file_path = "QuickPersonalFinance.xcodeproj"
+  scheme = "QuickPersonalFinance"
+  unit_tests_scheme = "QuickPersonalFinanceTests"
+
+  before_each do |lane, options|
+    app_store_connect_api_key
+  end
+
+  after_each do |lane, options|
+    notification(subtitle: "Finished", message: "#{lane}")
+  end
+
+  error do |lane, exception, options|
+    notification(subtitle: "A error occured", message: "#{lane}")
+  end
+
+  desc "Generates code signing items (certificates and provisioning profiles)"
+  lane :code_signing do |options|
+    log_settings
+
+    readonly = options.fetch(:readonly, true)
+    environment = lane_context[SharedValues::ENVIRONMENT]
+
+    match(
+      type: code_signing_type[environment],
+      readonly: readonly
+    )
+  end
+
+  desc "Increments the build number"
+  lane :bump_build do |options|
+    latest_testflight_build_number
+    latest_build_number = lane_context[SharedValues::LATEST_TESTFLIGHT_BUILD_NUMBER]
+    puts "latest_build_number: #{latest_build_number}"
+    increment_build_number(
+      build_number: latest_build_number + 1
+    )
+  end
+
+  desc "Increments the version number (bump_type: patch, minor or major)"
+  lane :bump_version do |options|
+    latest_testflight_build_number
+    latest_version_number = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION] ||= initial_version
+    puts "latest_version_number: #{latest_version_number}"
+    increment_version_number_in_plist(
+      version_number: latest_version_number
+    )
+    increment_version_number_in_xcodeproj(
+      version_number: latest_version_number
+    )
+    increment_version_number_in_plist(
+      bump_type: options.fetch(:bump_type, "patch")
+    )
+    increment_version_number_in_xcodeproj(
+      bump_type: options.fetch(:bump_type, "patch")
+    )
+  end
+
+  lane :tests do
+    run_tests(
+      project: project_file_path
+    )
+  end
+
+  desc "Generates an ipa"
+  lane :build do |options|
+    environment = lane_context[SharedValues::ENVIRONMENT]
+    build_app(
+      project: project_file_path,
+      configuration: configuration_type[environment] ||= "Release",
+      export_method: export_method_type[environment] ||= "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "org.arbridev.QuickPersonalFinance" => "match Development org.arbridev.QuickPersonalFinance",
+          "org.arbridev.QuickPersonalFinance" => "match AppStore org.arbridev.QuickPersonalFinance"
+        }
+      }
+    )
+  end
+
+  desc "Deliver the app to TestFlight"
+  lane :upload do |options|
+    upload_to_testflight
+    # build = get_build_number
+    # upload_to_app_store(
+    #   build_number: build,
+    #   submit_for_review: false,
+    #   automatic_release: false,
+    #   force: true, # Skip HTMl report verification
+    #   skip_metadata: true,
+    #   skip_screenshots: true,
+    #   skip_binary_upload: true,
+    #   precheck_include_in_app_purchases: false
+    # )
+  end
+
+  desc "Logs the current settings"
+  private_lane :log_settings do |options|
+    system('printenv')
+    debug ENV
   end
 end

@@ -39,6 +39,9 @@ platform :ios do
   project_file_path = "QuickPersonalFinance.xcodeproj"
   scheme = "QuickPersonalFinance"
   unit_tests_scheme = "QuickPersonalFinanceTests"
+  app_identifier = "org.arbridev.QuickPersonalFinance"
+  provisioning_profile_development = "match Development org.arbridev.QuickPersonalFinance"
+  provisioning_profile_appstore = "match AppStore org.arbridev.QuickPersonalFinance"
 
   before_each do |lane, options|
     app_store_connect_api_key
@@ -109,8 +112,8 @@ platform :ios do
       export_method: export_method_type[environment] ||= "app-store",
       export_options: {
         provisioningProfiles: {
-          "org.arbridev.QuickPersonalFinance" => "match Development org.arbridev.QuickPersonalFinance",
-          "org.arbridev.QuickPersonalFinance" => "match AppStore org.arbridev.QuickPersonalFinance"
+          app_identifier => provisioning_profile_development,
+          app_identifier => provisioning_profile_appstore
         }
       }
     )
@@ -119,17 +122,6 @@ platform :ios do
   desc "Deliver the app to TestFlight"
   lane :upload do |options|
     upload_to_testflight
-    # build = get_build_number
-    # upload_to_app_store(
-    #   build_number: build,
-    #   submit_for_review: false,
-    #   automatic_release: false,
-    #   force: true, # Skip HTMl report verification
-    #   skip_metadata: true,
-    #   skip_screenshots: true,
-    #   skip_binary_upload: true,
-    #   precheck_include_in_app_purchases: false
-    # )
   end
 
   desc "Logs the current settings"

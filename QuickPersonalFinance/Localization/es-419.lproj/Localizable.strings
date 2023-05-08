@@ -10,6 +10,11 @@
 "expenses.title" = "Gastos";
 "estimate.title" = "Estimado";
 
+"incomes.empty.title" = "Agrega un nuevo ingreso";
+"incomes.empty.message" = "Puedes agregar un nuevo ingreso usando el botón con el signo más (+) ubicado en la parte superior derecha de la pantalla.";
+"expenses.empty.title" = "Agrega un nuevo gasto";
+"expenses.empty.message" = "Puedes agregar un nuevo gasto usando el botón con el signo más (+) ubicado en la parte superior derecha de la pantalla.";
+
 "income.action.create.title" = "Crear Ingreso";
 "income.action.edit.title" = "Editar Ingreso";
 "expense.action.create.title" = "Crear Gasto";

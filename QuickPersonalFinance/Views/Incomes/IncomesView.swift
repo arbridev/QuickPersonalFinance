@@ -30,26 +30,37 @@ struct IncomesView: View {
             }
             Spacer()
             VStack {
-                Text("incomes.title")
-                    .asScreenTitle()
-                List {
-                    ForEach(mainData.financeData.incomes, id: \.hashValue) { income in
-                        HStack {
-                            Text(income.name)
-                            Spacer()
-                            Text(String(format: "\(viewModel.currencyCode) %.2f", income.grossValue))
+                if mainData.financeData.incomes.isEmpty {
+                    Text("incomes.title")
+                        .asScreenTitle()
+                    Spacer()
+                    EmptyContentView(
+                        title: "incomes.empty.title",
+                        message: "incomes.empty.message"
+                    )
+                    Spacer()
+                } else {
+                    Text("incomes.title")
+                        .asScreenTitle()
+                    List {
+                        ForEach(mainData.financeData.incomes, id: \.hashValue) { income in
+                            HStack {
+                                Text(income.name)
+                                Spacer()
+                                Text(String(format: "\(viewModel.currencyCode) %.2f", income.grossValue))
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                viewModel.selectedItem = income
+                            }
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewModel.selectedItem = income
-                        }
+                        .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }
-                    .onDelete(perform: { viewModel.deleteItems(at: $0) })
-                }
-                .font(.App.standard)
-                .sheet(isPresented: $viewModel.isPresentingEditAction) {
-                    IncomeActionView(editingIncome: viewModel.selectedItem!)
-                        .environmentObject(mainData)
+                    .font(.App.standard)
+                    .sheet(isPresented: $viewModel.isPresentingEditAction) {
+                        IncomeActionView(editingIncome: viewModel.selectedItem!)
+                            .environmentObject(mainData)
+                    }
                 }
             }
             Spacer()

@@ -21,4 +21,12 @@ extension Font {
     static func app(size: CGFloat) -> Font {
         .custom("WorkSans-Regular", size: size)
     }
+
+    static func title(size: CGFloat) -> Font {
+        .custom("WorkSans-Light", size: size)
+    }
+
+    static func input(size: CGFloat) -> Font {
+        .custom("Manrope-Regular", size: size)
+    }
 }

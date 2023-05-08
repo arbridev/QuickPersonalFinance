@@ -29,27 +29,38 @@ struct ExpensesView: View {
             }
             Spacer()
             VStack {
-                Text("expenses.title")
-                    .asScreenTitle()
-                List {
-                    ForEach(mainData.financeData.expenses, id: \.hashValue) { expense in
-                        HStack {
-                            Text(expense.name)
-                            Spacer()
-                            Text(String(format: "\(viewModel.currencyCode) %.2f", expense.grossValue))
+                if mainData.financeData.expenses.isEmpty {
+                    Text("expenses.title")
+                        .asScreenTitle()
+                    Spacer()
+                    EmptyContentView(
+                        title: "expenses.empty.title",
+                        message: "expenses.empty.message"
+                    )
+                    Spacer()
+                } else {
+                    Text("expenses.title")
+                        .asScreenTitle()
+                    List {
+                        ForEach(mainData.financeData.expenses, id: \.hashValue) { expense in
+                            HStack {
+                                Text(expense.name)
+                                Spacer()
+                                Text(String(format: "\(viewModel.currencyCode) %.2f", expense.grossValue))
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                viewModel.selectedItem = expense
+                            }
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewModel.selectedItem = expense
-                        }
+                        .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }
-                    .onDelete(perform: { viewModel.deleteItems(at: $0) })
+                    .font(.App.standard)
                     .sheet(isPresented: $viewModel.isPresentingEditAction) {
                         ExpenseActionView(editingExpense: viewModel.selectedItem!)
                             .environmentObject(mainData)
                     }
                 }
-                .font(.App.standard)
             }
             Spacer()
         }

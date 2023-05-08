@@ -40,7 +40,7 @@ struct ContentView: View {
                 IncomesView()
                     .tabItem {
                         Label(
-                            "incomes.title".localized,
+                            "incomes.title",
                             systemImage: "plus.circle"
                         )
                     }
@@ -49,7 +49,7 @@ struct ContentView: View {
                 ExpensesView()
                     .tabItem {
                         Label(
-                            "expenses.title".localized,
+                            "expenses.title",
                             systemImage: "minus.circle"
                         )
                     }
@@ -58,7 +58,7 @@ struct ContentView: View {
                 EstimateView()
                     .tabItem {
                         Label(
-                            "estimate.title".localized,
+                            "estimate.title",
                             systemImage: "plus.forwardslash.minus"
                         )
                     }

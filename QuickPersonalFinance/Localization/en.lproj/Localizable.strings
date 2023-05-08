@@ -10,6 +10,11 @@
 "expenses.title" = "Expenses";
 "estimate.title" = "Estimate";
 
+"incomes.empty.title" = "Add a new income";
+"incomes.empty.message" = "You can add a new income by using the plus (+) sign button at the top right corner of the screen.";
+"expenses.empty.title" = "Add a new expense";
+"expenses.empty.message" = "You can add a new expense by using the plus (+) sign button at the top right corner of the screen.";
+
 "income.action.create.title" = "Create Income";
 "income.action.edit.title" = "Edit Income";
 "expense.action.create.title" = "Create Expense";

@@ -96,3 +96,7 @@ iOSInjectionProject/
 
 # Environment configuration files
 .env**
+
+# Google Firebase configuration files
+
+**GoogleService-Info.plist

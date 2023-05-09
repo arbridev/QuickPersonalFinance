@@ -15,6 +15,13 @@ This app was designed for individuals to quickly calculate their financial proje
 #### Swift Package Manager
 
 - [SwiftLintPlugin](https://github.com/alandeguz/SwiftLintPlugin)
+- [Firebase](https://github.com/firebase/firebase-ios-sdk)
+    - FirebaseCrashlytics
+    - FirebaseAnalyticsWithoutAdIdSupport
+
+#### Building
+
+To build, this project requires to have a `GoogleService-Info.plist` file located at `/QuickPersonalFinance`.
 
 ### Code formatting and linting
 

@@ -44,6 +44,36 @@ extension EstimateView {
             Locale.current.currency?.identifier ?? "USD"
         }
 
+        var balanceInfoMessage: String {
+            String(
+                format: "estimate.balance.info.message".localized,
+                currencyCode,
+                selectedRecurrence.rawValue.localized
+            )
+        }
+
+        var shareMessage: String {
+            if balance > 0.0 {
+                return String(
+                    format: "estimate.share.message.save".localized,
+                    selectedRecurrence.rawValue.localized,
+                    incomeTotal.asCurrency,
+                    expenseTotal.asCurrency,
+                    balance.asCurrency,
+                    currencyCode
+                )
+            } else {
+                return String(
+                    format: "estimate.share.message.lose".localized,
+                    selectedRecurrence.rawValue.localized,
+                    incomeTotal.asCurrency,
+                    expenseTotal.asCurrency,
+                    balance.asCurrency,
+                    currencyCode
+                )
+            }
+        }
+
         func input(mainData: AppData) {
             self.mainData = mainData
         }

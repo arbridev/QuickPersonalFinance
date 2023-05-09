@@ -95,10 +95,14 @@ struct EstimateView: View {
 
                 HStack {
                     Spacer()
-                    Text("\(viewModel.currencyCode) per \(viewModel.selectedRecurrence.rawValue)")
+                    Text(viewModel.balanceInfoMessage)
                         .font(.App.info)
                 }
                 .padding(.horizontal)
+
+                ShareLink(item: viewModel.shareMessage) {
+                    Label("estimate.button.share", systemImage: "square.and.arrow.up")
+                }
 
                 Divider()
                     .overlay(Color.Palette.dividerSecondary)

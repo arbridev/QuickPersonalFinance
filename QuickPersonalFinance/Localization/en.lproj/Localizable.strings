@@ -39,10 +39,14 @@
 "year" = "year";
 
 "estimate.action.time.span" = "Time span";
+"estimate.balance.info.message" = "%@ per %@";
 "estimate.table.income" = "Income";
 "estimate.table.expense" = "Expense";
 "estimate.table.total" = "Total";
 "estimate.chart.source" = "Source";
+"estimate.button.share" = "Share";
+"estimate.share.message.save" = "Your income per %@ is projected to be around %@ with expenses around %@, which will allow you to save approximately %@ (%@) on that period.";
+"estimate.share.message.lose" = "Your income per %@ is projected to be around %@ with expenses around %@, which will make you lose approximately %@ (%@) on that period.";
 
 "settings.action.title" = "Settings";
 "settings.action.field.work.hours.day" = "Work hours per day";

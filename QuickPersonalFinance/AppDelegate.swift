@@ -13,6 +13,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        print("Documents directory:", URL.documentsDirectory)
         FirebaseApp.configure()
         return true
     }

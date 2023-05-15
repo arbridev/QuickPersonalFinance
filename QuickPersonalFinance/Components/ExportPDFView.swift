@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PDFKit
 import Charts
 
 /// Reference: https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-a-swiftui-view-to-a-pdf
@@ -19,7 +20,7 @@ struct ExportPDFView: View {
     @State private var balance: Double?
 
     var body: some View {
-        ShareLink("Export PDF", item: render())
+        ShareLink("share.pdf", item: render())
             .onAppear {
                 calculations = Calculation(
                     incomes: mainData.financeData.incomes,
@@ -32,42 +33,45 @@ struct ExportPDFView: View {
     }
 
     func render() -> URL {
-        let incomesURL = subrender(
-            fileName: "incomes-1.pdf",
-            content: createSources(
-                mainTitle: nil,
-                sectionTitle: nil,
-                sources: mainData.financeData.incomes
-            )
-        )
-        let expensesURL = subrender(
-            fileName: "expenses-1.pdf",
-            content: createSources(
-                mainTitle: nil,
-                sectionTitle: nil,
-                sources: mainData.financeData.expenses
-            )
-        )
+        var pdfs = [PDFDocument]()
+
+        subrenderSources(pdfs: &pdfs)
+
         let estimateURL = subrender(
-            fileName: "estimate-1.pdf",
+            fileName: "estimate.pdf",
             content: createEstimate(
                 incomeTotal: incomeTotal ?? 0.0,
                 expenseTotal: expenseTotal ?? 0.0,
-                balance: balance ?? 0.0
+                balance: balance ?? 0.0,
+                recurrence: recurrence
             )
         )
-        let chartURL = subrender(
-            fileName: "chart.pdf",
-            content: createChart(
-                incomeTotal: incomeTotal ?? 0.0,
-                expenseTotal: expenseTotal ?? 0.0
-            )
-        )
-        return chartURL
+        let estimatePDF = PDFDocument(url: estimateURL)!
+        pdfs.append(estimatePDF)
+
+        let firstPDF = pdfs.first!
+        for pdf in pdfs {
+            guard pdf != firstPDF else {
+                continue
+            }
+            firstPDF.addPages(from: pdf)
+        }
+
+        let url = URL.documentsDirectory.appending(path: "report.pdf")
+
+        let data = firstPDF.dataRepresentation()!
+        do {
+            try data.write(to: url)
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        let reportPDF = PDFDocument(url: url)
+        return reportPDF?.documentURL ?? estimateURL
     }
 
     func subrender(fileName: String, content: some View) -> URL {
-        let url = URL.documentsDirectory.appending(path: fileName)
+        let url = URL.temporaryDirectory.appending(path: fileName)
         let pdfDpi: Double = 72.0
         let letterWidth = 8.5 * pdfDpi
         let letterHeight = 11 * pdfDpi
@@ -93,252 +97,75 @@ struct ExportPDFView: View {
         return url
     }
 
+    private func subrenderSources(pdfs: inout [PDFDocument]) {
+        let incomes = mainData.financeData.incomes
+        let expenses = mainData.financeData.expenses
+        let limit = 25
+        var page = 1
+        var incomesIndex = 0
+        var expensesIndex = 0
+        var sources = [[any Source]?]()
+
+        while incomesIndex < incomes.count || expensesIndex < expenses.count {
+            var pageIncomes: [any Source]?
+            var pageExpenses: [any Source]?
+            let mainTitle = page == 1 ? "share.report.report" : nil
+            var sectionTitles = [String?]()
+            if incomesIndex < incomes.count {
+                sectionTitles.append(incomesIndex == 0 ? "incomes.title" : nil)
+                processSourcesSection(
+                    sources: incomes,
+                    sourcesIndex: &incomesIndex,
+                    pageSources: &pageIncomes,
+                    limit: limit
+                )
+            } else {
+                sectionTitles.append(nil)
+            }
+            if expensesIndex < expenses.count && pageIncomes == nil {
+                sectionTitles.append(expensesIndex == 0 ? "expenses.title" : nil)
+                processSourcesSection(
+                    sources: expenses,
+                    sourcesIndex: &expensesIndex,
+                    pageSources: &pageExpenses,
+                    limit: limit
+                )
+            } else {
+                sectionTitles.append(nil)
+            }
+            sources = [pageIncomes, pageExpenses]
+            let sourcesURL = subrender(
+                fileName: "sources-\(page).pdf",
+                content: createSources(
+                    mainTitle: mainTitle,
+                    sectionTitles: sectionTitles,
+                    sources: sources
+                )
+            )
+            let sourcesPDF = PDFDocument(url: sourcesURL)!
+            pdfs.append(sourcesPDF)
+            page += 1
+        }
+    }
+
+    private func processSourcesSection(
+        sources: [any Source],
+        sourcesIndex: inout Int,
+        pageSources: inout [any Source]?,
+        limit: Int
+    ) {
+        let itemsLeft = sources.suffix(from: sourcesIndex)
+        if itemsLeft.count > limit {
+            let lastIndex = sourcesIndex + limit
+            pageSources = Array(itemsLeft.prefix(upTo: lastIndex))
+            sourcesIndex = lastIndex
+        } else {
+            pageSources = Array(itemsLeft)
+            sourcesIndex = sources.count
+        }
+    }
+
     init(recurrence: Recurrence) {
         self.recurrence = recurrence
-    }
-}
-
-extension ExportPDFView {
-    struct ReportSourcesView: View {
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
-
-        var mainTitle: String?
-        var sectionTitle: String?
-        var sources: [any Source]
-
-        var body: some View {
-            HStack {
-                Spacer(minLength: horizontalMargins / 2)
-                VStack {
-                    // MARK: Title
-                    if let mainTitle {
-                        Text(mainTitle)
-                                .font(.largeTitle)
-                                .foregroundColor(.black)
-                                .padding()
-
-                        Divider()
-                    }
-
-                    // MARK: Sources
-                    if let sectionTitle {
-                        HStack {
-                            Text(sectionTitle)
-                                .font(.title)
-                                .padding(.bottom, 10)
-                            Spacer()
-                        }
-                    }
-
-                    VStack {
-                        ForEach(sources, id: \.id) { source in
-                            HStack {
-                                Text(source.name)
-                                    .font(.body)
-                                Text(source.recurrence?.rawValue ?? "")
-                                    .font(.caption)
-                                Spacer()
-                                Text(source.grossValue.asCurrency)
-                            }
-                        }
-                    }
-
-                    Spacer()
-                }
-                .frame(width: contentWidth, height: contentHeight, alignment: .center)
-            }
-        }
-
-        init(mainTitle: String?, sectionTitle: String?, sources: [any Source]) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.mainTitle = mainTitle
-            self.sectionTitle = sectionTitle
-            self.sources = sources
-        }
-    }
-
-    struct ReportEstimateView: View {
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
-
-        var incomeTotal: Double
-        var expenseTotal: Double
-        var balance: Double
-
-        var body: some View {
-            HStack {
-                Spacer(minLength: horizontalMargins / 2)
-                VStack {
-                    // MARK: Title
-                    HStack {
-                        Text("Estimate")
-                            .font(.title)
-                            .padding(.bottom, 10)
-                        Spacer()
-                    }
-
-                    Divider()
-
-                    VStack {
-                        HStack {
-                            Text("Total income")
-                                .font(.body)
-                            Spacer()
-                            Text(incomeTotal.asCurrency)
-                        }
-                    }
-
-                    VStack {
-                        HStack {
-                            Text("Total expense")
-                                .font(.body)
-                            Spacer()
-                            Text(expenseTotal.asCurrency)
-                        }
-                    }
-
-                    Divider()
-
-                    VStack {
-                        HStack {
-                            Text("Balance")
-                                .font(.body)
-                            Spacer()
-                            Text(balance.asCurrency)
-                        }
-                    }
-
-                    Spacer()
-                }
-                .frame(width: contentWidth, height: contentHeight, alignment: .center)
-            }
-        }
-
-        init(
-            incomeTotal: Double,
-            expenseTotal: Double,
-            balance: Double
-        ) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.incomeTotal = incomeTotal
-            self.expenseTotal = expenseTotal
-            self.balance = balance
-        }
-    }
-    
-    struct ReportChartView: View {
-        struct BarValue {
-            let title: String
-            let total: Double
-        }
-
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
-        let barChartColors: [Color] = [.Palette.incomeTable, .Palette.expenseTable]
-
-        var incomeTotal: Double
-        var expenseTotal: Double
-        var barChartData: [BarValue] = [BarValue]()
-
-        var body: some View {
-            HStack {
-                Spacer(minLength: horizontalMargins / 2)
-                VStack {
-                    // MARK: Chart
-                    Chart {
-                        ForEach(barChartData, id: \.title) { barValue in
-                            BarMark(
-                                x: .value("estimate.chart.source".localized, barValue.title),
-                                y: .value("estimate.table.total".localized, barValue.total)
-                            )
-                            .foregroundStyle(by: .value("estimate.chart.source".localized, barValue.title))
-                        }
-                    }
-                    .chartForegroundStyleScale(
-                        domain: [
-                            "estimate.table.income".localized,
-                            "estimate.table.expense".localized],
-                        range: barChartColors
-                    )
-                    .frame(width: contentWidth, height: contentHeight - 100.0, alignment: .center)
-
-                    Spacer()
-                }
-                .frame(width: contentWidth, height: contentHeight, alignment: .center)
-            }
-        }
-
-        init(
-            incomeTotal: Double,
-            expenseTotal: Double
-        ) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.incomeTotal = incomeTotal
-            self.expenseTotal = expenseTotal
-            self.barChartData = createChartData()
-        }
-
-        private func createChartData() -> [BarValue] {
-            let barChartData = [
-                BarValue(title: "estimate.table.income".localized, total: incomeTotal),
-                BarValue(title: "estimate.table.expense".localized, total: expenseTotal)
-            ]
-            return barChartData
-        }
-    }
-
-    func createSources(
-        mainTitle: String?,
-        sectionTitle: String?,
-        sources: [any Source]
-    ) -> some View {
-        ReportSourcesView(mainTitle: mainTitle, sectionTitle: sectionTitle, sources: sources)
-    }
-
-    func createEstimate(
-        incomeTotal: Double,
-        expenseTotal: Double,
-        balance: Double
-    ) -> some View {
-        ReportEstimateView(
-            incomeTotal: incomeTotal,
-            expenseTotal: expenseTotal,
-            balance: balance
-        )
-    }
-
-    func createChart(
-        incomeTotal: Double,
-        expenseTotal: Double
-    ) -> some View {
-        ReportChartView(
-            incomeTotal: incomeTotal,
-            expenseTotal: expenseTotal
-        )
     }
 }

@@ -52,3 +52,7 @@
 "settings.action.field.work.hours.day" = "Horas laborales diarias";
 "settings.action.field.work.days.week" = "Días laborales por semana";
 "settings.action.field.suggestion.average" = "Puede ser un promedio";
+
+"share.summary" = "Sumario";
+"share.pdf" = "Exportar a PDF";
+"share.report.report" = "Informe";

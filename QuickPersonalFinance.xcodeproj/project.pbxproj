@@ -60,6 +60,7 @@
 		14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1529BBD27C00B69FD7 /* Recurrence.swift */; };
 		14A16A1829BE408D00B69FD7 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1729BE408D00B69FD7 /* Source.swift */; };
 		14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */; };
+		14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */; };
 		14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393B29E4CC8E005E31A9 /* MockData.swift */; };
 		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
 		14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */; };
@@ -68,6 +69,8 @@
 		14BE31242A097CFC000A735C /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE31232A097CFC000A735C /* EmptyContentView.swift */; };
 		14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40829F1737600EFF244 /* ExpensePersistence.swift */; };
 		14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */; };
+		14DD43432A0E9E7F007E75B7 /* PDFDocument+AddPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */; };
+		14F533192A113FC8002772CC /* Font+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F533182A113FC8002772CC /* Font+Report.swift */; };
 		14FDF0282A0BA2C700EA40CB /* ExportPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +149,7 @@
 		14A16A1729BE408D00B69FD7 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		14A16A1929BF865500B69FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewUpperBar.swift; sourceTree = "<group>"; };
+		14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportPDFView+Report.swift"; sourceTree = "<group>"; };
 		14B4393B29E4CC8E005E31A9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 		14BE31232A097CFC000A735C /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
 		14DBC40829F1737600EFF244 /* ExpensePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePersistence.swift; sourceTree = "<group>"; };
 		14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFDocument+AddPage.swift"; sourceTree = "<group>"; };
+		14F533182A113FC8002772CC /* Font+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Report.swift"; sourceTree = "<group>"; };
 		14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFView.swift; sourceTree = "<group>"; };
 		14FF64BA2A00555A00BB15EE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -297,6 +303,8 @@
 				149DEEEE29E8BD1000155BF6 /* Font+App.swift */,
 				1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */,
 				144DB7B929EEFEEB00DF3585 /* Array+Difference.swift */,
+				14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */,
+				14F533182A113FC8002772CC /* Font+Report.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -403,6 +411,7 @@
 				14153FD429E8516E00C90D13 /* ScreenTitle.swift */,
 				14BE31232A097CFC000A735C /* EmptyContentView.swift */,
 				14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */,
+				14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -605,6 +614,7 @@
 				14783A0929E8350100BBE10F /* CTAButton.swift in Sources */,
 				1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */,
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
+				14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */,
 				144DB7BA29EEFEEB00DF3585 /* Array+Difference.swift in Sources */,
 				14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */,
 				1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */,
@@ -626,6 +636,7 @@
 				145F124C29FAA4EB009853A8 /* SettingsActionView.swift in Sources */,
 				14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */,
 				14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */,
+				14F533192A113FC8002772CC /* Font+Report.swift in Sources */,
 				149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */,
 				14A16A0629BA6FCF00B69FD7 /* ExpensesView.swift in Sources */,
 				14BE31212A097CBB000A735C /* IncomeActionView.swift in Sources */,
@@ -643,6 +654,7 @@
 				149ABEF129BA304E0088CE94 /* Constants.swift in Sources */,
 				14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */,
 				144E4E6029F472C200EEDC9B /* String+Localization.swift in Sources */,
+				14DD43432A0E9E7F007E75B7 /* PDFDocument+AddPage.swift in Sources */,
 				1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

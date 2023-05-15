@@ -102,7 +102,7 @@ struct EstimateView: View {
 
                 Menu {
                     ShareLink(item: viewModel.shareMessage) {
-                        Label("As text", systemImage: "square.and.arrow.up")
+                        Label("share.summary", systemImage: "square.and.arrow.up")
                     }
                     ExportPDFView(recurrence: viewModel.selectedRecurrence)
                         .environmentObject(mainData)

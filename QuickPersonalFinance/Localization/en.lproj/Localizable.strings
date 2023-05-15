@@ -52,3 +52,7 @@
 "settings.action.field.work.hours.day" = "Work hours per day";
 "settings.action.field.work.days.week" = "Work days per week";
 "settings.action.field.suggestion.average" = "It can be an average";
+
+"share.summary" = "Summary";
+"share.pdf" = "Export PDF";
+"share.report.report" = "Report";

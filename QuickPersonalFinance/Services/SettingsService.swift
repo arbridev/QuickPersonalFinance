@@ -10,15 +10,17 @@ import Foundation
 protocol SettingsService {
     var workHoursPerDay: Double { get set }
     var workDaysPerWeek: Double { get set }
+    var currencyID: String { get set }
     init(persistence: UserDefaults)
 }
 
 struct Settings: SettingsService {
     enum StorageKey: String {
-        case workHoursPerDay, workDaysPerWeek
+        case workHoursPerDay, workDaysPerWeek, currencyID
     }
 
     let persistence: UserDefaults
+    
     var workHoursPerDay: Double {
         get {
             let value = persistence.double(forKey: StorageKey.workHoursPerDay.rawValue)
@@ -28,6 +30,7 @@ struct Settings: SettingsService {
             persistence.set(newValue, forKey: StorageKey.workHoursPerDay.rawValue)
         }
     }
+
     var workDaysPerWeek: Double {
         get {
             let value = persistence.double(forKey: StorageKey.workDaysPerWeek.rawValue)
@@ -38,7 +41,19 @@ struct Settings: SettingsService {
         }
     }
 
-    init(persistence: UserDefaults) {
+    var currencyID: String {
+        get {
+            let value = persistence.string(forKey: StorageKey.currencyID.rawValue)
+            return value ??
+            Locale.current.currency?.identifier ??
+            Constant.defaultCurrencyID
+        }
+        set {
+            persistence.set(newValue, forKey: StorageKey.currencyID.rawValue)
+        }
+    }
+
+    init(persistence: UserDefaults = UserDefaults.standard) {
         self.persistence = persistence
     }
 }

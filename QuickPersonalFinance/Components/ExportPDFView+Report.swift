@@ -15,10 +15,15 @@ extension ExportPDFView {
         let contentHeight: Double
         let horizontalMargins: Double
         let verticalMargins: Double
+        private let settings: Settings
 
         var mainTitle: String?
         var sectionTitles: [String?]
         var sources: [[any Source]?]
+
+        var currencyID: String {
+            settings.currencyID
+        }
 
         var body: some View {
             HStack {
@@ -56,7 +61,7 @@ extension ExportPDFView {
                                                 .font(Font.Report.info)
                                         }
                                         Spacer()
-                                        Text(source.grossValue.asCurrency)
+                                        Text(source.grossValue.asCurrency(withID: currencyID))
                                             .font(Font.Report.standard)
                                     }
                                 }
@@ -83,6 +88,7 @@ extension ExportPDFView {
             self.mainTitle = mainTitle
             self.sectionTitles = sectionTitles
             self.sources = sources
+            settings = Settings()
         }
     }
 
@@ -92,36 +98,37 @@ extension ExportPDFView {
         let contentHeight: Double
         let horizontalMargins: Double
         let verticalMargins: Double
+        private let settings: SettingsService
 
         var incomeTotal: Double
         var expenseTotal: Double
         var balance: Double
         var recurrence: Recurrence
 
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
-        }
-
         var shareMessage: String {
             if balance > 0.0 {
                 return String(
                     format: "estimate.share.message.save".localized,
                     recurrence.rawValue.localized,
-                    incomeTotal.asCurrency,
-                    expenseTotal.asCurrency,
-                    balance.asCurrency,
-                    currencyCode
+                    incomeTotal.asCurrency(withID: currencyID),
+                    expenseTotal.asCurrency(withID: currencyID),
+                    balance.asCurrency(withID: currencyID),
+                    currencyID
                 )
             } else {
                 return String(
                     format: "estimate.share.message.lose".localized,
                     recurrence.rawValue.localized,
-                    incomeTotal.asCurrency,
-                    expenseTotal.asCurrency,
-                    balance.asCurrency,
-                    currencyCode
+                    incomeTotal.asCurrency(withID: currencyID),
+                    expenseTotal.asCurrency(withID: currencyID),
+                    balance.asCurrency(withID: currencyID),
+                    currencyID
                 )
             }
+        }
+
+        var currencyID: String {
+            settings.currencyID
         }
 
         var body: some View {
@@ -143,7 +150,7 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.income")
                                 Spacer()
-                                Text(incomeTotal.asCurrency)
+                                Text(incomeTotal.asCurrency(withID: currencyID))
                             }
                         }
 
@@ -151,7 +158,7 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.expense")
                                 Spacer()
-                                Text(expenseTotal.asCurrency)
+                                Text(expenseTotal.asCurrency(withID: currencyID))
                             }
                         }
 
@@ -161,7 +168,7 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.total")
                                 Spacer()
-                                Text(balance.asCurrency)
+                                Text(balance.asCurrency(withID: currencyID))
                             }
                         }
 
@@ -201,6 +208,7 @@ extension ExportPDFView {
             self.expenseTotal = expenseTotal
             self.balance = balance
             self.recurrence = recurrence
+            settings = Settings()
         }
     }
 

@@ -18,15 +18,22 @@ extension ExpensesView {
                 isPresentingEditAction.toggle()
             }
         }
+        
+        private let settings: SettingsService
         var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
+
+        var currencyID: String {
+            settings.currencyID
+        }
+
+        init() {
+            settings = Settings()
         }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData
-            self.persistenceService = ExpensePersistence(moc: moc)
+            persistenceService = ExpensePersistence(moc: moc)
         }
 
         func deleteItems(at offsets: IndexSet) {

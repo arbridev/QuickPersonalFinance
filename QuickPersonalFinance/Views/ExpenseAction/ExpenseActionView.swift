@@ -60,7 +60,7 @@ struct ExpenseActionView: View {
                         text: $viewModel.grossValueText,
                         errorMessage: $viewModel.grossValueErrorMessage,
                         placeholder: "action.field.gross.value".localized,
-                        prefix: viewModel.currencyCode,
+                        prefix: viewModel.currencyID,
                         prefixColor: .Palette.expenseAccent,
                         keyboardType: .decimalPad
                     )

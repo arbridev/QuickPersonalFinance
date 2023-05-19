@@ -10,8 +10,6 @@ import Foundation
 extension EstimateView {
 
     @MainActor class ViewModel: ObservableObject {
-        private var calculations: CalculationService?
-
         @Published private(set) var mainData: AppData? {
             didSet {
                 guard let mainData else {
@@ -39,15 +37,14 @@ extension EstimateView {
                 }
             }
         }
-
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
-        }
+        
+        private let settings: SettingsService
+        private var calculations: CalculationService?
 
         var balanceInfoMessage: String {
             String(
                 format: "estimate.balance.info.message".localized,
-                currencyCode,
+                currencyID,
                 selectedRecurrence.rawValue.localized
             )
         }
@@ -57,21 +54,29 @@ extension EstimateView {
                 return String(
                     format: "estimate.share.message.save".localized,
                     selectedRecurrence.rawValue.localized,
-                    incomeTotal.asCurrency,
-                    expenseTotal.asCurrency,
-                    balance.asCurrency,
-                    currencyCode
+                    incomeTotal.asCurrency(withID: currencyID),
+                    expenseTotal.asCurrency(withID: currencyID),
+                    balance.asCurrency(withID: currencyID),
+                    currencyID
                 )
             } else {
                 return String(
                     format: "estimate.share.message.lose".localized,
                     selectedRecurrence.rawValue.localized,
-                    incomeTotal.asCurrency,
-                    expenseTotal.asCurrency,
-                    balance.asCurrency,
-                    currencyCode
+                    incomeTotal.asCurrency(withID: currencyID),
+                    expenseTotal.asCurrency(withID: currencyID),
+                    balance.asCurrency(withID: currencyID),
+                    currencyID
                 )
             }
+        }
+
+        var currencyID: String {
+            settings.currencyID
+        }
+
+        init() {
+            settings = Settings()
         }
 
         func input(mainData: AppData) {

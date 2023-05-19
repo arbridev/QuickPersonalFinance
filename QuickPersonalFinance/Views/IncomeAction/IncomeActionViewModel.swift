@@ -25,8 +25,10 @@ extension IncomeActionView {
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
 
+        private let settings: SettingsService
         var moc: NSManagedObjectContext?
         var persistenceService: (any IncomePersistenceService)?
+
         var editingIncome: Income? {
             didSet {
                 guard let editingIncome else {
@@ -38,8 +40,13 @@ extension IncomeActionView {
                 selectedRecurrence = editingIncome.recurrence ?? .hour
             }
         }
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
+        
+        var currencyID: String {
+            settings.currencyID
+        }
+
+        init() {
+            settings = Settings()
         }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {

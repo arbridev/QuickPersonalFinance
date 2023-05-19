@@ -8,9 +8,12 @@
 import Foundation
 
 extension Double {
-    var asCurrency: String {
+    func asCurrency(withID id: String? = nil) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        if let id {
+            formatter.currencyCode = id
+        }
         return formatter.string(from: NSNumber(value: self))!
     }
 }

@@ -24,8 +24,11 @@ extension ExpenseActionView {
         @Published var selectedRecurrence: Recurrence = .hour
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
+
+        private let settings: SettingsService
         var moc: NSManagedObjectContext?
         var persistenceService: (any ExpensePersistenceService)?
+
         var editingExpense: Expense? {
             didSet {
                 guard let editingExpense else {
@@ -37,8 +40,13 @@ extension ExpenseActionView {
                 selectedRecurrence = editingExpense.recurrence ?? .hour
             }
         }
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
+        
+        var currencyID: String {
+            settings.currencyID
+        }
+
+        init() {
+            settings = Settings()
         }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {

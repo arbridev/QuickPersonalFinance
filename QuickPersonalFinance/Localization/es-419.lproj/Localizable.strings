@@ -52,6 +52,8 @@
 "settings.action.field.work.hours.day" = "Horas laborales diarias";
 "settings.action.field.work.days.week" = "Días laborales por semana";
 "settings.action.field.suggestion.average" = "Puede ser un promedio";
+"settings.action.field.currency" = "Moneda base";
+"settings.action.button.reset" = "Regresar a moneda local";
 
 "share.summary" = "Sumario";
 "share.pdf" = "Exportar a PDF";

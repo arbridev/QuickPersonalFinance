@@ -68,6 +68,30 @@ struct SettingsActionView: View {
                     Text("settings.action.field.suggestion.average".localized)
                         .font(.App.info)
                 }
+
+                Section {
+                    Picker(
+                        "\("settings.action.field.currency".localized):",
+                        selection: $viewModel.selectedCurrency
+                    ) {
+                        ForEach(Locale.Currency.isoCurrencies, id: \.identifier) { currency in
+                            Text(currency.identifier)
+                                .font(.App.input)
+                                .tag(currency.identifier)
+                        }
+                    }
+                    .padding(.bottom, 4)
+                    .font(.App.input)
+
+                    Button {
+                        viewModel.resetToLocalCurrency()
+                    } label: {
+                        HStack(alignment: .center) {
+                            Text("settings.action.button.reset")
+                                .font(.App.input)
+                        }
+                    }
+                }
             }
         }
     }

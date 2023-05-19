@@ -15,7 +15,7 @@ protocol CalculationService {
 }
 
 class Calculation: CalculationService {
-    let settings: SettingsService
+    private let settings: SettingsService
     var incomes: [Income]
     var expenses: [Expense]
 

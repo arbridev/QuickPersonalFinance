@@ -61,7 +61,7 @@ struct EstimateView: View {
                 HStack {
                     Text("estimate.table.income")
                     Spacer()
-                    Text("\(viewModel.incomeTotal.asCurrency)")
+                    Text("\(viewModel.incomeTotal.asCurrency(withID: viewModel.currencyID))")
                         .underline(true, color: .Palette.incomeAccent)
                 }
                 .padding(.top)
@@ -71,7 +71,7 @@ struct EstimateView: View {
                 HStack {
                     Text("estimate.table.expense")
                     Spacer()
-                    Text("\(viewModel.expenseTotal.asCurrency)")
+                    Text("\(viewModel.expenseTotal.asCurrency(withID: viewModel.currencyID))")
                         .underline(true, color: .Palette.expenseAccent)
                 }
                 .padding(.top, 6)
@@ -86,7 +86,7 @@ struct EstimateView: View {
                 HStack {
                     Text("estimate.table.total")
                     Spacer()
-                    Text("\(viewModel.balance.asCurrency)")
+                    Text("\(viewModel.balance.asCurrency(withID: viewModel.currencyID))")
                         .underline(true, color: .Palette.estimateAccent)
                 }
                 .padding(.top)

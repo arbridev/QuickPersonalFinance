@@ -19,10 +19,15 @@ extension IncomesView {
             }
         }
 
+        private let settings: SettingsService
         var moc: NSManagedObjectContext?
         var persistenceService: (any IncomePersistenceService)?
-        var currencyCode: String {
-            Locale.current.currency?.identifier ?? "USD"
+        var currencyID: String {
+            settings.currencyID
+        }
+
+        init() {
+            settings = Settings()
         }
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {

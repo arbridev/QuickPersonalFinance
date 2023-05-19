@@ -12,6 +12,7 @@ struct Constant {
     static let weeksPerMonthCount: Double = 4.34
     static let workHoursPerDay: Double = 8
     static let workDaysPerWeek: Double = 5
+    static let defaultCurrencyID: String = "USD"
 
     private init() {}
 }

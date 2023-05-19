@@ -47,7 +47,7 @@ struct IncomesView: View {
                             HStack {
                                 Text(income.name)
                                 Spacer()
-                                Text(String(format: "\(viewModel.currencyCode) %.2f", income.grossValue))
+                                Text(income.grossValue.asCurrency(withID: viewModel.currencyID))
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {

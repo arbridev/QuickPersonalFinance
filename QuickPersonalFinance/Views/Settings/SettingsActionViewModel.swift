@@ -21,9 +21,11 @@ extension SettingsActionView {
                 } else if !workHoursPerDayText.isEmpty {
                     settings.workHoursPerDay = Double(workHoursPerDayText)!
                 }
+                if workHoursPerDayText.count > Constant.maxLengthWorkHoursPerDayField {
+                    workHoursPerDayText = oldValue
+                }
             }
         }
-
         @Published var workDaysPerWeekText: String {
             didSet {
                 let preemptiveValidation = DoubleValidation(value: workDaysPerWeekText)
@@ -32,15 +34,16 @@ extension SettingsActionView {
                 } else if !workDaysPerWeekText.isEmpty {
                     settings.workDaysPerWeek = Double(workDaysPerWeekText)!
                 }
+                if workDaysPerWeekText.count > Constant.maxLengthWorkDaysPerWeekField {
+                    workDaysPerWeekText = oldValue
+                }
             }
         }
-        
         @Published var selectedCurrency: String {
             didSet {
                 settings.currencyID = selectedCurrency
             }
         }
-
         private var settings: SettingsService
 
         // MARK: Initialization

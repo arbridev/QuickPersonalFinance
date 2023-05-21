@@ -14,12 +14,27 @@ extension IncomeActionView {
         // MARK: Properties
 
         @Published var mainData: AppData?
-        @Published var nameText: String = ""
-        @Published var moreText: String = ""
+        @Published var nameText: String = "" {
+            didSet {
+                if nameText.count > Constant.maxLengthNameField {
+                    nameText = oldValue
+                }
+            }
+        }
+        @Published var moreText: String = "" {
+            didSet {
+                if moreText.count > Constant.maxLengthMoreField {
+                    moreText = oldValue
+                }
+            }
+        }
         @Published var grossValueText: String = "" {
             didSet {
                 let preemptiveValidation = DoubleValidation(value: grossValueText)
                 if !preemptiveValidation.isValid {
+                    grossValueText = oldValue
+                }
+                if grossValueText.count > Constant.maxLengthValueField {
                     grossValueText = oldValue
                 }
             }

@@ -67,6 +67,8 @@
 		14BE31212A097CBB000A735C /* IncomeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE311F2A097CBB000A735C /* IncomeActionView.swift */; };
 		14BE31222A097CBB000A735C /* IncomeActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE31202A097CBB000A735C /* IncomeActionViewModel.swift */; };
 		14BE31242A097CFC000A735C /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE31232A097CFC000A735C /* EmptyContentView.swift */; };
+		14C180E02A198B7C004CDBE7 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 14C180DF2A198B7C004CDBE7 /* FirebaseInstallations */; };
+		14C180E22A19A83D004CDBE7 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 14C180E12A19A83D004CDBE7 /* FirebaseInstallations */; };
 		14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40829F1737600EFF244 /* ExpensePersistence.swift */; };
 		14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */; };
 		14DD43432A0E9E7F007E75B7 /* PDFDocument+AddPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */; };
@@ -178,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C180E02A198B7C004CDBE7 /* FirebaseInstallations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C180E22A19A83D004CDBE7 /* FirebaseInstallations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +222,7 @@
 				149ABED029BA28310088CE94 /* QuickPersonalFinanceTests */,
 				149ABEDA29BA28320088CE94 /* QuickPersonalFinanceUITests */,
 				149ABEBE29BA282B0088CE94 /* Products */,
+				14C180A82A197A46004CDBE7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -434,6 +439,13 @@
 			path = IncomeAction;
 			sourceTree = "<group>";
 		};
+		14C180A82A197A46004CDBE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,6 +486,9 @@
 				149ABECF29BA28310088CE94 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinanceTests;
+			packageProductDependencies = (
+				14C180DF2A198B7C004CDBE7 /* FirebaseInstallations */,
+			);
 			productName = QuickPersonalFinanceTests;
 			productReference = 149ABECD29BA28310088CE94 /* QuickPersonalFinanceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -492,6 +507,9 @@
 				149ABED929BA28320088CE94 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinanceUITests;
+			packageProductDependencies = (
+				14C180E12A19A83D004CDBE7 /* FirebaseInstallations */,
+			);
 			productName = QuickPersonalFinanceUITests;
 			productReference = 149ABED729BA28320088CE94 /* QuickPersonalFinanceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -1054,6 +1072,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 144E490E2A0AA3B7008BAA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		14C180DF2A198B7C004CDBE7 /* FirebaseInstallations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 144E490E2A0AA3B7008BAA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseInstallations;
+		};
+		14C180E12A19A83D004CDBE7 /* FirebaseInstallations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 144E490E2A0AA3B7008BAA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseInstallations;
 		};
 /* End XCSwiftPackageProductDependency section */
 

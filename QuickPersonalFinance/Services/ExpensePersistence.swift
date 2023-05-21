@@ -10,6 +10,7 @@ import CoreData
 protocol ExpensePersistenceService: PersistenceService,
                                     CoreDataPersistable where PersistentType == Expense {}
 
+/// Persistence service related to Expense
 class ExpensePersistence: ExpensePersistenceService {
     let moc: NSManagedObjectContext
 

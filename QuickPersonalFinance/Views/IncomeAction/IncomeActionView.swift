@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct IncomeActionView: View {
+
+    // MARK: Nested types
+
     enum Field: Hashable {
         case name, more, grossValue
     }
+
+    // MARK: Properties
 
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
@@ -23,16 +28,16 @@ struct IncomeActionView: View {
 
     var body: some View {
         VStack {
-            // MARK: Upper bar
+            // MARK: Top bar
             ModalViewUpperBar(
                 title: editingIncome == nil ?
                 "income.action.create.title".localized :
                     "income.action.edit.title".localized,
                 dismiss: dismiss
             )
-            // MARK: Content
             Spacer()
             VStack {
+                // MARK: Form
                 Form {
                     CustomTextField(
                         text: $viewModel.nameText,
@@ -117,12 +122,16 @@ struct IncomeActionView: View {
         }
     }
 
+    // MARK: Initialization
+
     init() {}
 
     init(editingIncome: Income) {
         self.editingIncome = editingIncome
     }
 }
+
+// MARK: - Previews
 
 struct IncomeActionView_Previews: PreviewProvider {
     static var envObject: AppData {

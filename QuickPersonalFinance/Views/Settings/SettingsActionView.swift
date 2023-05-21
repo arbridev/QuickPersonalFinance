@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct SettingsActionView: View {
+
+    // MARK: Nested types
+
     enum Field: Hashable {
         case workHoursPerDayText, workDaysPerWeekText
     }
+
+    // MARK: Properties
     
     @Environment(\.dismiss) private var dismiss
 
@@ -18,15 +23,16 @@ struct SettingsActionView: View {
     @FocusState private var focusedField: Field?
 
     var body: some View {
-        // MARK: Upper bar
+        // MARK: Top bar
         ModalViewUpperBar(
             title: "settings.action.title".localized,
             dismiss: dismiss
         )
-        // MARK: Content
         Spacer()
         VStack {
+            // MARK: Form
             Form {
+                // MARK: Fields
                 VStack(alignment: .trailing) {
                     HStack {
                         Text("settings.action.field.work.hours.day".localized)
@@ -69,6 +75,7 @@ struct SettingsActionView: View {
                         .font(.App.info)
                 }
 
+                // MARK: Currency
                 Section {
                     Picker(
                         "\("settings.action.field.currency".localized):",
@@ -96,6 +103,8 @@ struct SettingsActionView: View {
         }
     }
 }
+
+// MARK: - Previews
 
 struct SettingsActionView_Previews: PreviewProvider {
     static var previews: some View {

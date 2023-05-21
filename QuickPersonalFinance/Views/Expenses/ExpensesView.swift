@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ExpensesView: View {
+
+    // MARK: Properties
+
     @EnvironmentObject private var mainData: AppData
     @Environment(\.managedObjectContext) var moc
     
@@ -15,6 +18,7 @@ struct ExpensesView: View {
 
     var body: some View {
         VStack {
+            // MARK: Top bar
             HStack {
                 Spacer()
                 Button {
@@ -30,6 +34,7 @@ struct ExpensesView: View {
             Spacer()
             VStack {
                 if mainData.financeData.expenses.isEmpty {
+                    // MARK: Empty content
                     Text("expenses.title")
                         .asScreenTitle()
                     Spacer()
@@ -39,6 +44,7 @@ struct ExpensesView: View {
                     )
                     Spacer()
                 } else {
+                    // MARK: List of expenses
                     Text("expenses.title")
                         .asScreenTitle()
                     List {
@@ -69,6 +75,8 @@ struct ExpensesView: View {
         }
     }
 }
+
+// MARK: - Previews
 
 struct ExpensesView_Previews: PreviewProvider {
     static var envObject: AppData {

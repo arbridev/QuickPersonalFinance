@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ExpenseActionView: View {
+
+    // MARK: Nested types
+
     enum Field {
         case name, more, grossValue
     }
+
+    // MARK: Properties
 
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
@@ -114,12 +119,16 @@ struct ExpenseActionView: View {
         }
     }
 
+    // MARK: Initialization
+
     init() {}
 
     init(editingExpense: Expense) {
         self.editingExpense = editingExpense
     }
 }
+
+// MARK: - Previews
 
 struct ExpenseActionView_Previews: PreviewProvider {
     static var envObject: AppData {

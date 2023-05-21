@@ -14,6 +14,7 @@ protocol CalculationService {
     func monthlyBalance() -> Double
 }
 
+/// Service for calculations
 class Calculation: CalculationService {
     private let settings: SettingsService
     var incomes: [Income]

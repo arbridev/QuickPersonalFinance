@@ -10,6 +10,9 @@ import CoreData
 extension ExpenseActionView {
 
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published var mainData: AppData?
         @Published var nameText: String = ""
         @Published var moreText: String = ""
@@ -48,6 +51,8 @@ extension ExpenseActionView {
         init() {
             settings = Settings()
         }
+
+        // MARK: Behavior
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData

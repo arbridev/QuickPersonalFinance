@@ -10,11 +10,16 @@ import CoreData
 extension ContentView {
 
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published var mainData: AppData?
 
         var moc: NSManagedObjectContext?
         var incomePersistenceService: (any IncomePersistenceService)?
         var expensePersistenceService: (any ExpensePersistenceService)?
+
+        // MARK: Behavior
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData

@@ -10,6 +10,9 @@ import CoreData
 extension IncomesView {
 
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published var mainData: AppData?
         @Published var isPresentingCreateAction = false
         @Published var isPresentingEditAction = false
@@ -29,6 +32,8 @@ extension IncomesView {
         init() {
             settings = Settings()
         }
+
+        // MARK: Behavior
 
         func input(mainData: AppData, moc: NSManagedObjectContext) {
             self.mainData = mainData

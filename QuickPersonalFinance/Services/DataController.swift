@@ -7,6 +7,7 @@
 
 import CoreData
 
+/// Controller for data initialization
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "QuickPersonalFinance")
 

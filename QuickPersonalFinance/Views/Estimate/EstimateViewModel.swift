@@ -10,6 +10,9 @@ import Foundation
 extension EstimateView {
 
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published private(set) var mainData: AppData? {
             didSet {
                 guard let mainData else {
@@ -79,6 +82,8 @@ extension EstimateView {
             settings = Settings()
         }
 
+        // MARK: Behavior
+
         func input(mainData: AppData) {
             self.mainData = mainData
         }
@@ -112,6 +117,8 @@ extension EstimateView {
     }
 
 }
+
+// MARK: - Bar value
 
 extension EstimateView {
     struct BarValue {

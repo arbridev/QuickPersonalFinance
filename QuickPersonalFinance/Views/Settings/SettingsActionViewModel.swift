@@ -10,6 +10,9 @@ import Foundation
 extension SettingsActionView {
 
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published var workHoursPerDayText: String {
             didSet {
                 let preemptiveValidation = DoubleValidation(value: workHoursPerDayText)
@@ -40,12 +43,16 @@ extension SettingsActionView {
 
         private var settings: SettingsService
 
+        // MARK: Initialization
+
         init() {
             settings = Settings()
             workHoursPerDayText = String(settings.workHoursPerDay)
             workDaysPerWeekText = String(settings.workDaysPerWeek)
             selectedCurrency = settings.currencyID
         }
+
+        // MARK: Behavior
 
         func resetToLocalCurrency() {
             selectedCurrency = Locale.current.currency?.identifier ?? Constant.defaultCurrencyID

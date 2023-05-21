@@ -15,6 +15,9 @@ class AppData: ObservableObject {
 }
 
 struct ContentView: View {
+
+    // MARK: Properties
+
     @StateObject private var mainData = AppData()
     @Environment(\.managedObjectContext) var moc
 
@@ -36,6 +39,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+            // MARK: Tabs
             TabView(selection: $selectedTab) {
                 IncomesView()
                     .tabItem {
@@ -74,6 +78,8 @@ struct ContentView: View {
         }
     }
 }
+
+// MARK: - Previews
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

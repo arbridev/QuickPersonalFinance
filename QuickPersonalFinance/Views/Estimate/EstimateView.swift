@@ -9,6 +9,9 @@ import SwiftUI
 import Charts
 
 struct EstimateView: View {
+
+    // MARK: Properties
+
     @EnvironmentObject private var mainData: AppData
     @StateObject private var viewModel = ViewModel()
 
@@ -16,6 +19,7 @@ struct EstimateView: View {
 
     var body: some View {
         VStack {
+            // MARK: Top bar
             HStack {
                 Spacer()
                 Button {
@@ -35,6 +39,7 @@ struct EstimateView: View {
             Spacer()
 
             VStack {
+                // MARK: Time span selection
                 HStack {
                     Text("\("estimate.action.time.span".localized):")
                     Picker(
@@ -58,6 +63,7 @@ struct EstimateView: View {
                     .overlay(Color.Palette.dividerPrimary)
                     .padding(.horizontal)
 
+                // MARK: Estimate table
                 HStack {
                     Text("estimate.table.income")
                     Spacer()
@@ -100,6 +106,7 @@ struct EstimateView: View {
                 }
                 .padding(.horizontal)
 
+                // MARK: Share
                 Menu {
                     ShareLink(item: viewModel.shareMessage) {
                         Label("share.summary", systemImage: "square.and.arrow.up")
@@ -114,6 +121,7 @@ struct EstimateView: View {
                     .overlay(Color.Palette.dividerSecondary)
                     .padding(.vertical)
 
+                // MARK: Chart
                 Chart {
                     ForEach(viewModel.barChartData, id: \.title) { barValue in
                         BarMark(
@@ -140,6 +148,8 @@ struct EstimateView: View {
         }
     }
 }
+
+// MARK: - Previews
 
 struct EstimateView_Previews: PreviewProvider {
     static var envObject: AppData {

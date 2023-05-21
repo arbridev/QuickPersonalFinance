@@ -10,6 +10,7 @@ import CoreData
 protocol IncomePersistenceService: PersistenceService,
                                     CoreDataPersistable where PersistentType == Income {}
 
+/// Persistence service related to Income
 class IncomePersistence: IncomePersistenceService {
     let moc: NSManagedObjectContext
 

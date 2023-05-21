@@ -14,10 +14,16 @@ protocol SettingsService {
     init(persistence: UserDefaults)
 }
 
+/// Persistence service related to the app settings
 struct Settings: SettingsService {
+
+    // MARK: Nested types
+
     enum StorageKey: String {
         case workHoursPerDay, workDaysPerWeek, currencyID
     }
+
+    // MARK: Properties
 
     let persistence: UserDefaults
     
@@ -52,6 +58,8 @@ struct Settings: SettingsService {
             persistence.set(newValue, forKey: StorageKey.currencyID.rawValue)
         }
     }
+
+    // MARK: Initialization
 
     init(persistence: UserDefaults = UserDefaults.standard) {
         self.persistence = persistence

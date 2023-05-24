@@ -33,8 +33,10 @@ struct ExportPDFView: View {
     func render() -> URL {
         var pdfs = [PDFDocument]()
 
+        // Render sources of incomes and expenses pages
         subrenderSources(pdfs: &pdfs)
 
+        // Render the estimage page
         let estimateURL = subrender(
             fileName: "estimate.pdf",
             content: createEstimate(
@@ -55,16 +57,25 @@ struct ExportPDFView: View {
             firstPDF.addPages(from: pdf)
         }
 
-        let url = URL.documentsDirectory.appending(path: "report.pdf")
+        let reportsUrl = URL.documentsDirectory.appending(path: "reports")
 
-        let data = firstPDF.dataRepresentation()!
+        // Create reports directory inside the Documents directory
         do {
-            try data.write(to: url)
+            try FileManager.default.createDirectory(at: reportsUrl, withIntermediateDirectories: true)
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
 
-        let reportPDF = PDFDocument(url: url)
+        // Create the Report PDF
+        let reportURL = reportsUrl.appending(path: "\("share.report.report".localized).pdf")
+        let data = firstPDF.dataRepresentation()!
+        do {
+            try data.write(to: reportURL)
+        } catch {
+            print(error)
+        }
+
+        let reportPDF = PDFDocument(url: reportURL)
         return reportPDF?.documentURL ?? estimateURL
     }
 

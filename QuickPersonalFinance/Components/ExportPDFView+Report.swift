@@ -31,7 +31,8 @@ extension ExportPDFView {
                 VStack {
                     // MARK: Main title
                     if let mainTitle {
-                        Text(LocalizedStringKey(mainTitle))
+                        // LocalizedStringKey does not work on PDF rendering
+                        Text(mainTitle.localized)
                             .font(Font.Report.mainTitle)
                             .foregroundColor(.black)
                             .padding()
@@ -43,7 +44,7 @@ extension ExportPDFView {
                     ForEach(0..<sectionTitles.count, id: \.self) { index in
                         if let sectionTitle = sectionTitles[index] {
                             HStack {
-                                Text(LocalizedStringKey(sectionTitle))
+                                Text(sectionTitle.localized)
                                     .font(Font.Report.title1)
                                     .padding(.bottom, 10)
                                 Spacer()
@@ -57,7 +58,7 @@ extension ExportPDFView {
                                         Text(source.name)
                                             .font(Font.Report.standard)
                                         if let recurrence = source.recurrence {
-                                            Text(recurrence.rawValue)
+                                            Text(recurrence.rawValue.localized)
                                                 .font(Font.Report.info)
                                         }
                                         Spacer()
@@ -137,7 +138,7 @@ extension ExportPDFView {
                 VStack {
                     // MARK: Title
                     HStack {
-                        Text("estimate.title")
+                        Text("estimate.title".localized)
                             .font(Font.Report.title1)
                             .padding(.bottom, 10)
                         Spacer()
@@ -148,7 +149,7 @@ extension ExportPDFView {
                     Group {
                         VStack {
                             HStack {
-                                Text("estimate.table.income")
+                                Text("estimate.table.income".localized)
                                 Spacer()
                                 Text(incomeTotal.asCurrency(withID: currencyID))
                             }
@@ -156,7 +157,7 @@ extension ExportPDFView {
 
                         VStack {
                             HStack {
-                                Text("estimate.table.expense")
+                                Text("estimate.table.expense".localized)
                                 Spacer()
                                 Text(expenseTotal.asCurrency(withID: currencyID))
                             }
@@ -166,7 +167,7 @@ extension ExportPDFView {
 
                         VStack {
                             HStack {
-                                Text("estimate.table.total")
+                                Text("estimate.table.total".localized)
                                 Spacer()
                                 Text(balance.asCurrency(withID: currencyID))
                             }

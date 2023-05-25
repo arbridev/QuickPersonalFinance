@@ -2,6 +2,8 @@
 
 This app was designed for individuals to quickly calculate their financial projections based on their incomes and expenses.
 
+Check out the app on the **[App Store](https://apps.apple.com/app/quickpersonalfinance/id6448765356)**.
+
 ## Tooling
 
 - Xcode 14.2
@@ -16,8 +18,8 @@ This app was designed for individuals to quickly calculate their financial proje
 
 - [SwiftLintPlugin](https://github.com/alandeguz/SwiftLintPlugin)
 - [Firebase](https://github.com/firebase/firebase-ios-sdk)
-    - FirebaseCrashlytics
-    - FirebaseAnalyticsWithoutAdIdSupport
+    - [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics/)
+    - [Firebase Performance](https://firebase.google.com/docs/perf-mon)
 
 #### Building
 
@@ -31,4 +33,4 @@ There is a separate file for auto-correct rules `.swiftlint.autocorrect.yml`; yo
 
 ## License
 
-Quick Personal Finance is released under the MIT license. See LICENSE for details.
+Quick Personal Finance is released under the MIT license. See [LICENSE](https://github.com/arbridev/QuickPersonalFinance/blob/main/LICENSE) for details.

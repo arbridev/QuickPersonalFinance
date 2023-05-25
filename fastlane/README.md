@@ -47,6 +47,14 @@ Increments the version number (bump_type: patch, minor or major)
 
 Sets current version and build
 
+### ios tag_release
+
+```sh
+[bundle exec] fastlane ios tag_release
+```
+
+Tag release
+
 ### ios tests
 
 ```sh

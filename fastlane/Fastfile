@@ -112,6 +112,18 @@ platform :ios do
     )
   end
 
+  desc "Tag release"
+  lane :tag_release do |options|
+    latest_testflight_build_number
+    latest_version_number = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION] ||= initial_version
+    puts "latest_version_number: #{latest_version_number}"
+
+    add_git_tag(
+      tag: "#{latest_version_number}",
+      message: "Release version #{latest_version_number}"
+    )
+  end
+
   lane :tests do
     run_tests(
       project: project_file_path

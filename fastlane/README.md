@@ -39,13 +39,21 @@ Increments the build number
 
 Increments the version number (bump_type: patch, minor or major)
 
-### ios current_build_and_version
+### ios set_current_version_and_build
 
 ```sh
-[bundle exec] fastlane ios current_build_and_version
+[bundle exec] fastlane ios set_current_version_and_build
 ```
 
 Sets current version and build
+
+### ios commit_current_version_and_build
+
+```sh
+[bundle exec] fastlane ios commit_current_version_and_build
+```
+
+Commit current version and build
 
 ### ios tag_release
 

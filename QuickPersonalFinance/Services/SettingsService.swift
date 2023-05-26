@@ -62,6 +62,11 @@ struct Settings: SettingsService {
     // MARK: Initialization
 
     init(persistence: UserDefaults = UserDefaults.standard) {
+        if LaunchArguments.shared.contains(.testing) {
+            self.persistence = UserDefaults(suiteName: "test-\(Self.self)") ??
+            UserDefaults.standard
+            return
+        }
         self.persistence = persistence
     }
 }

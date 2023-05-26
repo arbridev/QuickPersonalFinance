@@ -12,7 +12,7 @@ class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "QuickPersonalFinance")
 
     init(inMemory: Bool = false) {
-        if inMemory {
+        if inMemory || LaunchArguments.shared.contains(.testing) {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
         container.loadPersistentStores { _, error in

@@ -22,9 +22,7 @@ class Calculation: CalculationService {
 
     // MARK: Initialization
 
-    init(
-        settings: SettingsService = Settings(persistence: UserDefaults.standard)
-    ) {
+    init(settings: SettingsService = Settings()) {
         self.settings = settings
     }
 

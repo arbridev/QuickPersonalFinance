@@ -22,13 +22,11 @@ struct ExportPDFView: View {
     var body: some View {
         ShareLink("share.pdf", item: render())
             .onAppear {
-                calculations = Calculation(
+                calculations = Calculation()
+                balance = calculations!.makeBalance(
                     incomes: mainData.financeData.incomes,
-                    expenses: mainData.financeData.expenses
-                )
-                incomeTotal = calculations!.totalize(sources: mainData.financeData.incomes, to: recurrence)
-                expenseTotal = calculations!.totalize(sources: mainData.financeData.expenses, to: recurrence)
-                balance = (incomeTotal ?? 0.0) - (expenseTotal ?? 0.0)
+                    expenses: mainData.financeData.expenses,
+                    basedOn: recurrence)
             }
     }
 

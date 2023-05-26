@@ -20,40 +20,40 @@ final class QuickPersonalFinanceTests: XCTestCase {
     func testHourly() throws {
         let incomes = [Income(id: UUID(), name: "income", more: nil, grossValue: 5, recurrence: .hour)]
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 4, recurrence: .hour)]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 173.0, accuracy: 1.0)
     }
 
     func testDaily() throws {
         let incomes = [Income(id: UUID(), name: "income", more: nil, grossValue: 10, recurrence: .day)]
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 9, recurrence: .day)]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 21.0, accuracy: 1.0)
     }
 
     func testWeekly() throws {
         let incomes = [Income(id: UUID(), name: "income", more: nil, grossValue: 50, recurrence: .week)]
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 40, recurrence: .week)]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 43.0, accuracy: 1.0)
     }
 
     func testMonthly() throws {
         let incomes = [Income(id: UUID(), name: "income", more: nil, grossValue: 100, recurrence: .month)]
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 90, recurrence: .month)]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 10)
     }
 
     func testYearly() throws {
         let incomes = [Income(id: UUID(), name: "income", more: nil, grossValue: 1200, recurrence: .year)]
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 120, recurrence: .year)]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 90)
     }
 
@@ -74,8 +74,8 @@ final class QuickPersonalFinanceTests: XCTestCase {
             Expense(id: UUID(), name: "expense", more: nil, grossValue: 1200, recurrence: .month),
             Expense(id: UUID(), name: "expense", more: nil, grossValue: 6000, recurrence: .year)
         ]
-        calculation = Calculation(incomes: incomes, expenses: expenses)
-        let balance = calculation.monthlyBalance()
+        calculation = Calculation()
+        let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
         XCTAssertEqual(balance, 2893.0, accuracy: 1.0)
     }
 

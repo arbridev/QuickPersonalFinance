@@ -8,29 +8,29 @@
 import Foundation
 
 protocol CalculationService {
-    var incomes: [Income] { get set }
-    var expenses: [Expense] { get set }
+    func convert(_ value: Double, from origin: Recurrence, to destination: Recurrence) -> Double
     func totalize(sources: [any Source], to recurrence: Recurrence) -> Double
-    func monthlyBalance() -> Double
+    func makeBalance(incomes: [Income], expenses: [Expense], basedOn recurrence: Recurrence) -> Double
 }
 
 /// Service for calculations
 class Calculation: CalculationService {
+
+    // MARK: Properties
+
     private let settings: SettingsService
-    var incomes: [Income]
-    var expenses: [Expense]
+
+    // MARK: Initialization
 
     init(
-        incomes: [Income],
-        expenses: [Expense],
         settings: SettingsService = Settings(persistence: UserDefaults.standard)
     ) {
-        self.incomes = incomes
-        self.expenses = expenses
         self.settings = settings
     }
 
-    private func convert(
+    // MARK: Behavior
+
+    func convert(
         _ value: Double,
         from origin: Recurrence,
         to destination: Recurrence
@@ -81,7 +81,13 @@ class Calculation: CalculationService {
         .reduce(0, +)
     }
 
-    func monthlyBalance() -> Double {
-        totalize(sources: incomes, to: .month) - totalize(sources: expenses, to: .month)
+    func makeBalance(
+        incomes: [Income],
+        expenses: [Expense],
+        basedOn recurrence: Recurrence
+    ) -> Double {
+        let totalIncome = totalize(sources: incomes, to: recurrence)
+        let totalExpense = totalize(sources: expenses, to: recurrence)
+        return totalIncome - totalExpense
     }
 }

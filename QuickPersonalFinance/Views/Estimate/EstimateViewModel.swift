@@ -15,13 +15,7 @@ extension EstimateView {
 
         @Published private(set) var mainData: AppData? {
             didSet {
-                guard let mainData else {
-                    return
-                }
-                calculations = Calculation(
-                    incomes: mainData.financeData.incomes,
-                    expenses: mainData.financeData.expenses
-                )
+                calculations = Calculation()
             }
         }
         @Published var incomeTotal: Double = 0.0

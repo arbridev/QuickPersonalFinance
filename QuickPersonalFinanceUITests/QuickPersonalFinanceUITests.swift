@@ -12,9 +12,25 @@ final class QuickPersonalFinanceUITests: XCTestCase {
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
+        app.launchArguments = ["-testing"]
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        app.buttons["Add"].tap()
+        fillSourceCreation(app, name: "Salary", grossValue: "2000")
+
+        app.buttons["Add"].tap()
+        fillSourceCreation(app, name: "Garage sale", grossValue: "200")
+
+        XCUIApplication().tabBars["Tab Bar"].buttons["Expenses"].tap()
+
+        app.buttons["Add"].tap()
+        fillSourceCreation(app, name: "Salary", grossValue: "2000")
+
+        app.buttons["Add"].tap()
+        fillSourceCreation(app, name: "Garage sale", grossValue: "200")
+
+        app.buttons["Add"].tap()
+        fillSourceCreation(app, name: "Garage sale", grossValue: "200")
     }
 
     func testLaunchPerformance() throws {
@@ -24,5 +40,22 @@ final class QuickPersonalFinanceUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+
+    private func fillSourceCreation(
+        _ app: XCUIApplication,
+        name: String,
+        grossValue: String
+    ) {
+        let collectionViewsQuery = app.collectionViews
+        let textFieldName = collectionViewsQuery.textFields["Name"]
+        textFieldName.tap()
+        textFieldName.typeText(name)
+        let grossValueTextField = collectionViewsQuery.textFields["Gross value"]
+        grossValueTextField.tap()
+        grossValueTextField.typeText(grossValue)
+        collectionViewsQuery.staticTexts["Hour"].tap()
+        app.buttons["Month"].tap()
+        app.buttons["SUBMIT"].tap()
     }
 }

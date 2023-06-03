@@ -69,3 +69,6 @@
 "test.streaming" = "Streaming subscriptions";
 "test.taxes" = "Taxes";
 "test.leisure" = "Leisure";
+"test.dialog.save" = "Save";
+"test.dialog.replace.existing" = "Replace Existing Items?";
+"test.dialog.replace" = "Replace";

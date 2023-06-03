@@ -14,12 +14,14 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments += ["-testing"]
 
+        // Comment the next line if you follow the alternate flow without setupSnapshot
         setupSnapshot(app)
 //        // Alternate flow without setupSnapshot
 //        app.launchArguments += ["-AppleLanguages", "(en-US)"]
 //        app.launchArguments += ["-AppleLocale", "en_US"]
 //        app.launchArguments += ["-AppleLanguages", "(es_419)"]
 //        app.launchArguments += ["-AppleLocale", "es_419"]
+//        deviceLanguage = "en-US"
 //        deviceLanguage = "es-419"
 
         app.launch()
@@ -44,6 +46,29 @@ final class QuickPersonalFinanceUITests: XCTestCase {
             .tap()
 
         snapshot("estimate")
+
+        app.buttons["estimate.button.share".localized].tap()
+        app.buttons["share.pdf".localized].tap()
+
+        app.collectionViews.children(matching: .button)
+            .matching(identifier: "XCElementSnapshotPrivilegedValuePlaceholder")
+            .element(boundBy: 1)
+            .children(matching: .other)
+            .element(boundBy: 1)
+            .children(matching: .other)
+            .element(boundBy: 2)
+            .tap()
+        app.navigationBars["FullDocumentManagerViewControllerNavigationBar"].buttons["test.dialog.save".localized].tap()
+
+        if app.alerts["test.dialog.replace.existing".localized].exists {
+            app.alerts["test.dialog.replace.existing".localized]
+                .scrollViews
+                .otherElements
+                .buttons["test.dialog.replace".localized]
+                .tap()
+        }
+
+        sleep(3)
     }
 
     func testLaunchPerformance() throws {

@@ -69,3 +69,6 @@
 "test.streaming" = "Suscripciones de streaming";
 "test.taxes" = "Impuestos";
 "test.leisure" = "Ocio";
+"test.dialog.save" = "Guardar";
+"test.dialog.replace.existing" = "¿Reemplazar los elementos existentes?";
+"test.dialog.replace" = "Reemplazar";

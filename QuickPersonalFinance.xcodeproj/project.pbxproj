@@ -16,6 +16,7 @@
 		1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DC29E460E200197112 /* Double+Currency.swift */; };
 		14428B0129F0333B00BC0246 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14428B0029F0333B00BC0246 /* PersistenceService.swift */; };
 		14428B0529F047A300BC0246 /* IncomePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14428B0429F047A300BC0246 /* IncomePersistence.swift */; };
+		144C6C3A2A27A6EA00A15D8C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144C6C392A27A6E900A15D8C /* SnapshotHelper.swift */; };
 		144DB7B529EED77F00DF3585 /* IncomesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */; };
 		144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */; };
 		144DB7BA29EEFEEB00DF3585 /* Array+Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DB7B929EEFEEB00DF3585 /* Array+Difference.swift */; };
@@ -33,6 +34,7 @@
 		146F6A5129E0E7CA0087F514 /* ExpenseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */; };
 		146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5229E0F6DE0087F514 /* Validations.swift */; };
 		14783A0929E8350100BBE10F /* CTAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783A0829E8350100BBE10F /* CTAButton.swift */; };
+		147E8E4E2A27EDED001CBBF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5E29F4693A00EEDC9B /* Localizable.strings */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
 		149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC229BA282B0088CE94 /* ContentView.swift */; };
 		149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC429BA28310088CE94 /* Assets.xcassets */; };
@@ -106,6 +108,7 @@
 		1439A0DC29E460E200197112 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
 		14428B0029F0333B00BC0246 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		14428B0429F047A300BC0246 /* IncomePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomePersistence.swift; sourceTree = "<group>"; };
+		144C6C392A27A6E900A15D8C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		144DB7B429EED77F00DF3585 /* IncomesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesViewModel.swift; sourceTree = "<group>"; };
 		144DB7B629EEDBE100DF3585 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		144DB7B929EEFEEB00DF3585 /* Array+Difference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Difference.swift"; sourceTree = "<group>"; };
@@ -281,6 +284,7 @@
 		149ABEDA29BA28320088CE94 /* QuickPersonalFinanceUITests */ = {
 			isa = PBXGroup;
 			children = (
+				144C6C392A27A6E900A15D8C /* SnapshotHelper.swift */,
 				149ABEDB29BA28320088CE94 /* QuickPersonalFinanceUITests.swift */,
 				149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */,
 			);
@@ -600,6 +604,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147E8E4E2A27EDED001CBBF3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +706,7 @@
 			files = (
 				149ABEDC29BA28320088CE94 /* QuickPersonalFinanceUITests.swift in Sources */,
 				149ABEDE29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift in Sources */,
+				144C6C3A2A27A6EA00A15D8C /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +988,7 @@
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.arbridev.QuickPersonalFinanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1000,6 +1007,7 @@
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.arbridev.QuickPersonalFinanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

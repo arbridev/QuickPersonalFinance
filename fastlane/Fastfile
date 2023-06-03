@@ -35,6 +35,8 @@ platform :ios do
     "production"=> "app-store"
   }
 
+  ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
+
   initial_version = "0.1.0"
   project_file_path = "QuickPersonalFinance.xcodeproj"
   scheme = "QuickPersonalFinance"
@@ -147,6 +149,11 @@ platform :ios do
         }
       }
     )
+  end
+
+  desc "Take the screenshots"
+  lane :screenshots do |options|
+    snapshot
   end
 
   desc "Deliver the app to TestFlight"

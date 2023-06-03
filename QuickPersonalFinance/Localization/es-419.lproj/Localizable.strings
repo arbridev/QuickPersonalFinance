@@ -58,3 +58,14 @@
 "share.summary" = "Sumario";
 "share.pdf" = "Exportar a PDF";
 "share.report.report" = "Informe";
+
+// Test
+"test.add" = "Agregar";
+"test.tab.bar" = "Barra de pestañas";
+"test.salary" = "Salario";
+"test.garage.sale" = "Venta de garaje";
+"test.utilities" = "Servicios";
+"test.food" = "Comida";
+"test.streaming" = "Suscripciones de streaming";
+"test.taxes" = "Impuestos";
+"test.leisure" = "Ocio";

@@ -1,5 +1,6 @@
 excluded:
   - Package.swift
+  - fastlane/SnapshotHelper.swift
 
 disabled_rules:
   - force_cast

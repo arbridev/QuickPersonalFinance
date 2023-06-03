@@ -79,6 +79,14 @@ Tag release
 
 Generates an ipa
 
+### ios screenshots
+
+```sh
+[bundle exec] fastlane ios screenshots
+```
+
+Take the screenshots
+
 ### ios upload
 
 ```sh

@@ -28,6 +28,7 @@ final class QuickPersonalFinanceUITests: XCTestCase {
 
         print("Launch arguments:", app.launchArguments)
         print(Bundle(for: QuickPersonalFinanceUITests.self).bundlePath)
+        print("Documents directory:", URL.documentsDirectory)
         
         fillIncomes(app)
 
@@ -68,7 +69,7 @@ final class QuickPersonalFinanceUITests: XCTestCase {
                 .tap()
         }
 
-        sleep(3)
+        sleep(5)
     }
 
     func testLaunchPerformance() throws {

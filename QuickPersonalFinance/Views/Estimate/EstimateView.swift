@@ -122,21 +122,28 @@ struct EstimateView: View {
                     .padding(.vertical)
 
                 // MARK: Chart
-                Chart {
-                    ForEach(viewModel.barChartData, id: \.title) { barValue in
-                        BarMark(
-                            x: .value("estimate.chart.source".localized, barValue.title),
-                            y: .value("estimate.table.total".localized, barValue.total)
+                GeometryReader { geometry in
+                    HStack {
+                        Spacer()
+                        Chart {
+                            ForEach(viewModel.barChartData, id: \.title) { barValue in
+                                BarMark(
+                                    x: .value("estimate.chart.source".localized, barValue.title),
+                                    y: .value("estimate.table.total".localized, barValue.total)
+                                )
+                                .foregroundStyle(by: .value("estimate.chart.source".localized, barValue.title))
+                            }
+                        }
+                        .chartForegroundStyleScale(
+                            domain: [
+                                "estimate.table.income".localized,
+                                "estimate.table.expense".localized],
+                            range: barChartColors
                         )
-                        .foregroundStyle(by: .value("estimate.chart.source".localized, barValue.title))
+                        .frame(width: min(geometry.size.width, geometry.size.height) / 1.20, alignment: .center)
+                        Spacer()
                     }
                 }
-                .chartForegroundStyleScale(
-                    domain: [
-                        "estimate.table.income".localized,
-                        "estimate.table.expense".localized],
-                    range: barChartColors
-                )
             }
             .padding()
             .onAppear {

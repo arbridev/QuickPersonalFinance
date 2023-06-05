@@ -8,7 +8,7 @@
 
 "incomes.title" = "Ingresos";
 "expenses.title" = "Gastos";
-"estimate.title" = "Estimado";
+"estimate.title" = "Estimación";
 
 "incomes.empty.title" = "Agrega un nuevo ingreso";
 "incomes.empty.message" = "Puedes agregar un nuevo ingreso usando el botón con el signo más (+) ubicado en la parte superior derecha de la pantalla.";

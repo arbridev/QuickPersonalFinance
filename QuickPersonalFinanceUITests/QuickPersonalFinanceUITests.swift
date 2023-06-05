@@ -51,14 +51,11 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         app.buttons["estimate.button.share".localized].tap()
         app.buttons["share.pdf".localized].tap()
 
-        app.collectionViews.children(matching: .button)
-            .matching(identifier: "XCElementSnapshotPrivilegedValuePlaceholder")
-            .element(boundBy: 1)
-            .children(matching: .other)
-            .element(boundBy: 1)
-            .children(matching: .other)
-            .element(boundBy: 2)
-            .tap()
+        let options = app.collectionViews.children(matching: .button)
+        options.element(boundBy: options.count - 1).tap()
+
+        sleep(1)
+
         app.navigationBars["FullDocumentManagerViewControllerNavigationBar"].buttons["test.dialog.save".localized].tap()
 
         if app.alerts["test.dialog.replace.existing".localized].exists {

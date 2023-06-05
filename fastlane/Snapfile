@@ -2,7 +2,10 @@
 
 # A list of devices you want to take the screenshots from
 devices([
-  "iPhone 14 Pro Max"
+  "iPhone 14 Pro Max",
+  "iPhone SE (3rd generation)",
+  "iPad Pro (12.9-inch) (6th generation)",
+  "iPad Pro (12.9-inch) (2nd generation)"
 ])
 
 languages([
@@ -24,6 +27,15 @@ output_directory("./screenshots")
 
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
 # launch_arguments(["-snapshot"])
+
+# Retries
+number_of_retries(0)
+
+# Headless
+headless(false)
+
+# Dark mode
+dark_mode(false)
 
 # For more information about all available options run
 # fastlane action snapshot

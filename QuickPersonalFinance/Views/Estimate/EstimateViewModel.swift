@@ -34,6 +34,7 @@ extension EstimateView {
                 }
             }
         }
+        @Published var isPresentingCurrencyConversion = false
         
         private let settings: SettingsService
         private var calculations: CalculationService?

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1403933029C9DF1600049CCB /* OutlinedTextFieldStyle.swift */; };
 		1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1403933329CA034F00049CCB /* ValidationProtocol.swift */; };
+		140987902A18225000461A4B /* ConvertedEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409878F2A18225000461A4B /* ConvertedEstimateView.swift */; };
+		140987922A1824B400461A4B /* ConvertedEstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */; };
 		14153FD529E8516E00C90D13 /* ScreenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153FD429E8516E00C90D13 /* ScreenTitle.swift */; };
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
 		142BA18729ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */; };
@@ -101,6 +103,8 @@
 /* Begin PBXFileReference section */
 		1403933029C9DF1600049CCB /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
 		1403933329CA034F00049CCB /* ValidationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationProtocol.swift; sourceTree = "<group>"; };
+		1409878F2A18225000461A4B /* ConvertedEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedEstimateView.swift; sourceTree = "<group>"; };
+		140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedEstimateViewModel.swift; sourceTree = "<group>"; };
 		14153FD429E8516E00C90D13 /* ScreenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTitle.swift; sourceTree = "<group>"; };
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickPersonalFinance.xcdatamodel; sourceTree = "<group>"; };
@@ -204,6 +208,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1409878E2A18211500461A4B /* ConvertedEstimate */ = {
+			isa = PBXGroup;
+			children = (
+				1409878F2A18225000461A4B /* ConvertedEstimateView.swift */,
+				140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */,
+			);
+			path = ConvertedEstimate;
+			sourceTree = "<group>";
+		};
 		144E4E5929F4615A00EEDC9B /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +387,7 @@
 				14A16A0129BA6F8E00B69FD7 /* Expenses */,
 				14A16A0C29BA808600B69FD7 /* ExpenseAction */,
 				14A16A0229BA6F9800B69FD7 /* Estimate */,
+				1409878E2A18211500461A4B /* ConvertedEstimate */,
 				145F124A29FAA4C2009853A8 /* Settings */,
 				149ABEC229BA282B0088CE94 /* ContentView.swift */,
 				14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */,
@@ -676,8 +690,10 @@
 				14BE31222A097CBB000A735C /* IncomeActionViewModel.swift in Sources */,
 				14428B0129F0333B00BC0246 /* PersistenceService.swift in Sources */,
 				142BA18729ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld in Sources */,
+				140987922A1824B400461A4B /* ConvertedEstimateViewModel.swift in Sources */,
 				14A16A0829BA6FED00B69FD7 /* EstimateView.swift in Sources */,
 				14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */,
+				140987902A18225000461A4B /* ConvertedEstimateView.swift in Sources */,
 				1468A1EC29ED86A6002E92B7 /* DataController.swift in Sources */,
 				14A16A1829BE408D00B69FD7 /* Source.swift in Sources */,
 				14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */,

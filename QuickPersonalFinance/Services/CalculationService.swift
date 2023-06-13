@@ -88,4 +88,8 @@ class Calculation: CalculationService {
         let totalExpense = totalize(sources: expenses, to: recurrence)
         return totalIncome - totalExpense
     }
+
+    func convert(_ value: Double, rate: Double) -> Double {
+        value * rate
+    }
 }

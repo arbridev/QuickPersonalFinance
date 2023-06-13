@@ -151,6 +151,17 @@ struct EstimateView: View {
                 viewModel.update()
             }
 
+            Button {
+                viewModel.isPresentingCurrencyConversion = true
+            } label: {
+                Text("Show in alternative currency")
+                    .font(.App.input)
+            }
+            .sheet(isPresented: $viewModel.isPresentingCurrencyConversion) {
+                ConvertedEstimateView(recurrence: viewModel.selectedRecurrence)
+                    .environmentObject(mainData)
+            }
+
             Spacer()
         }
     }

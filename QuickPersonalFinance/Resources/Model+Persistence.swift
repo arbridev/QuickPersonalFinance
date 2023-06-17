@@ -54,3 +54,40 @@ extension StoredExpense {
         return destination
     }
 }
+
+extension LatestCurrencies {
+    static func from(_ origin: StoredCurrencyData) -> LatestCurrencies? {
+        guard let lastUpdate = origin.lastUpdate,
+                let data = origin.data
+        else {
+            return nil
+        }
+        let meta = Meta(lastUpdatedAt: lastUpdate)
+
+        do {
+            let decoder = JSONDecoder()
+            let currencies = try decoder.decode([String: Currency].self, from: data)
+            return LatestCurrencies(meta: meta, data: currencies)
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+}
+
+extension StoredCurrencyData {
+    static func from(_ origin: LatestCurrencies, context: NSManagedObjectContext) -> StoredCurrencyData? {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(origin.data)
+
+            let destination = StoredCurrencyData(context: context)
+            destination.lastUpdate = origin.meta.lastUpdatedAt
+            destination.data = data
+            return destination
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+}

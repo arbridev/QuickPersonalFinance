@@ -37,4 +37,7 @@ struct MockData {
         grossValue: 70.0,
         recurrence: .week
     )
+    static let latestCurrencies: LatestCurrencies = MockingHelper.parseJSON(
+        fromFileWithName: "example"
+    )
 }

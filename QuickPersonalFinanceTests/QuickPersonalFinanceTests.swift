@@ -79,4 +79,19 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertEqual(balance, 2893.0, accuracy: 1.0)
     }
 
+    func testExternalCurrency() throws {
+        let externalCurrency = ExternalCurrency()
+        let expectation = XCTestExpectation(description: "Fetch latest currencies")
+        Task.detached {
+            let currencies = await externalCurrency.fetchLatestCurrencies()
+            guard let usd = currencies?.data["USD"] else {
+                XCTFail("No USD data present")
+                return
+            }
+            XCTAssertEqual(usd.value, 1.0)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
+
 }

@@ -9,7 +9,7 @@ import CoreData
 
 /// Controller for data initialization
 class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "QuickPersonalFinance")
+    private(set) var container = NSPersistentContainer(name: "QuickPersonalFinance")
 
     init(inMemory: Bool = false) {
         if inMemory || LaunchArguments.shared.contains(.testing) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B26A5A461FDFFEF2A72E837 /* Pods_QuickPersonalFinance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D2650F5769E9DEE36D6C74F /* Pods_QuickPersonalFinance.framework */; };
+		13B72F46F5D7123DB474FB02 /* Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6E5EB2340ACB6A3F307F4E /* Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework */; };
 		1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1403933029C9DF1600049CCB /* OutlinedTextFieldStyle.swift */; };
 		1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1403933329CA034F00049CCB /* ValidationProtocol.swift */; };
 		140987902A18225000461A4B /* ConvertedEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409878F2A18225000461A4B /* ConvertedEstimateView.swift */; };
@@ -39,7 +41,6 @@
 		147E8E4E2A27EDED001CBBF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5E29F4693A00EEDC9B /* Localizable.strings */; };
 		148D915A2A38C4CF005E6F38 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 148D91592A38C4CF005E6F38 /* example.json */; };
 		148D915D2A38C55F005E6F38 /* MockingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D915C2A38C55F005E6F38 /* MockingHelper.swift */; };
-		148D915E2A38C55F005E6F38 /* MockingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D915C2A38C55F005E6F38 /* MockingHelper.swift */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
 		149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC229BA282B0088CE94 /* ContentView.swift */; };
 		149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC429BA28310088CE94 /* Assets.xcassets */; };
@@ -77,17 +78,12 @@
 		14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBC40A29F1D77300EFF244 /* ContentViewModel.swift */; };
 		14DD43432A0E9E7F007E75B7 /* PDFDocument+AddPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */; };
 		14EAC6152A216D9E0048B1B4 /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EAC6142A216D9E0048B1B4 /* LaunchArguments.swift */; };
-		14EFF7AF2A1C5F4F0088472C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7AE2A1C5F4F0088472C /* FirebaseCrashlytics */; };
-		14EFF7B12A1C5F4F0088472C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7B02A1C5F4F0088472C /* FirebasePerformance */; };
-		14EFF7B32A1C62920088472C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7B22A1C62920088472C /* FirebaseCrashlytics */; };
-		14EFF7B52A1C62920088472C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7B42A1C62920088472C /* FirebasePerformance */; };
-		14EFF7B72A1C62A10088472C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7B62A1C62A10088472C /* FirebaseCrashlytics */; };
-		14EFF7B92A1C62A10088472C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 14EFF7B82A1C62A10088472C /* FirebasePerformance */; };
 		14F533192A113FC8002772CC /* Font+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F533182A113FC8002772CC /* Font+Report.swift */; };
 		14F8446F2A3A1D5300289D5E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F8446E2A3A1D5300289D5E /* Currency.swift */; };
 		14F844712A3A232C00289D5E /* ExternalCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F844702A3A232C00289D5E /* ExternalCurrencyService.swift */; };
 		14F844772A3A7FE500289D5E /* CurrencyDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F844762A3A7FE500289D5E /* CurrencyDataPersistence.swift */; };
 		14FDF0282A0BA2C700EA40CB /* ExportPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */; };
+		22DD55C3EE009E4441871DA1 /* Pods_QuickPersonalFinanceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D810AC8D465F0F8128DC1DC8 /* Pods_QuickPersonalFinanceTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +184,15 @@
 		14F844762A3A7FE500289D5E /* CurrencyDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataPersistence.swift; sourceTree = "<group>"; };
 		14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFView.swift; sourceTree = "<group>"; };
 		14FF64BA2A00555A00BB15EE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1565BE1247BB531CCE88D060 /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.debug.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D2650F5769E9DEE36D6C74F /* Pods_QuickPersonalFinance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPersonalFinance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39B2EF9BB0B118A869036E6A /* Pods-QuickPersonalFinanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinanceTests.debug.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinanceTests/Pods-QuickPersonalFinanceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D6E5EB2340ACB6A3F307F4E /* Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		624771618EBC44824AD932F6 /* Pods-QuickPersonalFinance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinance.release.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance.release.xcconfig"; sourceTree = "<group>"; };
+		84A3E5DB8A61EAEE6DC3759F /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.release.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9C8C0A87BC22EA4CB16A3954 /* Pods-QuickPersonalFinance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinance.debug.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance.debug.xcconfig"; sourceTree = "<group>"; };
+		D810AC8D465F0F8128DC1DC8 /* Pods_QuickPersonalFinanceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPersonalFinanceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9375EF3ADE16A1100873966 /* Pods-QuickPersonalFinanceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPersonalFinanceTests.release.xcconfig"; path = "Target Support Files/Pods-QuickPersonalFinanceTests/Pods-QuickPersonalFinanceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14EFF7B12A1C5F4F0088472C /* FirebasePerformance in Frameworks */,
-				14EFF7AF2A1C5F4F0088472C /* FirebaseCrashlytics in Frameworks */,
+				0B26A5A461FDFFEF2A72E837 /* Pods_QuickPersonalFinance.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,8 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14EFF7B52A1C62920088472C /* FirebasePerformance in Frameworks */,
-				14EFF7B32A1C62920088472C /* FirebaseCrashlytics in Frameworks */,
+				22DD55C3EE009E4441871DA1 /* Pods_QuickPersonalFinanceTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,8 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14EFF7B92A1C62A10088472C /* FirebasePerformance in Frameworks */,
-				14EFF7B72A1C62A10088472C /* FirebaseCrashlytics in Frameworks */,
+				13B72F46F5D7123DB474FB02 /* Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +268,7 @@
 				149ABEDA29BA28320088CE94 /* QuickPersonalFinanceUITests */,
 				149ABEBE29BA282B0088CE94 /* Products */,
 				14C180A82A197A46004CDBE7 /* Frameworks */,
+				BD11230CE8E560E5A60884E5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -490,6 +493,9 @@
 		14C180A82A197A46004CDBE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D2650F5769E9DEE36D6C74F /* Pods_QuickPersonalFinance.framework */,
+				3D6E5EB2340ACB6A3F307F4E /* Pods_QuickPersonalFinance_QuickPersonalFinanceUITests.framework */,
+				D810AC8D465F0F8128DC1DC8 /* Pods_QuickPersonalFinanceTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -530,6 +536,19 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		BD11230CE8E560E5A60884E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C8C0A87BC22EA4CB16A3954 /* Pods-QuickPersonalFinance.debug.xcconfig */,
+				624771618EBC44824AD932F6 /* Pods-QuickPersonalFinance.release.xcconfig */,
+				1565BE1247BB531CCE88D060 /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.debug.xcconfig */,
+				84A3E5DB8A61EAEE6DC3759F /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.release.xcconfig */,
+				39B2EF9BB0B118A869036E6A /* Pods-QuickPersonalFinanceTests.debug.xcconfig */,
+				D9375EF3ADE16A1100873966 /* Pods-QuickPersonalFinanceTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -537,10 +556,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149ABEE129BA28320088CE94 /* Build configuration list for PBXNativeTarget "QuickPersonalFinance" */;
 			buildPhases = (
+				AAAF9B777F018237743B2DE9 /* [CP] Check Pods Manifest.lock */,
 				149ABEB929BA282B0088CE94 /* Sources */,
 				149ABEBA29BA282B0088CE94 /* Frameworks */,
 				149ABEBB29BA282B0088CE94 /* Resources */,
 				144E49152A0ACBDD008BAA5E /* Crashlytics */,
+				F3D8580C20ABD46A7AB9637F /* [CP] Embed Pods Frameworks */,
+				1492FD832A3FDDD500420E2C /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -548,10 +570,6 @@
 				1439F8C029FFFCDA00544883 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinance;
-			packageProductDependencies = (
-				14EFF7AE2A1C5F4F0088472C /* FirebaseCrashlytics */,
-				14EFF7B02A1C5F4F0088472C /* FirebasePerformance */,
-			);
 			productName = QuickPersonalFinance;
 			productReference = 149ABEBD29BA282B0088CE94 /* QuickPersonalFinance.app */;
 			productType = "com.apple.product-type.application";
@@ -560,6 +578,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149ABEE429BA28320088CE94 /* Build configuration list for PBXNativeTarget "QuickPersonalFinanceTests" */;
 			buildPhases = (
+				9FDDB385E9ECE030D3B6BF8C /* [CP] Check Pods Manifest.lock */,
 				149ABEC929BA28310088CE94 /* Sources */,
 				149ABECA29BA28310088CE94 /* Frameworks */,
 				149ABECB29BA28310088CE94 /* Resources */,
@@ -570,10 +589,6 @@
 				149ABECF29BA28310088CE94 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinanceTests;
-			packageProductDependencies = (
-				14EFF7B22A1C62920088472C /* FirebaseCrashlytics */,
-				14EFF7B42A1C62920088472C /* FirebasePerformance */,
-			);
 			productName = QuickPersonalFinanceTests;
 			productReference = 149ABECD29BA28310088CE94 /* QuickPersonalFinanceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -582,9 +597,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149ABEE729BA28320088CE94 /* Build configuration list for PBXNativeTarget "QuickPersonalFinanceUITests" */;
 			buildPhases = (
+				FA11DA408F51C6A8EEF7E243 /* [CP] Check Pods Manifest.lock */,
 				149ABED329BA28320088CE94 /* Sources */,
 				149ABED429BA28320088CE94 /* Frameworks */,
 				149ABED529BA28320088CE94 /* Resources */,
+				DE9242AA8734C2A822D19521 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -592,10 +609,6 @@
 				149ABED929BA28320088CE94 /* PBXTargetDependency */,
 			);
 			name = QuickPersonalFinanceUITests;
-			packageProductDependencies = (
-				14EFF7B62A1C62A10088472C /* FirebaseCrashlytics */,
-				14EFF7B82A1C62A10088472C /* FirebasePerformance */,
-			);
 			productName = QuickPersonalFinanceUITests;
 			productReference = 149ABED729BA28320088CE94 /* QuickPersonalFinanceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -633,10 +646,6 @@
 				"es-419",
 			);
 			mainGroup = 149ABEB429BA282B0088CE94;
-			packageReferences = (
-				1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */,
-				14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			productRefGroup = 149ABEBE29BA282B0088CE94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -703,7 +712,125 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		1492FD832A3FDDD500420E2C /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		9FDDB385E9ECE030D3B6BF8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPersonalFinanceTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAAF9B777F018237743B2DE9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPersonalFinance-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE9242AA8734C2A822D19521 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3D8580C20ABD46A7AB9637F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA11DA408F51C6A8EEF7E243 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -777,7 +904,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				148D915E2A38C55F005E6F38 /* MockingHelper.swift in Sources */,
 				149ABED229BA28310088CE94 /* QuickPersonalFinanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -946,6 +1072,7 @@
 		};
 		149ABEE229BA28320088CE94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C8C0A87BC22EA4CB16A3954 /* Pods-QuickPersonalFinance.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -984,6 +1111,7 @@
 		};
 		149ABEE329BA28320088CE94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 624771618EBC44824AD932F6 /* Pods-QuickPersonalFinance.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1021,6 +1149,7 @@
 		};
 		149ABEE529BA28320088CE94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39B2EF9BB0B118A869036E6A /* Pods-QuickPersonalFinanceTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1041,6 +1170,7 @@
 		};
 		149ABEE629BA28320088CE94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9375EF3ADE16A1100873966 /* Pods-QuickPersonalFinanceTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1061,6 +1191,7 @@
 		};
 		149ABEE829BA28320088CE94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1565BE1247BB531CCE88D060 /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1080,6 +1211,7 @@
 		};
 		149ABEE929BA28320088CE94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84A3E5DB8A61EAEE6DC3759F /* Pods-QuickPersonalFinance-QuickPersonalFinanceUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1147,14 +1279,6 @@
 				kind = branch;
 			};
 		};
-		14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1162,36 +1286,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
 			productName = "plugin:SwiftLint";
-		};
-		14EFF7AE2A1C5F4F0088472C /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		14EFF7B02A1C5F4F0088472C /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		14EFF7B22A1C62920088472C /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		14EFF7B42A1C62920088472C /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		14EFF7B62A1C62A10088472C /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		14EFF7B82A1C62A10088472C /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 14EFF7AD2A1C5F4E0088472C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
 		};
 /* End XCSwiftPackageProductDependency section */
 

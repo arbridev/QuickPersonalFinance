@@ -29,9 +29,12 @@ class CurrencyDataPersistence: CurrencyDataService {
             fetched.data = try? Serializer.toData(item.data)
         } else {
             _ = StoredCurrencyData.from(item, context: moc)
-            try? moc.save()
         }
-        try? moc.save()
+        do {
+            try moc.save()
+        } catch {
+            print(error)
+        }
     }
 
     func load() -> LatestCurrencies? {

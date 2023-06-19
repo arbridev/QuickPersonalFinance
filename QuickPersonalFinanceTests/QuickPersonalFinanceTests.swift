@@ -94,4 +94,16 @@ final class QuickPersonalFinanceTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
 
+    func testCurrencyPersistence() throws {
+        let currencies = MockData.latestCurrencies
+        let controller = DataController(inMemory: true)
+        let context = controller.container.newBackgroundContext()
+        let persistence = CurrencyDataPersistence(moc: context)
+
+        persistence.save(item: currencies)
+        XCTAssertNotNil(persistence.load())
+        persistence.delete()
+        XCTAssertNil(persistence.load())
+    }
+
 }

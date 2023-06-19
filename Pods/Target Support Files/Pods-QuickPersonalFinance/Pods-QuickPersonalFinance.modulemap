@@ -1,0 +1,6 @@
+framework module Pods_QuickPersonalFinance {
+  umbrella header "Pods-QuickPersonalFinance-umbrella.h"
+
+  export *
+  module * { export * }
+}

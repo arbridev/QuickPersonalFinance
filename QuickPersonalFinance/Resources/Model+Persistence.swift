@@ -65,8 +65,7 @@ extension LatestCurrencies {
         let meta = Meta(lastUpdatedAt: lastUpdate)
 
         do {
-            let decoder = JSONDecoder()
-            let currencies = try decoder.decode([String: Currency].self, from: data)
+            let currencies: [String: Currency] = try Serializer.fromData(data)
             return LatestCurrencies(meta: meta, data: currencies)
         } catch {
             print(error)
@@ -78,8 +77,7 @@ extension LatestCurrencies {
 extension StoredCurrencyData {
     static func from(_ origin: LatestCurrencies, context: NSManagedObjectContext) -> StoredCurrencyData? {
         do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(origin.data)
+            let data = try Serializer.toData(origin.data)
 
             let destination = StoredCurrencyData(context: context)
             destination.lastUpdate = origin.meta.lastUpdatedAt

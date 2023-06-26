@@ -14,9 +14,9 @@ Check out the app on the **[App Store](https://apps.apple.com/app/quickpersonalf
 
 ### Dependencies
 
-#### Swift Package Manager
+#### Cocoapods
 
-- [SwiftLintPlugin](https://github.com/alandeguz/SwiftLintPlugin)
+- [SwiftLint](https://github.com/realm/SwiftLint)
 - [Firebase](https://github.com/firebase/firebase-ios-sdk)
     - [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics/)
     - [Firebase Performance](https://firebase.google.com/docs/perf-mon)
@@ -24,6 +24,10 @@ Check out the app on the **[App Store](https://apps.apple.com/app/quickpersonalf
 #### Building
 
 To build, this project requires to have a `GoogleService-Info.plist` file located at `/QuickPersonalFinance`.
+
+Swift Package Manager was replaced by Cocoapods since it duplicated some Firebase files which rendered the project impossible to build for unit tests, crashing with the error: [[FBLPromise HTTPBody]: unrecognized selector sent to instance](https://github.com/firebase/firebase-ios-sdk/issues/8005).
+
+Cocoapods requires to run `pod install` if you need to install a new dependency, in any other case the pod sources will be available in the repository.
 
 ### Code formatting and linting
 

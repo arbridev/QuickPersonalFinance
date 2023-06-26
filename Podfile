@@ -9,6 +9,8 @@ target 'QuickPersonalFinance' do
   pod 'FirebaseCrashlytics'
   pod 'FirebasePerformance'
   pod 'SwiftLint'
+  pod 'ArkanaKeys', path: 'ArkanaKeys/ArkanaKeys'
+  pod 'ArkanaKeysInterfaces', path: 'ArkanaKeys/ArkanaKeysInterfaces'
 
   target 'QuickPersonalFinanceTests' do
     inherit! :search_paths

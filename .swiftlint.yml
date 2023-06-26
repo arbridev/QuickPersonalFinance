@@ -2,6 +2,7 @@ excluded:
   - Package.swift
   - fastlane/SnapshotHelper.swift
   - QuickPersonalFinance/Mocking/Responses
+  - ArkanaKeys
 
 disabled_rules:
   - force_cast

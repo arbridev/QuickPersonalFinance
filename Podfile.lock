@@ -1,4 +1,7 @@
 PODS:
+  - ArkanaKeys (1.0.0):
+    - ArkanaKeysInterfaces (~> 1.0.0)
+  - ArkanaKeysInterfaces (1.0.0)
   - FirebaseABTesting (8.15.0):
     - FirebaseCore (~> 8.0)
   - FirebaseCore (8.2.0):
@@ -59,6 +62,8 @@ PODS:
   - SwiftLint (0.50.3)
 
 DEPENDENCIES:
+  - ArkanaKeys (from `ArkanaKeys/ArkanaKeys`)
+  - ArkanaKeysInterfaces (from `ArkanaKeys/ArkanaKeysInterfaces`)
   - FirebaseCrashlytics
   - FirebasePerformance
   - SwiftLint
@@ -78,7 +83,15 @@ SPEC REPOS:
     - PromisesObjC
     - SwiftLint
 
+EXTERNAL SOURCES:
+  ArkanaKeys:
+    :path: ArkanaKeys/ArkanaKeys
+  ArkanaKeysInterfaces:
+    :path: ArkanaKeys/ArkanaKeysInterfaces
+
 SPEC CHECKSUMS:
+  ArkanaKeys: 356555f467c55ae40ba074c1b4d9cb5c38a55f3d
+  ArkanaKeysInterfaces: 81d21923368b058e2b6fd932ec96855166ef6d19
   FirebaseABTesting: 10cbce8db9985ae2e3847ea44e9947dd18f94e10
   FirebaseCore: 3a83f24c3de69ec9f9a426e2598125ea51f3a2ce
   FirebaseCoreDiagnostics: 61384f54989065b15c36b5922b65112e86811d3c
@@ -92,6 +105,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
 
-PODFILE CHECKSUM: a03869467f26c3b7f1480a517fad34172d0a9ce2
+PODFILE CHECKSUM: b8aa46ad27f76097b9120b69ca586db01cdda121
 
 COCOAPODS: 1.11.3

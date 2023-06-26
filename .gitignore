@@ -97,7 +97,12 @@ iOSInjectionProject/
 
 # Environment configuration files
 .env**
+!.env.template
 
 # Google Firebase configuration files
 
 **GoogleService-Info.plist
+
+# ArkanaKeys
+
+ArkanaKeys/

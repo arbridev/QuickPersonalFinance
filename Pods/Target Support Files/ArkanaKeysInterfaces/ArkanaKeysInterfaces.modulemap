@@ -1,0 +1,6 @@
+framework module ArkanaKeysInterfaces {
+  umbrella header "ArkanaKeysInterfaces-umbrella.h"
+
+  export *
+  module * { export * }
+}

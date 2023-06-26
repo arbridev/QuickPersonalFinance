@@ -1,4 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ArkanaKeys/ArkanaKeys.framework
+${BUILT_PRODUCTS_DIR}/ArkanaKeysInterfaces/ArkanaKeysInterfaces.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework

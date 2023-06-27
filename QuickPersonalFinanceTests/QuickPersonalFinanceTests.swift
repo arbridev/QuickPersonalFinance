@@ -79,20 +79,27 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertEqual(balance, 2893.0, accuracy: 1.0)
     }
 
-    func testExternalCurrency() throws {
-        let externalCurrency = ExternalCurrency()
+    // swiftlint:disable todo
+    // TODO: Change to a functional implementation where the mock is not the test subject
+    func testExternalCurrencyMock() throws {
+        let externalCurrency = ExternalCurrencyMock()
         let expectation = XCTestExpectation(description: "Fetch latest currencies")
         Task.detached {
-            let currencies = await externalCurrency.fetchLatestCurrencies()
-            guard let usd = currencies?.data["USD"] else {
-                XCTFail("No USD data present")
-                return
+            do {
+                let currencies = try await externalCurrency.fetchLatestCurrencies()
+                guard let usd = currencies.data["USD"] else {
+                    XCTFail("No USD data present")
+                    return
+                }
+                XCTAssertEqual(usd.value, 1.0)
+                expectation.fulfill()
+            } catch {
+                XCTFail(error.localizedDescription)
             }
-            XCTAssertEqual(usd.value, 1.0)
-            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 2.0)
     }
+    // swiftlint:enable todo
 
     func testCurrencyPersistence() throws {
         let currencies = MockData.latestCurrencies
@@ -106,4 +113,12 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertNil(persistence.load())
     }
 
+}
+
+fileprivate extension QuickPersonalFinanceTests {
+    actor ExternalCurrencyMock: ExternalCurrencyService {
+        func fetchLatestCurrencies() async throws -> QuickPersonalFinance.LatestCurrencies {
+            MockData.latestCurrencies
+        }
+    }
 }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import ArkanaKeys
+import ArkanaKeysInterfaces
 
 struct Constant {
     static let monthsPerYearCount: Double = 12
@@ -18,6 +20,15 @@ struct Constant {
     static let maxLengthValueField = 20
     static let maxLengthWorkHoursPerDayField = 5
     static let maxLengthWorkDaysPerWeekField = 4
+    static let currencyAPIURL = secrets.currencyAPIURL
+
+    private static let secrets: ArkanaKeysEnvironmentProtocol = {
+        #if DEBUG
+        ArkanaKeys.Debug()
+        #else
+        ArkanaKeys.Release()
+        #endif
+    }()
 
     private init() {}
 }

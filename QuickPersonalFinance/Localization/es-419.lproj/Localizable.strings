@@ -59,6 +59,11 @@
 "share.pdf" = "Exportar a PDF";
 "share.report.report" = "Informe";
 
+// External errors
+"external.error.wrong.url" = "Hubo un problema con la URL proporcionada.";
+"external.error.unsuccessful" = "No se pudo completar la solicitud. Intente luego.";
+"external.error.wrong.data" = "Hubo un problema con los datos de la respuesta. Intente luego.";
+
 // Test
 "test.add" = "Agregar";
 "test.tab.bar" = "Barra de pestañas";

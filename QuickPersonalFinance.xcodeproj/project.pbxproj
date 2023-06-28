@@ -39,6 +39,7 @@
 		146F6A5329E0F6DE0087F514 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F6A5229E0F6DE0087F514 /* Validations.swift */; };
 		14783A0929E8350100BBE10F /* CTAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783A0829E8350100BBE10F /* CTAButton.swift */; };
 		147E8E4E2A27EDED001CBBF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5E29F4693A00EEDC9B /* Localizable.strings */; };
+		148745242A4C5FA500CC91DB /* CalculationService+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148745232A4C5FA500CC91DB /* CalculationService+Currency.swift */; };
 		148D915A2A38C4CF005E6F38 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 148D91592A38C4CF005E6F38 /* example.json */; };
 		148D915D2A38C55F005E6F38 /* MockingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D915C2A38C55F005E6F38 /* MockingHelper.swift */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
@@ -66,6 +67,7 @@
 		14A16A1629BBD27C00B69FD7 /* Recurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1529BBD27C00B69FD7 /* Recurrence.swift */; };
 		14A16A1829BE408D00B69FD7 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1729BE408D00B69FD7 /* Source.swift */; };
 		14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */; };
+		14A17D612A4CD0DA0014E99B /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A17D602A4CD0DA0014E99B /* Double+Round.swift */; };
 		14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */; };
 		14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393B29E4CC8E005E31A9 /* MockData.swift */; };
 		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
@@ -134,6 +136,7 @@
 		146F6A5029E0E7CA0087F514 /* ExpenseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseActionViewModel.swift; sourceTree = "<group>"; };
 		146F6A5229E0F6DE0087F514 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		14783A0829E8350100BBE10F /* CTAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAButton.swift; sourceTree = "<group>"; };
+		148745232A4C5FA500CC91DB /* CalculationService+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalculationService+Currency.swift"; sourceTree = "<group>"; };
 		148D91592A38C4CF005E6F38 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		148D915C2A38C55F005E6F38 /* MockingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingHelper.swift; sourceTree = "<group>"; };
 		149ABEBD29BA282B0088CE94 /* QuickPersonalFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPersonalFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +169,7 @@
 		14A16A1729BE408D00B69FD7 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		14A16A1929BF865500B69FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewUpperBar.swift; sourceTree = "<group>"; };
+		14A17D602A4CD0DA0014E99B /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 		14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportPDFView+Report.swift"; sourceTree = "<group>"; };
 		14B4393B29E4CC8E005E31A9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				14F533182A113FC8002772CC /* Font+Report.swift */,
 				14EAC6142A216D9E0048B1B4 /* LaunchArguments.swift */,
 				14C4D3BB2A3DE8AD00733A69 /* Serializer.swift */,
+				14A17D602A4CD0DA0014E99B /* Double+Round.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				149ABEEC29BA29BD0088CE94 /* CalculationService.swift */,
+				148745232A4C5FA500CC91DB /* CalculationService+Currency.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -860,6 +866,7 @@
 				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,
 				14C4D3BC2A3DE8AD00733A69 /* Serializer.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,
+				148745242A4C5FA500CC91DB /* CalculationService+Currency.swift in Sources */,
 				145F125029FAA63C009853A8 /* SettingsService.swift in Sources */,
 				144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */,
 				1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */,
@@ -869,6 +876,7 @@
 				14428B0529F047A300BC0246 /* IncomePersistence.swift in Sources */,
 				14A16A1029BBCFA500B69FD7 /* Income.swift in Sources */,
 				145F124C29FAA4EB009853A8 /* SettingsActionView.swift in Sources */,
+				14A17D612A4CD0DA0014E99B /* Double+Round.swift in Sources */,
 				14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */,
 				14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */,
 				14F533192A113FC8002772CC /* Font+Report.swift in Sources */,

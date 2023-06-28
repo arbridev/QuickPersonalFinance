@@ -643,9 +643,13 @@
 			"code": "UZS",
 			"value": 11495.020712
 		},
-		"VEF": {
-			"code": "VEF",
-			"value": 2591362.885916
+        "VEF": {
+            "code": "VEF",
+            "value": 2591362.885916
+        },
+		"VES": {
+			"code": "VES",
+			"value": 25.913628
 		},
 		"VND": {
 			"code": "VND",

@@ -113,6 +113,47 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertNil(persistence.load())
     }
 
+    func testCurrencyConversionUSDtoEUR() throws {
+        let currencies = MockData.latestCurrencies.data
+        guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
+            fatalError("Could not initialize currency calculation")
+        }
+        let value = 20.0
+        guard let converted = currencyCalc.convert(value, from: "USD", to: "EUR") else {
+            XCTFail("Could not convert")
+            return
+        }
+        let expected = 18.4
+        XCTAssertEqual(converted, expected, accuracy: 0.2)
+    }
+
+    func testCurrencyConversionEURtoUSD() throws {
+        let currencies = MockData.latestCurrencies.data
+        guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
+            fatalError("Could not initialize currency calculation")
+        }
+        let value = 20.0
+        guard let converted = currencyCalc.convert(value, from: "EUR", to: "USD") else {
+            XCTFail("Could not convert")
+            return
+        }
+        let expected = 21.73
+        XCTAssertEqual(converted, expected, accuracy: 0.2)
+    }
+
+    func testCurrencyConversionVEStoEUR() throws {
+        let currencies = MockData.latestCurrencies.data
+        guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
+            fatalError("Could not initialize currency calculation")
+        }
+        let value = 60.0
+        guard let converted = currencyCalc.convert(value, from: "VES", to: "EUR") else {
+            XCTFail("Could not convert")
+            return
+        }
+        let expected = 2.12
+        XCTAssertEqual(converted.rounded(toPlaces: 2), expected, accuracy: 0.2)
+    }
 }
 
 fileprivate extension QuickPersonalFinanceTests {

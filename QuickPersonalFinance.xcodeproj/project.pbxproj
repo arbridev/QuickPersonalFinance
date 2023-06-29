@@ -297,8 +297,9 @@
 				14A169FF29BA46B100B69FD7 /* Views */,
 				14A16A1A29C0C38400B69FD7 /* Components */,
 				14A169FC29BA456200B69FD7 /* Model */,
-				149ABEEE29BA2FC70088CE94 /* Resources */,
 				149ABEEB29BA29910088CE94 /* Services */,
+				14A17D622A4CD93C0014E99B /* Shared */,
+				149ABEEE29BA2FC70088CE94 /* Resources */,
 				14B4393A29E4CC29005E31A9 /* Mocking */,
 				144E4E5929F4615A00EEDC9B /* Localization */,
 				149ABEC629BA28310088CE94 /* Preview Content */,
@@ -347,21 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				149DEEAE29E86AC300155BF6 /* Fonts */,
-				149ABEF029BA304E0088CE94 /* Constants.swift */,
 				149ABEC429BA28310088CE94 /* Assets.xcassets */,
-				1403933329CA034F00049CCB /* ValidationProtocol.swift */,
-				146F6A5229E0F6DE0087F514 /* Validations.swift */,
-				1439A0DC29E460E200197112 /* Double+Currency.swift */,
-				14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */,
-				14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */,
-				149DEEEE29E8BD1000155BF6 /* Font+App.swift */,
-				1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */,
-				144DB7B929EEFEEB00DF3585 /* Array+Difference.swift */,
-				14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */,
-				14F533182A113FC8002772CC /* Font+Report.swift */,
-				14EAC6142A216D9E0048B1B4 /* LaunchArguments.swift */,
-				14C4D3BB2A3DE8AD00733A69 /* Serializer.swift */,
-				14A17D602A4CD0DA0014E99B /* Double+Round.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -473,6 +460,51 @@
 				14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		14A17D622A4CD93C0014E99B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				14EAC6142A216D9E0048B1B4 /* LaunchArguments.swift */,
+				149ABEF029BA304E0088CE94 /* Constants.swift */,
+				14A17D642A4CD9C20014E99B /* Helpers */,
+				14A17D632A4CD9450014E99B /* Extensions */,
+				14A17D652A4DEABC0014E99B /* Validation */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		14A17D632A4CD9450014E99B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */,
+				14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */,
+				149DEEEE29E8BD1000155BF6 /* Font+App.swift */,
+				144DB7B929EEFEEB00DF3585 /* Array+Difference.swift */,
+				14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */,
+				14F533182A113FC8002772CC /* Font+Report.swift */,
+				1439A0DC29E460E200197112 /* Double+Currency.swift */,
+				14A17D602A4CD0DA0014E99B /* Double+Round.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		14A17D642A4CD9C20014E99B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				14C4D3BB2A3DE8AD00733A69 /* Serializer.swift */,
+				1468A1ED29ED8C70002E92B7 /* Model+Persistence.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		14A17D652A4DEABC0014E99B /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				1403933329CA034F00049CCB /* ValidationProtocol.swift */,
+				146F6A5229E0F6DE0087F514 /* Validations.swift */,
+			);
+			path = Validation;
 			sourceTree = "<group>";
 		};
 		14B4393A29E4CC29005E31A9 /* Mocking */ = {

@@ -25,7 +25,7 @@ struct SettingsActionView: View {
     var body: some View {
         // MARK: Top bar
         ModalViewUpperBar(
-            title: "settings.action.title".localized,
+            title: "settings.action.title",
             dismiss: dismiss
         )
         Spacer()

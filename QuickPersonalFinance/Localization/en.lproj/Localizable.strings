@@ -55,6 +55,12 @@
 "settings.action.field.currency" = "Base currency";
 "settings.action.button.reset" = "Reset to local currency";
 
+// Convert
+"converted.estimate.title" = "Currency conversion";
+"converted.estimate.currency" = "Currency:";
+"currency.not.found" = "Currency not available for conversion.";
+
+// Share
 "share.summary" = "Summary";
 "share.pdf" = "Export PDF";
 "share.report.report" = "Report";
@@ -63,6 +69,9 @@
 "external.error.wrong.url" = "There was a problem with the provided URL.";
 "external.error.unsuccessful" = "Could not complete the request. Try later.";
 "external.error.wrong.data" = "There was a problem with the response data. Try later.";
+
+// Standard errors
+"error.unknown" = "There was a problem with your request.";
 
 // Test
 "test.add" = "Add";

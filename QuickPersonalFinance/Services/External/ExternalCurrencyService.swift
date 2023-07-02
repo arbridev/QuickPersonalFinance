@@ -43,12 +43,12 @@ fileprivate extension URL {
 }
 
 fileprivate extension ExternalCurrency {
-    enum ExternalCurrencyError: Error {
+    enum ExternalCurrencyError: LocalizedError {
         case wrongURL
         case unsuccessful
         case wrongData
 
-        var localizedDescription: String {
+        var errorDescription: String? {
             switch self {
                 case .wrongURL:
                     return "external.error.wrong.url".localized

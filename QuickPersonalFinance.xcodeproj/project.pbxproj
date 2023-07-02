@@ -57,6 +57,7 @@
 		149DEED229E86B7000155BF6 /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEC029E86B7000155BF6 /* WorkSans-Regular.ttf */; };
 		149DEEEB29E8BB7600155BF6 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149DEEDF29E8BB7600155BF6 /* Manrope-Regular.ttf */; };
 		149DEEEF29E8BD1000155BF6 /* Font+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149DEEEE29E8BD1000155BF6 /* Font+App.swift */; };
+		14A0DBC42A51159D00E35602 /* StandardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0DBC32A51159D00E35602 /* StandardError.swift */; };
 		14A169FE29BA456D00B69FD7 /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A169FD29BA456D00B69FD7 /* FinanceData.swift */; };
 		14A16A0429BA6FB700B69FD7 /* IncomesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A0329BA6FB700B69FD7 /* IncomesView.swift */; };
 		14A16A0629BA6FCF00B69FD7 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A0529BA6FCF00B69FD7 /* ExpensesView.swift */; };
@@ -157,6 +158,7 @@
 		149DEEC029E86B7000155BF6 /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		149DEEDF29E8BB7600155BF6 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
 		149DEEEE29E8BD1000155BF6 /* Font+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+App.swift"; sourceTree = "<group>"; };
+		14A0DBC32A51159D00E35602 /* StandardError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardError.swift; sourceTree = "<group>"; };
 		14A169FA29BA432B00B69FD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14A169FD29BA456D00B69FD7 /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
 		14A16A0329BA6FB700B69FD7 /* IncomesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesView.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				14A17D642A4CD9C20014E99B /* Helpers */,
 				14A17D632A4CD9450014E99B /* Extensions */,
 				14A17D652A4DEABC0014E99B /* Validation */,
+				14A0DBC32A51159D00E35602 /* StandardError.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				144DB7BA29EEFEEB00DF3585 /* Array+Difference.swift in Sources */,
 				14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */,
 				1403933429CA034F00049CCB /* ValidationProtocol.swift in Sources */,
+				14A0DBC42A51159D00E35602 /* StandardError.swift in Sources */,
 				141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */,
 				149DEEEF29E8BD1000155BF6 /* Font+App.swift in Sources */,
 				14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */,

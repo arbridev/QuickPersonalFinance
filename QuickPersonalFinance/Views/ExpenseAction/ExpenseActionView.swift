@@ -31,8 +31,8 @@ struct ExpenseActionView: View {
             // MARK: Upper bar
             ModalViewUpperBar(
                 title: editingExpense == nil ?
-                "expense.action.create.title".localized :
-                    "expense.action.edit.title".localized,
+                "expense.action.create.title" :
+                    "expense.action.edit.title",
                 dismiss: dismiss
             )
             Spacer()

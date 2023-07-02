@@ -31,8 +31,8 @@ struct IncomeActionView: View {
             // MARK: Top bar
             ModalViewUpperBar(
                 title: editingIncome == nil ?
-                "income.action.create.title".localized :
-                    "income.action.edit.title".localized,
+                "income.action.create.title" :
+                    "income.action.edit.title",
                 dismiss: dismiss
             )
             Spacer()

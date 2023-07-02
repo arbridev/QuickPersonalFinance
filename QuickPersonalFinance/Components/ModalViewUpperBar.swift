@@ -27,7 +27,7 @@ struct ModalViewUpperBar: View {
                 .frame(maxHeight: 50)
             }
 
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .asScreenTitle()
         }
     }

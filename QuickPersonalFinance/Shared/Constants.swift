@@ -20,6 +20,7 @@ struct Constant {
     static let maxLengthValueField = 20
     static let maxLengthWorkHoursPerDayField = 5
     static let maxLengthWorkDaysPerWeekField = 4
+    static let currencyRefreshInterval: TimeInterval = 60 * 2
     static let currencyAPIURL = secrets.currencyAPIURL
 
     private static let secrets: ArkanaKeysEnvironmentProtocol = {

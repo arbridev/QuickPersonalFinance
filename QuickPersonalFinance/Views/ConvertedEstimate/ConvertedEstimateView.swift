@@ -9,27 +9,45 @@ import SwiftUI
 
 struct ConvertedEstimateView: View {
     @EnvironmentObject private var mainData: AppData
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) var moc
     @StateObject private var viewModel = ViewModel()
 
     var recurrence: Recurrence
     
     var body: some View {
         VStack {
-            Picker(
-                "Currency:",
-                selection: $viewModel.selectedCurrency
-            ) {
-                ForEach(Locale.Currency.isoCurrencies, id: \.identifier) { currency in
-                    Text(currency.identifier)
-                        .font(.App.input)
-                        .tag(currency.identifier)
+            // MARK: Top bar
+            ModalViewUpperBar(
+                title: "converted.estimate.title",
+                dismiss: dismiss
+            )
+            Spacer()
+
+            // MARK: Control
+            if !viewModel.isRefreshing {
+                Picker(
+                    "converted.estimate.currency",
+                    selection: $viewModel.pickerSelectedCurrency
+                ) {
+                    ForEach(viewModel.currencyIDs, id: \.self) { currencyID in
+                        Text(currencyID)
+                            .font(.App.input)
+                            .tag(currencyID)
+                    }
                 }
+                .padding(.bottom, 4)
+                .font(.App.input)
+                .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {
+
+                }
+            } else {
+                ProgressView()
             }
-            .padding(.bottom, 4)
-            .font(.App.input)
 
             Divider()
 
+            // MARK: Estimate table
             VStack {
                 Divider()
                     .overlay(Color.Palette.dividerPrimary)
@@ -77,9 +95,14 @@ struct ConvertedEstimateView: View {
                 }
                 .padding(.horizontal)
             }
+            Spacer()
         }
         .onAppear {
-            viewModel.input(financeData: mainData.financeData, recurrence: recurrence)
+            viewModel.input(
+                financeData: mainData.financeData,
+                recurrence: recurrence,
+                moc: moc
+            )
         }
     }
 }

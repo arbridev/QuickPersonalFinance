@@ -42,6 +42,7 @@
 		148745242A4C5FA500CC91DB /* CalculationService+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148745232A4C5FA500CC91DB /* CalculationService+Currency.swift */; };
 		148D915A2A38C4CF005E6F38 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 148D91592A38C4CF005E6F38 /* example.json */; };
 		148D915D2A38C55F005E6F38 /* MockingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D915C2A38C55F005E6F38 /* MockingHelper.swift */; };
+		1491DE5B2A5216D60020D172 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DE5A2A5216D60020D172 /* UserDataService.swift */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
 		149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC229BA282B0088CE94 /* ContentView.swift */; };
 		149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC429BA28310088CE94 /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		148745232A4C5FA500CC91DB /* CalculationService+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalculationService+Currency.swift"; sourceTree = "<group>"; };
 		148D91592A38C4CF005E6F38 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		148D915C2A38C55F005E6F38 /* MockingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingHelper.swift; sourceTree = "<group>"; };
+		1491DE5A2A5216D60020D172 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		149ABEBD29BA282B0088CE94 /* QuickPersonalFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPersonalFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceApp.swift; sourceTree = "<group>"; };
 		149ABEC229BA282B0088CE94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				145F124F29FAA63C009853A8 /* SettingsService.swift */,
+				1491DE5A2A5216D60020D172 /* UserDataService.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				14783A0929E8350100BBE10F /* CTAButton.swift in Sources */,
 				14F8446F2A3A1D5300289D5E /* Currency.swift in Sources */,
 				1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */,
+				1491DE5B2A5216D60020D172 /* UserDataService.swift in Sources */,
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
 				14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */,
 				144DB7BA29EEFEEB00DF3585 /* Array+Difference.swift in Sources */,

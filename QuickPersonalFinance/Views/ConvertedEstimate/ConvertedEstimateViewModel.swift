@@ -13,18 +13,7 @@ extension ConvertedEstimateView {
     @MainActor class ViewModel: ObservableObject {
         @Published var pickerSelectedCurrency = Constant.defaultCurrencyID {
             didSet {
-                Task.detached(priority: .background) {
-                    do {
-                        try await self.setConversion()
-                        await self.setErrorMessage(nil)
-                    } catch {
-                        if let error = error as? Calculation.CurrencyCalculationError {
-                            await self.setErrorMessage(error.localizedDescription)
-                        } else {
-                            await self.setErrorMessage(StandardError.unknown.localizedDescription)
-                        }
-                    }
-                }
+                convert()
             }
         }
         @Published var selectedCurrency = Constant.defaultCurrencyID
@@ -36,7 +25,9 @@ extension ConvertedEstimateView {
         @Published var isRefreshing = false
 
         let settings: Settings
+        let currencyRefresh: CurrencyRefresh = .after(Constant.currencyRefreshInterval)
 
+        var userData: UserDataService
         var financeData: FinanceData?
         var recurrence: Recurrence?
         var rate = 1.0
@@ -55,10 +46,10 @@ extension ConvertedEstimateView {
         var persistenceService: (any CurrencyDataService)?
         var externalService: (any ExternalCurrencyService)?
         var currencyIDs: [String] = Locale.Currency.isoCurrencies.map({ $0.identifier })
-        let currencyRefresh: CurrencyRefresh = .after(Constant.currencyRefreshInterval)
 
         init() {
             settings = Settings()
+            userData = UserData()
         }
 
         func input(
@@ -69,7 +60,8 @@ extension ConvertedEstimateView {
             self.financeData = financeData
             self.recurrence = recurrence
             self.moc = moc
-            self.selectedCurrency = settings.currencyID
+            selectedCurrency = settings.currencyID
+            pickerSelectedCurrency = settings.currencyID
             externalService = ExternalCurrency()
             persistenceService = CurrencyDataPersistence(moc: moc)
             setInitialState()
@@ -118,15 +110,22 @@ extension ConvertedEstimateView {
             if let currencyData = persistenceService.load() {
                 switch currencyRefresh {
                     case .after(let interval):
-                        let timeLimit = currencyData.meta.lastUpdatedAt.addingTimeInterval(interval)
+                        guard let timeLimit = userData.lastCurrencyUpdate?.addingTimeInterval(interval) else {
+                            let latestCurrencies = try await fetchCurrencies()
+                            persistenceService.save(item: latestCurrencies)
+                            userData.lastCurrencyUpdate = .now
+                            return Calculation.CurrencyCalculation(latestCurrencies.data)
+                        }
                         if Date.now > timeLimit {
                             let latestCurrencies = try await fetchCurrencies()
                             persistenceService.save(item: latestCurrencies)
+                            userData.lastCurrencyUpdate = .now
                             return Calculation.CurrencyCalculation(latestCurrencies.data)
                         }
                     case .always:
                         let latestCurrencies = try await fetchCurrencies()
                         persistenceService.save(item: latestCurrencies)
+                        userData.lastCurrencyUpdate = .now
                         return Calculation.CurrencyCalculation(latestCurrencies.data)
                     case .never:
                         break
@@ -135,6 +134,7 @@ extension ConvertedEstimateView {
             } else {
                 let latestCurrencies = try await fetchCurrencies()
                 persistenceService.save(item: latestCurrencies)
+                userData.lastCurrencyUpdate = .now
                 return Calculation.CurrencyCalculation(latestCurrencies.data)
             }
         }
@@ -153,6 +153,21 @@ extension ConvertedEstimateView {
         private func setErrorMessage(_ message: String?) {
             errorMessage = message
             isErrorPresented = message == nil ? false : true
+        }
+
+        private func convert() {
+            Task.detached(priority: .background) {
+                do {
+                    try await self.setConversion()
+                    await self.setErrorMessage(nil)
+                } catch {
+                    if let error = error as? Calculation.CurrencyCalculationError {
+                        await self.setErrorMessage(error.localizedDescription)
+                    } else {
+                        await self.setErrorMessage(StandardError.unknown.localizedDescription)
+                    }
+                }
+            }
         }
     }
 

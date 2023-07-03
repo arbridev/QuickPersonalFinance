@@ -8,11 +8,17 @@
 import Foundation
 import CoreData
 
+/// Controller for currency conversion operations.
 actor CurrencyConversionController {
+
+    // MARK: Properties
+
     let currencyRefresh: CurrencyRefresh = .after(Constant.currencyRefreshInterval)
     let persistenceService: CurrencyDataService
     let externalService: ExternalCurrencyService
     var userData: UserDataService
+
+    // MARK: Initialization
 
     init(
         persistenceService: CurrencyDataService,
@@ -24,6 +30,10 @@ actor CurrencyConversionController {
         self.userData = userData
     }
 
+    // MARK: Behavior
+
+    /// Factory method for a calculation service.
+    /// - Returns: A currency calculation service ready to be used.
     func makeCurrencyCalculationService() async throws -> CurrencyCalculationService? {
         if let currencyData = persistenceService.load() {
             switch currencyRefresh {
@@ -49,6 +59,8 @@ actor CurrencyConversionController {
         }
     }
 
+    /// Updates the currency data to be used for operations by fetching from external sources and persisting.
+    /// - Returns: Data from currencies as structured in LatestCurrencies.
     private func updateCurrencies() async throws -> LatestCurrencies {
         let latestCurrencies = try await externalService.fetchLatestCurrencies()
         persistenceService.save(item: latestCurrencies)

@@ -7,12 +7,18 @@
 
 import Foundation
 
+// MARK: - External currency service protocol
+
 protocol ExternalCurrencyService: Actor {
     func fetchLatestCurrencies() async throws -> LatestCurrencies
 }
 
+// MARK: - External currency
+
 actor ExternalCurrency: ExternalCurrencyService {
 
+    /// Fetches the currency data.
+    /// - Returns: A LatestCurrencies structure with the currency data.
     func fetchLatestCurrencies() async throws -> LatestCurrencies {
         let stringURL = Constant.currencyAPIURL + URL.Endpoint.latest
         guard let url = URL(string: stringURL) else {
@@ -35,12 +41,16 @@ actor ExternalCurrency: ExternalCurrencyService {
     }
 }
 
+// MARK: - Endpoints for external currency
+
 fileprivate extension URL {
     struct Endpoint {
         static let latest = ""
         private init() {}
     }
 }
+
+// MARK: - External currency error
 
 fileprivate extension ExternalCurrency {
     enum ExternalCurrencyError: LocalizedError {

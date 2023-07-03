@@ -10,7 +10,11 @@ import CoreData
 
 extension ConvertedEstimateView {
 
+    ///  View model for converted estimate view
     @MainActor class ViewModel: ObservableObject {
+
+        // MARK: Properties
+
         @Published var pickerSelectedCurrency = Constant.defaultCurrencyID {
             didSet {
                 Task.detached(priority: .background) {
@@ -43,6 +47,8 @@ extension ConvertedEstimateView {
         var controller: CurrencyConversionController?
         var currencyIDs: [String] = Locale.Currency.isoCurrencies.map({ $0.identifier })
 
+        // MARK: Initialization
+
         init(
             settings: SettingsService = Settings(),
             userData: UserDataService = UserData()
@@ -70,6 +76,9 @@ extension ConvertedEstimateView {
             setInitialState()
         }
 
+        // MARK: Behavior
+
+        /// Set an initial state based on the base currency set by an user.
         private func setInitialState() {
             guard let financeData, let recurrence else {
                 return
@@ -93,6 +102,7 @@ extension ConvertedEstimateView {
             )
         }
 
+        /// Sets the data converted between currencies, after calculating and updating.
         private func setConversion() async throws {
             setInitialState()
             let userCurrency = settings.currencyID
@@ -108,11 +118,14 @@ extension ConvertedEstimateView {
             selectedCurrency = pickerSelectedCurrency
         }
 
+        /// Sets an error message that is intended to prompt the user with a dialog.
+        /// - Parameter message: the error message, if nil it should hide the dialog.
         private func setErrorMessage(_ message: String?) {
             errorMessage = message
             isErrorPresented = message == nil ? false : true
         }
 
+        /// Converts the data and shows it or prompts the user with an error, handling progress view (refreshing) update.
         private func convert() async {
             isRefreshing = true
             defer {

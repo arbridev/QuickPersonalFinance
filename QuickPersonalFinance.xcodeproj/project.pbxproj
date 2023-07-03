@@ -43,6 +43,8 @@
 		148D915A2A38C4CF005E6F38 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 148D91592A38C4CF005E6F38 /* example.json */; };
 		148D915D2A38C55F005E6F38 /* MockingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D915C2A38C55F005E6F38 /* MockingHelper.swift */; };
 		1491DE5B2A5216D60020D172 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DE5A2A5216D60020D172 /* UserDataService.swift */; };
+		1491DE5D2A52FFD40020D172 /* CurrencyConversionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DE5C2A52FFD40020D172 /* CurrencyConversionController.swift */; };
+		1491DE5F2A5301030020D172 /* CurrencyRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DE5E2A5301030020D172 /* CurrencyRefresh.swift */; };
 		149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */; };
 		149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEC229BA282B0088CE94 /* ContentView.swift */; };
 		149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC429BA28310088CE94 /* Assets.xcassets */; };
@@ -142,6 +144,8 @@
 		148D91592A38C4CF005E6F38 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		148D915C2A38C55F005E6F38 /* MockingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingHelper.swift; sourceTree = "<group>"; };
 		1491DE5A2A5216D60020D172 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
+		1491DE5C2A52FFD40020D172 /* CurrencyConversionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionController.swift; sourceTree = "<group>"; };
+		1491DE5E2A5301030020D172 /* CurrencyRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRefresh.swift; sourceTree = "<group>"; };
 		149ABEBD29BA282B0088CE94 /* QuickPersonalFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPersonalFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149ABEC029BA282B0088CE94 /* QuickPersonalFinanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceApp.swift; sourceTree = "<group>"; };
 		149ABEC229BA282B0088CE94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 			children = (
 				1409878F2A18225000461A4B /* ConvertedEstimateView.swift */,
 				140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */,
+				1491DE5C2A52FFD40020D172 /* CurrencyConversionController.swift */,
 			);
 			path = ConvertedEstimate;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				14A17D632A4CD9450014E99B /* Extensions */,
 				14A17D652A4DEABC0014E99B /* Validation */,
 				14A0DBC32A51159D00E35602 /* StandardError.swift */,
+				1491DE5E2A5301030020D172 /* CurrencyRefresh.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -893,6 +899,7 @@
 				1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */,
 				1491DE5B2A5216D60020D172 /* UserDataService.swift in Sources */,
 				149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */,
+				1491DE5F2A5301030020D172 /* CurrencyRefresh.swift in Sources */,
 				14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */,
 				144DB7BA29EEFEEB00DF3585 /* Array+Difference.swift in Sources */,
 				14DBC40929F1737600EFF244 /* ExpensePersistence.swift in Sources */,
@@ -918,6 +925,7 @@
 				145F124C29FAA4EB009853A8 /* SettingsActionView.swift in Sources */,
 				14A17D612A4CD0DA0014E99B /* Double+Round.swift in Sources */,
 				14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */,
+				1491DE5D2A52FFD40020D172 /* CurrencyConversionController.swift in Sources */,
 				14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */,
 				14F533192A113FC8002772CC /* Font+Report.swift in Sources */,
 				149ABEC129BA282B0088CE94 /* QuickPersonalFinanceApp.swift in Sources */,

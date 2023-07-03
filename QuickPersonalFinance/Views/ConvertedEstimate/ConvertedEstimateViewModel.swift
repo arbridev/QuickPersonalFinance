@@ -13,7 +13,9 @@ extension ConvertedEstimateView {
     @MainActor class ViewModel: ObservableObject {
         @Published var pickerSelectedCurrency = Constant.defaultCurrencyID {
             didSet {
-                convert()
+                Task.detached(priority: .background) {
+                    await self.convert()
+                }
             }
         }
         @Published var selectedCurrency = Constant.defaultCurrencyID
@@ -24,17 +26,10 @@ extension ConvertedEstimateView {
         @Published var errorMessage: String?
         @Published var isRefreshing = false
 
-        let settings: Settings
-        let currencyRefresh: CurrencyRefresh = .after(Constant.currencyRefreshInterval)
-
+        var settings: SettingsService
         var userData: UserDataService
         var financeData: FinanceData?
         var recurrence: Recurrence?
-        var rate = 1.0
-        var baseCurrencyID: String {
-            settings.currencyID
-        }
-
         var balanceInfoMessage: String {
             String(
                 format: "estimate.balance.info.message".localized,
@@ -45,11 +40,15 @@ extension ConvertedEstimateView {
         var moc: NSManagedObjectContext?
         var persistenceService: (any CurrencyDataService)?
         var externalService: (any ExternalCurrencyService)?
+        var controller: CurrencyConversionController?
         var currencyIDs: [String] = Locale.Currency.isoCurrencies.map({ $0.identifier })
 
-        init() {
-            settings = Settings()
-            userData = UserData()
+        init(
+            settings: SettingsService = Settings(),
+            userData: UserDataService = UserData()
+        ) {
+            self.settings = settings
+            self.userData = userData
         }
 
         func input(
@@ -60,10 +59,14 @@ extension ConvertedEstimateView {
             self.financeData = financeData
             self.recurrence = recurrence
             self.moc = moc
-            selectedCurrency = settings.currencyID
             pickerSelectedCurrency = settings.currencyID
             externalService = ExternalCurrency()
             persistenceService = CurrencyDataPersistence(moc: moc)
+            controller = CurrencyConversionController(
+                persistenceService: persistenceService!,
+                externalService: externalService!,
+                userData: userData
+            )
             setInitialState()
         }
 
@@ -72,6 +75,8 @@ extension ConvertedEstimateView {
                 return
             }
             let calculation = Calculation()
+
+            selectedCurrency = settings.currencyID
             
             incomeTotal = calculation.totalize(
                 sources: financeData.incomes,
@@ -94,7 +99,7 @@ extension ConvertedEstimateView {
             guard userCurrency != pickerSelectedCurrency else {
                 return
             }
-            guard let converter = try await makeCurrencyCalculationService() else {
+            guard let converter = try await controller?.makeCurrencyCalculationService() else {
                 return
             }
             incomeTotal = try converter.convert(incomeTotal, from: userCurrency, to: pickerSelectedCurrency)
@@ -103,77 +108,27 @@ extension ConvertedEstimateView {
             selectedCurrency = pickerSelectedCurrency
         }
 
-        private func makeCurrencyCalculationService() async throws -> CurrencyCalculationService? {
-            guard let persistenceService else {
-                return nil
-            }
-            if let currencyData = persistenceService.load() {
-                switch currencyRefresh {
-                    case .after(let interval):
-                        guard let timeLimit = userData.lastCurrencyUpdate?.addingTimeInterval(interval) else {
-                            let latestCurrencies = try await fetchCurrencies()
-                            persistenceService.save(item: latestCurrencies)
-                            userData.lastCurrencyUpdate = .now
-                            return Calculation.CurrencyCalculation(latestCurrencies.data)
-                        }
-                        if Date.now > timeLimit {
-                            let latestCurrencies = try await fetchCurrencies()
-                            persistenceService.save(item: latestCurrencies)
-                            userData.lastCurrencyUpdate = .now
-                            return Calculation.CurrencyCalculation(latestCurrencies.data)
-                        }
-                    case .always:
-                        let latestCurrencies = try await fetchCurrencies()
-                        persistenceService.save(item: latestCurrencies)
-                        userData.lastCurrencyUpdate = .now
-                        return Calculation.CurrencyCalculation(latestCurrencies.data)
-                    case .never:
-                        break
-                }
-                return Calculation.CurrencyCalculation(currencyData.data)
-            } else {
-                let latestCurrencies = try await fetchCurrencies()
-                persistenceService.save(item: latestCurrencies)
-                userData.lastCurrencyUpdate = .now
-                return Calculation.CurrencyCalculation(latestCurrencies.data)
-            }
-        }
-
-        private func fetchCurrencies() async throws -> LatestCurrencies {
-            guard let externalService else {
-                return LatestCurrencies(meta: Meta(lastUpdatedAt: .now), data: [:])
-            }
-            isRefreshing = true
-            defer {
-                isRefreshing = false
-            }
-            return try await externalService.fetchLatestCurrencies()
-        }
-
         private func setErrorMessage(_ message: String?) {
             errorMessage = message
             isErrorPresented = message == nil ? false : true
         }
 
-        private func convert() {
-            Task.detached(priority: .background) {
-                do {
-                    try await self.setConversion()
-                    await self.setErrorMessage(nil)
-                } catch {
-                    if let error = error as? Calculation.CurrencyCalculationError {
-                        await self.setErrorMessage(error.localizedDescription)
-                    } else {
-                        await self.setErrorMessage(StandardError.unknown.localizedDescription)
-                    }
+        private func convert() async {
+            isRefreshing = true
+            defer {
+                isRefreshing = false
+            }
+
+            do {
+                try await setConversion()
+                setErrorMessage(nil)
+            } catch {
+                if let error = error as? Calculation.CurrencyCalculationError {
+                    setErrorMessage(error.localizedDescription)
+                } else {
+                    setErrorMessage(StandardError.unknown.localizedDescription)
                 }
             }
         }
-    }
-
-    enum CurrencyRefresh {
-        case never
-        case always
-        case after(TimeInterval)
     }
 }

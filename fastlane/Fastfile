@@ -39,6 +39,7 @@ platform :ios do
 
   initial_version = "0.1.0"
   project_file_path = "QuickPersonalFinance.xcodeproj"
+  workspace_file_path = "QuickPersonalFinance.xcworkspace"
   scheme = "QuickPersonalFinance"
   unit_tests_scheme = "QuickPersonalFinanceTests"
   app_identifier = "org.arbridev.QuickPersonalFinance"
@@ -129,9 +130,10 @@ platform :ios do
     )
   end
 
-  lane :tests do
+  lane :test do
     run_tests(
-      project: project_file_path
+      workspace: workspace_file_path,
+      scheme: unit_tests_scheme
     )
   end
 
@@ -139,7 +141,7 @@ platform :ios do
   lane :build do |options|
     environment = lane_context[SharedValues::ENVIRONMENT]
     build_app(
-      project: project_file_path,
+      workspace: workspace_file_path,
       configuration: configuration_type[environment] ||= "Release",
       export_method: export_method_type[environment] ||= "app-store",
       export_options: {

@@ -73,6 +73,7 @@
 		14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */; };
 		14A17D612A4CD0DA0014E99B /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A17D602A4CD0DA0014E99B /* Double+Round.swift */; };
 		14A867CA2A0FDE3C00F42D37 /* ExportPDFView+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */; };
+		14AF8EAC2A55BD5200B287FE /* SourceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8EAB2A55BD5200B287FE /* SourceRowView.swift */; };
 		14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393B29E4CC8E005E31A9 /* MockData.swift */; };
 		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
 		14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */; };
@@ -179,6 +180,7 @@
 		14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewUpperBar.swift; sourceTree = "<group>"; };
 		14A17D602A4CD0DA0014E99B /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 		14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportPDFView+Report.swift"; sourceTree = "<group>"; };
+		14AF8EAB2A55BD5200B287FE /* SourceRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceRowView.swift; sourceTree = "<group>"; };
 		14B4393B29E4CC8E005E31A9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 		14A16A1A29C0C38400B69FD7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				14AF8EAB2A55BD5200B287FE /* SourceRowView.swift */,
 				14A16A1D29C0C69A00B69FD7 /* ModalViewUpperBar.swift */,
 				1403933029C9DF1600049CCB /* OutlinedTextFieldStyle.swift */,
 				141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */,
@@ -892,6 +895,7 @@
 				145F124E29FAA505009853A8 /* SettingsActionViewModel.swift in Sources */,
 				14A16A1229BBCFB000B69FD7 /* Expense.swift in Sources */,
 				14BE31242A097CFC000A735C /* EmptyContentView.swift in Sources */,
+				14AF8EAC2A55BD5200B287FE /* SourceRowView.swift in Sources */,
 				149ABEC329BA282B0088CE94 /* ContentView.swift in Sources */,
 				14153FD529E8516E00C90D13 /* ScreenTitle.swift in Sources */,
 				14783A0929E8350100BBE10F /* CTAButton.swift in Sources */,

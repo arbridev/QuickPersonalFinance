@@ -49,15 +49,10 @@ struct ExpensesView: View {
                         .asScreenTitle()
                     List {
                         ForEach(mainData.financeData.expenses, id: \.hashValue) { expense in
-                            HStack {
-                                Text(expense.name)
-                                Spacer()
-                                Text(expense.grossValue.asCurrency(withID: viewModel.currencyID))
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                viewModel.selectedItem = expense
-                            }
+                            SourceRowView(source: expense, currencyID: viewModel.currencyID)
+                                .onTapGesture {
+                                    viewModel.selectedItem = expense
+                                }
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }
@@ -79,10 +74,18 @@ struct ExpensesView: View {
 // MARK: - Previews
 
 struct ExpensesView_Previews: PreviewProvider {
+    static let expenseLargeTitle = Expense(
+        id: MockData.expense2.id,
+        name: String(repeating: MockData.expense2.name, count: 8),
+        more: MockData.expense2.more,
+        grossValue: MockData.expense2.grossValue,
+        recurrence: MockData.expense2.recurrence
+    )
     static var envObject: AppData {
         let data = AppData()
         let expenses = [
-            MockData.expense2
+            MockData.expense1,
+            expenseLargeTitle
         ]
         data.financeData = FinanceData(incomes: [Income](), expenses: expenses)
         return data

@@ -125,7 +125,8 @@ extension ConvertedEstimateView {
             isErrorPresented = message == nil ? false : true
         }
 
-        /// Converts the data and shows it or prompts the user with an error, handling progress view (refreshing) update.
+        /// Converts the data and shows it or prompts the user with an error,
+        /// handles progress view (refreshing) update.
         private func convert() async {
             isRefreshing = true
             defer {

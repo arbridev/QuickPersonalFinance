@@ -50,15 +50,10 @@ struct IncomesView: View {
                         .asScreenTitle()
                     List {
                         ForEach(mainData.financeData.incomes, id: \.hashValue) { income in
-                            HStack {
-                                Text(income.name)
-                                Spacer()
-                                Text(income.grossValue.asCurrency(withID: viewModel.currencyID))
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                viewModel.selectedItem = income
-                            }
+                            SourceRowView(source: income, currencyID: viewModel.currencyID)
+                                .onTapGesture {
+                                    viewModel.selectedItem = income
+                                }
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }

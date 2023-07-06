@@ -57,6 +57,7 @@ extension ExpensesView {
             mainData?.financeData = financeData
 
             persistenceService?.delete(items: forDeletion)
+            HapticsService().notificationFeedback(.success)
         }
     }
 

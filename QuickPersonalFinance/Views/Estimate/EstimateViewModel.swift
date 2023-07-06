@@ -24,6 +24,7 @@ extension EstimateView {
         @Published var selectedRecurrence: Recurrence = .year {
             didSet {
                 update()
+                HapticsService().selectionFeedback()
             }
         }
         @Published var barChartData: [BarValue] = [BarValue]()

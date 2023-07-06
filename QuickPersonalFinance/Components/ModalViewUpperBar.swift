@@ -17,6 +17,7 @@ struct ModalViewUpperBar: View {
                 HStack {
                     Spacer()
                     Button {
+                        HapticsService().impactFeedback(style: .light)
                         dismiss.callAsFunction()
                     } label: {
                         Image(systemName: "xmark")

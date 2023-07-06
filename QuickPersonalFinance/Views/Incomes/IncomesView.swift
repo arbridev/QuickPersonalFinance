@@ -53,6 +53,7 @@ struct IncomesView: View {
                             SourceRowView(source: income, currencyID: viewModel.currencyID)
                                 .onTapGesture {
                                     viewModel.selectedItem = income
+                                    HapticsService().impactFeedback(style: .light)
                                 }
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })

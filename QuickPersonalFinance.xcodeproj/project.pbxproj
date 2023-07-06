@@ -77,6 +77,7 @@
 		14B4393C29E4CC8E005E31A9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393B29E4CC8E005E31A9 /* MockData.swift */; };
 		14B4393E29E4E4DD005E31A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */; };
 		14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */; };
+		14B6E4A42A571CC500C5B916 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6E4A32A571CC500C5B916 /* HapticsService.swift */; };
 		14BE31212A097CBB000A735C /* IncomeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE311F2A097CBB000A735C /* IncomeActionView.swift */; };
 		14BE31222A097CBB000A735C /* IncomeActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE31202A097CBB000A735C /* IncomeActionViewModel.swift */; };
 		14BE31242A097CFC000A735C /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BE31232A097CFC000A735C /* EmptyContentView.swift */; };
@@ -184,6 +185,7 @@
 		14B4393B29E4CC8E005E31A9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		14B4393D29E4E4DD005E31A9 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		14B4393F29E4E53A005E31A9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		14B6E4A32A571CC500C5B916 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 		14BE311F2A097CBB000A735C /* IncomeActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeActionView.swift; sourceTree = "<group>"; };
 		14BE31202A097CBB000A735C /* IncomeActionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeActionViewModel.swift; sourceTree = "<group>"; };
 		14BE31232A097CFC000A735C /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 			children = (
 				145F124F29FAA63C009853A8 /* SettingsService.swift */,
 				1491DE5A2A5216D60020D172 /* UserDataService.swift */,
+				14B6E4A32A571CC500C5B916 /* HapticsService.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				14A16A1E29C0C69A00B69FD7 /* ModalViewUpperBar.swift in Sources */,
 				1439A0DD29E460E200197112 /* Double+Currency.swift in Sources */,
 				14DBC40B29F1D77300EFF244 /* ContentViewModel.swift in Sources */,
+				14B6E4A42A571CC500C5B916 /* HapticsService.swift in Sources */,
 				14B4394029E4E53A005E31A9 /* UIColor+Hex.swift in Sources */,
 				14C4D3BC2A3DE8AD00733A69 /* Serializer.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,

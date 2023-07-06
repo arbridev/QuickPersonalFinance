@@ -5,7 +5,6 @@
 //  Created by Armando Brito on 19/5/23.
 //
 
-import Foundation
 import CoreData
 
 extension ConvertedEstimateView {
@@ -142,6 +141,7 @@ extension ConvertedEstimateView {
                 } else {
                     setErrorMessage(StandardError.unknown.localizedDescription)
                 }
+                HapticsService().notificationFeedback(.error)
             }
         }
     }

@@ -39,7 +39,11 @@ extension ExpenseActionView {
                 }
             }
         }
-        @Published var selectedRecurrence: Recurrence = .hour
+        @Published var selectedRecurrence: Recurrence = .hour {
+            didSet {
+                HapticsService().selectionFeedback()
+            }
+        }
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
 

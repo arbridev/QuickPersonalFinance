@@ -24,6 +24,7 @@ struct EstimateView: View {
                 Spacer()
                 Button {
                     viewModel.isPresentingSettings = true
+                    HapticsService().impactFeedback(style: .light)
                 } label: {
                     Image(systemName: "gearshape.fill")
                 }
@@ -116,6 +117,9 @@ struct EstimateView: View {
                 } label: {
                     Label("estimate.button.share", systemImage: "square.and.arrow.up")
                 }
+                .onTapGesture {
+                    HapticsService().impactFeedback(style: .light)
+                }
 
                 Divider()
                     .overlay(Color.Palette.dividerSecondary)
@@ -153,6 +157,7 @@ struct EstimateView: View {
 
             Button {
                 viewModel.isPresentingCurrencyConversion = true
+                HapticsService().impactFeedback()
             } label: {
                 Text("Show in alternative currency")
                     .font(.App.input)

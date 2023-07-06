@@ -23,6 +23,7 @@ struct ExpensesView: View {
                 Spacer()
                 Button {
                     viewModel.isPresentingCreateAction = true
+                    HapticsService().impactFeedback(style: .light)
                 } label: {
                     Image(systemName: "plus")
                 }

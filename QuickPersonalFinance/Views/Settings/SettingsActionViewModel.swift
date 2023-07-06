@@ -42,6 +42,7 @@ extension SettingsActionView {
         @Published var selectedCurrency: String {
             didSet {
                 settings.currencyID = selectedCurrency
+                HapticsService().selectionFeedback()
             }
         }
         private var settings: SettingsService
@@ -59,6 +60,7 @@ extension SettingsActionView {
 
         func resetToLocalCurrency() {
             selectedCurrency = Locale.current.currency?.identifier ?? Constant.defaultCurrencyID
+            HapticsService().selectionFeedback()
         }
     }
 

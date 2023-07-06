@@ -16,6 +16,7 @@ struct CTAButton: View {
     var body: some View {
         Button {
             action()
+            HapticsService().impactFeedback()
         } label: {
             Text(title.uppercased())
                 .padding(.horizontal, 10)

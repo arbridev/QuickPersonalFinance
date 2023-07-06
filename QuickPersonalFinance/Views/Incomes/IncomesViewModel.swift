@@ -56,6 +56,7 @@ extension IncomesView {
             mainData?.financeData = financeData
             
             persistenceService?.delete(items: forDeletion)
+            HapticsService().notificationFeedback(.success)
         }
     }
 

@@ -10,6 +10,9 @@ import SwiftUI
 struct SourceRowView: View {
     var source: any Source
     var currencyID: String
+    var recurrenceLoc: LocalizedStringKey {
+        LocalizedStringKey(source.recurrence?.rawValue ?? Recurrence.year.rawValue)
+    }
 
     var body: some View {
         HStack {
@@ -17,7 +20,7 @@ struct SourceRowView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 Text(source.grossValue.asCurrency(withID: currencyID))
-                Text(source.recurrence?.rawValue ?? Recurrence.year.rawValue)
+                Text(recurrenceLoc)
                     .font(.App.info)
             }
         }

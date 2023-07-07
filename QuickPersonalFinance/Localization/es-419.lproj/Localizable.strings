@@ -47,6 +47,7 @@
 "estimate.button.share" = "Compartir";
 "estimate.share.message.save" = "Su ingreso por %@ está proyectado para ser alrededor de %@ con gastos alrededor de %@, lo que le permitiría ahorrar aproximadamente %@ (%@) en dicho período.";
 "estimate.share.message.lose" = "Su ingreso por %@ está proyectado para ser alrededor de %@ con gastos alrededor de %@, lo que le haría perder aproximadamente %@ (%@) en dicho período.";
+"estimate.convert.currency" = "Mostrar en una moneda distinta";
 
 "settings.action.title" = "Configuración";
 "settings.action.field.work.hours.day" = "Horas laborales diarias";

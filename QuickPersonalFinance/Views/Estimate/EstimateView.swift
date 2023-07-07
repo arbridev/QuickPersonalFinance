@@ -159,7 +159,7 @@ struct EstimateView: View {
                 viewModel.isPresentingCurrencyConversion = true
                 HapticsService().impactFeedback()
             } label: {
-                Text("Show in alternative currency")
+                Text("estimate.convert.currency")
                     .font(.App.input)
             }
             .sheet(isPresented: $viewModel.isPresentingCurrencyConversion) {

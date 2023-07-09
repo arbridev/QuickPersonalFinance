@@ -8,8 +8,12 @@
 import Foundation
 import CoreData
 
+protocol CurrencyControl where Self: Actor {
+    func makeCurrencyCalculationService() async throws -> CurrencyCalculationService?
+}
+
 /// Controller for currency conversion operations.
-actor CurrencyConversionController {
+actor CurrencyConversionController: CurrencyControl {
 
     // MARK: Properties
 

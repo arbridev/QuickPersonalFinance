@@ -15,6 +15,7 @@ struct Constant {
     static let workHoursPerDay: Double = 8
     static let workDaysPerWeek: Double = 5
     static let defaultCurrencyID: String = "USD"
+    static let secondaryCurrencyID: String = "EUR"
     static let maxLengthNameField = 30
     static let maxLengthMoreField = 50
     static let maxLengthValueField = 20
@@ -22,6 +23,7 @@ struct Constant {
     static let maxLengthWorkDaysPerWeekField = 4
     static let currencyRefreshInterval: TimeInterval = 60 * 2
     static let currencyAPIURL = secrets.currencyAPIURL
+    static let currencyIDs = Locale.Currency.isoCurrencies.map({ $0.identifier })
 
     private static let secrets: ArkanaKeysEnvironmentProtocol = {
         #if DEBUG

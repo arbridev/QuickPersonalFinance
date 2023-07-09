@@ -16,7 +16,7 @@ final class QuickPersonalFinanceUITests: XCTestCase {
 
         // Comment the next line if you follow the alternate flow without setupSnapshot
         setupSnapshot(app)
-//        // Alternate flow without setupSnapshot
+        // Alternate flow without setupSnapshot
 //        app.launchArguments += ["-AppleLanguages", "(en-US)"]
 //        app.launchArguments += ["-AppleLocale", "en_US"]
 //        app.launchArguments += ["-AppleLanguages", "(es_419)"]
@@ -29,10 +29,14 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         print("Launch arguments:", app.launchArguments)
         print(Bundle(for: QuickPersonalFinanceUITests.self).bundlePath)
         print("Documents directory:", URL.documentsDirectory)
-        
+
+        // Incomes
+
         fillIncomes(app)
 
         snapshot("incomes")
+
+        // Expenses
 
         app.tabBars["test.tab.bar".localized]
             .buttons["expenses.title".localized]
@@ -42,11 +46,27 @@ final class QuickPersonalFinanceUITests: XCTestCase {
 
         snapshot("expenses")
 
+        // Estimate
+
         app.tabBars["test.tab.bar".localized]
             .buttons["estimate.title".localized]
             .tap()
 
         snapshot("estimate")
+
+        // Currency conversion
+
+        app.buttons["estimate.convert.currency".localized].tap()
+        app.staticTexts["USD"].tap()
+        app.buttons["EUR"].tap()
+
+        sleep(3)
+
+        snapshot("currency_conversion")
+
+        app.buttons["modal_close"].tap()
+
+        // Share
 
         app.buttons["estimate.button.share".localized].tap()
         app.buttons["share.pdf".localized].tap()
@@ -54,7 +74,7 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         let options = app.collectionViews.children(matching: .button)
         options.element(boundBy: options.count - 1).tap()
 
-        sleep(1)
+        sleep(3)
 
         app.navigationBars["FullDocumentManagerViewControllerNavigationBar"].buttons["test.dialog.save".localized].tap()
 

@@ -19,6 +19,21 @@ scheme("QuickPersonalFinanceUITests")
 # Where should the resulting screenshots be stored?
 output_directory("./screenshots")
 
+# The number of times a test can fail before snapshot should stop retrying
+number_of_retries(0)
+
+# Enabling this option will prevent displaying the simulator window
+headless(false)
+
+# Enabling this option will configure the Simulator to be in dark mode (false for light, true for dark)
+dark_mode(false)
+
+# Enabling this option will configure the Simulator's system language
+localize_simulator(true) # not working
+
+# Take snapshots on multiple simulators concurrently. Note: This option is only applicable when running against Xcode 9
+concurrent_simulators(false)
+
 # remove the '#' to clear all previously generated screenshots before creating new ones
 # clear_previous_screenshots(true)
 
@@ -27,15 +42,6 @@ output_directory("./screenshots")
 
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
 # launch_arguments(["-snapshot"])
-
-# Retries
-number_of_retries(0)
-
-# Headless
-headless(false)
-
-# Dark mode
-dark_mode(false)
 
 # For more information about all available options run
 # fastlane action snapshot

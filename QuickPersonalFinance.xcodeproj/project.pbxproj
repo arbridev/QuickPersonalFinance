@@ -30,6 +30,7 @@
 		144E4E5C29F4693A00EEDC9B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 144E4E5E29F4693A00EEDC9B /* Localizable.strings */; };
 		144E4E6029F472C200EEDC9B /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E4E5F29F472C200EEDC9B /* String+Localization.swift */; };
 		1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */; };
+		1459B0942A5AF4370047B40B /* MockCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1459B0932A5AF4370047B40B /* MockCurrency.swift */; };
 		145F124C29FAA4EB009853A8 /* SettingsActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F124B29FAA4EB009853A8 /* SettingsActionView.swift */; };
 		145F124E29FAA505009853A8 /* SettingsActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F124D29FAA505009853A8 /* SettingsActionViewModel.swift */; };
 		145F125029FAA63C009853A8 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F124F29FAA63C009853A8 /* SettingsService.swift */; };
@@ -134,6 +135,7 @@
 		144E4E5F29F472C200EEDC9B /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		144E4E6129F4A2A200EEDC9B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockData+Persistence.swift"; sourceTree = "<group>"; };
+		1459B0932A5AF4370047B40B /* MockCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrency.swift; sourceTree = "<group>"; };
 		145F124B29FAA4EB009853A8 /* SettingsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionView.swift; sourceTree = "<group>"; };
 		145F124D29FAA505009853A8 /* SettingsActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionViewModel.swift; sourceTree = "<group>"; };
 		145F124F29FAA63C009853A8 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				14B4393B29E4CC8E005E31A9 /* MockData.swift */,
 				1453E7EB29F6BD8B0000663B /* MockData+Persistence.swift */,
 				148D915C2A38C55F005E6F38 /* MockingHelper.swift */,
+				1459B0932A5AF4370047B40B /* MockCurrency.swift */,
 			);
 			path = Mocking;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				14C4D3BC2A3DE8AD00733A69 /* Serializer.swift in Sources */,
 				14A16A0E29BA80AC00B69FD7 /* ExpenseActionView.swift in Sources */,
 				148745242A4C5FA500CC91DB /* CalculationService+Currency.swift in Sources */,
+				1459B0942A5AF4370047B40B /* MockCurrency.swift in Sources */,
 				145F125029FAA63C009853A8 /* SettingsService.swift in Sources */,
 				144DB7B729EEDBE100DF3585 /* ExpensesViewModel.swift in Sources */,
 				1403933129C9DF1600049CCB /* OutlinedTextFieldStyle.swift in Sources */,

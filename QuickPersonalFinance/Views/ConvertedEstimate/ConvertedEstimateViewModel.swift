@@ -43,8 +43,8 @@ extension ConvertedEstimateView {
         var moc: NSManagedObjectContext?
         var persistenceService: (any CurrencyDataService)?
         var externalService: (any ExternalCurrencyService)?
-        var controller: CurrencyConversionController?
-        var currencyIDs: [String] = Locale.Currency.isoCurrencies.map({ $0.identifier })
+        var controller: (any CurrencyControl)?
+        var currencyIDs: [String] = Constant.currencyIDs
 
         // MARK: Initialization
 
@@ -65,13 +65,19 @@ extension ConvertedEstimateView {
             self.recurrence = recurrence
             self.moc = moc
             pickerSelectedCurrency = settings.currencyID
-            externalService = ExternalCurrency()
-            persistenceService = CurrencyDataPersistence(moc: moc)
-            controller = CurrencyConversionController(
-                persistenceService: persistenceService!,
-                externalService: externalService!,
-                userData: userData
-            )
+
+            if LaunchArguments.shared.contains(.testing) {
+                controller = MockCurrencyController()
+                currencyIDs = MockData.currencyIDs
+            } else {
+                externalService = ExternalCurrency()
+                persistenceService = CurrencyDataPersistence(moc: moc)
+                controller = CurrencyConversionController(
+                    persistenceService: persistenceService!,
+                    externalService: externalService!,
+                    userData: userData
+                )
+            }
             setInitialState()
         }
 

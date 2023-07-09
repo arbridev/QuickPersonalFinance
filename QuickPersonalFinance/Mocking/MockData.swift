@@ -40,4 +40,12 @@ struct MockData {
     static let latestCurrencies: LatestCurrencies = MockingHelper.parseJSON(
         fromFileWithName: "example"
     )
+    static let currencyIDs = Locale.Currency.isoCurrencies
+        .filter { isoCurrency in
+            isoCurrency.identifier == Constant.defaultCurrencyID ||
+            isoCurrency.identifier == Constant.secondaryCurrencyID
+        }
+        .map { isoCurrency in
+            isoCurrency.identifier
+        }
 }

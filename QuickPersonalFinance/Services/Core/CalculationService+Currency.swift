@@ -22,11 +22,11 @@ protocol CurrencyCalculationService {
 }
 
 extension Calculation {
-    struct CurrencyCalculation: CurrencyCalculationService {
+    class CurrencyCalculation: CurrencyCalculationService {
         let baseCurrency: Currency
         let currencies: [String: Currency]
 
-        init?(_ currencies: [String: Currency]) {
+        required init?(_ currencies: [String: Currency]) {
             guard let baseCurrency = currencies["USD"] else {
                 return nil
             }

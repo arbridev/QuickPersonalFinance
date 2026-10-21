@@ -197,6 +197,14 @@
 		14DD43422A0E9E7F007E75B7 /* PDFDocument+AddPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFDocument+AddPage.swift"; sourceTree = "<group>"; };
 		14EAC6142A216D9E0048B1B4 /* LaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArguments.swift; sourceTree = "<group>"; };
 		14F533182A113FC8002772CC /* Font+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Report.swift"; sourceTree = "<group>"; };
+		14F6B01E3088FFD10051C921 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		14F6B01F3088FFD10051C921 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		14F6B0203088FFD10051C921 /* Pluginfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Pluginfile; sourceTree = "<group>"; };
+		14F6B0213088FFD10051C921 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		14F6B0223088FFD10051C921 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		14F6B0233088FFD10051C921 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
+		14F6B0243088FFD10051C921 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		14F6B0263088FFD10051C921 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		14F8446E2A3A1D5300289D5E /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		14F844702A3A232C00289D5E /* ExternalCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCurrencyService.swift; sourceTree = "<group>"; };
 		14F844762A3A7FE500289D5E /* CurrencyDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataPersistence.swift; sourceTree = "<group>"; };
@@ -288,6 +296,8 @@
 				149ABEBE29BA282B0088CE94 /* Products */,
 				14C180A82A197A46004CDBE7 /* Frameworks */,
 				BD11230CE8E560E5A60884E5 /* Pods */,
+				14F6B0253088FFD10051C921 /* fastlane */,
+				14F6B0263088FFD10051C921 /* Gemfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -554,6 +564,20 @@
 				D810AC8D465F0F8128DC1DC8 /* Pods_QuickPersonalFinanceTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14F6B0253088FFD10051C921 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				14F6B01E3088FFD10051C921 /* Appfile */,
+				14F6B01F3088FFD10051C921 /* Fastfile */,
+				14F6B0203088FFD10051C921 /* Pluginfile */,
+				14F6B0213088FFD10051C921 /* README.md */,
+				14F6B0223088FFD10051C921 /* report.xml */,
+				14F6B0233088FFD10051C921 /* Snapfile */,
+				14F6B0243088FFD10051C921 /* SnapshotHelper.swift */,
+			);
+			path = fastlane;
 			sourceTree = "<group>";
 		};
 		14F844722A3A7B4300289D5E /* Persistence */ = {
@@ -843,9 +867,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests/Pods-QuickPersonalFinance-QuickPersonalFinanceUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -860,9 +888,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickPersonalFinance/Pods-QuickPersonalFinance-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -991,7 +1023,7 @@
 /* Begin PBXTargetDependency section */
 		1439F8C029FFFCDA00544883 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 1439F8BF29FFFCDA00544883 /* plugin:SwiftLint */;
+			productRef = 1439F8BF29FFFCDA00544883 /* SwiftLint */;
 		};
 		149ABECF29BA28310088CE94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1352,7 +1384,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1439F8BF29FFFCDA00544883 /* plugin:SwiftLint */ = {
+		1439F8BF29FFFCDA00544883 /* SwiftLint */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1439F8BE29FFFCD100544883 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
 			productName = "plugin:SwiftLint";

@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios code_signing
 ```
 
-Generates code signing items (certificates and provisioning profiles)
+Syncs certificates and provisioning profiles with match. environment: development, stage, or production (lane option, otherwise APP_BUILD_ENVIRONMENT), mapped to match types development, adhoc, and appstore. readonly defaults to true.
 
 ### ios bump_build
 
@@ -29,7 +29,7 @@ Generates code signing items (certificates and provisioning profiles)
 [bundle exec] fastlane ios bump_build
 ```
 
-Increments the build number
+Sets the Xcode build number to the latest TestFlight build plus one. Does not commit.
 
 ### ios bump_version
 
@@ -37,7 +37,7 @@ Increments the build number
 [bundle exec] fastlane ios bump_version
 ```
 
-Increments the version number (bump_type: patch, minor or major)
+Bumps the marketing version in the Xcode project. bump_type: patch (default), minor, or major. Does not commit.
 
 ### ios set_current_version_and_build
 
@@ -45,7 +45,7 @@ Increments the version number (bump_type: patch, minor or major)
 [bundle exec] fastlane ios set_current_version_and_build
 ```
 
-Sets current version and build
+Writes the latest TestFlight version and build number into the Xcode project. Uses 0.1.0 when TestFlight has no version. Does not commit.
 
 ### ios commit_current_version_and_build
 
@@ -53,7 +53,7 @@ Sets current version and build
 [bundle exec] fastlane ios commit_current_version_and_build
 ```
 
-Commit current version and build
+Writes the latest TestFlight version and build into the Xcode project, then commits that version bump.
 
 ### ios tag_release
 
@@ -61,7 +61,7 @@ Commit current version and build
 [bundle exec] fastlane ios tag_release
 ```
 
-Tag release
+Creates a local git tag named with the latest TestFlight version. Uses 0.1.0 when TestFlight has no version. Optional commit pins the tag to that commit. Does not push.
 
 ### ios test
 
@@ -69,7 +69,7 @@ Tag release
 [bundle exec] fastlane ios test
 ```
 
-
+Runs the QuickPersonalFinanceTests scheme.
 
 ### ios build
 
@@ -77,7 +77,7 @@ Tag release
 [bundle exec] fastlane ios build
 ```
 
-Generates an ipa
+Builds an ipa. Configuration and export method come from APP_BUILD_ENVIRONMENT: development (Debug, development), stage (Release, ad-hoc), or production (Release, app-store). Defaults to Release and app-store.
 
 ### ios screenshots
 
@@ -85,7 +85,7 @@ Generates an ipa
 [bundle exec] fastlane ios screenshots
 ```
 
-Take the screenshots
+Captures App Store screenshots with snapshot.
 
 ### ios upload
 
@@ -93,7 +93,7 @@ Take the screenshots
 [bundle exec] fastlane ios upload
 ```
 
-Deliver the app to TestFlight
+Uploads an ipa to TestFlight.
 
 ----
 

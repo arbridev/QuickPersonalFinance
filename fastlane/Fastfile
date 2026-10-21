@@ -15,6 +15,14 @@
 
 default_platform(:ios)
 
+module Fastlane
+  module Actions
+    module SharedValues
+      ENVIRONMENT = :ENVIRONMENT
+    end
+  end
+end
+
 platform :ios do
 
   code_signing_type = {
@@ -46,6 +54,10 @@ platform :ios do
   provisioning_profile_development = "match Development org.arbridev.QuickPersonalFinance"
   provisioning_profile_appstore = "match AppStore org.arbridev.QuickPersonalFinance"
 
+  before_all do |lane, options|
+    lane_context[SharedValues::ENVIRONMENT] = ENV["APP_BUILD_ENVIRONMENT"]
+  end
+
   before_each do |lane, options|
     app_store_connect_api_key
   end
@@ -58,20 +70,22 @@ platform :ios do
     notification(subtitle: "A error occured", message: "#{lane}")
   end
 
-  desc "Generates code signing items (certificates and provisioning profiles)"
+  desc "Syncs certificates and provisioning profiles with match. environment: development, stage, or production (lane option, otherwise APP_BUILD_ENVIRONMENT), mapped to match types development, adhoc, and appstore. readonly defaults to true."
   lane :code_signing do |options|
     log_settings
 
-    readonly = options.fetch(:readonly, true)
-    environment = lane_context[SharedValues::ENVIRONMENT]
+    environment = options.fetch(:environment) {
+      lane_context[SharedValues::ENVIRONMENT]
+    }
+    UI.user_error!("environment must be development, stage, or production") unless code_signing_type.key?(environment)
 
     match(
       type: code_signing_type[environment],
-      readonly: readonly
+      readonly: options.fetch(:readonly, true)
     )
   end
 
-  desc "Increments the build number"
+  desc "Sets the Xcode build number to the latest TestFlight build plus one. Does not commit."
   lane :bump_build do |options|
     latest_testflight_build_number
     latest_build_number = lane_context[SharedValues::LATEST_TESTFLIGHT_BUILD_NUMBER]
@@ -81,7 +95,7 @@ platform :ios do
     )
   end
 
-  desc "Increments the version number (bump_type: patch, minor or major)"
+  desc "Bumps the marketing version in the Xcode project. bump_type: patch (default), minor, or major. Does not commit."
   lane :bump_version do |options|
     latest_testflight_build_number
     latest_version_number = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION] ||= initial_version
@@ -91,7 +105,7 @@ platform :ios do
     )
   end
 
-  desc "Sets current version and build"
+  desc "Writes the latest TestFlight version and build number into the Xcode project. Uses 0.1.0 when TestFlight has no version. Does not commit."
   lane :set_current_version_and_build do |options|
     latest_testflight_build_number
     latest_build_number = lane_context[SharedValues::LATEST_TESTFLIGHT_BUILD_NUMBER]
@@ -107,7 +121,7 @@ platform :ios do
     [latest_version_number, latest_build_number]
   end
 
-  desc "Commit current version and build"
+  desc "Writes the latest TestFlight version and build into the Xcode project, then commits that version bump."
   lane :commit_current_version_and_build do |options|
     (version, build) = set_current_version_and_build
     commit_version_bump(
@@ -115,7 +129,7 @@ platform :ios do
     )
   end
 
-  desc "Tag release"
+  desc "Creates a local git tag named with the latest TestFlight version. Uses 0.1.0 when TestFlight has no version. Optional commit pins the tag to that commit. Does not push."
   lane :tag_release do |options|
     latest_testflight_build_number
     latest_version_number = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION] ||= initial_version
@@ -130,6 +144,7 @@ platform :ios do
     )
   end
 
+  desc "Runs the QuickPersonalFinanceTests scheme."
   lane :test do
     run_tests(
       workspace: workspace_file_path,
@@ -137,7 +152,7 @@ platform :ios do
     )
   end
 
-  desc "Generates an ipa"
+  desc "Builds an ipa. Configuration and export method come from APP_BUILD_ENVIRONMENT: development (Debug, development), stage (Release, ad-hoc), or production (Release, app-store). Defaults to Release and app-store."
   lane :build do |options|
     environment = lane_context[SharedValues::ENVIRONMENT]
     build_app(
@@ -153,17 +168,17 @@ platform :ios do
     )
   end
 
-  desc "Take the screenshots"
+  desc "Captures App Store screenshots with snapshot."
   lane :screenshots do |options|
     snapshot
   end
 
-  desc "Deliver the app to TestFlight"
+  desc "Uploads an ipa to TestFlight."
   lane :upload do |options|
     upload_to_testflight
   end
 
-  desc "Logs the current settings"
+  desc "Prints the process environment."
   private_lane :log_settings do |options|
     system('printenv')
     debug ENV

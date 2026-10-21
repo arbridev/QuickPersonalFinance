@@ -31,7 +31,7 @@ class IncomePersistence: IncomePersistenceService {
 
     func load(itemWithID id: UUID) -> Income? {
         let request = NSFetchRequest<StoredIncome>(entityName: "\(StoredIncome.self)")
-        request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         if let fetchedObject = try? moc.fetch(request).first {
             return Income.from(fetchedObject)
         }
@@ -66,7 +66,7 @@ class IncomePersistence: IncomePersistenceService {
 
     private func load(itemWithID id: UUID) -> StoredIncome? {
         let request = NSFetchRequest<StoredIncome>(entityName: "\(StoredIncome.self)")
-        request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         return try? moc.fetch(request).first
     }
 }

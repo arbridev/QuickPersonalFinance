@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Source: Codable, Hashable {
+protocol Source: Codable, Hashable, Identifiable {
     var id: UUID { get }
     var name: String { get }
     var more: String? { get }

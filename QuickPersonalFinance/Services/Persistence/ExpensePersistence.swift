@@ -31,7 +31,7 @@ class ExpensePersistence: ExpensePersistenceService {
 
     func load(itemWithID id: UUID) -> Expense? {
         let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
-        request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         if let fetchedObject = try? moc.fetch(request).first {
             return Expense.from(fetchedObject)
         }
@@ -66,7 +66,7 @@ class ExpensePersistence: ExpensePersistenceService {
 
     private func load(itemWithID id: UUID) -> StoredExpense? {
         let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
-        request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         return try? moc.fetch(request).first
     }
 }

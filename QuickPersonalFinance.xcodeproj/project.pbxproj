@@ -1156,6 +1156,7 @@
 				INFOPLIST_FILE = QuickPersonalFinance/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Quick Personal Finance";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -1194,6 +1195,7 @@
 				INFOPLIST_FILE = QuickPersonalFinance/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Quick Personal Finance";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";

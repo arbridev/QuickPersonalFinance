@@ -294,7 +294,7 @@ extension ExportPDFView {
 
     // MARK: Creation methods
 
-    func createSources(
+    static func createSources(
         mainTitle: String?,
         sectionTitles: [String?],
         sources: [[any Source]?]
@@ -302,7 +302,7 @@ extension ExportPDFView {
         ReportSourcesView(mainTitle: mainTitle, sectionTitles: sectionTitles, sources: sources)
     }
 
-    func createEstimate(
+    static func createEstimate(
         incomeTotal: Double,
         expenseTotal: Double,
         balance: Double,

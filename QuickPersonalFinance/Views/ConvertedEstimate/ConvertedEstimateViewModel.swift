@@ -16,8 +16,9 @@ extension ConvertedEstimateView {
 
         @Published var pickerSelectedCurrency = Constant.defaultCurrencyID {
             didSet {
-                Task.detached(priority: .background) {
-                    await self.convert()
+                conversionTask?.cancel()
+                conversionTask = Task {
+                    await convert()
                 }
             }
         }
@@ -45,6 +46,7 @@ extension ConvertedEstimateView {
         var externalService: (any ExternalCurrencyService)?
         var controller: (any CurrencyControl)?
         var currencyIDs: [String] = Constant.currencyIDs
+        private var conversionTask: Task<Void, Never>?
 
         // MARK: Initialization
 
@@ -117,6 +119,7 @@ extension ConvertedEstimateView {
             guard let converter = try await controller?.makeCurrencyCalculationService() else {
                 return
             }
+            try Task.checkCancellation()
             incomeTotal = try converter.convert(incomeTotal, from: userCurrency, to: pickerSelectedCurrency)
             expenseTotal = try converter.convert(expenseTotal, from: userCurrency, to: pickerSelectedCurrency)
             balance = try converter.convert(balance, from: userCurrency, to: pickerSelectedCurrency)
@@ -135,12 +138,16 @@ extension ConvertedEstimateView {
         private func convert() async {
             isRefreshing = true
             defer {
-                isRefreshing = false
+                if !Task.isCancelled {
+                    isRefreshing = false
+                }
             }
 
             do {
                 try await setConversion()
                 setErrorMessage(nil)
+            } catch is CancellationError {
+                return
             } catch {
                 if let error = error as? Calculation.CurrencyCalculationError {
                     setErrorMessage(error.localizedDescription)

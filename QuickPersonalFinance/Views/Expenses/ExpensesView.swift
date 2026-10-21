@@ -49,7 +49,7 @@ struct ExpensesView: View {
                     Text("expenses.title")
                         .asScreenTitle()
                     List {
-                        ForEach(mainData.financeData.expenses, id: \.hashValue) { expense in
+                        ForEach(mainData.financeData.expenses) { expense in
                             SourceRowView(source: expense, currencyID: viewModel.currencyID)
                                 .onTapGesture {
                                     viewModel.selectedItem = expense
@@ -58,8 +58,8 @@ struct ExpensesView: View {
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }
                     .font(.App.standard)
-                    .sheet(isPresented: $viewModel.isPresentingEditAction) {
-                        ExpenseActionView(editingExpense: viewModel.selectedItem!)
+                    .sheet(item: $viewModel.selectedItem) { expense in
+                        ExpenseActionView(editingExpense: expense)
                             .environmentObject(mainData)
                     }
                 }

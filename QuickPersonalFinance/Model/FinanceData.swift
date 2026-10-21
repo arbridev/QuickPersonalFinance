@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FinanceData {
+struct FinanceData: Equatable {
     let incomes: [Income]
     let expenses: [Expense]
 }

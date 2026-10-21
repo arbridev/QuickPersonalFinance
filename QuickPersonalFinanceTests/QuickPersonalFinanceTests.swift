@@ -113,6 +113,40 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertNil(persistence.load())
     }
 
+    func testExpensePersistenceRoundTrip() throws {
+        let controller = DataController(inMemory: true)
+        let persistence = ExpensePersistence(moc: controller.container.viewContext)
+        let expense = Expense(id: UUID(), name: "expense", more: nil, grossValue: 10, recurrence: .month)
+
+        persistence.save(item: expense)
+        XCTAssertEqual(persistence.load(itemWithID: expense.id)?.name, "expense")
+
+        let edited = Expense(id: expense.id, name: "edited", more: "more", grossValue: 20, recurrence: .year)
+        persistence.update(item: edited)
+        XCTAssertEqual(persistence.load(itemWithID: expense.id), edited)
+
+        persistence.delete(item: edited)
+        XCTAssertNil(persistence.load(itemWithID: expense.id))
+        XCTAssertTrue(persistence.loadAll().isEmpty)
+    }
+
+    func testIncomePersistenceRoundTrip() throws {
+        let controller = DataController(inMemory: true)
+        let persistence = IncomePersistence(moc: controller.container.viewContext)
+        let incomes = [
+            Income(id: UUID(), name: "first", more: nil, grossValue: 10, recurrence: .month),
+            Income(id: UUID(), name: "second", more: nil, grossValue: 20, recurrence: .week)
+        ]
+        incomes.forEach { persistence.save(item: $0) }
+
+        let edited = Income(id: incomes[0].id, name: "edited", more: nil, grossValue: 15, recurrence: .day)
+        persistence.update(item: edited)
+        XCTAssertEqual(persistence.load(itemWithID: edited.id), edited)
+
+        persistence.delete(items: incomes)
+        XCTAssertTrue(persistence.loadAll().isEmpty)
+    }
+
     func testCurrencyConversionUSDtoEUR() throws {
         let currencies = MockData.latestCurrencies.data
         guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {

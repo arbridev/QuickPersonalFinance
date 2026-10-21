@@ -15,12 +15,7 @@ extension IncomesView {
 
         @Published var mainData: AppData?
         @Published var isPresentingCreateAction = false
-        @Published var isPresentingEditAction = false
-        @Published var selectedItem: Income? {
-            didSet {
-                isPresentingEditAction.toggle()
-            }
-        }
+        @Published var selectedItem: Income?
 
         private let settings: SettingsService
         var moc: NSManagedObjectContext?

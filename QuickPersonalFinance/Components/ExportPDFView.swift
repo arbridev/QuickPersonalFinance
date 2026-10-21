@@ -8,47 +8,40 @@
 import SwiftUI
 import PDFKit
 import Charts
+import UniformTypeIdentifiers
 
 /// Reference: https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-a-swiftui-view-to-a-pdf
 @MainActor
 struct ExportPDFView: View {
     @EnvironmentObject private var mainData: AppData
     var recurrence: Recurrence
-    @State private var calculations: CalculationService?
-    @State private var incomeTotal: Double?
-    @State private var expenseTotal: Double?
-    @State private var balance: Double?
 
     var body: some View {
-        ShareLink("share.pdf", item: render())
-            .onAppear {
-                calculations = Calculation()
-                incomeTotal = calculations!.totalize(
-                    sources: mainData.financeData.incomes,
-                    to: recurrence)
-                expenseTotal = calculations!.totalize(
-                    sources: mainData.financeData.expenses,
-                    to: recurrence)
-                balance = calculations!.makeBalance(
-                    incomes: mainData.financeData.incomes,
-                    expenses: mainData.financeData.expenses,
-                    basedOn: recurrence)
-            }
+        ShareLink(
+            "share.pdf",
+            item: Report(financeData: mainData.financeData, recurrence: recurrence),
+            preview: SharePreview(Text("share.report.report"))
+        )
     }
 
-    func render() -> URL {
+    static func render(financeData: FinanceData, recurrence: Recurrence) -> URL {
         var pdfs = [PDFDocument]()
 
         // Render sources of incomes and expenses pages
-        subrenderSources(pdfs: &pdfs)
+        subrenderSources(financeData: financeData, pdfs: &pdfs)
 
         // Render the estimage page
+        let calculations = Calculation()
         let estimateURL = subrender(
             fileName: "estimate.pdf",
             content: createEstimate(
-                incomeTotal: incomeTotal ?? 0.0,
-                expenseTotal: expenseTotal ?? 0.0,
-                balance: balance ?? 0.0,
+                incomeTotal: calculations.totalize(sources: financeData.incomes, to: recurrence),
+                expenseTotal: calculations.totalize(sources: financeData.expenses, to: recurrence),
+                balance: calculations.makeBalance(
+                    incomes: financeData.incomes,
+                    expenses: financeData.expenses,
+                    basedOn: recurrence
+                ),
                 recurrence: recurrence
             )
         )
@@ -85,7 +78,7 @@ struct ExportPDFView: View {
         return reportPDF?.documentURL ?? estimateURL
     }
 
-    func subrender(fileName: String, content: some View) -> URL {
+    static func subrender(fileName: String, content: some View) -> URL {
         let url = URL.temporaryDirectory.appending(path: fileName)
         let pdfDpi: Double = 72.0
         let letterWidth = 8.5 * pdfDpi
@@ -112,9 +105,9 @@ struct ExportPDFView: View {
         return url
     }
 
-    private func subrenderSources(pdfs: inout [PDFDocument]) {
-        let incomes = mainData.financeData.incomes
-        let expenses = mainData.financeData.expenses
+    private static func subrenderSources(financeData: FinanceData, pdfs: inout [PDFDocument]) {
+        let incomes = financeData.incomes
+        let expenses = financeData.expenses
         let limit = 25
         var page = 1
         var incomesIndex = 0
@@ -163,7 +156,7 @@ struct ExportPDFView: View {
         }
     }
 
-    private func processSourcesSection(
+    private static func processSourcesSection(
         sources: [any Source],
         sourcesIndex: inout Int,
         pageSources: inout [any Source]?,
@@ -182,5 +175,25 @@ struct ExportPDFView: View {
 
     init(recurrence: Recurrence) {
         self.recurrence = recurrence
+    }
+}
+
+// MARK: - Report
+
+extension ExportPDFView {
+    /// Renders the PDF only when the share sheet requests the file
+    struct Report: Transferable {
+        let financeData: FinanceData
+        let recurrence: Recurrence
+
+        static var transferRepresentation: some TransferRepresentation {
+            FileRepresentation(exportedContentType: .pdf) { report in
+                let url = await ExportPDFView.render(
+                    financeData: report.financeData,
+                    recurrence: report.recurrence
+                )
+                return SentTransferredFile(url)
+            }
+        }
     }
 }

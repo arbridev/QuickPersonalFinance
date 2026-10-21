@@ -15,12 +15,7 @@ extension ExpensesView {
 
         @Published var mainData: AppData?
         @Published var isPresentingCreateAction = false
-        @Published var isPresentingEditAction = false
-        @Published var selectedItem: Expense? {
-            didSet {
-                isPresentingEditAction.toggle()
-            }
-        }
+        @Published var selectedItem: Expense?
         
         private let settings: SettingsService
         var moc: NSManagedObjectContext?

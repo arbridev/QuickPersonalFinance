@@ -154,6 +154,9 @@ struct EstimateView: View {
                 viewModel.input(mainData: mainData)
                 viewModel.update()
             }
+            .onChange(of: mainData.financeData) { _ in
+                viewModel.update()
+            }
 
             Button {
                 viewModel.isPresentingCurrencyConversion = true

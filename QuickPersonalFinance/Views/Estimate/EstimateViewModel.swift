@@ -14,9 +14,7 @@ extension EstimateView {
         // MARK: Properties
 
         @Published private(set) var mainData: AppData?
-        @Published var incomeTotal: Double = 0.0
-        @Published var expenseTotal: Double = 0.0
-        @Published var balance: Double = 0.0
+        @Published private(set) var summary: EstimateSummary
         @Published var selectedRecurrence: Recurrence = .year {
             didSet {
                 update()
@@ -32,47 +30,22 @@ extension EstimateView {
             }
         }
         @Published var isPresentingCurrencyConversion = false
-        
+
         private let settings: SettingsService
         private let calculations: CalculationService
 
-        var balanceInfoMessage: String {
-            String(
-                format: "estimate.balance.info.message".localized,
-                currencyID,
-                selectedRecurrence.rawValue.localized
-            )
-        }
+        // MARK: Initialization
 
-        var shareMessage: String {
-            if balance > 0.0 {
-                return String(
-                    format: "estimate.share.message.save".localized,
-                    selectedRecurrence.rawValue.localized,
-                    incomeTotal.asCurrency(withID: currencyID),
-                    expenseTotal.asCurrency(withID: currencyID),
-                    balance.asCurrency(withID: currencyID),
-                    currencyID
-                )
-            } else {
-                return String(
-                    format: "estimate.share.message.lose".localized,
-                    selectedRecurrence.rawValue.localized,
-                    incomeTotal.asCurrency(withID: currencyID),
-                    expenseTotal.asCurrency(withID: currencyID),
-                    balance.asCurrency(withID: currencyID),
-                    currencyID
-                )
-            }
-        }
-
-        var currencyID: String {
-            settings.currencyID
-        }
-
-        init() {
-            settings = Settings()
+        init(settings: SettingsService) {
+            self.settings = settings
             calculations = Calculation(settings: settings)
+            summary = EstimateSummary(
+                incomeTotal: 0,
+                expenseTotal: 0,
+                balance: 0,
+                recurrence: .year,
+                currencyID: settings.currencyID
+            )
         }
 
         // MARK: Behavior
@@ -85,25 +58,19 @@ extension EstimateView {
             guard let mainData else {
                 return
             }
-            incomeTotal = calculations.totalize(
-                sources: mainData.financeData.incomes,
-                to: selectedRecurrence
+            summary = EstimateSummary(
+                financeData: mainData.financeData,
+                recurrence: selectedRecurrence,
+                currencyID: settings.currencyID,
+                calculation: calculations
             )
-            expenseTotal = calculations.totalize(
-                sources: mainData.financeData.expenses,
-                to: selectedRecurrence
-            )
-            balance = incomeTotal - expenseTotal
             createChartData()
         }
 
         private func createChartData() {
-            guard mainData != nil else {
-                return
-            }
             let barChartData = [
-                BarValue(title: "estimate.table.income".localized, total: incomeTotal),
-                BarValue(title: "estimate.table.expense".localized, total: expenseTotal)
+                BarValue(title: "estimate.table.income".localized, total: summary.incomeTotal),
+                BarValue(title: "estimate.table.expense".localized, total: summary.expenseTotal)
             ]
             self.barChartData = barChartData
         }

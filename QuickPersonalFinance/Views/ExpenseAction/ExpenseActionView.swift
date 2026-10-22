@@ -19,9 +19,8 @@ struct ExpenseActionView: View {
 
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.managedObjectContext) var moc
 
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
     @FocusState private var focusedField: Field?
 
     var editingExpense: Expense?
@@ -114,7 +113,7 @@ struct ExpenseActionView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.input(mainData: mainData, moc: moc)
+            viewModel.input(mainData: mainData)
             viewModel.editingExpense = editingExpense
         }
         .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {}
@@ -122,10 +121,9 @@ struct ExpenseActionView: View {
 
     // MARK: Initialization
 
-    init() {}
-
-    init(editingExpense: Expense) {
+    init(services: AppServices, editingExpense: Expense? = nil) {
         self.editingExpense = editingExpense
+        _viewModel = StateObject(wrappedValue: ViewModel(services: services))
     }
 }
 
@@ -139,7 +137,7 @@ struct ExpenseActionView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        ExpenseActionView()
+        ExpenseActionView(services: .preview)
             .environmentObject(envObject)
     }
 }

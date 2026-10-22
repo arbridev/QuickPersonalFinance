@@ -19,7 +19,7 @@ struct SettingsActionView: View {
     
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
     @FocusState private var focusedField: Field?
 
     var body: some View {
@@ -102,12 +102,18 @@ struct SettingsActionView: View {
             }
         }
     }
+
+    // MARK: Initialization
+
+    init(settings: SettingsService) {
+        _viewModel = StateObject(wrappedValue: ViewModel(settings: settings))
+    }
 }
 
 // MARK: - Previews
 
 struct SettingsActionView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsActionView()
+        SettingsActionView(settings: AppServices.preview.settings)
     }
 }

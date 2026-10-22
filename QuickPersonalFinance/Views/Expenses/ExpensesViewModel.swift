@@ -5,7 +5,7 @@
 //  Created by Armando Brito on 18/4/23.
 //
 
-import CoreData
+import Foundation
 import OSLog
 
 extension ExpensesView {
@@ -17,24 +17,23 @@ extension ExpensesView {
         @Published var mainData: AppData?
         @Published var isPresentingCreateAction = false
         @Published var selectedItem: Expense?
-        
+
         private let settings: SettingsService
-        var moc: NSManagedObjectContext?
-        var persistenceService: (any ExpensePersistenceService)?
+        private let persistenceService: any ExpensePersistenceService
 
         var currencyID: String {
             settings.currencyID
         }
 
-        init() {
-            settings = Settings()
+        init(services: AppServices) {
+            settings = services.settings
+            persistenceService = services.expensePersistence
         }
 
         // MARK: Behavior
 
-        func input(mainData: AppData, moc: NSManagedObjectContext) {
+        func input(mainData: AppData) {
             self.mainData = mainData
-            persistenceService = ExpensePersistence(moc: moc)
         }
 
         func deleteItems(at offsets: IndexSet) {
@@ -47,7 +46,7 @@ extension ExpensesView {
             let forDeletion = oldData.financeData.expenses.subtracting(expenses)
 
             do {
-                try persistenceService?.delete(items: forDeletion)
+                try persistenceService.delete(items: forDeletion)
             } catch {
                 Logger.persistence.error("Could not delete expenses: \(error.localizedDescription)")
                 HapticsService().notificationFeedback(.error)

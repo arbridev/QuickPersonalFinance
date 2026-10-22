@@ -5,7 +5,7 @@
 //  Created by Armando Brito on 7/4/23.
 //
 
-import CoreData
+import Foundation
 import OSLog
 
 extension ExpenseActionView {
@@ -51,8 +51,7 @@ extension ExpenseActionView {
         @Published var errorMessage: String?
 
         private let settings: SettingsService
-        var moc: NSManagedObjectContext?
-        var persistenceService: (any ExpensePersistenceService)?
+        private let persistenceService: any ExpensePersistenceService
 
         var editingExpense: Expense? {
             didSet {
@@ -70,15 +69,15 @@ extension ExpenseActionView {
             settings.currencyID
         }
 
-        init() {
-            settings = Settings()
+        init(services: AppServices) {
+            settings = services.settings
+            persistenceService = services.expensePersistence
         }
 
         // MARK: Behavior
 
-        func input(mainData: AppData, moc: NSManagedObjectContext) {
+        func input(mainData: AppData) {
             self.mainData = mainData
-            self.persistenceService = ExpensePersistence(moc: moc)
         }
 
         func validate() -> Bool {
@@ -104,7 +103,6 @@ extension ExpenseActionView {
         func submit(_ didSubmit: (Bool) -> Void) {
             guard validate(),
                   let oldData = mainData,
-                  let persistenceService,
                   let grossValue = Double(grossValueText) else {
                 didSubmit(false)
                 return
@@ -137,7 +135,6 @@ extension ExpenseActionView {
             guard validate(),
                   let editingExpense,
                   let oldData = mainData,
-                  let persistenceService,
                   let grossValue = Double(grossValueText) else {
                 didEdit(false)
                 return

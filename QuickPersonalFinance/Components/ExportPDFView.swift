@@ -15,35 +15,36 @@ import UniformTypeIdentifiers
 struct ExportPDFView: View {
     @EnvironmentObject private var mainData: AppData
     var recurrence: Recurrence
+    private let settings: SettingsService
 
     var body: some View {
         ShareLink(
             "share.pdf",
-            item: Report(financeData: mainData.financeData, recurrence: recurrence),
+            item: Report(financeData: mainData.financeData, recurrence: recurrence, settings: settings),
             preview: SharePreview(Text("share.report.report"))
         )
     }
 
-    static func render(financeData: FinanceData, recurrence: Recurrence) throws -> URL {
+    static func render(
+        financeData: FinanceData,
+        recurrence: Recurrence,
+        settings: SettingsService
+    ) throws -> URL {
         var pdfs = [PDFDocument]()
 
         // Render sources of incomes and expenses pages
-        try subrenderSources(financeData: financeData, pdfs: &pdfs)
+        try subrenderSources(financeData: financeData, currencyID: settings.currencyID, pdfs: &pdfs)
 
         // Render the estimage page
-        let calculations = Calculation()
+        let summary = EstimateSummary(
+            financeData: financeData,
+            recurrence: recurrence,
+            currencyID: settings.currencyID,
+            calculation: Calculation(settings: settings)
+        )
         let estimateURL = subrender(
             fileName: "estimate.pdf",
-            content: createEstimate(
-                incomeTotal: calculations.totalize(sources: financeData.incomes, to: recurrence),
-                expenseTotal: calculations.totalize(sources: financeData.expenses, to: recurrence),
-                balance: calculations.makeBalance(
-                    incomes: financeData.incomes,
-                    expenses: financeData.expenses,
-                    basedOn: recurrence
-                ),
-                recurrence: recurrence
-            )
+            content: ReportEstimateView(summary: summary)
         )
         pdfs.append(try document(at: estimateURL))
 
@@ -74,15 +75,12 @@ struct ExportPDFView: View {
 
     static func subrender(fileName: String, content: some View) -> URL {
         let url = URL.temporaryDirectory.appending(path: fileName)
-        let pdfDpi: Double = 72.0
-        let letterWidth = 8.5 * pdfDpi
-        let letterHeight = 11 * pdfDpi
         let renderer = ImageRenderer(
             content: content
         )
 
         renderer.render { _, renderer in
-            var box = CGRect(x: 0, y: 0, width: letterWidth, height: letterHeight)
+            var box = CGRect(origin: .zero, size: PageMetrics.pageSize)
 
             guard let pdfContext = CGContext(url as CFURL, mediaBox: &box, nil) else {
                 return
@@ -99,10 +97,14 @@ struct ExportPDFView: View {
         return url
     }
 
-    private static func subrenderSources(financeData: FinanceData, pdfs: inout [PDFDocument]) throws {
+    private static func subrenderSources(
+        financeData: FinanceData,
+        currencyID: String,
+        pdfs: inout [PDFDocument]
+    ) throws {
         let incomes = financeData.incomes
         let expenses = financeData.expenses
-        let limit = 25
+        let limit = PageMetrics.sourcesPerPage
         var page = 1
         var incomesIndex = 0
         var expensesIndex = 0
@@ -138,10 +140,11 @@ struct ExportPDFView: View {
             sources = [pageIncomes, pageExpenses]
             let sourcesURL = subrender(
                 fileName: "sources-\(page).pdf",
-                content: createSources(
+                content: ReportSourcesView(
                     mainTitle: mainTitle,
                     sectionTitles: sectionTitles,
-                    sources: sources
+                    sources: sources,
+                    currencyID: currencyID
                 )
             )
             pdfs.append(try document(at: sourcesURL))
@@ -166,8 +169,9 @@ struct ExportPDFView: View {
         }
     }
 
-    init(recurrence: Recurrence) {
+    init(recurrence: Recurrence, settings: SettingsService) {
         self.recurrence = recurrence
+        self.settings = settings
     }
 }
 
@@ -183,12 +187,14 @@ extension ExportPDFView {
     struct Report: Transferable {
         let financeData: FinanceData
         let recurrence: Recurrence
+        let settings: SettingsService
 
         static var transferRepresentation: some TransferRepresentation {
             FileRepresentation(exportedContentType: .pdf) { report in
                 let url = try await ExportPDFView.render(
                     financeData: report.financeData,
-                    recurrence: report.recurrence
+                    recurrence: report.recurrence,
+                    settings: report.settings
                 )
                 return SentTransferredFile(url)
             }

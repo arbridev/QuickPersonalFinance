@@ -11,16 +11,22 @@ import FirebaseCore
 @main
 struct QuickPersonalFinanceApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var dataController = DataController()
-    
+    @StateObject private var dataController: DataController
+    private let services: AppServices
+
     var body: some Scene {
         WindowGroup {
             if dataController.loadError == nil {
-                ContentView()
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
+                ContentView(services: services)
             } else {
                 EmptyContentView(title: "error.store.title", message: "error.store.message")
             }
         }
+    }
+
+    init() {
+        let dataController = DataController()
+        _dataController = StateObject(wrappedValue: dataController)
+        services = .live(moc: dataController.container.viewContext)
     }
 }

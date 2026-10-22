@@ -13,8 +13,9 @@ struct EstimateView: View {
     // MARK: Properties
 
     @EnvironmentObject private var mainData: AppData
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
 
+    private let services: AppServices
     let barChartColors: [Color] = [.Palette.incomeTable, .Palette.expenseTable]
 
     var body: some View {
@@ -30,7 +31,7 @@ struct EstimateView: View {
                 }
                 .padding(.trailing)
                 .sheet(isPresented: $viewModel.isPresentingSettings) {
-                    SettingsActionView()
+                    SettingsActionView(settings: services.settings)
                 }
             }
 
@@ -65,54 +66,14 @@ struct EstimateView: View {
                     .padding(.horizontal)
 
                 // MARK: Estimate table
-                HStack {
-                    Text("estimate.table.income")
-                    Spacer()
-                    Text("\(viewModel.incomeTotal.asCurrency(withID: viewModel.currencyID))")
-                        .underline(true, color: .Palette.incomeAccent)
-                }
-                .padding(.top)
-                .padding(.horizontal)
-                .font(.app(size: 18))
-
-                HStack {
-                    Text("estimate.table.expense")
-                    Spacer()
-                    Text("\(viewModel.expenseTotal.asCurrency(withID: viewModel.currencyID))")
-                        .underline(true, color: .Palette.expenseAccent)
-                }
-                .padding(.top, 6)
-                .padding(.horizontal)
-                .font(.app(size: 18))
-
-                Divider()
-                    .overlay(Color.Palette.dividerSecondary)
-                    .padding(.top)
-                    .padding(.horizontal)
-
-                HStack {
-                    Text("estimate.table.total")
-                    Spacer()
-                    Text("\(viewModel.balance.asCurrency(withID: viewModel.currencyID))")
-                        .underline(true, color: .Palette.estimateAccent)
-                }
-                .padding(.top)
-                .padding(.horizontal)
-                .font(.app(size: 20))
-
-                HStack {
-                    Spacer()
-                    Text(viewModel.balanceInfoMessage)
-                        .font(.App.info)
-                }
-                .padding(.horizontal)
+                EstimateTableView(summary: viewModel.summary)
 
                 // MARK: Share
                 Menu {
-                    ShareLink(item: viewModel.shareMessage) {
+                    ShareLink(item: viewModel.summary.shareMessage) {
                         Label("share.summary", systemImage: "square.and.arrow.up")
                     }
-                    ExportPDFView(recurrence: viewModel.selectedRecurrence)
+                    ExportPDFView(recurrence: viewModel.selectedRecurrence, settings: services.settings)
                         .environmentObject(mainData)
                 } label: {
                     Label("estimate.button.share", systemImage: "square.and.arrow.up")
@@ -166,12 +127,19 @@ struct EstimateView: View {
                     .font(.App.input)
             }
             .sheet(isPresented: $viewModel.isPresentingCurrencyConversion) {
-                ConvertedEstimateView(recurrence: viewModel.selectedRecurrence)
+                ConvertedEstimateView(services: services, recurrence: viewModel.selectedRecurrence)
                     .environmentObject(mainData)
             }
 
             Spacer()
         }
+    }
+
+    // MARK: Initialization
+
+    init(services: AppServices) {
+        self.services = services
+        _viewModel = StateObject(wrappedValue: ViewModel(settings: services.settings))
     }
 }
 
@@ -196,7 +164,7 @@ struct EstimateView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        EstimateView()
+        EstimateView(services: .preview)
             .environmentObject(envObject)
 //            .previewDevice(PreviewDevice(rawValue: "iPad (10th generation)"))
     }

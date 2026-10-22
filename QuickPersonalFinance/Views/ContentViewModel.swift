@@ -5,7 +5,7 @@
 //  Created by Armando Brito on 20/4/23.
 //
 
-import CoreData
+import Foundation
 import OSLog
 
 extension ContentView {
@@ -16,21 +16,24 @@ extension ContentView {
 
         @Published var mainData: AppData?
 
-        var moc: NSManagedObjectContext?
-        var incomePersistenceService: (any IncomePersistenceService)?
-        var expensePersistenceService: (any ExpensePersistenceService)?
+        private let incomePersistenceService: any IncomePersistenceService
+        private let expensePersistenceService: any ExpensePersistenceService
+
+        // MARK: Initialization
+
+        init(services: AppServices) {
+            incomePersistenceService = services.incomePersistence
+            expensePersistenceService = services.expensePersistence
+        }
 
         // MARK: Behavior
 
-        func input(mainData: AppData, moc: NSManagedObjectContext) {
+        func input(mainData: AppData) {
             self.mainData = mainData
-            self.moc = moc
-            incomePersistenceService = IncomePersistence(moc: moc)
-            expensePersistenceService = ExpensePersistence(moc: moc)
             do {
                 let financeData = FinanceData(
-                    incomes: try incomePersistenceService?.loadAll() ?? [Income](),
-                    expenses: try expensePersistenceService?.loadAll() ?? [Expense]()
+                    incomes: try incomePersistenceService.loadAll(),
+                    expenses: try expensePersistenceService.loadAll()
                 )
                 self.mainData?.financeData = financeData
             } catch {

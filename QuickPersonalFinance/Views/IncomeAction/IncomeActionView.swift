@@ -19,9 +19,8 @@ struct IncomeActionView: View {
 
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.managedObjectContext) var moc
 
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
     @FocusState private var focusedField: Field?
 
     var editingIncome: Income?
@@ -117,7 +116,7 @@ struct IncomeActionView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.input(mainData: mainData, moc: moc)
+            viewModel.input(mainData: mainData)
             viewModel.editingIncome = editingIncome
         }
         .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {}
@@ -125,10 +124,9 @@ struct IncomeActionView: View {
 
     // MARK: Initialization
 
-    init() {}
-
-    init(editingIncome: Income) {
+    init(services: AppServices, editingIncome: Income? = nil) {
         self.editingIncome = editingIncome
+        _viewModel = StateObject(wrappedValue: ViewModel(services: services))
     }
 }
 
@@ -142,7 +140,7 @@ struct IncomeActionView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        IncomeActionView()
+        IncomeActionView(services: .preview)
             .environmentObject(envObject)
     }
 }

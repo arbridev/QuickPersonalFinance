@@ -14,6 +14,9 @@
 		140987902A18225000461A4B /* ConvertedEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409878F2A18225000461A4B /* ConvertedEstimateView.swift */; };
 		140987922A1824B400461A4B /* ConvertedEstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */; };
 		14153FD529E8516E00C90D13 /* ScreenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153FD429E8516E00C90D13 /* ScreenTitle.swift */; };
+		14E5A00000000000000000A2 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000A1 /* AppServices.swift */; };
+		14E5A00000000000000000B2 /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000B1 /* EstimateSummary.swift */; };
+		14E5A00000000000000000C2 /* EstimateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000C1 /* EstimateTableView.swift */; };
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
 		142BA18729ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 142BA18529ECE25A005F4610 /* QuickPersonalFinance.xcdatamodeld */; };
 		1439A0DB29E4376A00197112 /* EstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A0DA29E4376A00197112 /* EstimateViewModel.swift */; };
@@ -118,6 +121,9 @@
 		1409878F2A18225000461A4B /* ConvertedEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedEstimateView.swift; sourceTree = "<group>"; };
 		140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedEstimateViewModel.swift; sourceTree = "<group>"; };
 		14153FD429E8516E00C90D13 /* ScreenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTitle.swift; sourceTree = "<group>"; };
+		14E5A00000000000000000A1 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		14E5A00000000000000000B1 /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
+		14E5A00000000000000000C1 /* EstimateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateTableView.swift; sourceTree = "<group>"; };
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickPersonalFinance.xcdatamodel; sourceTree = "<group>"; };
 		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
@@ -365,6 +371,7 @@
 				14F844742A3A7B7B00289D5E /* External */,
 				14F844732A3A7B7000289D5E /* Support */,
 				14F844722A3A7B4300289D5E /* Persistence */,
+				14E5A00000000000000000A1 /* AppServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -415,6 +422,7 @@
 				14A16A1529BBD27C00B69FD7 /* Recurrence.swift */,
 				14A16A1729BE408D00B69FD7 /* Source.swift */,
 				14F8446E2A3A1D5300289D5E /* Currency.swift */,
+				14E5A00000000000000000B1 /* EstimateSummary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 				14BE31232A097CFC000A735C /* EmptyContentView.swift */,
 				14FDF0272A0BA2C700EA40CB /* ExportPDFView.swift */,
 				14A867C92A0FDE3C00F42D37 /* ExportPDFView+Report.swift */,
+				14E5A00000000000000000C1 /* EstimateTableView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -997,6 +1006,9 @@
 				14DD43432A0E9E7F007E75B7 /* PDFDocument+AddPage.swift in Sources */,
 				1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */,
 				14F844772A3A7FE500289D5E /* CurrencyDataPersistence.swift in Sources */,
+				14E5A00000000000000000A2 /* AppServices.swift in Sources */,
+				14E5A00000000000000000B2 /* EstimateSummary.swift in Sources */,
+				14E5A00000000000000000C2 /* EstimateTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

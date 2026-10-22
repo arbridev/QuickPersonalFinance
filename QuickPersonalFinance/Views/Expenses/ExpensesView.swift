@@ -12,9 +12,10 @@ struct ExpensesView: View {
     // MARK: Properties
 
     @EnvironmentObject private var mainData: AppData
-    @Environment(\.managedObjectContext) var moc
-    
-    @StateObject private var viewModel = ViewModel()
+
+    @StateObject private var viewModel: ViewModel
+
+    private let services: AppServices
 
     var body: some View {
         VStack {
@@ -29,7 +30,8 @@ struct ExpensesView: View {
                 }
                 .padding(.trailing)
                 .sheet(isPresented: $viewModel.isPresentingCreateAction) {
-                    ExpenseActionView()
+                    ExpenseActionView(services: services)
+                        .environmentObject(mainData)
                 }
             }
             Spacer()
@@ -59,7 +61,7 @@ struct ExpensesView: View {
                     }
                     .font(.App.standard)
                     .sheet(item: $viewModel.selectedItem) { expense in
-                        ExpenseActionView(editingExpense: expense)
+                        ExpenseActionView(services: services, editingExpense: expense)
                             .environmentObject(mainData)
                     }
                 }
@@ -67,8 +69,15 @@ struct ExpensesView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.input(mainData: mainData, moc: moc)
+            viewModel.input(mainData: mainData)
         }
+    }
+
+    // MARK: Initialization
+
+    init(services: AppServices) {
+        self.services = services
+        _viewModel = StateObject(wrappedValue: ViewModel(services: services))
     }
 }
 
@@ -93,7 +102,7 @@ struct ExpensesView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        ExpensesView()
+        ExpensesView(services: .preview)
             .environmentObject(envObject)
     }
 }

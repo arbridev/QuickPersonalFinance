@@ -19,10 +19,10 @@ struct ContentView: View {
     // MARK: Properties
 
     @StateObject private var mainData = AppData()
-    @Environment(\.managedObjectContext) var moc
-
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
     @State private var selectedTab = 0
+
+    private let services: AppServices
 
     private var tabTint: Color {
         switch selectedTab {
@@ -41,7 +41,7 @@ struct ContentView: View {
         ZStack {
             // MARK: Tabs
             TabView(selection: $selectedTab) {
-                IncomesView()
+                IncomesView(services: services)
                     .tabItem {
                         Label(
                             "incomes.title",
@@ -50,7 +50,7 @@ struct ContentView: View {
                     }
                     .tag(0)
                     .font(.app(size: 20))
-                ExpensesView()
+                ExpensesView(services: services)
                     .tabItem {
                         Label(
                             "expenses.title",
@@ -59,7 +59,7 @@ struct ContentView: View {
                     }
                     .tag(1)
                     .font(.app(size: 20))
-                EstimateView()
+                EstimateView(services: services)
                     .tabItem {
                         Label(
                             "estimate.title",
@@ -74,8 +74,15 @@ struct ContentView: View {
         }
         .environmentObject(mainData)
         .onAppear {
-            viewModel.input(mainData: mainData, moc: moc)
+            viewModel.input(mainData: mainData)
         }
+    }
+
+    // MARK: Initialization
+
+    init(services: AppServices) {
+        self.services = services
+        _viewModel = StateObject(wrappedValue: ViewModel(services: services))
     }
 }
 
@@ -83,7 +90,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environment(\.managedObjectContext, MockData.previewManagedObjectContext)
+        ContentView(services: .preview)
     }
 }

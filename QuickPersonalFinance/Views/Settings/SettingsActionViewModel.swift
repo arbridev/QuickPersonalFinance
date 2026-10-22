@@ -49,8 +49,8 @@ extension SettingsActionView {
 
         // MARK: Initialization
 
-        init() {
-            settings = Settings()
+        init(settings: SettingsService) {
+            self.settings = settings
             workHoursPerDayText = String(settings.workHoursPerDay)
             workDaysPerWeekText = String(settings.workDaysPerWeek)
             selectedCurrency = settings.currencyID

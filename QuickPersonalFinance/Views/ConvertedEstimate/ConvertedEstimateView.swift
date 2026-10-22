@@ -10,11 +10,10 @@ import SwiftUI
 struct ConvertedEstimateView: View {
     @EnvironmentObject private var mainData: AppData
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.managedObjectContext) var moc
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel: ViewModel
 
     var recurrence: Recurrence
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -58,58 +57,21 @@ struct ConvertedEstimateView: View {
                         .overlay(Color.Palette.dividerPrimary)
                         .padding(.horizontal)
 
-                    HStack {
-                        Text("estimate.table.income")
-                        Spacer()
-                        Text("\(viewModel.incomeTotal.asCurrency(withID: viewModel.selectedCurrency))")
-                            .underline(true, color: .Palette.incomeAccent)
-                    }
-                    .padding(.top)
-                    .padding(.horizontal)
-                    .font(.app(size: 18))
-
-                    HStack {
-                        Text("estimate.table.expense")
-                        Spacer()
-                        Text("\(viewModel.expenseTotal.asCurrency(withID: viewModel.selectedCurrency))")
-                            .underline(true, color: .Palette.expenseAccent)
-                    }
-                    .padding(.top, 6)
-                    .padding(.horizontal)
-                    .font(.app(size: 18))
-
-                    Divider()
-                        .overlay(Color.Palette.dividerSecondary)
-                        .padding(.top)
-                        .padding(.horizontal)
-
-                    HStack {
-                        Text("estimate.table.total")
-                        Spacer()
-                        Text("\(viewModel.balance.asCurrency(withID: viewModel.selectedCurrency))")
-                            .underline(true, color: .Palette.estimateAccent)
-                    }
-                    .padding(.top)
-                    .padding(.horizontal)
-                    .font(.app(size: 20))
-
-                    HStack {
-                        Spacer()
-                        Text(viewModel.balanceInfoMessage)
-                            .font(.App.info)
-                    }
-                    .padding(.horizontal)
+                    EstimateTableView(summary: viewModel.summary)
                 }
                 Spacer()
             }
             .onAppear {
-                viewModel.input(
-                    financeData: mainData.financeData,
-                    recurrence: recurrence,
-                    moc: moc
-                )
+                viewModel.input(financeData: mainData.financeData, recurrence: recurrence)
             }
         }
+    }
+
+    // MARK: Initialization
+
+    init(services: AppServices, recurrence: Recurrence) {
+        self.recurrence = recurrence
+        _viewModel = StateObject(wrappedValue: ViewModel(services: services))
     }
 }
 
@@ -132,7 +94,7 @@ struct ConvertedEstimateView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        ConvertedEstimateView(recurrence: .year)
+        ConvertedEstimateView(services: .preview, recurrence: .year)
             .environmentObject(envObject)
     }
 }

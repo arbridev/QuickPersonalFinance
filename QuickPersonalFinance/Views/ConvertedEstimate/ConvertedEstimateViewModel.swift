@@ -5,7 +5,7 @@
 //  Created by Armando Brito on 19/5/23.
 //
 
-import CoreData
+import Foundation
 
 extension ConvertedEstimateView {
 
@@ -22,64 +22,40 @@ extension ConvertedEstimateView {
                 }
             }
         }
-        @Published var selectedCurrency = Constant.defaultCurrencyID
-        @Published var incomeTotal: Double = 0.0
-        @Published var expenseTotal: Double = 0.0
-        @Published var balance: Double = 0.0
+        @Published private(set) var summary: EstimateSummary
         @Published var isErrorPresented = false
         @Published var errorMessage: String?
         @Published var isRefreshing = false
 
-        var settings: SettingsService
-        var userData: UserDataService
-        var financeData: FinanceData?
-        var recurrence: Recurrence?
-        var balanceInfoMessage: String {
-            String(
-                format: "estimate.balance.info.message".localized,
-                selectedCurrency,
-                recurrence?.rawValue.localized ?? ""
-            )
-        }
-        var moc: NSManagedObjectContext?
-        var persistenceService: (any CurrencyDataService)?
-        var externalService: (any ExternalCurrencyService)?
-        var controller: (any CurrencyControl)?
-        var currencyIDs: [String] = Constant.currencyIDs
+        let currencyIDs: [String]
+
+        private let settings: SettingsService
+        private let calculation: CalculationService
+        private let controller: any CurrencyControl
+        private var financeData: FinanceData?
+        private var recurrence: Recurrence?
         private var conversionTask: Task<Void, Never>?
 
         // MARK: Initialization
 
-        init(
-            settings: SettingsService = Settings(),
-            userData: UserDataService = UserData()
-        ) {
-            self.settings = settings
-            self.userData = userData
+        init(services: AppServices) {
+            settings = services.settings
+            calculation = Calculation(settings: services.settings)
+            controller = services.currencyControl
+            currencyIDs = services.currencyIDs
+            summary = EstimateSummary(
+                incomeTotal: 0,
+                expenseTotal: 0,
+                balance: 0,
+                recurrence: .year,
+                currencyID: services.settings.currencyID
+            )
         }
 
-        func input(
-            financeData: FinanceData,
-            recurrence: Recurrence,
-            moc: NSManagedObjectContext
-        ) {
+        func input(financeData: FinanceData, recurrence: Recurrence) {
             self.financeData = financeData
             self.recurrence = recurrence
-            self.moc = moc
             pickerSelectedCurrency = settings.currencyID
-
-            if LaunchArguments.shared.contains(.testing) {
-                controller = MockCurrencyController()
-                currencyIDs = MockData.currencyIDs
-            } else {
-                externalService = ExternalCurrency()
-                persistenceService = CurrencyDataPersistence(moc: moc)
-                controller = CurrencyConversionController(
-                    persistenceService: persistenceService!,
-                    externalService: externalService!,
-                    userData: userData
-                )
-            }
             setInitialState()
         }
 
@@ -90,22 +66,11 @@ extension ConvertedEstimateView {
             guard let financeData, let recurrence else {
                 return
             }
-            let calculation = Calculation()
-
-            selectedCurrency = settings.currencyID
-            
-            incomeTotal = calculation.totalize(
-                sources: financeData.incomes,
-                to: recurrence
-            )
-            expenseTotal = calculation.totalize(
-                sources: financeData.expenses,
-                to: recurrence
-            )
-            balance = calculation.makeBalance(
-                incomes: financeData.incomes,
-                expenses: financeData.expenses,
-                basedOn: recurrence
+            summary = EstimateSummary(
+                financeData: financeData,
+                recurrence: recurrence,
+                currencyID: settings.currencyID,
+                calculation: calculation
             )
         }
 
@@ -116,14 +81,17 @@ extension ConvertedEstimateView {
             guard userCurrency != pickerSelectedCurrency else {
                 return
             }
-            guard let converter = try await controller?.makeCurrencyCalculationService() else {
+            guard let converter = try await controller.makeCurrencyCalculationService() else {
                 return
             }
             try Task.checkCancellation()
-            incomeTotal = try converter.convert(incomeTotal, from: userCurrency, to: pickerSelectedCurrency)
-            expenseTotal = try converter.convert(expenseTotal, from: userCurrency, to: pickerSelectedCurrency)
-            balance = try converter.convert(balance, from: userCurrency, to: pickerSelectedCurrency)
-            selectedCurrency = pickerSelectedCurrency
+            summary = EstimateSummary(
+                incomeTotal: try converter.convert(summary.incomeTotal, from: userCurrency, to: pickerSelectedCurrency),
+                expenseTotal: try converter.convert(summary.expenseTotal, from: userCurrency, to: pickerSelectedCurrency),
+                balance: try converter.convert(summary.balance, from: userCurrency, to: pickerSelectedCurrency),
+                recurrence: summary.recurrence,
+                currencyID: pickerSelectedCurrency
+            )
         }
 
         /// Sets an error message that is intended to prompt the user with a dialog.

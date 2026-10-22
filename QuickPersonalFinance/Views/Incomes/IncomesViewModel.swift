@@ -5,7 +5,7 @@
 //  Created by Armando Brito on 18/4/23.
 //
 
-import CoreData
+import Foundation
 import OSLog
 
 extension IncomesView {
@@ -19,21 +19,20 @@ extension IncomesView {
         @Published var selectedItem: Income?
 
         private let settings: SettingsService
-        var moc: NSManagedObjectContext?
-        var persistenceService: (any IncomePersistenceService)?
+        private let persistenceService: any IncomePersistenceService
         var currencyID: String {
             settings.currencyID
         }
 
-        init() {
-            settings = Settings()
+        init(services: AppServices) {
+            settings = services.settings
+            persistenceService = services.incomePersistence
         }
 
         // MARK: Behavior
 
-        func input(mainData: AppData, moc: NSManagedObjectContext) {
+        func input(mainData: AppData) {
             self.mainData = mainData
-            self.persistenceService = IncomePersistence(moc: moc)
         }
 
         func deleteItems(at offsets: IndexSet) {
@@ -46,7 +45,7 @@ extension IncomesView {
             let forDeletion = oldData.financeData.incomes.subtracting(incomes)
 
             do {
-                try persistenceService?.delete(items: forDeletion)
+                try persistenceService.delete(items: forDeletion)
             } catch {
                 Logger.persistence.error("Could not delete incomes: \(error.localizedDescription)")
                 HapticsService().notificationFeedback(.error)

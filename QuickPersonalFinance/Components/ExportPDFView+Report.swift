@@ -9,25 +9,29 @@ import SwiftUI
 import Charts
 
 extension ExportPDFView {
+    // MARK: - PageMetrics
+    /// US Letter page geometry, in PDF points.
+    enum PageMetrics {
+        static let dpi: Double = 72
+        static let pageSize = CGSize(width: 8.5 * dpi, height: 11 * dpi)
+        static let horizontalMargins: Double = 0.75 * 2 * dpi
+        static let verticalMargins: Double = 0.75 * 2 * dpi
+        static let contentWidth = pageSize.width - horizontalMargins
+        static let contentHeight = pageSize.height - verticalMargins
+        /// Source rows that fit on a page below the titles.
+        static let sourcesPerPage = 25
+    }
+
     // MARK: - ReportSourcesView
     struct ReportSourcesView: View {
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
-        private let settings: Settings
-
         var mainTitle: String?
         var sectionTitles: [String?]
         var sources: [[any Source]?]
-
-        var currencyID: String {
-            settings.currencyID
-        }
+        var currencyID: String
 
         var body: some View {
             HStack {
-                Spacer(minLength: horizontalMargins / 2)
+                Spacer(minLength: PageMetrics.horizontalMargins / 2)
                 VStack {
                     // MARK: Main title
                     if let mainTitle {
@@ -74,67 +78,22 @@ extension ExportPDFView {
 
                     ReportPageFooter()
                 }
-                .frame(width: contentWidth, height: contentHeight, alignment: .center)
+                .frame(
+                    width: PageMetrics.contentWidth,
+                    height: PageMetrics.contentHeight,
+                    alignment: .center
+                )
             }
-        }
-
-        init(mainTitle: String?, sectionTitles: [String?], sources: [[any Source]?]) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.mainTitle = mainTitle
-            self.sectionTitles = sectionTitles
-            self.sources = sources
-            settings = Settings()
         }
     }
 
     // MARK: - ReportEstimateView
     struct ReportEstimateView: View {
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
-        private let settings: SettingsService
-
-        var incomeTotal: Double
-        var expenseTotal: Double
-        var balance: Double
-        var recurrence: Recurrence
-
-        var shareMessage: String {
-            if balance > 0.0 {
-                return String(
-                    format: "estimate.share.message.save".localized,
-                    recurrence.rawValue.localized,
-                    incomeTotal.asCurrency(withID: currencyID),
-                    expenseTotal.asCurrency(withID: currencyID),
-                    balance.asCurrency(withID: currencyID),
-                    currencyID
-                )
-            } else {
-                return String(
-                    format: "estimate.share.message.lose".localized,
-                    recurrence.rawValue.localized,
-                    incomeTotal.asCurrency(withID: currencyID),
-                    expenseTotal.asCurrency(withID: currencyID),
-                    balance.asCurrency(withID: currencyID),
-                    currencyID
-                )
-            }
-        }
-
-        var currencyID: String {
-            settings.currencyID
-        }
+        let summary: EstimateSummary
 
         var body: some View {
             HStack {
-                Spacer(minLength: horizontalMargins / 2)
+                Spacer(minLength: PageMetrics.horizontalMargins / 2)
                 VStack {
                     // MARK: Title
                     HStack {
@@ -151,7 +110,7 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.income".localized)
                                 Spacer()
-                                Text(incomeTotal.asCurrency(withID: currencyID))
+                                Text(summary.incomeTotal.asCurrency(withID: summary.currencyID))
                             }
                         }
 
@@ -159,7 +118,7 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.expense".localized)
                                 Spacer()
-                                Text(expenseTotal.asCurrency(withID: currencyID))
+                                Text(summary.expenseTotal.asCurrency(withID: summary.currencyID))
                             }
                         }
 
@@ -169,11 +128,11 @@ extension ExportPDFView {
                             HStack {
                                 Text("estimate.table.total".localized)
                                 Spacer()
-                                Text(balance.asCurrency(withID: currencyID))
+                                Text(summary.balance.asCurrency(withID: summary.currencyID))
                             }
                         }
 
-                        Text(shareMessage)
+                        Text(summary.shareMessage)
                             .font(Font.Report.info)
                             .padding(.top, 8)
                     }
@@ -181,35 +140,19 @@ extension ExportPDFView {
                     Divider()
                         .padding(.vertical)
 
-                    ReportChartView(incomeTotal: incomeTotal, expenseTotal: expenseTotal)
+                    ReportChartView(incomeTotal: summary.incomeTotal, expenseTotal: summary.expenseTotal)
 
                     Spacer()
 
                     ReportPageFooter()
                 }
-                .frame(width: contentWidth, height: contentHeight, alignment: .center)
+                .frame(
+                    width: PageMetrics.contentWidth,
+                    height: PageMetrics.contentHeight,
+                    alignment: .center
+                )
                 .font(Font.Report.standard)
             }
-        }
-
-        init(
-            incomeTotal: Double,
-            expenseTotal: Double,
-            balance: Double,
-            recurrence: Recurrence
-        ) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.incomeTotal = incomeTotal
-            self.expenseTotal = expenseTotal
-            self.balance = balance
-            self.recurrence = recurrence
-            settings = Settings()
         }
     }
 
@@ -220,15 +163,17 @@ extension ExportPDFView {
             let total: Double
         }
 
-        let contentWidth: Double
-        let contentHeight: Double
-        let horizontalMargins: Double
-        let verticalMargins: Double
         let barChartColors: [Color] = [.Palette.incomeTable, .Palette.expenseTable]
 
         var incomeTotal: Double
         var expenseTotal: Double
-        var barChartData: [BarValue] = [BarValue]()
+
+        private var barChartData: [BarValue] {
+            [
+                BarValue(title: "estimate.table.income".localized, total: incomeTotal),
+                BarValue(title: "estimate.table.expense".localized, total: expenseTotal)
+            ]
+        }
 
         var body: some View {
             HStack {
@@ -249,36 +194,20 @@ extension ExportPDFView {
                             "estimate.table.expense".localized],
                         range: barChartColors
                     )
-                    .frame(width: contentWidth / 2, height: contentHeight / 2, alignment: .center)
+                    .frame(
+                        width: PageMetrics.contentWidth / 2,
+                        height: PageMetrics.contentHeight / 2,
+                        alignment: .center
+                    )
 
                     Spacer()
                 }
-                .frame(width: contentWidth / 2, height: contentHeight / 2, alignment: .center)
+                .frame(
+                    width: PageMetrics.contentWidth / 2,
+                    height: PageMetrics.contentHeight / 2,
+                    alignment: .center
+                )
             }
-        }
-
-        init(
-            incomeTotal: Double,
-            expenseTotal: Double
-        ) {
-            let pdfDpi: Double = 72.0
-            let letterWidth: Double = 8.5 * pdfDpi
-            let letterHeight: Double = 11 * pdfDpi
-            horizontalMargins = 0.75 * 2 * pdfDpi
-            verticalMargins = 0.75 * 2 * pdfDpi
-            contentWidth = letterWidth - horizontalMargins
-            contentHeight = letterHeight - verticalMargins
-            self.incomeTotal = incomeTotal
-            self.expenseTotal = expenseTotal
-            self.barChartData = createChartData()
-        }
-
-        private func createChartData() -> [BarValue] {
-            let barChartData = [
-                BarValue(title: "estimate.table.income".localized, total: incomeTotal),
-                BarValue(title: "estimate.table.expense".localized, total: expenseTotal)
-            ]
-            return barChartData
         }
     }
 
@@ -290,29 +219,5 @@ extension ExportPDFView {
             .frame(width: nil, height: 40, alignment: .center)
             .font(Font.Report.trademark)
         }
-    }
-
-    // MARK: Creation methods
-
-    static func createSources(
-        mainTitle: String?,
-        sectionTitles: [String?],
-        sources: [[any Source]?]
-    ) -> some View {
-        ReportSourcesView(mainTitle: mainTitle, sectionTitles: sectionTitles, sources: sources)
-    }
-
-    static func createEstimate(
-        incomeTotal: Double,
-        expenseTotal: Double,
-        balance: Double,
-        recurrence: Recurrence
-    ) -> some View {
-        ReportEstimateView(
-            incomeTotal: incomeTotal,
-            expenseTotal: expenseTotal,
-            balance: balance,
-            recurrence: recurrence
-        )
     }
 }

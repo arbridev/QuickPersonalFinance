@@ -195,6 +195,46 @@ final class QuickPersonalFinanceTests: XCTestCase {
         }
     }
 
+    func testEstimateSummaryFromFinanceData() {
+        let financeData = FinanceData(
+            incomes: [Income(id: UUID(), name: "income", more: nil, grossValue: 1200, recurrence: .year)],
+            expenses: [Expense(id: UUID(), name: "expense", more: nil, grossValue: 40, recurrence: .month)]
+        )
+        let summary = EstimateSummary(
+            financeData: financeData,
+            recurrence: .month,
+            currencyID: "USD",
+            calculation: Calculation()
+        )
+
+        XCTAssertEqual(summary.incomeTotal, 100)
+        XCTAssertEqual(summary.expenseTotal, 40)
+        XCTAssertEqual(summary.balance, 60)
+        XCTAssertEqual(summary.currencyID, "USD")
+    }
+
+    @MainActor
+    func testEstimateViewModelUsesInjectedSettings() throws {
+        let suiteName = "test-\(#function)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        var settings = Settings(persistence: defaults)
+        settings.workHoursPerDay = 10
+        settings.currencyID = "EUR"
+
+        let mainData = AppData()
+        mainData.financeData = FinanceData(
+            incomes: [Income(id: UUID(), name: "hourly", more: nil, grossValue: 2, recurrence: .hour)],
+            expenses: []
+        )
+        let viewModel = EstimateView.ViewModel(settings: settings)
+        viewModel.input(mainData: mainData)
+        viewModel.selectedRecurrence = .day
+
+        XCTAssertEqual(viewModel.summary.incomeTotal, 20)
+        XCTAssertEqual(viewModel.summary.currencyID, "EUR")
+    }
+
     func testSettingsUsesInjectedDefaults() throws {
         let suiteName = "test-\(#function)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))

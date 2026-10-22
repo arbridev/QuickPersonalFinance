@@ -18,8 +18,8 @@ extension SettingsActionView {
                 let preemptiveValidation = DoubleValidation(value: workHoursPerDayText)
                 if !preemptiveValidation.isValid {
                     workHoursPerDayText = oldValue
-                } else if !workHoursPerDayText.isEmpty {
-                    settings.workHoursPerDay = Double(workHoursPerDayText)!
+                } else if let value = Double(workHoursPerDayText) {
+                    settings.workHoursPerDay = value
                 }
                 if workHoursPerDayText.count > Constant.maxLengthWorkHoursPerDayField {
                     workHoursPerDayText = oldValue
@@ -31,8 +31,8 @@ extension SettingsActionView {
                 let preemptiveValidation = DoubleValidation(value: workDaysPerWeekText)
                 if !preemptiveValidation.isValid {
                     workDaysPerWeekText = oldValue
-                } else if !workDaysPerWeekText.isEmpty {
-                    settings.workDaysPerWeek = Double(workDaysPerWeekText)!
+                } else if let value = Double(workDaysPerWeekText) {
+                    settings.workDaysPerWeek = value
                 }
                 if workDaysPerWeekText.count > Constant.maxLengthWorkDaysPerWeekField {
                     workDaysPerWeekText = oldValue

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 extension ContentView {
 
@@ -26,13 +27,15 @@ extension ContentView {
             self.moc = moc
             incomePersistenceService = IncomePersistence(moc: moc)
             expensePersistenceService = ExpensePersistence(moc: moc)
-            let storedIncomes = incomePersistenceService?.loadAll() ?? [Income]()
-            let storedExpenses = expensePersistenceService?.loadAll() ?? [Expense]()
-            let financeData = FinanceData(
-                incomes: storedIncomes,
-                expenses: storedExpenses
-            )
-            self.mainData?.financeData = financeData
+            do {
+                let financeData = FinanceData(
+                    incomes: try incomePersistenceService?.loadAll() ?? [Income](),
+                    expenses: try expensePersistenceService?.loadAll() ?? [Expense]()
+                )
+                self.mainData?.financeData = financeData
+            } catch {
+                Logger.persistence.error("Could not load finance data: \(error.localizedDescription)")
+            }
         }
     }
 

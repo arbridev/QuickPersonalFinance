@@ -13,8 +13,12 @@ extension MockData {
         let context = dataController.container.viewContext
         let incomePersistence = IncomePersistence(moc: context)
         let expensePersistence = ExpensePersistence(moc: context)
-        incomePersistence.save(item: MockData.income1)
-        expensePersistence.save(item: MockData.expense1)
+        do {
+            try incomePersistence.save(item: MockData.income1)
+            try expensePersistence.save(item: MockData.expense1)
+        } catch {
+            assertionFailure("Could not seed preview data: \(error)")
+        }
         return context
     }()
 }

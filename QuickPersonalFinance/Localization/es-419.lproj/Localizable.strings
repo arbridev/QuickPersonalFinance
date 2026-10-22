@@ -60,6 +60,7 @@
 "converted.estimate.title" = "Conversión de moneda";
 "converted.estimate.currency" = "Moneda:";
 "currency.not.found" = "Moneda no disponible para conversión.";
+"currency.invalid.rate" = "La tasa de cambio de esta moneda no es válida. Intente luego.";
 
 // Share
 "share.summary" = "Sumario";
@@ -73,6 +74,8 @@
 
 // Standard errors
 "error.unknown" = "Ocurrió un problema con su solicitud.";
+"error.store.title" = "No se pudieron cargar sus datos";
+"error.store.message" = "Por favor reinicie la app. Si el problema persiste, reinstálela.";
 
 // Test
 "test.add" = "Agregar";

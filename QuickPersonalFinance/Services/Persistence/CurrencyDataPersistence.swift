@@ -8,9 +8,9 @@
 import CoreData
 
 protocol CurrencyDataService: CoreDataPersistable {
-    func save(item: LatestCurrencies)
-    func load() -> LatestCurrencies?
-    func delete()
+    func save(item: LatestCurrencies) throws
+    func load() throws -> LatestCurrencies?
+    func delete() throws
 }
 
 /// Persistence service related to CurrencyData.
@@ -24,38 +24,33 @@ class CurrencyDataPersistence: CurrencyDataService {
         self.moc = moc
     }
 
-    func save(item: LatestCurrencies) {
-        moc.performAndWait {
+    func save(item: LatestCurrencies) throws {
+        try moc.performAndWait {
             let request = NSFetchRequest<StoredCurrencyData>(entityName: "\(StoredCurrencyData.self)")
-            if let fetched = try? moc.fetch(request).first {
+            if let fetched = try moc.fetch(request).first {
                 fetched.lastUpdate = item.meta.lastUpdatedAt
-                fetched.data = try? Serializer.toData(item.data)
+                fetched.data = try Serializer.toData(item.data)
             } else {
-                _ = StoredCurrencyData.from(item, context: moc)
+                _ = try StoredCurrencyData.from(item, context: moc)
             }
-            do {
-                try moc.save()
-            } catch {
-                print(error)
-            }
+            try saveOrRollback()
         }
     }
 
-    func load() -> LatestCurrencies? {
-        moc.performAndWait {
+    func load() throws -> LatestCurrencies? {
+        try moc.performAndWait {
             let request = NSFetchRequest<StoredCurrencyData>(entityName: "\(StoredCurrencyData.self)")
-            let fetched = try? moc.fetch(request)
-            return fetched?.compactMap({ LatestCurrencies.from($0) }).first
+            return try moc.fetch(request).compactMap({ LatestCurrencies.from($0) }).first
         }
     }
 
-    func delete() {
-        moc.performAndWait {
+    func delete() throws {
+        try moc.performAndWait {
             let request = NSFetchRequest<StoredCurrencyData>(entityName: "\(StoredCurrencyData.self)")
-            if let fetched = try? moc.fetch(request).first {
+            if let fetched = try moc.fetch(request).first {
                 moc.delete(fetched)
             }
-            try? moc.save()
+            try saveOrRollback()
         }
     }
 }

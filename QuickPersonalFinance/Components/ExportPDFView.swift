@@ -24,11 +24,11 @@ struct ExportPDFView: View {
         )
     }
 
-    static func render(financeData: FinanceData, recurrence: Recurrence) -> URL {
+    static func render(financeData: FinanceData, recurrence: Recurrence) throws -> URL {
         var pdfs = [PDFDocument]()
 
         // Render sources of incomes and expenses pages
-        subrenderSources(financeData: financeData, pdfs: &pdfs)
+        try subrenderSources(financeData: financeData, pdfs: &pdfs)
 
         // Render the estimage page
         let calculations = Calculation()
@@ -45,37 +45,31 @@ struct ExportPDFView: View {
                 recurrence: recurrence
             )
         )
-        let estimatePDF = PDFDocument(url: estimateURL)!
-        pdfs.append(estimatePDF)
+        pdfs.append(try document(at: estimateURL))
 
-        let firstPDF = pdfs.first!
-        for pdf in pdfs {
-            guard pdf != firstPDF else {
-                continue
-            }
-            firstPDF.addPages(from: pdf)
+        let report = pdfs[0]
+        for pdf in pdfs.dropFirst() {
+            report.addPages(from: pdf)
         }
-
-        let reportsUrl = URL.documentsDirectory.appending(path: "reports")
 
         // Create reports directory inside the Documents directory
-        do {
-            try FileManager.default.createDirectory(at: reportsUrl, withIntermediateDirectories: true)
-        } catch {
-            print(error)
-        }
+        let reportsUrl = URL.documentsDirectory.appending(path: "reports")
+        try FileManager.default.createDirectory(at: reportsUrl, withIntermediateDirectories: true)
 
         // Create the Report PDF
         let reportURL = reportsUrl.appending(path: "\("share.report.report".localized).pdf")
-        let data = firstPDF.dataRepresentation()!
-        do {
-            try data.write(to: reportURL)
-        } catch {
-            print(error)
+        guard let data = report.dataRepresentation() else {
+            throw ExportError.renderFailed
         }
+        try data.write(to: reportURL)
+        return reportURL
+    }
 
-        let reportPDF = PDFDocument(url: reportURL)
-        return reportPDF?.documentURL ?? estimateURL
+    private static func document(at url: URL) throws -> PDFDocument {
+        guard let document = PDFDocument(url: url) else {
+            throw ExportError.renderFailed
+        }
+        return document
     }
 
     static func subrender(fileName: String, content: some View) -> URL {
@@ -105,7 +99,7 @@ struct ExportPDFView: View {
         return url
     }
 
-    private static func subrenderSources(financeData: FinanceData, pdfs: inout [PDFDocument]) {
+    private static func subrenderSources(financeData: FinanceData, pdfs: inout [PDFDocument]) throws {
         let incomes = financeData.incomes
         let expenses = financeData.expenses
         let limit = 25
@@ -150,8 +144,7 @@ struct ExportPDFView: View {
                     sources: sources
                 )
             )
-            let sourcesPDF = PDFDocument(url: sourcesURL)!
-            pdfs.append(sourcesPDF)
+            pdfs.append(try document(at: sourcesURL))
             page += 1
         }
     }
@@ -181,6 +174,11 @@ struct ExportPDFView: View {
 // MARK: - Report
 
 extension ExportPDFView {
+    enum ExportError: Error {
+        case renderFailed
+    }
+
+
     /// Renders the PDF only when the share sheet requests the file
     struct Report: Transferable {
         let financeData: FinanceData
@@ -188,7 +186,7 @@ extension ExportPDFView {
 
         static var transferRepresentation: some TransferRepresentation {
             FileRepresentation(exportedContentType: .pdf) { report in
-                let url = await ExportPDFView.render(
+                let url = try await ExportPDFView.render(
                     financeData: report.financeData,
                     recurrence: report.recurrence
                 )

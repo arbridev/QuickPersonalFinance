@@ -45,25 +45,9 @@ class Calculation: CalculationService {
             return value
         }
         let next = Recurrence.allCases[offset]
-        var factor: Double!
-        if isForward {
-            let forwardConversionFactor: [Recurrence: Double] = [
-                .hour: 1,
-                .day: settings.workHoursPerDay,
-                .week: settings.workDaysPerWeek,
-                .month: Constant.weeksPerMonthCount,
-                .year: Constant.monthsPerYearCount
-            ]
-            factor = forwardConversionFactor[next]
-        } else {
-            let backwardConversionFactor: [Recurrence: Double] = [
-                .hour: settings.workHoursPerDay,
-                .day: settings.workDaysPerWeek,
-                .week: Constant.weeksPerMonthCount,
-                .month: Constant.monthsPerYearCount,
-                .year: 1
-            ]
-            factor = backwardConversionFactor[next]
+        let factor = isForward ? forwardFactor(to: next) : backwardFactor(to: next)
+        guard factor != 0 else {
+            return value
         }
 
         let newValue = isForward ? value * factor : value / factor
@@ -72,11 +56,44 @@ class Calculation: CalculationService {
 
     func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
         sources.map { source in
-            source.recurrence != nil ?
-            convert(source.grossValue, from: source.recurrence!, to: recurrence) :
-            source.grossValue
+            guard let sourceRecurrence = source.recurrence else {
+                return source.grossValue
+            }
+            return convert(source.grossValue, from: sourceRecurrence, to: recurrence)
         }
         .reduce(0, +)
+    }
+
+    /// Factor to multiply by when moving one step up, into `next`.
+    private func forwardFactor(to next: Recurrence) -> Double {
+        switch next {
+            case .hour:
+                return 1
+            case .day:
+                return settings.workHoursPerDay
+            case .week:
+                return settings.workDaysPerWeek
+            case .month:
+                return Constant.weeksPerMonthCount
+            case .year:
+                return Constant.monthsPerYearCount
+        }
+    }
+
+    /// Factor to divide by when moving one step down, into `next`.
+    private func backwardFactor(to next: Recurrence) -> Double {
+        switch next {
+            case .hour:
+                return settings.workHoursPerDay
+            case .day:
+                return settings.workDaysPerWeek
+            case .week:
+                return Constant.weeksPerMonthCount
+            case .month:
+                return Constant.monthsPerYearCount
+            case .year:
+                return 1
+        }
     }
 
     func makeBalance(

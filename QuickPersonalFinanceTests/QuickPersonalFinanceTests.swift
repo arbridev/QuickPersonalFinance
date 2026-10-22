@@ -107,10 +107,10 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let context = controller.container.newBackgroundContext()
         let persistence = CurrencyDataPersistence(moc: context)
 
-        persistence.save(item: currencies)
-        XCTAssertNotNil(persistence.load())
-        persistence.delete()
-        XCTAssertNil(persistence.load())
+        try persistence.save(item: currencies)
+        XCTAssertNotNil(try persistence.load())
+        try persistence.delete()
+        XCTAssertNil(try persistence.load())
     }
 
     func testExpensePersistenceRoundTrip() throws {
@@ -118,16 +118,16 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let persistence = ExpensePersistence(moc: controller.container.viewContext)
         let expense = Expense(id: UUID(), name: "expense", more: nil, grossValue: 10, recurrence: .month)
 
-        persistence.save(item: expense)
-        XCTAssertEqual(persistence.load(itemWithID: expense.id)?.name, "expense")
+        try persistence.save(item: expense)
+        XCTAssertEqual(try persistence.load(itemWithID: expense.id)?.name, "expense")
 
         let edited = Expense(id: expense.id, name: "edited", more: "more", grossValue: 20, recurrence: .year)
-        persistence.update(item: edited)
-        XCTAssertEqual(persistence.load(itemWithID: expense.id), edited)
+        try persistence.update(item: edited)
+        XCTAssertEqual(try persistence.load(itemWithID: expense.id), edited)
 
-        persistence.delete(item: edited)
-        XCTAssertNil(persistence.load(itemWithID: expense.id))
-        XCTAssertTrue(persistence.loadAll().isEmpty)
+        try persistence.delete(item: edited)
+        XCTAssertNil(try persistence.load(itemWithID: expense.id))
+        XCTAssertTrue(try persistence.loadAll().isEmpty)
     }
 
     func testIncomePersistenceRoundTrip() throws {
@@ -137,14 +137,74 @@ final class QuickPersonalFinanceTests: XCTestCase {
             Income(id: UUID(), name: "first", more: nil, grossValue: 10, recurrence: .month),
             Income(id: UUID(), name: "second", more: nil, grossValue: 20, recurrence: .week)
         ]
-        incomes.forEach { persistence.save(item: $0) }
+        try incomes.forEach { try persistence.save(item: $0) }
 
         let edited = Income(id: incomes[0].id, name: "edited", more: nil, grossValue: 15, recurrence: .day)
-        persistence.update(item: edited)
-        XCTAssertEqual(persistence.load(itemWithID: edited.id), edited)
+        try persistence.update(item: edited)
+        XCTAssertEqual(try persistence.load(itemWithID: edited.id), edited)
 
-        persistence.delete(items: incomes)
-        XCTAssertTrue(persistence.loadAll().isEmpty)
+        try persistence.delete(items: incomes)
+        XCTAssertTrue(try persistence.loadAll().isEmpty)
+    }
+
+    func testUpdateMissingItemThrows() throws {
+        let controller = DataController(inMemory: true)
+        let persistence = ExpensePersistence(moc: controller.container.viewContext)
+        let expense = Expense(id: UUID(), name: "missing", more: nil, grossValue: 1, recurrence: .day)
+
+        XCTAssertThrowsError(try persistence.update(item: expense)) { error in
+            guard case PersistenceError.itemNotFound = error else {
+                return XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    func testStoredRowWithoutIDIsSkipped() throws {
+        let controller = DataController(inMemory: true)
+        let context = controller.container.viewContext
+        let persistence = IncomePersistence(moc: context)
+        let stored = StoredIncome(context: context)
+        stored.name = "no id"
+        try context.save()
+
+        XCTAssertTrue(try persistence.loadAll().isEmpty)
+    }
+
+    func testArraySubtracting() {
+        XCTAssertEqual([1, 2, 3, 4].subtracting([2, 4]), [1, 3])
+        XCTAssertEqual([1, 2].subtracting([2, 5]), [1])
+        XCTAssertEqual([Int]().subtracting([1]), [])
+    }
+
+    func testTotalizeWithoutRecurrenceUsesGrossValue() {
+        let incomes = [
+            Income(id: UUID(), name: "fixed", more: nil, grossValue: 7, recurrence: nil),
+            Income(id: UUID(), name: "monthly", more: nil, grossValue: 12, recurrence: .month)
+        ]
+        calculation = Calculation()
+        XCTAssertEqual(calculation.totalize(sources: incomes, to: .month), 19)
+    }
+
+    func testCurrencyConversionWithZeroRateThrows() throws {
+        var currencies = MockData.latestCurrencies.data
+        currencies["EUR"] = Currency(code: "EUR", value: 0)
+        let currencyCalc = try XCTUnwrap(Calculation.CurrencyCalculation(currencies))
+
+        XCTAssertThrowsError(try currencyCalc.convert(20, from: "EUR", to: "USD")) { error in
+            XCTAssertEqual(error as? Calculation.CurrencyCalculationError, .invalidRate)
+        }
+    }
+
+    func testSettingsUsesInjectedDefaults() throws {
+        let suiteName = "test-\(#function)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        var settings = Settings(persistence: defaults)
+        settings.workHoursPerDay = 6
+
+        XCTAssertEqual(defaults.double(forKey: Settings.StorageKey.workHoursPerDay.rawValue), 6)
+        XCTAssertEqual(Settings(persistence: defaults).workHoursPerDay, 6)
     }
 
     func testCurrencyConversionUSDtoEUR() throws {

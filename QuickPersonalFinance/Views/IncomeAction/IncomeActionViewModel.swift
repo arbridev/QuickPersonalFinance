@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 extension IncomeActionView {
 
@@ -46,6 +47,8 @@ extension IncomeActionView {
         }
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
+        @Published var isErrorPresented = false
+        @Published var errorMessage: String?
 
         private let settings: SettingsService
         var moc: NSManagedObjectContext?
@@ -99,62 +102,75 @@ extension IncomeActionView {
         }
 
         func submit(_ didSubmit: (Bool) -> Void) {
-            let isValid = validate()
-
-            if isValid, let oldData = mainData {
-                let income = Income(
-                    id: UUID(),
-                    name: nameText,
-                    more: moreText.isEmpty ? nil : moreText,
-                    grossValue: Double(grossValueText)!,
-                    recurrence: selectedRecurrence
-                )
-                var incomes = oldData.financeData.incomes
-                incomes.append(income)
-                let financeData = FinanceData(
-                    incomes: incomes,
-                    expenses: oldData.financeData.expenses
-                )
-                mainData?.financeData = financeData
-
-                persistenceService?.save(item: income)
-                
-                didSubmit(true)
+            guard validate(),
+                  let oldData = mainData,
+                  let persistenceService,
+                  let grossValue = Double(grossValueText) else {
+                didSubmit(false)
                 return
             }
 
-            didSubmit(false)
+            let income = Income(
+                id: UUID(),
+                name: nameText,
+                more: moreText.isEmpty ? nil : moreText,
+                grossValue: grossValue,
+                recurrence: selectedRecurrence
+            )
+
+            do {
+                try persistenceService.save(item: income)
+            } catch {
+                presentPersistenceError(error)
+                didSubmit(false)
+                return
+            }
+
+            mainData?.financeData = FinanceData(
+                incomes: oldData.financeData.incomes + [income],
+                expenses: oldData.financeData.expenses
+            )
+            didSubmit(true)
         }
 
         func edit(_ didEdit: (Bool) -> Void) {
-            let isValid = validate()
-
-            if let editingIncome, isValid, let oldData = mainData {
-                let income = Income(
-                    id: editingIncome.id,
-                    name: nameText,
-                    more: moreText.isEmpty ? nil : moreText,
-                    grossValue: Double(grossValueText)!,
-                    recurrence: selectedRecurrence
-                )
-
-                persistenceService?.update(item: income)
-                guard let incomes = persistenceService?.loadAll() else {
-                    didEdit(false)
-                    return
-                }
-
-                let financeData = FinanceData(
-                    incomes: incomes,
-                    expenses: oldData.financeData.expenses
-                )
-                mainData?.financeData = financeData
-
-                didEdit(true)
+            guard validate(),
+                  let editingIncome,
+                  let oldData = mainData,
+                  let persistenceService,
+                  let grossValue = Double(grossValueText) else {
+                didEdit(false)
                 return
             }
 
-            didEdit(false)
+            let income = Income(
+                id: editingIncome.id,
+                name: nameText,
+                more: moreText.isEmpty ? nil : moreText,
+                grossValue: grossValue,
+                recurrence: selectedRecurrence
+            )
+
+            do {
+                try persistenceService.update(item: income)
+                mainData?.financeData = FinanceData(
+                    incomes: try persistenceService.loadAll(),
+                    expenses: oldData.financeData.expenses
+                )
+            } catch {
+                presentPersistenceError(error)
+                didEdit(false)
+                return
+            }
+
+            didEdit(true)
+        }
+
+        private func presentPersistenceError(_ error: Error) {
+            Logger.persistence.error("Could not persist income: \(error.localizedDescription)")
+            errorMessage = StandardError.unknown.localizedDescription
+            isErrorPresented = true
+            HapticsService().notificationFeedback(.error)
         }
     }
 

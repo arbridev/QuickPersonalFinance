@@ -120,6 +120,7 @@ struct IncomeActionView: View {
             viewModel.input(mainData: mainData, moc: moc)
             viewModel.editingIncome = editingIncome
         }
+        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {}
     }
 
     // MARK: Initialization

@@ -13,11 +13,7 @@ extension EstimateView {
 
         // MARK: Properties
 
-        @Published private(set) var mainData: AppData? {
-            didSet {
-                calculations = Calculation()
-            }
-        }
+        @Published private(set) var mainData: AppData?
         @Published var incomeTotal: Double = 0.0
         @Published var expenseTotal: Double = 0.0
         @Published var balance: Double = 0.0
@@ -38,7 +34,7 @@ extension EstimateView {
         @Published var isPresentingCurrencyConversion = false
         
         private let settings: SettingsService
-        private var calculations: CalculationService?
+        private let calculations: CalculationService
 
         var balanceInfoMessage: String {
             String(
@@ -76,6 +72,7 @@ extension EstimateView {
 
         init() {
             settings = Settings()
+            calculations = Calculation(settings: settings)
         }
 
         // MARK: Behavior
@@ -88,11 +85,11 @@ extension EstimateView {
             guard let mainData else {
                 return
             }
-            incomeTotal = calculations!.totalize(
+            incomeTotal = calculations.totalize(
                 sources: mainData.financeData.incomes,
                 to: selectedRecurrence
             )
-            expenseTotal = calculations!.totalize(
+            expenseTotal = calculations.totalize(
                 sources: mainData.financeData.expenses,
                 to: selectedRecurrence
             )

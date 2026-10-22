@@ -38,3 +38,17 @@ class LaunchArguments {
         contains(all: args)
     }
 }
+
+extension UserDefaults {
+    /// `.standard`, or an isolated suite when launched with the testing argument
+    /// so UI tests never touch real user data.
+    static func appDefaults(testSuiteName: String) -> UserDefaults {
+        guard LaunchArguments.shared.contains(.testing) else {
+            return .standard
+        }
+        guard let suite = UserDefaults(suiteName: testSuiteName) else {
+            fatalError("Could not create UserDefaults suite \(testSuiteName)")
+        }
+        return suite
+    }
+}

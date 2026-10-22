@@ -18,55 +18,48 @@ class ExpensePersistence: ExpensePersistenceService {
         self.moc = moc
     }
 
-    func save(item: Expense) {
+    func save(item: Expense) throws {
         _ = StoredExpense.from(item, context: moc)
-        try? moc.save()
+        try saveOrRollback()
     }
 
-    func loadAll() -> [Expense] {
+    func loadAll() throws -> [Expense] {
         let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
-        let fetched = try? moc.fetch(request)
-        return fetched?.map({ Expense.from($0) }) ?? [Expense]()
+        return try moc.fetch(request).compactMap { Expense.from($0) }
     }
 
-    func load(itemWithID id: UUID) -> Expense? {
-        let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
-        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        if let fetchedObject = try? moc.fetch(request).first {
-            return Expense.from(fetchedObject)
+    func load(itemWithID id: UUID) throws -> Expense? {
+        try loadStored(itemWithID: id).flatMap { Expense.from($0) }
+    }
+
+    func update(item: Expense) throws {
+        guard let fetchedObject = try loadStored(itemWithID: item.id) else {
+            throw PersistenceError.itemNotFound
         }
-        return nil
+        fetchedObject.name = item.name
+        fetchedObject.more = item.more
+        fetchedObject.grossValue = item.grossValue
+        fetchedObject.recurrence = item.recurrence?.rawValue
+        try saveOrRollback()
     }
 
-    func update(item: Expense) {
-        if let fetchedObject: StoredExpense = load(itemWithID: item.id) {
-            fetchedObject.name = item.name
-            fetchedObject.more = item.more
-            fetchedObject.grossValue = item.grossValue
-            fetchedObject.recurrence = item.recurrence?.rawValue
-        }
-        try? moc.save()
+    func delete(item: Expense) throws {
+        try delete(items: [item])
     }
 
-    func delete(item: Expense) {
-        if let fetchedObject: StoredExpense = load(itemWithID: item.id) {
-            moc.delete(fetchedObject)
-        }
-        try? moc.save()
-    }
-
-    func delete(items: [Expense]) {
+    func delete(items: [Expense]) throws {
         for item in items {
-            if let fetchedObject: StoredExpense = load(itemWithID: item.id) {
+            if let fetchedObject = try loadStored(itemWithID: item.id) {
                 moc.delete(fetchedObject)
             }
         }
-        try? moc.save()
+        try saveOrRollback()
     }
 
-    private func load(itemWithID id: UUID) -> StoredExpense? {
+    private func loadStored(itemWithID id: UUID) throws -> StoredExpense? {
         let request = NSFetchRequest<StoredExpense>(entityName: "\(StoredExpense.self)")
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        return try? moc.fetch(request).first
+        request.fetchLimit = 1
+        return try moc.fetch(request).first
     }
 }

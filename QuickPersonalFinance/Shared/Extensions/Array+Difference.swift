@@ -7,11 +7,10 @@
 
 import Foundation
 
-/// source: https://www.hackingwithswift.com/example-code/language/how-to-find-the-difference-between-two-arrays
 extension Array where Element: Hashable {
-    func difference(from other: [Element]) -> [Element] {
-        let thisSet = Set(self)
+    /// Elements of this array that are not present in `other`.
+    func subtracting(_ other: [Element]) -> [Element] {
         let otherSet = Set(other)
-        return Array(thisSet.symmetricDifference(otherSet))
+        return filter { !otherSet.contains($0) }
     }
 }

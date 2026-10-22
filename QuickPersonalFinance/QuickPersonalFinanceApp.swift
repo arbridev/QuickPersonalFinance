@@ -15,8 +15,12 @@ struct QuickPersonalFinanceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+            if dataController.loadError == nil {
+                ContentView()
+                    .environment(\.managedObjectContext, dataController.container.viewContext)
+            } else {
+                EmptyContentView(title: "error.store.title", message: "error.store.message")
+            }
         }
     }
 }

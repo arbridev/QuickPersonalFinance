@@ -117,6 +117,7 @@ struct ExpenseActionView: View {
             viewModel.input(mainData: mainData, moc: moc)
             viewModel.editingExpense = editingExpense
         }
+        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {}
     }
 
     // MARK: Initialization

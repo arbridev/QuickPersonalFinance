@@ -10,16 +10,24 @@ import SwiftUI
 extension Color {
     struct Palette {
         struct Base {
-            static let red = Color(uiColor: UIColor(hex: "#F05B75")!)
-            static let green = Color(uiColor: UIColor(hex: "#27b83a")!)
-            static let blue = Color(uiColor: UIColor(hex: "#506EE0")!)
-            static let blue2 = Color(uiColor: UIColor(hex: "#5299e0")!)
-            static let purple = Color(uiColor: UIColor(hex: "#BC57FA")!)
-            static let gray0 = Color(uiColor: UIColor(hex: "#aebbc7")!)
-            static let gray1 = Color(uiColor: UIColor(hex: "#ccd5db")!)
-            static let gray2 = Color(uiColor: UIColor(hex: "#e1e6ea")!)
+            static let red = hex("#F05B75")
+            static let green = hex("#27b83a")
+            static let blue = hex("#506EE0")
+            static let blue2 = hex("#5299e0")
+            static let purple = hex("#BC57FA")
+            static let gray0 = hex("#aebbc7")
+            static let gray1 = hex("#ccd5db")
+            static let gray2 = hex("#e1e6ea")
 
             private init() {}
+
+            private static func hex(_ value: String) -> Color {
+                guard let color = UIColor(hex: value) else {
+                    assertionFailure("Invalid hex color: \(value)")
+                    return .clear
+                }
+                return Color(uiColor: color)
+            }
         }
 
         static let incomeAccent = Color("incomeAccent")

@@ -27,7 +27,7 @@ extension Calculation {
         let currencies: [String: Currency]
 
         required init?(_ currencies: [String: Currency]) {
-            guard let baseCurrency = currencies["USD"] else {
+            guard let baseCurrency = currencies[Constant.defaultCurrencyID] else {
                 return nil
             }
             self.baseCurrency = baseCurrency
@@ -46,6 +46,9 @@ extension Calculation {
             if origin.code == baseCurrency.code {
                 return value * destination.value
             } else if destination.code == baseCurrency.code {
+                guard origin.value != 0 else {
+                    throw CurrencyCalculationError.invalidRate
+                }
                 return value / origin.value
             }
 
@@ -56,9 +59,15 @@ extension Calculation {
 
     enum CurrencyCalculationError: LocalizedError {
         case currencyNotFound
-        
+        case invalidRate
+
         var errorDescription: String? {
-            "currency.not.found".localized
+            switch self {
+                case .currencyNotFound:
+                    return "currency.not.found".localized
+                case .invalidRate:
+                    return "currency.invalid.rate".localized
+            }
         }
     }
 }

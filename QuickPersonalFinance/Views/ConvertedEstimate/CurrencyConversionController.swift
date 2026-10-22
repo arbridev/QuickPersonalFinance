@@ -39,7 +39,7 @@ actor CurrencyConversionController: CurrencyControl {
     /// Factory method for a calculation service.
     /// - Returns: A currency calculation service ready to be used.
     func makeCurrencyCalculationService() async throws -> CurrencyCalculationService? {
-        if let currencyData = persistenceService.load() {
+        if let currencyData = try persistenceService.load() {
             switch currencyRefresh {
                 case .after(let interval):
                     guard let timeLimit = userData.lastCurrencyUpdate?.addingTimeInterval(interval) else {
@@ -67,7 +67,7 @@ actor CurrencyConversionController: CurrencyControl {
     /// - Returns: Data from currencies as structured in LatestCurrencies.
     private func updateCurrencies() async throws -> LatestCurrencies {
         let latestCurrencies = try await externalService.fetchLatestCurrencies()
-        persistenceService.save(item: latestCurrencies)
+        try persistenceService.save(item: latestCurrencies)
         userData.lastCurrencyUpdate = .now
         return latestCurrencies
     }

@@ -14,6 +14,6 @@ extension Double {
         if let id {
             formatter.currencyCode = id
         }
-        return formatter.string(from: NSNumber(value: self))!
+        return formatter.string(from: NSNumber(value: self)) ?? String(format: "%.2f", self)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 extension ExpensesView {
 
@@ -43,15 +44,21 @@ extension ExpensesView {
             var expenses = oldData.financeData.expenses
             expenses.remove(atOffsets: offsets)
 
-            let forDeletion = oldData.financeData.expenses.difference(from: expenses)
+            let forDeletion = oldData.financeData.expenses.subtracting(expenses)
+
+            do {
+                try persistenceService?.delete(items: forDeletion)
+            } catch {
+                Logger.persistence.error("Could not delete expenses: \(error.localizedDescription)")
+                HapticsService().notificationFeedback(.error)
+                return
+            }
 
             let financeData = FinanceData(
                 incomes: oldData.financeData.incomes,
                 expenses: expenses
             )
             mainData?.financeData = financeData
-
-            persistenceService?.delete(items: forDeletion)
             HapticsService().notificationFeedback(.success)
         }
     }

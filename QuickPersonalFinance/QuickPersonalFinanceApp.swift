@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseCore
 
 @main
 struct QuickPersonalFinanceApp: App {

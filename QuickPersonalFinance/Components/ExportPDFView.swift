@@ -182,7 +182,6 @@ extension ExportPDFView {
         case renderFailed
     }
 
-
     /// Renders the PDF only when the share sheet requests the file
     struct Report: Transferable {
         let financeData: FinanceData

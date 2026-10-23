@@ -60,7 +60,15 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         app.staticTexts["USD"].tap()
         app.buttons["EUR"].tap()
 
-        sleep(3)
+        let convertedBalance = String(
+            format: "estimate.balance.info.message".localized,
+            "EUR",
+            "year".localized
+        )
+        XCTAssertTrue(
+            app.staticTexts[convertedBalance].waitForExistence(timeout: 5),
+            "Converted balance did not appear"
+        )
 
         snapshot("currency_conversion")
 
@@ -69,24 +77,15 @@ final class QuickPersonalFinanceUITests: XCTestCase {
         // Share
 
         app.buttons["estimate.button.share".localized].tap()
-        app.buttons["share.pdf".localized].tap()
+        let exportPDF = app.buttons["share.pdf".localized]
+        XCTAssertTrue(exportPDF.waitForExistence(timeout: 5), "Export PDF was not offered")
+        exportPDF.tap()
 
-        let options = app.collectionViews.children(matching: .button)
-        options.element(boundBy: options.count - 1).tap()
-
-        sleep(3)
-
-        app.navigationBars["FullDocumentManagerViewControllerNavigationBar"].buttons["test.dialog.save".localized].tap()
-
-        if app.alerts["test.dialog.replace.existing".localized].exists {
-            app.alerts["test.dialog.replace.existing".localized]
-                .scrollViews
-                .otherElements
-                .buttons["test.dialog.replace".localized]
-                .tap()
-        }
-
-        sleep(5)
+        // The system share sheet's actions are outside the app, so the test
+        // confirms the sheet opened and then dismisses it.
+        let shareSheetClose = app.buttons["header.closeButton"]
+        XCTAssertTrue(shareSheetClose.waitForExistence(timeout: 5), "Share sheet did not appear")
+        shareSheetClose.tap()
     }
 
     func testLaunchPerformance() throws {
@@ -199,9 +198,13 @@ fileprivate extension String {
             path = testBundle.path(forResource: String(deviceLanguage.prefix(2)), ofType: "lproj")
         }
         guard let path else {
-            fatalError("Could not find the .lproj resource, check the test bundle")
+            XCTFail("Could not find the .lproj resource for \(deviceLanguage)")
+            return self
         }
-        let bundle = Bundle(path: path)!
+        guard let bundle = Bundle(path: path) else {
+            XCTFail("Could not load the bundle at \(path)")
+            return self
+        }
         return NSLocalizedString(self, bundle: bundle, comment: "")
     }
 }

@@ -31,6 +31,7 @@
 "action.field.recurrence" = "Recurrence";
 "action.button.submit" = "Submit";
 "action.button.edit" = "Edit";
+"action.button.ok" = "OK";
 
 "hour" = "hour";
 "day" = "day";
@@ -76,6 +77,10 @@
 "error.unknown" = "There was a problem with your request.";
 "error.store.title" = "Your data could not be loaded";
 "error.store.message" = "Please restart the app. If the problem persists, reinstall it.";
+
+"accessibility.add" = "Add";
+"accessibility.settings" = "Settings";
+"accessibility.close" = "Close";
 
 // Test
 "test.add" = "Add";

@@ -25,6 +25,7 @@ struct ModalViewUpperBar: View {
                     .padding(.top)
                     .padding(.trailing)
                     .accessibilityIdentifier("modal_close")
+                    .accessibilityLabel("accessibility.close")
                 }
                 .frame(maxHeight: 50)
             }

@@ -119,7 +119,9 @@ struct IncomeActionView: View {
             viewModel.input(mainData: mainData)
             viewModel.editingIncome = editingIncome
         }
-        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {}
+        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {
+            Button("action.button.ok", role: .cancel) {}
+        }
     }
 
     // MARK: Initialization

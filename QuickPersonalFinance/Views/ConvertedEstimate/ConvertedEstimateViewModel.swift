@@ -86,8 +86,16 @@ extension ConvertedEstimateView {
             }
             try Task.checkCancellation()
             summary = EstimateSummary(
-                incomeTotal: try converter.convert(summary.incomeTotal, from: userCurrency, to: pickerSelectedCurrency),
-                expenseTotal: try converter.convert(summary.expenseTotal, from: userCurrency, to: pickerSelectedCurrency),
+                incomeTotal: try converter.convert(
+                    summary.incomeTotal,
+                    from: userCurrency,
+                    to: pickerSelectedCurrency
+                ),
+                expenseTotal: try converter.convert(
+                    summary.expenseTotal,
+                    from: userCurrency,
+                    to: pickerSelectedCurrency
+                ),
                 balance: try converter.convert(summary.balance, from: userCurrency, to: pickerSelectedCurrency),
                 recurrence: summary.recurrence,
                 currencyID: pickerSelectedCurrency

@@ -29,6 +29,7 @@ struct EstimateView: View {
                 } label: {
                     Image(systemName: "gearshape.fill")
                 }
+                .accessibilityLabel("accessibility.settings")
                 .padding(.trailing)
                 .sheet(isPresented: $viewModel.isPresentingSettings) {
                     SettingsActionView(settings: services.settings)

@@ -43,7 +43,7 @@ struct ConvertedEstimateView: View {
                     .padding(.bottom, 4)
                     .font(.App.input)
                     .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.isErrorPresented) {
-
+                        Button("action.button.ok", role: .cancel) {}
                     }
                 } else {
                     ProgressView()

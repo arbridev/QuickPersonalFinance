@@ -23,13 +23,13 @@ struct SettingsActionView: View {
     @FocusState private var focusedField: Field?
 
     var body: some View {
-        // MARK: Top bar
-        ModalViewUpperBar(
-            title: "settings.action.title",
-            dismiss: dismiss
-        )
-        Spacer()
         VStack {
+            // MARK: Top bar
+            ModalViewUpperBar(
+                title: "settings.action.title",
+                dismiss: dismiss
+            )
+            Spacer()
             // MARK: Form
             Form {
                 // MARK: Fields
@@ -44,7 +44,7 @@ struct SettingsActionView: View {
                             errorMessage: Binding.constant(nil),
                             placeholder: "settings.action.field.work.hours.day".localized,
                             prefix: nil,
-                            keyboardType: .alphabet
+                            keyboardType: .decimalPad
                         )
                         .padding(.top, 4)
                         .listRowSeparator(.hidden)
@@ -65,7 +65,7 @@ struct SettingsActionView: View {
                             errorMessage: Binding.constant(nil),
                             placeholder: "settings.action.field.work.days.week".localized,
                             prefix: nil,
-                            keyboardType: .alphabet
+                            keyboardType: .decimalPad
                         )
                         .listRowSeparator(.hidden)
                         .padding(.top, 4)

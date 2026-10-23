@@ -31,6 +31,7 @@
 "action.field.recurrence" = "Frecuencia";
 "action.button.submit" = "Enviar";
 "action.button.edit" = "Editar";
+"action.button.ok" = "Aceptar";
 
 "hour" = "hora";
 "day" = "día";
@@ -76,6 +77,10 @@
 "error.unknown" = "Ocurrió un problema con su solicitud.";
 "error.store.title" = "No se pudieron cargar sus datos";
 "error.store.message" = "Por favor reinicie la app. Si el problema persiste, reinstálela.";
+
+"accessibility.add" = "Agregar";
+"accessibility.settings" = "Ajustes";
+"accessibility.close" = "Cerrar";
 
 // Test
 "test.add" = "Agregar";

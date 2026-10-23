@@ -28,6 +28,7 @@ struct ExpensesView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
+                .accessibilityLabel("accessibility.add")
                 .padding(.trailing)
                 .sheet(isPresented: $viewModel.isPresentingCreateAction) {
                     ExpenseActionView(services: services)
@@ -52,10 +53,12 @@ struct ExpensesView: View {
                         .asScreenTitle()
                     List {
                         ForEach(mainData.financeData.expenses) { expense in
-                            SourceRowView(source: expense, currencyID: viewModel.currencyID)
-                                .onTapGesture {
-                                    viewModel.selectedItem = expense
-                                }
+                            Button {
+                                viewModel.selectedItem = expense
+                            } label: {
+                                SourceRowView(source: expense, currencyID: viewModel.currencyID)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }

@@ -27,6 +27,7 @@ struct IncomesView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
+                .accessibilityLabel("accessibility.add")
                 .padding(.trailing)
                 .sheet(isPresented: $viewModel.isPresentingCreateAction) {
                     IncomeActionView(services: services)
@@ -51,11 +52,13 @@ struct IncomesView: View {
                         .asScreenTitle()
                     List {
                         ForEach(mainData.financeData.incomes) { income in
-                            SourceRowView(source: income, currencyID: viewModel.currencyID)
-                                .onTapGesture {
-                                    viewModel.selectedItem = income
-                                    HapticsService().impactFeedback(style: .light)
-                                }
+                            Button {
+                                viewModel.selectedItem = income
+                                HapticsService().impactFeedback(style: .light)
+                            } label: {
+                                SourceRowView(source: income, currencyID: viewModel.currencyID)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }

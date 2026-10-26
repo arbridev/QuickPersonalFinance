@@ -72,8 +72,8 @@ struct ExpenseActionView: View {
                     .focused($focusedField, equals: .grossValue)
                     .onChange(of: focusedField) { newFocusedField in
                         if newFocusedField == .grossValue {
-                            if let number = Double(viewModel.grossValueText),
-                                number == 0.0 {
+                            if let number = Decimal.parseMoney(viewModel.grossValueText),
+                                number == 0 {
                                 viewModel.grossValueText = ""
                             }
                         }

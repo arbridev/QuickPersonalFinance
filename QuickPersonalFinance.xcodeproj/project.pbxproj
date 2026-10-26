@@ -15,6 +15,7 @@
 		140987922A1824B400461A4B /* ConvertedEstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140987912A1824B400461A4B /* ConvertedEstimateViewModel.swift */; };
 		14153FD529E8516E00C90D13 /* ScreenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153FD429E8516E00C90D13 /* ScreenTitle.swift */; };
 		14E5A00000000000000000A2 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000A1 /* AppServices.swift */; };
+		14E5A00000000000000000E2 /* StoreMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000E1 /* StoreMigrator.swift */; };
 		14E5A00000000000000000B2 /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000B1 /* EstimateSummary.swift */; };
 		14E5A00000000000000000C2 /* EstimateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000C1 /* EstimateTableView.swift */; };
 		141A5B1B29DF1025003DB4A2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */; };
@@ -126,6 +127,8 @@
 		14E5A00000000000000000C1 /* EstimateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateTableView.swift; sourceTree = "<group>"; };
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickPersonalFinance.xcdatamodel; sourceTree = "<group>"; };
+		14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "QuickPersonalFinance 2.xcdatamodel"; sourceTree = "<group>"; };
+		14E5A00000000000000000E1 /* StoreMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreMigrator.swift; sourceTree = "<group>"; };
 		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
 		1439A0DC29E460E200197112 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
 		14428B0029F0333B00BC0246 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
@@ -597,6 +600,7 @@
 				14428B0429F047A300BC0246 /* IncomePersistence.swift */,
 				14DBC40829F1737600EFF244 /* ExpensePersistence.swift */,
 				14F844762A3A7FE500289D5E /* CurrencyDataPersistence.swift */,
+				14E5A00000000000000000E1 /* StoreMigrator.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1007,6 +1011,7 @@
 				1453E7EC29F6BD8B0000663B /* MockData+Persistence.swift in Sources */,
 				14F844772A3A7FE500289D5E /* CurrencyDataPersistence.swift in Sources */,
 				14E5A00000000000000000A2 /* AppServices.swift in Sources */,
+				14E5A00000000000000000E2 /* StoreMigrator.swift in Sources */,
 				14E5A00000000000000000B2 /* EstimateSummary.swift in Sources */,
 				14E5A00000000000000000C2 /* EstimateTableView.swift in Sources */,
 			);
@@ -1408,8 +1413,9 @@
 			isa = XCVersionGroup;
 			children = (
 				142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */,
+				14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */,
 			);
-			currentVersion = 142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */;
+			currentVersion = 14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */;
 			path = QuickPersonalFinance.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

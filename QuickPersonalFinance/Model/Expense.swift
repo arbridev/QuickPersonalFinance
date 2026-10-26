@@ -11,6 +11,6 @@ struct Expense: Source {
     let id: UUID
     let name: String
     let more: String?
-    let grossValue: Double
+    let grossValue: Decimal
     let recurrence: Recurrence?
 }

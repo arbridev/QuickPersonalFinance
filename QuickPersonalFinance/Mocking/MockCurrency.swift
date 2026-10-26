@@ -27,7 +27,7 @@ class MockCurrencyCalculation: CurrencyCalculationService {
         self.currencies = currencies
     }
 
-    func convert(_ value: Double, from originID: String, to destinationID: String) throws -> Double {
+    func convert(_ value: Decimal, from originID: String, to destinationID: String) throws -> Decimal {
         try Calculation.CurrencyCalculation(currencies)!.convert(value, from: originID, to: destinationID)
     }
 }

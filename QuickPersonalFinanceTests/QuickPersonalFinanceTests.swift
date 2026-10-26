@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import QuickPersonalFinance
 
 final class QuickPersonalFinanceTests: XCTestCase {
@@ -22,7 +23,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 4, recurrence: .hour)]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 173.0, accuracy: 1.0)
+        XCTAssertEqual(balance, Decimal(string: "173.6")!)
     }
 
     func testDaily() throws {
@@ -30,7 +31,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 9, recurrence: .day)]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 21.0, accuracy: 1.0)
+        XCTAssertEqual(balance, Decimal(string: "21.7")!)
     }
 
     func testWeekly() throws {
@@ -38,7 +39,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 40, recurrence: .week)]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 43.0, accuracy: 1.0)
+        XCTAssertEqual(balance, Decimal(string: "43.4")!)
     }
 
     func testMonthly() throws {
@@ -46,7 +47,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 90, recurrence: .month)]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 10)
+        XCTAssertEqual(balance, Decimal(10))
     }
 
     func testYearly() throws {
@@ -54,7 +55,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let expenses = [Expense(id: UUID(), name: "expense", more: nil, grossValue: 120, recurrence: .year)]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 90)
+        XCTAssertEqual(balance, Decimal(90))
     }
 
     func testMixedBalance() throws {
@@ -76,7 +77,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
         ]
         calculation = Calculation()
         let balance = calculation.makeBalance(incomes: incomes, expenses: expenses, basedOn: .month)
-        XCTAssertEqual(balance, 2893.0, accuracy: 1.0)
+        XCTAssertEqual(balance, Decimal(string: "2893.5")!)
     }
 
     // swiftlint:disable todo
@@ -182,7 +183,7 @@ final class QuickPersonalFinanceTests: XCTestCase {
             Income(id: UUID(), name: "monthly", more: nil, grossValue: 12, recurrence: .month)
         ]
         calculation = Calculation()
-        XCTAssertEqual(calculation.totalize(sources: incomes, to: .month), 19)
+        XCTAssertEqual(calculation.totalize(sources: incomes, to: .month), Decimal(19))
     }
 
     func testCurrencyConversionWithZeroRateThrows() throws {
@@ -207,9 +208,9 @@ final class QuickPersonalFinanceTests: XCTestCase {
             calculation: Calculation()
         )
 
-        XCTAssertEqual(summary.incomeTotal, 100)
-        XCTAssertEqual(summary.expenseTotal, 40)
-        XCTAssertEqual(summary.balance, 60)
+        XCTAssertEqual(summary.incomeTotal, Decimal(100))
+        XCTAssertEqual(summary.expenseTotal, Decimal(40))
+        XCTAssertEqual(summary.balance, Decimal(60))
         XCTAssertEqual(summary.currencyID, "USD")
     }
 
@@ -231,8 +232,66 @@ final class QuickPersonalFinanceTests: XCTestCase {
         viewModel.input(mainData: mainData)
         viewModel.selectedRecurrence = .day
 
-        XCTAssertEqual(viewModel.summary.incomeTotal, 20)
+        XCTAssertEqual(viewModel.summary.incomeTotal, Decimal(20))
         XCTAssertEqual(viewModel.summary.currencyID, "EUR")
+    }
+
+    func testMigratesDoubleMoneyToDecimal() throws {
+        let storeURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("money-migration-\(UUID().uuidString).sqlite")
+        defer {
+            ["", "-wal", "-shm"].forEach { suffix in
+                try? FileManager.default.removeItem(at: URL(fileURLWithPath: storeURL.path + suffix))
+            }
+        }
+
+        let source = try StoreMigrator.compiledModel(named: "QuickPersonalFinance")
+        let writable = source.copy() as! NSManagedObjectModel
+        writable.entities.forEach { $0.managedObjectClassName = NSStringFromClass(NSManagedObject.self) }
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: writable)
+        let store = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL)
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.persistentStoreCoordinator = coordinator
+
+        let income = NSManagedObject(entity: writable.entitiesByName["StoredIncome"]!, insertInto: context)
+        income.setValue(10.5, forKey: "grossValue")
+        income.setValue(UUID(), forKey: "id")
+        income.setValue("salary", forKey: "name")
+
+        let expense = NSManagedObject(entity: writable.entitiesByName["StoredExpense"]!, insertInto: context)
+        expense.setValue(0.1, forKey: "grossValue")
+        expense.setValue(UUID(), forKey: "id")
+        expense.setValue("tax", forKey: "name")
+
+        let currency = NSManagedObject(entity: writable.entitiesByName["StoredCurrencyData"]!, insertInto: context)
+        currency.setValue(Date(timeIntervalSince1970: 1_700_000_000), forKey: "lastUpdate")
+        try context.save()
+        try coordinator.remove(store)
+
+        try StoreMigrator.migrateStoreIfNeeded(at: storeURL)
+
+        let container = NSPersistentContainer(name: "QuickPersonalFinance")
+        let description = NSPersistentStoreDescription(url: storeURL)
+        description.shouldMigrateStoreAutomatically = false
+        container.persistentStoreDescriptions = [description]
+        let loaded = expectation(description: "migrated store")
+        var loadError: Error?
+        container.loadPersistentStores { _, error in
+            loadError = error
+            loaded.fulfill()
+        }
+        wait(for: [loaded], timeout: 5)
+        XCTAssertNil(loadError)
+
+        let incomes = try container.viewContext.fetch(NSFetchRequest<StoredIncome>(entityName: "StoredIncome"))
+        XCTAssertEqual(incomes.first?.name, "salary")
+        XCTAssertEqual(incomes.first?.money, Decimal(string: "10.5"))
+        let expenses = try container.viewContext.fetch(NSFetchRequest<StoredExpense>(entityName: "StoredExpense"))
+        XCTAssertEqual(expenses.first?.money, Decimal(string: "0.1"))
+        let currencies = try container.viewContext.fetch(
+            NSFetchRequest<StoredCurrencyData>(entityName: "StoredCurrencyData")
+        )
+        XCTAssertEqual(currencies.count, 1)
     }
 
     func testSettingsUsesInjectedDefaults() throws {
@@ -247,15 +306,41 @@ final class QuickPersonalFinanceTests: XCTestCase {
         XCTAssertEqual(Settings(persistence: defaults).workHoursPerDay, 6)
     }
 
+    func testParseMoneyKeepsFractionalPart() {
+        XCTAssertEqual(Decimal.parseMoney("19.99"), Decimal(string: "19.99"))
+        XCTAssertEqual(Decimal.parseMoney("10,50"), Decimal(string: "10.50"))
+        XCTAssertEqual(Decimal.parseMoney("0,5"), Decimal(string: "0.5"))
+        XCTAssertNil(Decimal.parseMoney("1,234.56"))
+        XCTAssertNil(Decimal.parseMoney("10.5abc"))
+    }
+
+    func testFractionalGrossValueRoundTrip() throws {
+        let controller = DataController(inMemory: true)
+        let persistence = IncomePersistence(moc: controller.container.viewContext)
+        let amount = Decimal(string: "19.99")!
+        let income = Income(id: UUID(), name: "salary", more: nil, grossValue: amount, recurrence: .month)
+
+        try persistence.save(item: income)
+        XCTAssertEqual(try persistence.load(itemWithID: income.id)?.grossValue, amount)
+
+        let edited = Income(
+            id: income.id,
+            name: "salary",
+            more: nil,
+            grossValue: Decimal(string: "10.5")!,
+            recurrence: .month
+        )
+        try persistence.update(item: edited)
+        XCTAssertEqual(try persistence.load(itemWithID: income.id)?.grossValue, edited.grossValue)
+    }
+
     func testCurrencyConversionUSDtoEUR() throws {
         let currencies = MockData.latestCurrencies.data
         guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
             fatalError("Could not initialize currency calculation")
         }
-        let value = 20.0
-        let converted = try currencyCalc.convert(value, from: "USD", to: "EUR")
-        let expected = 18.4
-        XCTAssertEqual(converted, expected, accuracy: 0.2)
+        let converted = try currencyCalc.convert(20, from: "USD", to: "EUR")
+        XCTAssertEqual(converted, Decimal(string: "18.4")!, accuracy: Decimal(string: "0.2")!)
     }
 
     func testCurrencyConversionEURtoUSD() throws {
@@ -263,10 +348,8 @@ final class QuickPersonalFinanceTests: XCTestCase {
         guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
             fatalError("Could not initialize currency calculation")
         }
-        let value = 20.0
-        let converted = try currencyCalc.convert(value, from: "EUR", to: "USD")
-        let expected = 21.73
-        XCTAssertEqual(converted, expected, accuracy: 0.2)
+        let converted = try currencyCalc.convert(20, from: "EUR", to: "USD")
+        XCTAssertEqual(converted, Decimal(string: "21.73")!, accuracy: Decimal(string: "0.2")!)
     }
 
     func testCurrencyConversionVEStoEUR() throws {
@@ -274,11 +357,23 @@ final class QuickPersonalFinanceTests: XCTestCase {
         guard let currencyCalc = Calculation.CurrencyCalculation(currencies) else {
             fatalError("Could not initialize currency calculation")
         }
-        let value = 60.0
-        let converted = try currencyCalc.convert(value, from: "VES", to: "EUR")
-        let expected = 2.12
-        XCTAssertEqual(converted.rounded(toPlaces: 2), expected, accuracy: 0.2)
+        let converted = try currencyCalc.convert(60, from: "VES", to: "EUR")
+        XCTAssertEqual(
+            converted.rounded(toPlaces: 2),
+            Decimal(string: "2.12")!,
+            accuracy: Decimal(string: "0.2")!
+        )
     }
+}
+
+private func XCTAssertEqual(
+    _ expression: Decimal,
+    _ expected: Decimal,
+    accuracy: Decimal,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) {
+    XCTAssertLessThanOrEqual(abs(expression - expected), accuracy, file: file, line: line)
 }
 
 fileprivate extension QuickPersonalFinanceTests {

@@ -140,7 +140,10 @@ extension ExportPDFView {
                     Divider()
                         .padding(.vertical)
 
-                    ReportChartView(incomeTotal: summary.incomeTotal, expenseTotal: summary.expenseTotal)
+                    ReportChartView(
+                        incomeTotal: summary.incomeTotal.doubleValue,
+                        expenseTotal: summary.expenseTotal.doubleValue
+                    )
 
                     Spacer()
 

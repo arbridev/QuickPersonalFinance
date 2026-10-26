@@ -8,9 +8,9 @@
 import Foundation
 
 protocol CalculationService {
-    func convert(_ value: Double, from origin: Recurrence, to destination: Recurrence) -> Double
-    func totalize(sources: [any Source], to recurrence: Recurrence) -> Double
-    func makeBalance(incomes: [Income], expenses: [Expense], basedOn recurrence: Recurrence) -> Double
+    func convert(_ value: Decimal, from origin: Recurrence, to destination: Recurrence) -> Decimal
+    func totalize(sources: [any Source], to recurrence: Recurrence) -> Decimal
+    func makeBalance(incomes: [Income], expenses: [Expense], basedOn recurrence: Recurrence) -> Decimal
 }
 
 /// Service for calculations
@@ -29,10 +29,10 @@ class Calculation: CalculationService {
     // MARK: Behavior
 
     func convert(
-        _ value: Double,
+        _ value: Decimal,
         from origin: Recurrence,
         to destination: Recurrence
-    ) -> Double {
+    ) -> Decimal {
         guard origin != destination else {
             return value
         }
@@ -54,7 +54,7 @@ class Calculation: CalculationService {
         return convert(newValue, from: next, to: destination)
     }
 
-    func totalize(sources: [any Source], to recurrence: Recurrence) -> Double {
+    func totalize(sources: [any Source], to recurrence: Recurrence) -> Decimal {
         sources.map { source in
             guard let sourceRecurrence = source.recurrence else {
                 return source.grossValue
@@ -65,14 +65,14 @@ class Calculation: CalculationService {
     }
 
     /// Factor to multiply by when moving one step up, into `next`.
-    private func forwardFactor(to next: Recurrence) -> Double {
+    private func forwardFactor(to next: Recurrence) -> Decimal {
         switch next {
             case .hour:
                 return 1
             case .day:
-                return settings.workHoursPerDay
+                return decimal(settings.workHoursPerDay)
             case .week:
-                return settings.workDaysPerWeek
+                return decimal(settings.workDaysPerWeek)
             case .month:
                 return Constant.weeksPerMonthCount
             case .year:
@@ -81,12 +81,12 @@ class Calculation: CalculationService {
     }
 
     /// Factor to divide by when moving one step down, into `next`.
-    private func backwardFactor(to next: Recurrence) -> Double {
+    private func backwardFactor(to next: Recurrence) -> Decimal {
         switch next {
             case .hour:
-                return settings.workHoursPerDay
+                return decimal(settings.workHoursPerDay)
             case .day:
-                return settings.workDaysPerWeek
+                return decimal(settings.workDaysPerWeek)
             case .week:
                 return Constant.weeksPerMonthCount
             case .month:
@@ -96,11 +96,16 @@ class Calculation: CalculationService {
         }
     }
 
+    /// Work-hour settings are stored as Double. Parse their decimal text so 8.5 stays 8.5.
+    private func decimal(_ value: Double) -> Decimal {
+        Decimal(string: String(value), locale: Locale(identifier: "en_US_POSIX")) ?? Decimal(value)
+    }
+
     func makeBalance(
         incomes: [Income],
         expenses: [Expense],
         basedOn recurrence: Recurrence
-    ) -> Double {
+    ) -> Decimal {
         let totalIncome = totalize(sources: incomes, to: recurrence)
         let totalExpense = totalize(sources: expenses, to: recurrence)
         return totalIncome - totalExpense

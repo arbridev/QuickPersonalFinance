@@ -31,7 +31,7 @@ extension IncomeActionView {
         }
         @Published var grossValueText: String = "" {
             didSet {
-                let preemptiveValidation = DoubleValidation(value: grossValueText)
+                let preemptiveValidation = MoneyValidation(value: grossValueText)
                 if !preemptiveValidation.isValid {
                     grossValueText = oldValue
                 }
@@ -60,7 +60,7 @@ extension IncomeActionView {
                 }
                 nameText = editingIncome.name
                 moreText = editingIncome.more ?? ""
-                grossValueText = String(editingIncome.grossValue)
+                grossValueText = editingIncome.grossValue.moneyText
                 selectedRecurrence = editingIncome.recurrence ?? .hour
             }
         }
@@ -89,7 +89,7 @@ extension IncomeActionView {
                 nameTextErrorMessage = nil
             }
 
-            let grossValueValidation = DoubleValidation(value: grossValueText)
+            let grossValueValidation = MoneyValidation(value: grossValueText)
             if grossValueText.isEmpty || !grossValueValidation.isValid {
                 grossValueErrorMessage = "income.validation.error.gross.value".localized
                 isValid = false
@@ -103,7 +103,7 @@ extension IncomeActionView {
         func submit(_ didSubmit: (Bool) -> Void) {
             guard validate(),
                   let oldData = mainData,
-                  let grossValue = Double(grossValueText) else {
+                  let grossValue = Decimal.parseMoney(grossValueText) else {
                 didSubmit(false)
                 return
             }
@@ -135,7 +135,7 @@ extension IncomeActionView {
             guard validate(),
                   let editingIncome,
                   let oldData = mainData,
-                  let grossValue = Double(grossValueText) else {
+                  let grossValue = Decimal.parseMoney(grossValueText) else {
                 didEdit(false)
                 return
             }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-extension Double {
-    /// Rounds the double to decimal places value
-    /// source: https://stackoverflow.com/a/32581409/5691990
-    func rounded(toPlaces places: Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
+extension Decimal {
+    func rounded(toPlaces places: Int) -> Decimal {
+        var value = self
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &value, places, .plain)
+        return rounded
     }
 }

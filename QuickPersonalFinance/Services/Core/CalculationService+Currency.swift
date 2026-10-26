@@ -18,7 +18,7 @@ protocol CurrencyCalculationService {
     ///   - value: the value to be converted.
     ///   - from: the original currency identifier.
     ///   - to: the destination currency identifier.
-    func convert(_ value: Double, from originID: String, to destinationID: String) throws -> Double
+    func convert(_ value: Decimal, from originID: String, to destinationID: String) throws -> Decimal
 }
 
 extension Calculation {
@@ -34,7 +34,7 @@ extension Calculation {
             self.currencies = currencies
         }
 
-        func convert(_ value: Double, from originID: String, to destinationID: String) throws -> Double {
+        func convert(_ value: Decimal, from originID: String, to destinationID: String) throws -> Decimal {
             guard originID != destinationID else {
                 return value
             }

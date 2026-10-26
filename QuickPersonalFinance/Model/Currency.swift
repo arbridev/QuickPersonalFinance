@@ -16,7 +16,7 @@ struct LatestCurrencies: Codable {
 // MARK: - Currency
 struct Currency: Codable {
     let code: String
-    let value: Double
+    let value: Decimal
 }
 
 // MARK: - Meta

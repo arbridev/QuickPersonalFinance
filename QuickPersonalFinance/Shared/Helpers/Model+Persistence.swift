@@ -8,6 +8,13 @@
 import CoreData
 import OSLog
 
+extension StoredSource {
+    var money: Decimal {
+        get { grossValue?.decimalValue ?? 0 }
+        set { grossValue = NSDecimalNumber(decimal: newValue) }
+    }
+}
+
 extension Income {
     /// Returns nil for rows without an id, since a new id would break later updates and deletes.
     static func from(_ origin: StoredIncome) -> Income? {
@@ -19,7 +26,7 @@ extension Income {
             id: id,
             name: origin.name ?? "",
             more: origin.more,
-            grossValue: origin.grossValue,
+            grossValue: origin.money,
             recurrence: Recurrence(rawValue: origin.recurrence ?? "")
         )
     }
@@ -31,7 +38,7 @@ extension StoredIncome {
         destination.id = origin.id
         destination.name = origin.name
         destination.more = origin.more
-        destination.grossValue = origin.grossValue
+        destination.money = origin.grossValue
         destination.recurrence = origin.recurrence?.rawValue
         return destination
     }
@@ -48,7 +55,7 @@ extension Expense {
             id: id,
             name: origin.name ?? "",
             more: origin.more,
-            grossValue: origin.grossValue,
+            grossValue: origin.money,
             recurrence: Recurrence(rawValue: origin.recurrence ?? "")
         )
     }
@@ -60,7 +67,7 @@ extension StoredExpense {
         destination.id = origin.id
         destination.name = origin.name
         destination.more = origin.more
-        destination.grossValue = origin.grossValue
+        destination.money = origin.grossValue
         destination.recurrence = origin.recurrence?.rawValue
         return destination
     }

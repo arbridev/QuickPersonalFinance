@@ -10,8 +10,8 @@ import ArkanaKeys
 import ArkanaKeysInterfaces
 
 struct Constant {
-    static let monthsPerYearCount: Double = 12
-    static let weeksPerMonthCount: Double = 4.34
+    static let monthsPerYearCount = Decimal(12)
+    static let weeksPerMonthCount = Decimal(string: "4.34")!
     static let workHoursPerDay: Double = 8
     static let workDaysPerWeek: Double = 5
     static let defaultCurrencyID: String = "USD"

@@ -9,9 +9,9 @@ import Foundation
 
 /// Totals of an estimate for a recurrence, with the texts shown and shared for them.
 struct EstimateSummary {
-    let incomeTotal: Double
-    let expenseTotal: Double
-    let balance: Double
+    let incomeTotal: Decimal
+    let expenseTotal: Decimal
+    let balance: Decimal
     let recurrence: Recurrence
     let currencyID: String
 

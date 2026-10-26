@@ -38,7 +38,7 @@ class ExpensePersistence: ExpensePersistenceService {
         }
         fetchedObject.name = item.name
         fetchedObject.more = item.more
-        fetchedObject.grossValue = item.grossValue
+        fetchedObject.money = item.grossValue
         fetchedObject.recurrence = item.recurrence?.rawValue
         try saveOrRollback()
     }

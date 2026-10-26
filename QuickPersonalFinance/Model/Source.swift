@@ -11,6 +11,6 @@ protocol Source: Codable, Hashable, Identifiable {
     var id: UUID { get }
     var name: String { get }
     var more: String? { get }
-    var grossValue: Double { get }
+    var grossValue: Decimal { get }
     var recurrence: Recurrence? { get }
 }

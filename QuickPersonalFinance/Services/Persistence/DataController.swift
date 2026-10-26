@@ -16,6 +16,15 @@ class DataController: ObservableObject {
     init(inMemory: Bool = false) {
         if inMemory || LaunchArguments.shared.contains(.testing) {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+        } else if let storeURL = container.persistentStoreDescriptions.first?.url {
+            do {
+                try StoreMigrator.migrateStoreIfNeeded(at: storeURL)
+            } catch {
+                Logger.persistence.fault("Core Data migration failed: \(error.localizedDescription)")
+                assertionFailure("Core Data migration failed: \(error)")
+                loadError = error
+                return
+            }
         }
         container.loadPersistentStores { [weak self] _, error in
             guard let error else {

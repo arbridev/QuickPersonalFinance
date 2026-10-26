@@ -58,7 +58,7 @@ struct ExpensesView: View {
                             } label: {
                                 SourceRowView(source: expense, currencyID: viewModel.currencyID)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(FullWidthRowButtonStyle())
                         }
                         .onDelete(perform: { viewModel.deleteItems(at: $0) })
                     }

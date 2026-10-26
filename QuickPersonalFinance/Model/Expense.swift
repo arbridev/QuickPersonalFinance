@@ -13,4 +13,24 @@ struct Expense: Source {
     let more: String?
     let grossValue: Decimal
     let recurrence: Recurrence?
+    let firstPaymentDate: Date?
+    let lastPaymentDate: Date?
+
+    init(
+        id: UUID,
+        name: String,
+        more: String?,
+        grossValue: Decimal,
+        recurrence: Recurrence?,
+        firstPaymentDate: Date? = nil,
+        lastPaymentDate: Date? = nil
+    ) {
+        self.id = id
+        self.name = name
+        self.more = more
+        self.grossValue = grossValue
+        self.recurrence = recurrence
+        self.firstPaymentDate = firstPaymentDate
+        self.lastPaymentDate = lastPaymentDate
+    }
 }

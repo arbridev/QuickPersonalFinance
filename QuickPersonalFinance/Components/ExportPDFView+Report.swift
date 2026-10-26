@@ -65,6 +65,10 @@ extension ExportPDFView {
                                             Text(recurrence.rawValue.localized)
                                                 .font(Font.Report.info)
                                         }
+                                        if let nextPayment = nextPaymentText(for: source) {
+                                            Text(nextPayment)
+                                                .font(Font.Report.info)
+                                        }
                                         Spacer()
                                         Text(source.grossValue.asCurrency(withID: currencyID))
                                             .font(Font.Report.standard)
@@ -84,6 +88,20 @@ extension ExportPDFView {
                     alignment: .center
                 )
             }
+        }
+
+        private func nextPaymentText(for source: any Source) -> String? {
+            guard let recurrence = source.recurrence else {
+                return nil
+            }
+            if let next = source.nextPaymentDate() {
+                let label = PaymentSchedule.format(next, recurrence: recurrence)
+                return "\("action.field.next.payment".localized): \(label)"
+            }
+            guard source.firstPaymentDate != nil else {
+                return nil
+            }
+            return "action.field.next.payment.ended".localized
         }
     }
 

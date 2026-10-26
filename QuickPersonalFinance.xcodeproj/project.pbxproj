@@ -55,6 +55,7 @@
 		149ABEC529BA28310088CE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC429BA28310088CE94 /* Assets.xcassets */; };
 		149ABEC829BA28310088CE94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149ABEC729BA28310088CE94 /* Preview Assets.xcassets */; };
 		149ABED229BA28310088CE94 /* QuickPersonalFinanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABED129BA28310088CE94 /* QuickPersonalFinanceTests.swift */; };
+		14E5A00000000000000000F2 /* PaymentDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5A00000000000000000F1 /* PaymentDateTests.swift */; };
 		149ABEDC29BA28320088CE94 /* QuickPersonalFinanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEDB29BA28320088CE94 /* QuickPersonalFinanceUITests.swift */; };
 		149ABEDE29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */; };
 		149ABEED29BA29BD0088CE94 /* CalculationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ABEEC29BA29BD0088CE94 /* CalculationService.swift */; };
@@ -128,6 +129,7 @@
 		141A5B1A29DF1025003DB4A2 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickPersonalFinance.xcdatamodel; sourceTree = "<group>"; };
 		14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "QuickPersonalFinance 2.xcdatamodel"; sourceTree = "<group>"; };
+		14E5A00000000000000000D2 /* QuickPersonalFinance 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "QuickPersonalFinance 3.xcdatamodel"; sourceTree = "<group>"; };
 		14E5A00000000000000000E1 /* StoreMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreMigrator.swift; sourceTree = "<group>"; };
 		1439A0DA29E4376A00197112 /* EstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateViewModel.swift; sourceTree = "<group>"; };
 		1439A0DC29E460E200197112 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		149ABEC729BA28310088CE94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		149ABECD29BA28310088CE94 /* QuickPersonalFinanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickPersonalFinanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149ABED129BA28310088CE94 /* QuickPersonalFinanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceTests.swift; sourceTree = "<group>"; };
+		14E5A00000000000000000F1 /* PaymentDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDateTests.swift; sourceTree = "<group>"; };
 		149ABED729BA28320088CE94 /* QuickPersonalFinanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickPersonalFinanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149ABEDB29BA28320088CE94 /* QuickPersonalFinanceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceUITests.swift; sourceTree = "<group>"; };
 		149ABEDD29BA28320088CE94 /* QuickPersonalFinanceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPersonalFinanceUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -353,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				149ABED129BA28310088CE94 /* QuickPersonalFinanceTests.swift */,
+				14E5A00000000000000000F1 /* PaymentDateTests.swift */,
 			);
 			path = QuickPersonalFinanceTests;
 			sourceTree = "<group>";
@@ -1022,6 +1026,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				149ABED229BA28310088CE94 /* QuickPersonalFinanceTests.swift in Sources */,
+				14E5A00000000000000000F2 /* PaymentDateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,8 +1419,9 @@
 			children = (
 				142BA18629ECE25A005F4610 /* QuickPersonalFinance.xcdatamodel */,
 				14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */,
+				14E5A00000000000000000D2 /* QuickPersonalFinance 3.xcdatamodel */,
 			);
-			currentVersion = 14E5A00000000000000000D1 /* QuickPersonalFinance 2.xcdatamodel */;
+			currentVersion = 14E5A00000000000000000D2 /* QuickPersonalFinance 3.xcdatamodel */;
 			path = QuickPersonalFinance.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

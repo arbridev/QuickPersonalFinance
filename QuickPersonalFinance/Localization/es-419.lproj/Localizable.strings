@@ -29,6 +29,12 @@
 "action.field.more" = "Más información (opcional)";
 "action.field.gross.value" = "Valor bruto";
 "action.field.recurrence" = "Frecuencia";
+"action.field.first.payment" = "Primer pago";
+"action.field.has.last.payment" = "Tiene fecha de último pago";
+"action.field.last.payment" = "Último pago";
+"action.field.next.payment" = "Próximo pago";
+"action.field.next.payment.ended" = "Sin pagos próximos";
+"action.validation.error.last.payment" = "El último pago debe ser igual o posterior al primer pago";
 "action.button.submit" = "Enviar";
 "action.button.edit" = "Editar";
 "action.button.ok" = "Aceptar";

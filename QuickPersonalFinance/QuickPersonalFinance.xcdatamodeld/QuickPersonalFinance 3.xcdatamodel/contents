@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="3">
+    <entity name="StoredCurrencyData" representedClassName="StoredCurrencyData" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="StoredExpense" representedClassName="StoredExpense" parentEntity="StoredSource" syncable="YES" codeGenerationType="class"/>
+    <entity name="StoredIncome" representedClassName="StoredIncome" parentEntity="StoredSource" syncable="YES" codeGenerationType="class"/>
+    <entity name="StoredSource" representedClassName="StoredSource" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="firstPaymentDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="grossValue" optional="YES" attributeType="Decimal" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastPaymentDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="more" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="recurrence" optional="YES" attributeType="String"/>
+    </entity>
+</model>

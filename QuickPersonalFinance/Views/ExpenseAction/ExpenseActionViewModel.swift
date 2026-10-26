@@ -40,11 +40,26 @@ extension ExpenseActionView {
                 }
             }
         }
-        @Published var selectedRecurrence: Recurrence = .hour {
+        @Published var selectedRecurrence = Recurrence.allCases.last ?? .year {
             didSet {
                 HapticsService().selectionFeedback()
+                guard firstPaymentDateIsPlaceholder else {
+                    return
+                }
+                isRefreshingPlaceholder = true
+                firstPaymentDate = selectedRecurrence.placeholderFirstPaymentDate()
+                isRefreshingPlaceholder = false
             }
         }
+        @Published var firstPaymentDate = Recurrence.hour.placeholderFirstPaymentDate() {
+            didSet {
+                if !isRefreshingPlaceholder {
+                    firstPaymentDateIsPlaceholder = false
+                }
+            }
+        }
+        @Published var includesLastPayment = false
+        @Published var lastPaymentDate = Date()
         @Published var nameTextErrorMessage: String?
         @Published var grossValueErrorMessage: String?
         @Published var isErrorPresented = false
@@ -52,6 +67,8 @@ extension ExpenseActionView {
 
         private let settings: SettingsService
         private let persistenceService: any ExpensePersistenceService
+        private var isRefreshingPlaceholder = false
+        private var firstPaymentDateIsPlaceholder = true
 
         var editingExpense: Expense? {
             didSet {
@@ -62,7 +79,36 @@ extension ExpenseActionView {
                 moreText = editingExpense.more ?? ""
                 grossValueText = editingExpense.grossValue.moneyText
                 selectedRecurrence = editingExpense.recurrence ?? .hour
+                let selection = PaymentDateSelection(
+                    first: editingExpense.firstPaymentDate,
+                    last: editingExpense.lastPaymentDate,
+                    recurrence: selectedRecurrence
+                )
+                isRefreshingPlaceholder = true
+                firstPaymentDate = selection.firstPaymentDate
+                firstPaymentDateIsPlaceholder = selection.firstPaymentDateIsPlaceholder
+                isRefreshingPlaceholder = false
+                includesLastPayment = selection.includesLastPayment
+                lastPaymentDate = selection.lastPaymentDate
             }
+        }
+
+        var paymentSelection: PaymentDateSelection {
+            PaymentDateSelection(
+                firstPaymentDate: firstPaymentDate,
+                firstPaymentDateIsPlaceholder: firstPaymentDateIsPlaceholder,
+                includesLastPayment: includesLastPayment,
+                lastPaymentDate: lastPaymentDate,
+                recurrence: selectedRecurrence
+            )
+        }
+
+        var lastPaymentErrorMessage: String? {
+            paymentSelection.validationMessage
+        }
+
+        var nextPaymentDate: Date? {
+            paymentSelection.nextPaymentDate()
         }
         
         var currencyID: String {
@@ -97,6 +143,10 @@ extension ExpenseActionView {
                 grossValueErrorMessage = nil
             }
 
+            if lastPaymentErrorMessage != nil {
+                isValid = false
+            }
+
             return isValid
         }
 
@@ -108,12 +158,15 @@ extension ExpenseActionView {
                 return
             }
 
+            let dates = paymentSelection.persistedDates()
             let expense = Expense(
                 id: UUID(),
                 name: nameText,
                 more: moreText.isEmpty ? nil : moreText,
                 grossValue: grossValue,
-                recurrence: selectedRecurrence
+                recurrence: selectedRecurrence,
+                firstPaymentDate: dates.first,
+                lastPaymentDate: dates.last
             )
 
             do {
@@ -140,12 +193,15 @@ extension ExpenseActionView {
                 return
             }
 
+            let dates = paymentSelection.persistedDates()
             let expense = Expense(
                 id: editingExpense.id,
                 name: nameText,
                 more: moreText.isEmpty ? nil : moreText,
                 grossValue: grossValue,
-                recurrence: selectedRecurrence
+                recurrence: selectedRecurrence,
+                firstPaymentDate: dates.first,
+                lastPaymentDate: dates.last
             )
 
             do {

@@ -29,6 +29,12 @@
 "action.field.more" = "More info (optional)";
 "action.field.gross.value" = "Gross value";
 "action.field.recurrence" = "Recurrence";
+"action.field.first.payment" = "First payment";
+"action.field.has.last.payment" = "Has a last payment";
+"action.field.last.payment" = "Last payment";
+"action.field.next.payment" = "Next payment";
+"action.field.next.payment.ended" = "No upcoming payment";
+"action.validation.error.last.payment" = "The last payment must be on or after the first payment";
 "action.button.submit" = "Submit";
 "action.button.edit" = "Edit";
 "action.button.ok" = "OK";

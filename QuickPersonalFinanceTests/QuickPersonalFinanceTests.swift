@@ -286,6 +286,8 @@ final class QuickPersonalFinanceTests: XCTestCase {
         let incomes = try container.viewContext.fetch(NSFetchRequest<StoredIncome>(entityName: "StoredIncome"))
         XCTAssertEqual(incomes.first?.name, "salary")
         XCTAssertEqual(incomes.first?.money, Decimal(string: "10.5"))
+        XCTAssertNil(incomes.first?.firstPaymentDate)
+        XCTAssertNil(incomes.first?.lastPaymentDate)
         let expenses = try container.viewContext.fetch(NSFetchRequest<StoredExpense>(entityName: "StoredExpense"))
         XCTAssertEqual(expenses.first?.money, Decimal(string: "0.1"))
         let currencies = try container.viewContext.fetch(

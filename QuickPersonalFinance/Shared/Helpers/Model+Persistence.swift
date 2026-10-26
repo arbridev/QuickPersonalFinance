@@ -27,7 +27,9 @@ extension Income {
             name: origin.name ?? "",
             more: origin.more,
             grossValue: origin.money,
-            recurrence: Recurrence(rawValue: origin.recurrence ?? "")
+            recurrence: Recurrence(rawValue: origin.recurrence ?? ""),
+            firstPaymentDate: origin.firstPaymentDate,
+            lastPaymentDate: origin.lastPaymentDate
         )
     }
 }
@@ -40,6 +42,8 @@ extension StoredIncome {
         destination.more = origin.more
         destination.money = origin.grossValue
         destination.recurrence = origin.recurrence?.rawValue
+        destination.firstPaymentDate = origin.firstPaymentDate
+        destination.lastPaymentDate = origin.lastPaymentDate
         return destination
     }
 }
@@ -56,7 +60,9 @@ extension Expense {
             name: origin.name ?? "",
             more: origin.more,
             grossValue: origin.money,
-            recurrence: Recurrence(rawValue: origin.recurrence ?? "")
+            recurrence: Recurrence(rawValue: origin.recurrence ?? ""),
+            firstPaymentDate: origin.firstPaymentDate,
+            lastPaymentDate: origin.lastPaymentDate
         )
     }
 }
@@ -69,6 +75,8 @@ extension StoredExpense {
         destination.more = origin.more
         destination.money = origin.grossValue
         destination.recurrence = origin.recurrence?.rawValue
+        destination.firstPaymentDate = origin.firstPaymentDate
+        destination.lastPaymentDate = origin.lastPaymentDate
         return destination
     }
 }

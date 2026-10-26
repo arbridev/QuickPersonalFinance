@@ -95,6 +95,8 @@ enum StoreMigrator {
         var more: String?
         var grossValue: Decimal
         var recurrence: String?
+        var firstPaymentDate: Date?
+        var lastPaymentDate: Date?
     }
 
     private struct CurrencyRow {
@@ -143,15 +145,43 @@ enum StoreMigrator {
     private static func rows(named entityName: String, in context: NSManagedObjectContext) throws -> [SourceRow] {
         let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
         return try context.fetch(request).map { object in
-            let number = object.value(forKey: "grossValue") as? NSNumber
+            let attributes = object.entity.attributesByName
             return SourceRow(
                 id: object.value(forKey: "id") as? UUID,
                 name: object.value(forKey: "name") as? String,
                 more: object.value(forKey: "more") as? String,
-                grossValue: number.map(decimal(fromStoredDouble:)) ?? 0,
-                recurrence: object.value(forKey: "recurrence") as? String
+                grossValue: decimal(from: object, attributes: attributes),
+                recurrence: object.value(forKey: "recurrence") as? String,
+                firstPaymentDate: date("firstPaymentDate", on: object, attributes: attributes),
+                lastPaymentDate: date("lastPaymentDate", on: object, attributes: attributes)
             )
         }
+    }
+
+    /// Version 1 stores money as a Double. Later versions already store a Decimal,
+    /// which must be copied as-is so a second migration does not round it again.
+    private static func decimal(
+        from object: NSManagedObject,
+        attributes: [String: NSAttributeDescription]
+    ) -> Decimal {
+        guard let number = object.value(forKey: "grossValue") as? NSNumber else {
+            return 0
+        }
+        if attributes["grossValue"]?.attributeType == .decimalAttributeType {
+            return number.decimalValue
+        }
+        return decimal(fromStoredDouble: number)
+    }
+
+    private static func date(
+        _ name: String,
+        on object: NSManagedObject,
+        attributes: [String: NSAttributeDescription]
+    ) -> Date? {
+        guard attributes[name] != nil else {
+            return nil
+        }
+        return object.value(forKey: name) as? Date
     }
 
     private static func currencyRows(in context: NSManagedObjectContext) throws -> [CurrencyRow] {
@@ -218,6 +248,8 @@ enum StoreMigrator {
         source.more = row.more
         source.money = row.grossValue
         source.recurrence = row.recurrence
+        source.firstPaymentDate = row.firstPaymentDate
+        source.lastPaymentDate = row.lastPaymentDate
     }
 
     private static func destroyStore(at storeURL: URL, model: NSManagedObjectModel) throws {

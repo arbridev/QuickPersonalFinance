@@ -40,6 +40,8 @@ class IncomePersistence: IncomePersistenceService {
         fetchedObject.more = item.more
         fetchedObject.money = item.grossValue
         fetchedObject.recurrence = item.recurrence?.rawValue
+        fetchedObject.firstPaymentDate = item.firstPaymentDate
+        fetchedObject.lastPaymentDate = item.lastPaymentDate
         try saveOrRollback()
     }
 

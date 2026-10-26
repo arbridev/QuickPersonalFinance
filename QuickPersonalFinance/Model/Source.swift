@@ -13,4 +13,18 @@ protocol Source: Codable, Hashable, Identifiable {
     var more: String? { get }
     var grossValue: Decimal { get }
     var recurrence: Recurrence? { get }
+    var firstPaymentDate: Date? { get }
+    var lastPaymentDate: Date? { get }
+}
+
+extension Source {
+    func nextPaymentDate(from now: Date = .now, calendar: Calendar = .current) -> Date? {
+        PaymentSchedule.nextDate(
+            first: firstPaymentDate,
+            last: lastPaymentDate,
+            recurrence: recurrence,
+            from: now,
+            calendar: calendar
+        )
+    }
 }

@@ -72,6 +72,7 @@
 // Share
 "share.summary" = "Sumario";
 "share.pdf" = "Exportar a PDF";
+"share.pdf.preparing" = "Preparando su informe…";
 "share.report.report" = "Informe";
 
 // External errors

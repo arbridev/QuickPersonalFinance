@@ -74,13 +74,23 @@ struct EstimateView: View {
                     ShareLink(item: viewModel.summary.shareMessage) {
                         Label("share.summary", systemImage: "square.and.arrow.up")
                     }
-                    ExportPDFView(recurrence: viewModel.selectedRecurrence, settings: services.settings)
-                        .environmentObject(mainData)
+                    ExportPDFView(
+                        recurrence: viewModel.selectedRecurrence,
+                        settings: services.settings,
+                        isExporting: $viewModel.isExportingPDF,
+                        exportShare: $viewModel.exportShare,
+                        errorMessage: $viewModel.exportErrorMessage,
+                        isErrorPresented: $viewModel.isExportErrorPresented
+                    )
+                    .environmentObject(mainData)
                 } label: {
                     Label("estimate.button.share", systemImage: "square.and.arrow.up")
                 }
                 .onTapGesture {
                     HapticsService().impactFeedback(style: .light)
+                    DispatchQueue.main.async {
+                        ExportPDFView.prewarmExportIfNeeded()
+                    }
                 }
 
                 Divider()
@@ -134,6 +144,39 @@ struct EstimateView: View {
 
             Spacer()
         }
+        .overlay {
+            if viewModel.isExportingPDF {
+                exportProgressHUD
+            }
+        }
+        .background {
+            ActivityShareSheet(share: $viewModel.exportShare) {
+                viewModel.isExportingPDF = false
+            }
+        }
+        .alert(viewModel.exportErrorMessage ?? "", isPresented: $viewModel.isExportErrorPresented) {
+            Button("action.button.ok", role: .cancel) {}
+        }
+    }
+
+    private var exportProgressHUD: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
+            VStack(spacing: 12) {
+                ProgressView()
+                    .controlSize(.large)
+                Text("share.pdf.preparing")
+                    .font(Font.App.standard)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(24)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("share.pdf.preparing"))
     }
 
     // MARK: Initialization

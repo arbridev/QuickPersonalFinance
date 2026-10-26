@@ -30,6 +30,10 @@ extension EstimateView {
             }
         }
         @Published var isPresentingCurrencyConversion = false
+        @Published var isExportingPDF = false
+        @Published var exportShare: ExportShare?
+        @Published var exportErrorMessage: String?
+        @Published var isExportErrorPresented = false
 
         private let settings: SettingsService
         private let calculations: CalculationService

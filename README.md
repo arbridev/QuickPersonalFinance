@@ -45,4 +45,10 @@ There is a separate file for auto-correct rules `.swiftlint.autocorrect.yml`; yo
 
 ## License
 
-Quick Personal Finance is released under the MIT license. See [LICENSE](https://github.com/arbridev/QuickPersonalFinance/blob/main/LICENSE) for details.
+Quick Personal Finance is proprietary software. Copyright (c) 2023-2026 Armando Brito. All rights reserved.
+
+- Source code is covered by [LICENSE](LICENSE).
+- End users of the distributed app are covered by Apple's standard Licensed Application End User License Agreement.
+- Data handling is described in the [Privacy Policy](PrivacyPolicy.md).
+
+Third-party libraries under `Pods/` remain under their own licenses. Copies of this project that were already obtained under the MIT License stay under that license.

@@ -1,28 +1,20 @@
-MIT License
+Copyright (c) 2023-2026 Armando Brito. All rights reserved.
 
-Copyright (c) 2023 Armando Brito
+Quick Personal Finance, including this source code, is proprietary software.
 
-Permission is hereby granted, free of charge, to any person obtaining a 
-copy
-of this software and associated documentation files (the "Software"), to 
-deal
-in the Software without restriction, including without limitation the 
-rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+No permission is granted to use, copy, modify, merge, publish, distribute,
+sublicense, or sell this source code or the application, except as allowed
+by Apple's standard Licensed Application End User License Agreement for the
+distributed application.
 
-The above copyright notice and this permission notice shall be included in 
-all
-copies or substantial portions of the Software.
+The distributed application is licensed to end users under Apple's standard
+Licensed Application End User License Agreement. How the application handles
+data is described in PrivacyPolicy.md.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
-THE
-SOFTWARE.
+Copies of this project that were already obtained under the MIT License
+remain subject to that license. Replacing this file does not revoke the
+MIT License for those earlier copies. This notice applies to the current
+source tree and to later changes.
+
+Third-party components under Pods/ are not covered by this notice. They
+remain under their own licenses, and those notices must be preserved.
